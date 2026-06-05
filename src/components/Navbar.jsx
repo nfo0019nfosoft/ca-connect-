@@ -141,9 +141,14 @@ function Navbar() {
             Book Consultation
           </a>
 
-          <a href="/" className="login-btn">
-            Login / Register
-          </a>
+         
+          <Link
+  to="/Login"
+  className="login-btn"
+  onClick={closeMenu}
+>
+  Login / Register
+</Link>
 
         </div>
 
