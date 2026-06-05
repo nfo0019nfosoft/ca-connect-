@@ -1,0 +1,430 @@
+/* ==========================
+   RESET
+========================== */
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+html,
+body,
+#root{
+  width:100%;
+  overflow-x:hidden;
+}
+
+body{
+  font-family:'Inter',sans-serif;
+  background:#fff;
+}
+
+a{
+  text-decoration:none;
+}
+
+/* ==========================
+   NAVBAR
+========================== */
+
+.navbar{
+  width:100%;
+  background:#fff;
+  border-bottom:1px solid #e5e7eb;
+  position:sticky;
+  top:0;
+  z-index:1000;
+}
+
+.navbar-container{
+  max-width:1450px;
+  margin:auto;
+  height:84px;
+  padding:0 24px;
+
+  display:flex;
+  align-items:center;
+}
+
+/* ==========================
+   LOGO
+========================== */
+
+.logo{
+  flex:0 0 220px;
+}
+
+.logo img{
+  height:50px;
+  width:auto;
+  display:block;
+}
+
+/* ==========================
+   NAVIGATION
+========================== */
+
+.nav-links{
+  flex:1;
+  margin-left:8px;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  gap:15px;
+  list-style:none;
+}
+
+.nav-links li{
+  position:relative;
+  white-space:nowrap;
+}
+
+.nav-links li:last-child{
+  margin-right:20px;
+}
+
+.nav-links a{
+  color:#111827;
+  font-size:12px;
+  font-weight:600;
+  position:relative;
+  transition:.3s ease;
+}
+
+.nav-links a::after{
+  content:"";
+  position:absolute;
+  left:0;
+  bottom:-10px;
+
+  width:0;
+  height:2px;
+
+  background:#2563eb;
+  border-radius:20px;
+
+  transition:.3s ease;
+}
+
+.nav-links a:hover{
+  color:#2563eb;
+}
+
+.nav-links a:hover::after{
+  width:100%;
+}
+
+.active-link{
+  color:#2563eb !important;
+}
+
+.active-link::after{
+  width:100% !important;
+}
+
+/* ==========================
+   DROPDOWN
+========================== */
+
+.dropdown{
+  position:relative;
+}
+
+.down-icon{
+  margin-left:4px;
+  font-size:11px;
+}
+
+.dropdown-menu{
+  position:absolute;
+  top:42px;
+  left:0;
+
+  min-width:220px;
+
+  background:#fff;
+  border-radius:12px;
+
+  box-shadow:0 10px 30px rgba(0,0,0,.08);
+
+  padding:10px 0;
+
+  opacity:0;
+  visibility:hidden;
+
+  transform:translateY(10px);
+
+  transition:.3s ease;
+}
+
+.dropdown-menu li{
+  display:block;
+}
+
+.dropdown-menu li a{
+  display:block;
+  padding:12px 18px;
+}
+
+.dropdown-menu li a::after{
+  display:none;
+}
+
+.dropdown-menu li a:hover{
+  background:#f8fafc;
+}
+
+.dropdown:hover .dropdown-menu{
+  opacity:1;
+  visibility:visible;
+  transform:translateY(0);
+}
+
+/* ==========================
+   RIGHT ACTIONS
+========================== */
+
+.nav-actions{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  flex-shrink:0;
+}
+
+/* Book Consultation */
+
+.consult-btn{
+  display:flex;
+  align-items:center;
+  gap:5px;
+margin-left:8px;
+  height:46px;
+  padding:0 20px;
+
+  border:1px solid #2563eb;
+  border-radius:12px;
+
+  background:#fff;
+  color:#2563eb;
+
+  font-size:14px;
+  font-weight:600;
+
+  white-space:nowrap;
+  transition:.3s ease;
+}
+
+.consult-btn:hover{
+  background:#2563eb;
+  color:#fff;
+}
+
+/* Location */
+
+.location-btn{
+  display:flex;
+  align-items:center;
+  gap:6px;
+
+  height:46px;
+  padding:0 16px;
+
+  border:1px solid #e5e7eb;
+  border-radius:12px;
+
+  background:#fff;
+  color:#374151;
+
+  font-size:14px;
+  font-weight:500;
+
+  white-space:nowrap;
+}
+
+/* Login */
+
+.login-btn{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  height:46px;
+  padding:0 22px;
+
+  border:none;
+  border-radius:12px;
+
+  background:#2563eb;
+  color:#fff;
+
+  font-size:14px;
+  font-weight:600;
+
+  white-space:nowrap;
+  transition:.3s ease;
+}
+
+.login-btn:hover{
+  background:#1d4ed8;
+}
+
+/* ==========================
+   HAMBURGER
+========================== */
+
+.hamburger{
+  display:none;
+  margin-left:auto;
+
+  font-size:26px;
+  cursor:pointer;
+  color:#2563eb;
+}
+
+.mobile-buttons{
+  display:none;
+}
+
+/* ==========================
+   LARGE LAPTOP
+========================== */
+
+@media (max-width:1300px){
+
+  .logo{
+    flex:0 0 180px;
+  }
+
+  .logo img{
+    height:54px;
+  }
+
+  .nav-links{
+    gap:16px;
+  }
+
+  .nav-links a{
+    font-size:14px;
+  }
+
+  .consult-btn,
+  .location-btn,
+  .login-btn{
+    font-size:13px;
+  }
+}
+
+/* ==========================
+   TABLET
+========================== */
+
+/* ==========================
+   TABLET & MOBILE
+========================== */
+
+@media (max-width:992px){
+
+  .navbar-container{
+    height:75px;
+    padding:0 18px;
+  }
+
+  .logo{
+    flex:auto;
+  }
+
+  .logo img{
+    height:50px;
+  }
+
+  .hamburger{
+    display:block;
+  }
+
+  .nav-actions{
+    display:none;
+  }
+
+  .nav-links{
+    position:fixed;
+    top:75px;
+    right:-100%;
+
+    width:300px;
+    height:calc(100vh - 75px);
+
+    background:#fff;
+
+    flex-direction:column;
+    align-items:flex-start;
+    justify-content:flex-start;
+
+    gap:22px;
+    padding:30px;
+
+    transition:.4s ease;
+    box-shadow:-10px 0 25px rgba(0,0,0,.08);
+
+    overflow-y:auto;
+  }
+
+  .nav-links.active{
+    right:0;
+  }
+
+  .nav-links li{
+    width:100%;
+  }
+
+  /* Dropdown Hidden By Default */
+
+  .dropdown-menu{
+    display:none;
+
+    position:static;
+    min-width:100%;
+
+    background:transparent;
+    box-shadow:none;
+
+    padding-left:15px;
+    margin-top:10px;
+  }
+
+  /* Open Only When Active Class Added */
+
+  .dropdown.active .dropdown-menu{
+    display:block;
+  }
+
+  .mobile-buttons{
+    display:flex;
+    flex-direction:column;
+
+    width:100%;
+    gap:12px;
+    margin-top:20px;
+  }
+
+  .mobile-buttons a{
+    width:100%;
+    justify-content:center;
+  }
+}
+/* ==========================
+   MOBILE
+========================== */
+
+@media (max-width:480px){
+
+  .logo img{
+    height:42px;
+  }
+
+  .nav-links{
+    width:280px;
+  }
+}
