@@ -1,6 +1,7 @@
 import "./Navbar.css";
 import { useState } from "react";
 import logo from "../assets/logo.png";
+import { Link } from "react-router-dom";
 
 import {
   FaBars,
@@ -120,13 +121,13 @@ function Navbar() {
               Book Consultation
             </a>
 
-            <a
-              href="/login"
-              className="login-btn"
-              onClick={closeMenu}
-            >
-              Login / Register
-            </a>
+          <Link
+  to="/login"
+  className="login-btn"
+  onClick={closeMenu}
+>
+  Login / Register
+</Link>
 
           </li>
 
