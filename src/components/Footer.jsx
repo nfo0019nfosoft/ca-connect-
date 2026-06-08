@@ -1,5 +1,6 @@
 import "./Footer.css";
 import logo from "../assets/logo.png";
+import { Link } from "react-router-dom";
 
 function Footer() {
   return (
@@ -34,52 +35,50 @@ function Footer() {
         </div>
 
         {/* Quick Links */}
+<div className="footer-column">
+  <h4>Quick Links</h4>
 
-        <div className="footer-column">
-          <h4>Quick Links</h4>
-
-          <a href="/">Home</a>
-          <a href="/">Find CA</a>
-          <a href="/">Services</a>
-          <a href="/">AI Assistant</a>
-          <a href="/">Blogs</a>
-          <a href="/">Contact Us</a>
-        </div>
+  <Link to="/">Home</Link>
+  <Link to="/find-ca">Find CA</Link>
+  <Link to="/service">Services</Link>
+  <Link to="/ai-assistant">AI Assistant</Link>
+  <Link to="/blogs">Blogs</Link>
+  <Link to="/contact">Contact Us</Link>
+</div>
 
         {/* Services */}
+<div className="footer-column">
+  <h4>Services</h4>
 
-        <div className="footer-column">
-          <h4>Services</h4>
-
-          <a href="/">GST Filing</a>
-          <a href="/">Income Tax Filing</a>
-          <a href="/">Company Registration</a>
-          <a href="/">ROC Filing</a>
-          <a href="/">Audit & Assurance</a>
-          <a href="/">Bookkeeping</a>
-        </div>
+  <Link to="/services/gst-filing">GST Filing</Link>
+  <Link to="/services/income-tax-filing">Income Tax Filing</Link>
+  <Link to="/services/company-registration">Company Registration</Link>
+  <Link to="/services/roc-filing">ROC Filing</Link>
+  <Link to="/services/audit-assurance">Audit & Assurance</Link>
+  <Link to="/services/bookkeeping">Bookkeeping</Link>
+   <Link to="/services/bookkeeping">Payroll Services</Link>
+</div>
 
         {/* Support */}
 
-        <div className="footer-column">
-          <h4>Support</h4>
+      <div className="footer-column">
+  <h4>Support</h4>
 
-          <a href="/">Help Center</a>
-          <a href="/">FAQs</a>
-          <a href="/">How It Works</a>
-          <a href="/">Contact Support</a>
-          <a href="/">Signup</a>
-        </div>
-
+  <Link to="/help-center">Help Center</Link>
+  <Link to="/faqs">FAQs</Link>
+  <Link to="/how-it-works">How It Works</Link>
+  <Link to="/support">Contact Support</Link>
+  <Link to="/Login">Signup</Link>
+</div>
         {/* Legal */}
 
-        <div className="footer-column">
-          <h4>Legal</h4>
+       <div className="footer-column">
+  <h4>Legal</h4>
 
-          <a href="/">Privacy Policy</a>
-          <a href="/">Terms & Conditions</a>
-          <a href="/">Refund Policy</a>
-        </div>
+  <Link to="/PrivacyPolicy">Privacy Policy</Link>
+  <Link to="/TermsAndConditions">Terms & Conditions</Link>
+  <Link to="/TermsAndConditions">Refund Policy</Link>
+</div>
 
         {/* Newsletter */}
 

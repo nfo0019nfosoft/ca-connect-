@@ -37,6 +37,7 @@ import home2 from "../assets/home2.png";
 import home3 from "../assets/home3.png";
 import home4 from "../assets/home4.png";
 import "@fortawesome/fontawesome-free/css/all.min.css";
+import { Link } from "react-router-dom";
 
 function Home() {
 
@@ -88,23 +89,23 @@ function Home() {
     </p>
 
     <div
-      className="hero-features"
+      className="hero-feaures"
       data-aos="fade-up"
       data-aos-delay="500"
     >
 
-      <div className="feature">
-        <FaShieldAlt className="feature-icon" />
+      <div className="feaure">
+        <FaShieldAlt className="feaure-icon" />
         <span>Verified Professionals</span>
       </div>
 
-      <div className="feature">
-        <FaWallet className="feature-icon" />
+      <div className="feaure">
+        <FaWallet className="feaure-icon" />
         <span>Transparent Pricing</span>
       </div>
 
-      <div className="feature">
-        <FaLock className="feature-icon" />
+      <div className="feaure">
+        <FaLock className="feaure-icon" />
         <span>Secure & Reliable</span>
       </div>
 
@@ -241,105 +242,73 @@ function Home() {
 
 {/* Popular Services Section */}
 
-<section className="services-section">
+<section className="popular-services-section">
 
   <div
-    className="services-header"
+    className="popular-services-header"
     data-aos="fade-up"
   >
     <h2>Popular Services</h2>
 
-    <a href="/" className="view-all">
+    <a href="/" className="popular-view-all">
       View All Services
       <FaArrowRight />
     </a>
   </div>
 
-  <div className="services-grid">
+  <div className="popular-services-grid">
 
-    <div
-      className="service-card"
-      data-aos="zoom-in-up"
-      data-aos-delay="100"
-    >
-      <div className="service-icon green">
+    <div className="popular-service-card">
+      <div className="popular-service-icon green">
         <FaFileInvoice />
       </div>
       <h4>GST Filing</h4>
     </div>
 
-    <div
-      className="service-card"
-      data-aos="zoom-in-up"
-      data-aos-delay="200"
-    >
-      <div className="service-icon blue">
+    <div className="popular-service-card">
+      <div className="popular-service-icon blue">
         <FaClipboardList />
       </div>
       <h4>Income Tax Filing</h4>
     </div>
 
-    <div
-      className="service-card"
-      data-aos="zoom-in-up"
-      data-aos-delay="300"
-    >
-      <div className="service-icon purple">
+    <div className="popular-service-card">
+      <div className="popular-service-icon purple">
         <FaBuilding />
       </div>
       <h4>Company Registration</h4>
     </div>
 
-    <div
-      className="service-card"
-      data-aos="zoom-in-up"
-      data-aos-delay="400"
-    >
-      <div className="service-icon red">
+    <div className="popular-service-card">
+      <div className="popular-service-icon red">
         <FaClipboardList />
       </div>
       <h4>ROC Filing</h4>
     </div>
 
-    <div
-      className="service-card"
-      data-aos="zoom-in-up"
-      data-aos-delay="500"
-    >
-      <div className="service-icon cyan">
+    <div className="popular-service-card">
+      <div className="popular-service-icon cyan">
         <FaTrademark />
       </div>
       <h4>Trademark Registration</h4>
     </div>
 
-    <div
-      className="service-card"
-      data-aos="zoom-in-up"
-      data-aos-delay="600"
-    >
-      <div className="service-icon orange">
+    <div className="popular-service-card">
+      <div className="popular-service-icon orange">
         <FaShieldAlt />
       </div>
       <h4>Audit & Assurance</h4>
     </div>
 
-    <div
-      className="service-card"
-      data-aos="zoom-in-up"
-      data-aos-delay="700"
-    >
-      <div className="service-icon violet">
+    <div className="popular-service-card">
+      <div className="popular-service-icon violet">
         <FaBook />
       </div>
       <h4>Bookkeeping</h4>
     </div>
 
-    <div
-      className="service-card"
-      data-aos="zoom-in-up"
-      data-aos-delay="800"
-    >
-      <div className="service-icon navy">
+    <div className="popular-service-card">
+      <div className="popular-service-icon navy">
         <FaUsers />
       </div>
       <h4>Payroll Services</h4>
@@ -826,6 +795,181 @@ function Home() {
 
 
 
+
+
+
+
+<section className="blog-section">
+
+  <div className="blog-container">
+
+    <div className="blog-header">
+
+      <h2>Latest from Our Blog</h2>
+
+      <a href="/" className="blog-view-all">
+        View All Blogs
+        <i className="fas fa-arrow-right"></i>
+      </a>
+
+    </div>
+
+    <div className="blog-grid">
+
+      {/* CARD 1 */}
+
+      <div className="blog-card">
+
+        <div className="blog-image">
+
+          <img
+            src="https://images.unsplash.com/photo-1554224155-6726b3ff858f"
+            alt="GST Updates"
+          />
+
+          <span className="blog-tag gst">
+            GST
+          </span>
+
+        </div>
+
+        <div className="blog-content">
+
+          <h3>
+            Latest Changes in GST for FY 2024-25
+          </h3>
+
+          <div className="blog-meta">
+            <span>May 10, 2024</span>
+            <span>•</span>
+            <span>5 min read</span>
+          </div>
+
+        </div>
+
+      </div>
+
+      {/* CARD 2 */}
+
+      <div className="blog-card">
+
+        <div className="blog-image">
+
+          <img
+            src="https://images.unsplash.com/photo-1579621970795-87facc2f976d"
+            alt="Income Tax"
+          />
+
+          <span className="blog-tag tax">
+            Income Tax
+          </span>
+
+        </div>
+
+        <div className="blog-content">
+
+          <h3>
+            Income Tax Saving Tips You Should Know
+          </h3>
+
+          <div className="blog-meta">
+            <span>May 08, 2024</span>
+            <span>•</span>
+            <span>4 min read</span>
+          </div>
+
+        </div>
+
+      </div>
+
+      {/* CARD 3 */}
+
+      <div className="blog-card">
+
+        <div className="blog-image">
+
+          <img
+            src="https://images.unsplash.com/photo-1556740749-887f6717d7e4"
+            alt="Business Registration"
+          />
+
+          <span className="blog-tag business">
+            Business
+          </span>
+
+        </div>
+
+        <div className="blog-content">
+
+          <h3>
+            How to Register Your Company in India
+          </h3>
+
+          <div className="blog-meta">
+            <span>May 05, 2024</span>
+            <span>•</span>
+            <span>6 min read</span>
+          </div>
+
+        </div>
+
+      </div>
+
+      {/* CARD 4 */}
+
+      <div className="blog-card">
+
+        <div className="blog-image">
+
+          <img
+            src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40"
+            alt="Compliance"
+          />
+
+          <span className="blog-tag compliance">
+            Compliance
+          </span>
+
+        </div>
+
+        <div className="blog-content">
+
+          <h3>
+            ROC Compliance Checklist for Private Limited Company
+          </h3>
+
+          <div className="blog-meta">
+            <span>May 03, 2024</span>
+            <span>•</span>
+            <span>4 min read</span>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <section className="faq-section">
 
   <div className="faq-container">
@@ -840,7 +984,7 @@ function Home() {
 
       <h2>Frequently Asked Questions</h2>
 
-      <details className="faq-item" open>
+      <details className="faq-item" >
         <summary className="faq-question">
           <span>How can I find a trusted CA near me?</span>
         </summary>
@@ -932,14 +1076,13 @@ function Home() {
         </p>
 
         <div className="support-buttons">
+<Link to="/support" className="contact-btn">
+  Contact Support
+</Link>
 
-          <button className="contact-btn">
-            Contact Support
-          </button>
-
-          <button className="chat-btn">
-            Live Chat
-          </button>
+<Link to="/ai-assisstant" className="chat-btn">
+  Live Chat
+</Link>
 
         </div>
 

@@ -8,6 +8,7 @@ import {
   FaTimes,
   FaChevronDown,
   FaCalendarAlt,
+  FaMapMarkerAlt,
 } from "react-icons/fa";
 
 function Navbar() {
@@ -23,62 +24,84 @@ function Navbar() {
     <header className="navbar">
       <div className="navbar-container">
 
-        {/* Logo */}
-        <a href="/" className="logo">
+        <Link to="/" className="logo">
           <img src={logo} alt="CA Connect" />
-        </a>
+        </Link>
 
-        {/* Navigation */}
         <ul className={menuOpen ? "nav-links active" : "nav-links"}>
 
           <li>
-            <a
-              href="/"
-              className="active-link"
-              onClick={closeMenu}
-            >
+            <Link to="/" onClick={closeMenu}>
               Home
-            </a>
+            </Link>
           </li>
 
           <li>
-            <a href="/" onClick={closeMenu}>
+            <Link to="/find-ca" onClick={closeMenu}>
               Find CA
-            </a>
+            </Link>
           </li>
 
-          {/* Services Dropdown */}
           <li className={serviceOpen ? "dropdown active" : "dropdown"}>
 
-            <a
-              href="/"
-              onClick={(e) => {
-                e.preventDefault();
-                setServiceOpen(!serviceOpen);
-              }}
-            >
-              Services
-              <FaChevronDown className="down-icon" />
-            </a>
+            <div className="service-nav">
+
+              <Link to="/service" onClick={closeMenu}>
+                Services
+              </Link>
+
+              <FaChevronDown
+                className="down-icon"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setServiceOpen(!serviceOpen);
+                }}
+              />
+
+            </div>
 
             <ul className="dropdown-menu">
 
               <li>
-                <a href="/" onClick={closeMenu}>
+                <Link to="/gst-filing" onClick={closeMenu}>
                   GST Filing
-                </a>
+                </Link>
               </li>
 
               <li>
-                <a href="/" onClick={closeMenu}>
-                  Income Tax
-                </a>
+                <Link to="/income-tax-filing" onClick={closeMenu}>
+                  Income Tax Filing
+                </Link>
               </li>
 
               <li>
-                <a href="/" onClick={closeMenu}>
+                <Link to="/company-registration" onClick={closeMenu}>
                   Company Registration
-                </a>
+                </Link>
+              </li>
+
+              <li>
+                <Link to="/roc-filing" onClick={closeMenu}>
+                  ROC Filing
+                </Link>
+              </li>
+
+                <li>
+                <Link to="/roc-filing" onClick={closeMenu}>
+                  Audit & Assurance
+                </Link>
+              </li>
+
+                <li>
+                <Link to="/roc-filing" onClick={closeMenu}>
+                  Bookkeping
+                </Link>
+              </li>
+
+                <li>
+                <Link to="/roc-filing" onClick={closeMenu}>
+                 Payroll Services
+                </Link>
               </li>
 
             </ul>
@@ -86,73 +109,79 @@ function Navbar() {
           </li>
 
           <li>
-            <a href="/" onClick={closeMenu}>
+            <Link to="/ai-assistant" onClick={closeMenu}>
               AI Assistant
-            </a>
+            </Link>
           </li>
 
           <li>
-            <a href="/" onClick={closeMenu}>
+            <Link to="/blogs" onClick={closeMenu}>
               Blogs
-            </a>
+            </Link>
           </li>
 
           <li>
-            <a href="/" onClick={closeMenu}>
+            <Link to="/AboutUs" onClick={closeMenu}>
               About Us
-            </a>
+            </Link>
           </li>
 
           <li>
-            <a href="/" onClick={closeMenu}>
+            <Link to="/contact" onClick={closeMenu}>
               Contact Us
-            </a>
+            </Link>
           </li>
 
-          {/* Mobile Buttons */}
           <li className="mobile-buttons">
 
-            <a
-              href="/"
+            <Link
+              to="/consultation"
               className="consult-btn"
               onClick={closeMenu}
             >
               <FaCalendarAlt />
               Book Consultation
-            </a>
+            </Link>
 
-          <Link
-  to="/login"
-  className="login-btn"
-  onClick={closeMenu}
->
-  Login / Register
-</Link>
+            <Link
+              to="/location"
+              className="location-badge"
+              onClick={closeMenu}
+            >
+              <FaMapMarkerAlt />
+              Location
+            </Link>
+
+            <Link
+              to="/login"
+              className="login-btn"
+              onClick={closeMenu}
+            >
+              Login / Register
+            </Link>
 
           </li>
 
         </ul>
 
-        {/* Desktop Buttons */}
         <div className="nav-actions">
 
-          <a href="/" className="consult-btn">
+          <Link to="/consultation" className="consult-btn">
             <FaCalendarAlt />
             Book Consultation
-          </a>
+          </Link>
 
-         
-          <Link
-  to="/Login"
-  className="login-btn"
-  onClick={closeMenu}
->
-  Login / Register
-</Link>
+          <Link to="/location" className="location-badge">
+            <FaMapMarkerAlt />
+            Location
+          </Link>
+
+          <Link to="/login" className="login-btn">
+            Login / Register
+          </Link>
 
         </div>
 
-        {/* Mobile Hamburger */}
         <div
           className="hamburger"
           onClick={() => {
