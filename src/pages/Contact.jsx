@@ -253,10 +253,13 @@ const faqData = [
 
           <select className="contact-input">
             <option>Select a subject</option>
-            <option>Consultation</option>
-            <option>Support</option>
-            <option>Billing</option>
-            <option>Partnership</option>
+          <option>GST Filing</option>
+<option>Income Tax Filing</option>
+<option>Company Registration</option>
+<option>ROC Filing</option>
+<option>Audit & Assurance</option>
+<option>Bookkeeping</option>
+<option>Payroll Services</option>
           </select>
 
         </div>

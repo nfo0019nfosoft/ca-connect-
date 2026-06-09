@@ -603,6 +603,7 @@ text-align:left;
 .popular-services-section {
   max-width: 1400px;
   margin: 40px auto;
+    overflow:hidden;
   padding: 50px;
 }
 
@@ -774,6 +775,7 @@ text-align:left;
 
 .top-ca-section {
   padding:30px 5%;
+    overflow:hidden;
   background: #fff;
 }
 
@@ -1186,7 +1188,8 @@ text-align:left;
 ================================== */
 
 .how-section {
-  padding: 70px 5%;
+  padding: 50px 5%;
+    overflow:hidden;
   background: #fff;
 }
 
@@ -1430,6 +1433,7 @@ text-align:left;
 .expert-section{
     width:100%;
     padding:0 40px;
+      overflow:hidden;
     box-sizing:border-box;
 }
 
@@ -1771,6 +1775,7 @@ text-align:left;
 
 .ai-assistant-section{
   padding:30px 20px;
+    overflow:hidden;
   background:#fff;
 }
 
@@ -2096,7 +2101,8 @@ text-align:left;
 ========================== */
 
 .testimonial-section{
-  padding:70px 40px;
+  padding:50px 40px;
+    overflow:hidden;
   background:#fff;
 }
 
@@ -2452,7 +2458,8 @@ text-align:left;
 ========================== */
 
 .blog-section{
-  padding:80px 60px;
+  padding:50px 60px;
+    overflow:hidden;
   background:#fff;
 }
 
@@ -2669,6 +2676,7 @@ text-align:left;
 
 .faq-section{
   padding:30px 30px;
+    overflow:hidden;
   background:#fff;
 }
 

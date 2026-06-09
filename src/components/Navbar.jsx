@@ -9,16 +9,32 @@ import {
   FaChevronDown,
   FaCalendarAlt,
   FaMapMarkerAlt,
+  FaUserCircle,
+    FaPhoneAlt,
+  FaUserTag,
+  FaSignOutAlt
 } from "react-icons/fa";
 
 function Navbar() {
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [serviceOpen, setServiceOpen] = useState(false);
+const [menuOpen, setMenuOpen] = useState(false);
+const [serviceOpen, setServiceOpen] = useState(false);
+const [profileOpen, setProfileOpen] = useState(false);
 
-  const closeMenu = () => {
-    setMenuOpen(false);
-    setServiceOpen(false);
-  };
+const user = JSON.parse(
+  localStorage.getItem("user")
+);
+
+const handleLogout = () => {
+  localStorage.removeItem("token");
+  localStorage.removeItem("user");
+
+  window.location.href = "/";
+};
+
+const closeMenu = () => {
+  setMenuOpen(false);
+  setServiceOpen(false);
+};
 
   return (
     <header className="navbar">
@@ -63,43 +79,43 @@ function Navbar() {
             <ul className="dropdown-menu">
 
               <li>
-                <Link to="/gst-filing" onClick={closeMenu}>
+                <Link to="/service" onClick={closeMenu}>
                   GST Filing
                 </Link>
               </li>
 
               <li>
-                <Link to="/income-tax-filing" onClick={closeMenu}>
+                <Link to="/service" onClick={closeMenu}>
                   Income Tax Filing
                 </Link>
               </li>
 
               <li>
-                <Link to="/company-registration" onClick={closeMenu}>
+                <Link to="/service" onClick={closeMenu}>
                   Company Registration
                 </Link>
               </li>
 
               <li>
-                <Link to="/roc-filing" onClick={closeMenu}>
+                <Link to="/service" onClick={closeMenu}>
                   ROC Filing
                 </Link>
               </li>
 
                 <li>
-                <Link to="/roc-filing" onClick={closeMenu}>
+                <Link to="/service" onClick={closeMenu}>
                   Audit & Assurance
                 </Link>
               </li>
 
                 <li>
-                <Link to="/roc-filing" onClick={closeMenu}>
+                <Link to="/service" onClick={closeMenu}>
                   Bookkeping
                 </Link>
               </li>
 
                 <li>
-                <Link to="/roc-filing" onClick={closeMenu}>
+                <Link to="/service" onClick={closeMenu}>
                  Payroll Services
                 </Link>
               </li>
@@ -151,16 +167,66 @@ function Navbar() {
               <FaMapMarkerAlt />
               Location
             </Link>
+{user ? (
+  <div className="profile-wrapper">
 
-            <Link
-              to="/login"
-              className="login-btn"
-              onClick={closeMenu}
-            >
-              Login / Register
-            </Link>
+    <FaUserCircle
+      className="profile-icon"
+      size={35}
+      onClick={() =>
+        setProfileOpen(!profileOpen)
+      }
+    />
 
-          </li>
+    {profileOpen && (
+      <div className="profile-popup">
+
+        <div className="profile-header">
+          <FaUserCircle
+            className="popup-avatar"
+          />
+
+          <h4>
+            {user?.role === "vendor"
+              ? "CA Professional"
+              : "User"}
+          </h4>
+        </div>
+
+        <div className="profile-item">
+          <FaPhoneAlt />
+          <span>
+            {user?.phone}
+          </span>
+        </div>
+
+        <div className="profile-item">
+          <FaUserTag />
+          <span>
+            {user?.role}
+          </span>
+        </div>
+
+        <button
+          onClick={handleLogout}
+          className="logout-btn"
+        >
+          <FaSignOutAlt />
+          Logout
+        </button>
+
+      </div>
+    )}
+
+  </div>
+) : (
+  <Link
+    to="/login"
+    className="login-btn"
+  >
+    Login / Register
+  </Link>
+)}          </li>
 
         </ul>
 
@@ -175,10 +241,67 @@ function Navbar() {
             <FaMapMarkerAlt />
             Location
           </Link>
+{user ? (
+  <div className="profile-wrapper">
 
-          <Link to="/login" className="login-btn">
-            Login / Register
-          </Link>
+    <FaUserCircle
+      className="profile-icon"
+      size={30}
+      onClick={() =>
+        setProfileOpen(!profileOpen)
+      }
+    />
+
+    {profileOpen && (
+      <div className="profile-popup">
+
+        <div className="profile-header">
+          <FaUserCircle
+            className="popup-avatar"
+          />
+
+          <h4>
+            {user?.role === "vendor"
+              ? "CA Professional"
+              : "User"}
+          </h4>
+        </div>
+
+        <div className="profile-item">
+          <FaPhoneAlt />
+          <span>
+            {user?.phone}
+          </span>
+        </div>
+
+        <div className="profile-item">
+          <FaUserTag />
+          <span>
+            {user?.role}
+          </span>
+        </div>
+
+        <button
+          onClick={handleLogout}
+          className="logout-btn"
+        >
+          <FaSignOutAlt />
+          Logout
+        </button>
+
+      </div>
+    )}
+
+  </div>
+) : (
+  <Link
+    to="/login"
+    className="login-btn"
+    onClick={closeMenu}
+  >
+    Login / Register
+  </Link>
+)}
 
         </div>
 

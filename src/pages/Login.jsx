@@ -21,14 +21,67 @@ import {
 function Login() {
   const [phone, setPhone] = useState("");
   const [userType, setUserType] = useState("user");
+const handleOtp = async () => {
+  try {
 
-  const handleOtp = () => {
-    console.log({
-      phone,
-      userType,
-    });
-  };
+    console.log("Sending phone:", phone);
 
+    const response = await fetch(
+      "http://localhost:5000/api/auth/login",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+       body: JSON.stringify({
+  phone,
+  role: userType === "ca" ? "vendor" : "user",
+}),
+      }
+    );
+
+    const data = await response.json();
+
+    console.log("STATUS:", response.status);
+    console.log("FULL DATA:", data);
+
+    if (data.success) {
+
+      localStorage.setItem(
+        "token",
+        data.token
+      );
+
+      localStorage.setItem(
+        "user",
+        JSON.stringify(data.user)
+      );
+
+      if (data.user.role === "vendor") {
+        window.location.href =
+          "/vendor-dashboard";
+      } else {
+        window.location.href = "/";
+      }
+
+    } else {
+
+      alert(
+        data.message || "Login Failed"
+      );
+
+    }
+
+  } catch (error) {
+
+    console.log(error);
+
+    alert(
+      "Something went wrong"
+    );
+
+  }
+};
   return (
     <section className="login-page">
       <div className="login-card">
@@ -118,12 +171,12 @@ function Login() {
 
           </div>
 
-          <button
-            className="otp-btn"
-            onClick={handleOtp}
-          >
-            Send OTP
-          </button>
+         <button
+  className="otp-btn"
+  onClick={handleOtp}
+>
+Login
+</button>
 
           <div className="secure-text">
             <FaShieldAlt />
