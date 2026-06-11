@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Mediclaim - Rishika Mother & Child Hospital</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="images/fav.png">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/med.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- AOS -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css">
+</head>
+
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+
+    <header class="header">
+
+        <div class="container">
+
+            <a href="index.html" class="logo">
+                <img src="images/logo.png" alt="Rishika Hospital">
+            </a>
+
+            <nav class="navbar">
+
+                <ul class="nav-links">
+
+                    <li><a href="index.html">Home</a></li>
+
+                    <li><a href="about.html">About Us</a></li>
+
+                    <li><a href="doctors.html">Doctors</a></li>
+
+                    <!-- Specialities -->
+                    <li class="dropdown">
+
+                        <a href="specialities.html">
+                            Specialities
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </a>
+
+                        <ul class="dropdown-menu">
+                            <li><a href="pediatric-care.html">Pediatric Care</a></li>
+                            <li><a href="neonatology.html">Neonatology</a></li>
+                            <li><a href="gynaecology.html">Gynecology</a></li>
+                            <li><a href="obstetrics.html">Obstetrics</a></li>
+                            <li><a href="infertility.html">Infertility</a></li>
+                        </ul>
+
+                    </li>
+
+                    <!-- Facilities -->
+                    <li class="dropdown">
+
+                        <a href="facilities.html">
+                            Facilities
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </a>
+
+                        <ul class="dropdown-menu">
+                            <li><a href="picu.html">PICU</a></li>
+                            <li><a href="nicu.html">NICU</a></li>
+                            <li><a href="operation-theater.html">Operation Theater</a></li>
+                            <li><a href="24-7-ambulance.html">24/7 Ambulance</a></li>
+                            <li><a href="x-ray.html">X-Ray</a></li>
+                            <li><a href="inpatient-outpatient.html">Inpatient / Outpatient</a></li>
+                        </ul>
+
+                    </li>
+
+                    <!-- Info -->
+                    <li class="dropdown">
+
+                        <a href="#">
+                            Info
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </a>
+
+                        <ul class="dropdown-menu">
+                            <li><a href="mediclam.html">Mediclam</a></li>
+                            <li><a href="blog.html">Blog</a></li>
+
+
+                        </ul>
+
+                    </li>
+
+                    <li><a href="gallery.html">Gallery</a></li>
+
+                    <li><a href="contact.html">Contact Us</a></li>
+
+                </ul>
+
+            </nav>
+
+            <a href="contact.html" class="appointment-btn">
+                Book Appointment
+            </a>
+
+            <div class="hamburger">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+
+        </div>
+
+    </header>
+
+    <!-- Mobile Menu -->
+
+    <div class="mobile-menu">
+
+        <ul>
+
+            <li><a href="index.html">Home</a></li>
+
+            <li><a href="about.html">About Us</a></li>
+
+            <li><a href="doctors.html">Doctors</a></li>
+            <li class="mobile-dropdown">
+
+                <div class="mobile-dropdown-header">
+
+                    <a href="specialities.html">
+                        Specialities
+                    </a>
+
+                    <button class="dropdown-toggle">
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </button>
+
+                </div>
+
+                <ul>
+                    <li><a href="pediatric-care.html">Pediatric Care</a></li>
+                    <li><a href="neonatology.html">Neonatology</a></li>
+                    <li><a href="gynaecology.html">Gynecology</a></li>
+                    <li><a href="obstetrics.html">Obstetrics</a></li>
+                    <li><a href="infertility.html">Infertility</a></li>
+                </ul>
+
+            </li>
+
+            <li class="mobile-dropdown">
+
+                <div class="mobile-dropdown-header">
+
+                    <a href="facilities.html">
+                        Facilities
+                    </a>
+
+                    <button class="dropdown-toggle">
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </button>
+
+                </div>
+
+                <ul>
+                    <li><a href="picu.html">PICU</a></li>
+                    <li><a href="nicu.html">NICU</a></li>
+                    <li><a href="operation-theater.html">Operation Theater</a></li>
+                    <li><a href="24-7-ambulance.html">24/7 Ambulance</a></li>
+                    <li><a href="x-ray.html">X-Ray</a></li>
+                    <li><a href="inpatient-outpatient.html">Inpatient / Outpatient</a></li>
+                </ul>
+
+            </li>
+
+            <li class="mobile-dropdown">
+
+                <span>
+                    Info
+                    <i class="fa-solid fa-chevron-down"></i>
+                </span>
+
+                <ul>
+                    <li><a href="mediclaim.html">Mediclaim</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                </ul>
+
+            </li>
+
+            <li><a href="gallery.html">Gallery</a></li>
+
+            <li><a href="contact.html">Contact Us</a></li>
+
+        </ul>
+
+    </div>
+
+    <!-- JS -->
+
+    <script>
+
+        const hamburger = document.querySelector(".hamburger");
+        const mobileMenu = document.querySelector(".mobile-menu");
+
+        hamburger.addEventListener("click", () => {
+            mobileMenu.classList.toggle("active");
+        });
+
+
+        document.querySelectorAll(".dropdown-toggle").forEach(button => {
+
+            button.addEventListener("click", function (e) {
+
+                e.preventDefault();
+
+                const dropdown = this.closest(".mobile-dropdown");
+
+                dropdown.classList.toggle("open");
+
+            });
+
+        });
+
+    </script>
+
+    <!-- AOS -->
+
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+
+    <script>
+        AOS.init({
+            duration: 800,
+            once: true
+        });
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <section class="page-hero">
+
+
+        <div class="shape circle-one"></div>
+        <div class="shape circle-two"></div>
+
+        <div class="capsule capsule-one"></div>
+        <div class="capsule capsule-two"></div>
+
+        <div class="triangle triangle-one"></div>
+        <div class="triangle triangle-two"></div>
+
+
+        <div class="dot-grid dot-grid-one"></div>
+        <div class="dot-grid dot-grid-two"></div>
+
+        <img src="images/star.png" class="hero-star star-one" alt="">
+        <!-- <img src="images/star.png" class="hero-star star-two" alt=""> -->
+
+        <div class="hero-content">
+            <h1>Mediclaim</h1>
+        </div>
+
+        <div class="bottom-wave"></div>
+
+    </section>
+
+
+
+
+
+
+
+    <section class="life-goals-section">
+
+    <div class="life-goals-container" data-aos="fade-up">
+
+        <h2>
+           Comprehensive Insurance Coverage at Rishika Mother and Child Hospital
+        </h2>
+
+    </div>
+
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="scheme-section">
+
+    <!-- Decorative Stars -->
+    <div class="shape-stars">
+        <img src="images/star.png" alt="star">
+    </div>
+
+    <div class="scheme-container">
+
+        <!-- Image Side -->
+        <div class="scheme-image"
+             data-aos="fade-right"
+             data-aos-duration="1200">
+
+            <img src="images/med1.png"
+                 alt="Aarogyasri Scheme">
+
+        </div>
+
+        <!-- Content Side -->
+        <div class="scheme-content"
+             data-aos="fade-left"
+             data-aos-duration="1200">
+
+            <h2>
+                రిషికా తల్లి & పిల్లల హాస్పిటల్‌లో
+                చిన్నారుల కోసం ఆరోగ్యశ్రీ పథకం
+            </h2>
+
+            <p>
+              జమ్మికుంటలోని రిషిక తల్లి మరియు పిల్లల హాస్పిటల్‌లో ఆరోగ్యశ్రీ పథకం అందుబాటులో ఉంది. ఈ పథకం చిన్నారులకు అత్యుత్తమ వైద్య సేవలను అందించేందుకు రూపొందించబడింది. డా. బి. రమేష్ గారి దృఢ లక్ష్యం — ఆర్థికంగా బలహీనమైన కుటుంబాలకు చెందిన ప్రతి చిన్నారికి ఈ పథకం ద్వారా ఉచితంగా సమగ్ర వైద్య సేవలను అందించడం.
+            </p>
+
+            <p>
+              పుట్టుక తర్వాత శిశు సంరక్షణ నుండి, సాధారణ వైద్య సేవల వరకు, అత్యవసర చికిత్సల వరకు మా ఆసుపత్రిలో నిపుణులైన వైద్య బృందం చిన్నారుల కోసం సేవలందిస్తోంది. ఆరోగ్యశ్రీ పథకం కింద పిల్లలకు అందించే సేవల్లో వృద్ధి పరిశీలనలు, వ్యాధి నిర్ధారణ, ప్రత్యేక చికిత్సలు, అవసరమైతే అత్యవసర శస్త్రచికిత్సలు వంటి వైద్య సేవలు ఉన్నాయి.
+            </p>
+
+            <p>
+              మా లక్ష్యం ప్రతి చిన్నారి ఆరోగ్యాన్ని మెరుగుపరచడం. ఆరోగ్యశ్రీ పథకం వివరాల కోసం లేదా ఈ సేవలను పొందడానికి, దయచేసి మా ఫ్రంట్ డెస్క్‌ను సంప్రదించండి.
+            </p>
+
+            <a href="#" class="read-more-btn">
+                Read More
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="scheme-section">
+
+    <!-- Decorative Stars -->
+    
+
+    <div class="scheme-container">
+
+        <!-- Image Side -->
+        <div class="scheme-image"
+             data-aos="fade-right"
+             data-aos-duration="1200">
+
+            <img src="images/med2.png"
+                 alt="Aarogyasri Scheme">
+
+        </div>
+
+        <!-- Content Side -->
+        <div class="scheme-content"
+             data-aos="fade-left"
+             data-aos-duration="1200">
+
+            <h2>
+               Insurance Coverage for Seamless Pediatric Care at Rishika Mother & Child Hospital
+            </h2>
+
+            <p>
+              Rishika Children’s Hospital, Jammikunta, accepts a wide range of insurance plans to ensure that every child receives the medical care they need without financial burdens. From routine pediatric consultations and vaccinations to specialized treatments and emergency care, our hospital is committed to delivering comprehensive care with seamless insurance support.
+            </p>
+
+            <p>
+We collaborate with major insurance providers, including Mediclaim and other widely accepted schemes, making quality pediatric healthcare more accessible and affordable. Our team, led by Dr. B. Ramesh and supported by experienced pediatricians and specialists, offers expert and timely treatment with minimal out-of-pocket expenses.
+            </p>
+
+            <p>
+At Rishika, we understand the stress that medical costs can bring to families. That’s why we strive to simplify the insurance process and guide you through your coverage options — so you can focus on what truly matters: the health and well-being of your child. For detailed assistance on insurance coverage, please reach out to our front desk.
+            </p>
+
+            <a href="#" class="read-more-btn">
+                Read More
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="insurance-section">
+    <div class="ins-container">
+
+        <div class="insurance-heading" data-aos="fade-up">
+            
+            <h2>Hassle-Free Claims with 50+ Mediclaim Providers</h2>
+        </div>
+
+        <div class="insurance-marquee">
+            <div class="marquee-track">
+
+                <!-- First Set -->
+                <div class="logo-item"><img src="images/ins1.png" alt=""></div>
+                <div class="logo-item"><img src="images/ins2.png" alt=""></div>
+                <div class="logo-item"><img src="images/ins3.png" alt=""></div>
+                <div class="logo-item"><img src="images/ins4.png" alt=""></div>
+                <div class="logo-item"><img src="images/ins5.png" alt=""></div>
+                <div class="logo-item"><img src="images/ins6.png" alt=""></div>
+                <div class="logo-item"><img src="images/ins7.png" alt=""></div>
+                <div class="logo-item"><img src="images/ins8.png" alt=""></div>
+                <div class="logo-item"><img src="images/ins9.png" alt=""></div>
+                <div class="logo-item"><img src="images/ins10.png" alt=""></div>
+                <div class="logo-item"><img src="images/ins11.png" alt=""></div>
+                <div class="logo-item"><img src="images/ins12.png" alt=""></div>
+                <div class="logo-item"><img src="images/ins13.png" alt=""></div>
+                <div class="logo-item"><img src="images/ins14.png" alt=""></div>
+                <div class="logo-item"><img src="images/ins15.png" alt=""></div>
+                <div class="logo-item"><img src="images/ins16.png" alt=""></div>
+                <div class="logo-item"><img src="images/ins17.png" alt=""></div>
+                <div class="logo-item"><img src="images/ins18.png" alt=""></div>
+                <div class="logo-item"><img src="images/ins19.png" alt=""></div>
+                <div class="logo-item"><img src="images/ins20.png" alt=""></div>
+                <div class="logo-item"><img src="images/ins21.png" alt=""></div>
+                <div class="logo-item"><img src="images/ins22.png" alt=""></div>
+                <div class="logo-item"><img src="images/ins23.png" alt=""></div>
+                <div class="logo-item"><img src="images/ins24.png" alt=""></div>
+
+                <!-- Duplicate Set for Infinite Loop -->
+                <div class="logo-item"><img src="images/ins1.png" alt=""></div>
+                <div class="logo-item"><img src="images/ins2.png" alt=""></div>
+                <div class="logo-item"><img src="images/ins3.png" alt=""></div>
+                <div class="logo-item"><img src="images/ins4.png" alt=""></div>
+                <div class="logo-item"><img src="images/ins5.png" alt=""></div>
+                <div class="logo-item"><img src="images/ins6.png" alt=""></div>
+                <div class="logo-item"><img src="images/ins7.png" alt=""></div>
+                <div class="logo-item"><img src="images/ins8.png" alt=""></div>
+                <div class="logo-item"><img src="images/ins9.png" alt=""></div>
+                <div class="logo-item"><img src="images/ins10.png" alt=""></div>
+                <div class="logo-item"><img src="images/ins11.png" alt=""></div>
+                <div class="logo-item"><img src="images/ins12.png" alt=""></div>
+                <div class="logo-item"><img src="images/ins13.png" alt=""></div>
+                <div class="logo-item"><img src="images/ins14.png" alt=""></div>
+                <div class="logo-item"><img src="images/ins15.png" alt=""></div>
+                <div class="logo-item"><img src="images/ins16.png" alt=""></div>
+                <div class="logo-item"><img src="images/ins17.png" alt=""></div>
+                <div class="logo-item"><img src="images/ins18.png" alt=""></div>
+                <div class="logo-item"><img src="images/ins19.png" alt=""></div>
+                <div class="logo-item"><img src="images/ins20.png" alt=""></div>
+                <div class="logo-item"><img src="images/ins21.png" alt=""></div>
+                <div class="logo-item"><img src="images/ins22.png" alt=""></div>
+                <div class="logo-item"><img src="images/ins23.png" alt=""></div>
+                <div class="logo-item"><img src="images/ins24.png" alt=""></div>
+
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="emergency-section">
+
+    <div class="emergency-container">
+
+        <span class="emergency-tag"
+              data-aos="fade-down"
+              data-aos-duration="1000">
+            EMERGENCY SERVICES ARE AVAILABLE 24*7
+        </span>
+
+        <h2 class="emergency-title"
+            data-aos="zoom-in"
+            data-aos-delay="200"
+            data-aos-duration="1200">
+
+            Call us, we are happy to assist you with the information you need.
+
+        </h2>
+
+        <div class="emergency-btn-wrap"
+             data-aos="fade-up"
+             data-aos-delay="400"
+             data-aos-duration="1200">
+
+            <a href="tel:+918888888888"
+               class="emergency-btn">
+
+                Contact Us
+
+            </a>
+
+        </div>
+
+    </div>
+
+</section>

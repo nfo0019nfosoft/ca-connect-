@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Doctors - Rishika Mother & Child Hospital</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="images/fav.png">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/doctors.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- AOS -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css">
+</head>
+
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+
+    <header class="header">
+
+        <div class="container">
+
+            <a href="index.html" class="logo">
+                <img src="images/logo.png" alt="Rishika Hospital">
+            </a>
+
+            <nav class="navbar">
+
+                <ul class="nav-links">
+
+                    <li><a href="index.html">Home</a></li>
+
+                    <li><a href="about.html">About Us</a></li>
+
+                    <li><a href="doctors.html">Doctors</a></li>
+
+                    <!-- Specialities -->
+                    <li class="dropdown">
+
+                        <a href="specialities.html">
+                            Specialities
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </a>
+
+                        <ul class="dropdown-menu">
+                            <li><a href="pediatric-care.html">Pediatric Care</a></li>
+                            <li><a href="neonatology.html">Neonatology</a></li>
+                            <li><a href="gynaecology.html">Gynecology</a></li>
+                            <li><a href="obstetrics.html">Obstetrics</a></li>
+                            <li><a href="infertility.html">Infertility</a></li>
+                        </ul>
+
+                    </li>
+
+                    <!-- Facilities -->
+                    <li class="dropdown">
+
+                        <a href="facilities.html">
+                            Facilities
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </a>
+
+                        <ul class="dropdown-menu">
+                            <li><a href="picu.html">PICU</a></li>
+                            <li><a href="nicu.html">NICU</a></li>
+                            <li><a href="operation-theater.html">Operation Theater</a></li>
+                            <li><a href="24-7-ambulance.html">24/7 Ambulance</a></li>
+                            <li><a href="x-ray.html">X-Ray</a></li>
+                            <li><a href="inpatient-outpatient.html">Inpatient / Outpatient</a></li>
+                        </ul>
+
+                    </li>
+
+                    <!-- Info -->
+                    <li class="dropdown">
+
+                        <a href="#">
+                            Info
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </a>
+
+                        <ul class="dropdown-menu">
+                            <li><a href="mediclam.html">Mediclam</a></li>
+                            <li><a href="blog.html">Blog</a></li>
+
+
+                        </ul>
+
+                    </li>
+
+                    <li><a href="gallery.html">Gallery</a></li>
+
+                    <li><a href="contact.html">Contact Us</a></li>
+
+                </ul>
+
+            </nav>
+
+            <a href="contact.html" class="appointment-btn">
+                Book Appointment
+            </a>
+
+            <div class="hamburger">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+
+        </div>
+
+    </header>
+
+    <!-- Mobile Menu -->
+
+    <div class="mobile-menu">
+
+        <ul>
+
+            <li><a href="index.html">Home</a></li>
+
+            <li><a href="about.html">About Us</a></li>
+
+            <li><a href="doctors.html">Doctors</a></li>
+            <li class="mobile-dropdown">
+
+                <div class="mobile-dropdown-header">
+
+                    <a href="specialities.html">
+                        Specialities
+                    </a>
+
+                    <button class="dropdown-toggle">
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </button>
+
+                </div>
+
+                <ul>
+                    <li><a href="pediatric-care.html">Pediatric Care</a></li>
+                    <li><a href="neonatology.html">Neonatology</a></li>
+                    <li><a href="gynaecology.html">Gynecology</a></li>
+                    <li><a href="obstetrics.html">Obstetrics</a></li>
+                    <li><a href="infertility.html">Infertility</a></li>
+                </ul>
+
+            </li>
+
+            <li class="mobile-dropdown">
+
+                <div class="mobile-dropdown-header">
+
+                    <a href="facilities.html">
+                        Facilities
+                    </a>
+
+                    <button class="dropdown-toggle">
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </button>
+
+                </div>
+
+                <ul>
+                    <li><a href="picu.html">PICU</a></li>
+                    <li><a href="nicu.html">NICU</a></li>
+                    <li><a href="operation-theater.html">Operation Theater</a></li>
+                    <li><a href="24-7-ambulance.html">24/7 Ambulance</a></li>
+                    <li><a href="x-ray.html">X-Ray</a></li>
+                    <li><a href="inpatient-outpatient.html">Inpatient / Outpatient</a></li>
+                </ul>
+
+            </li>
+
+            <li class="mobile-dropdown">
+
+                <span>
+                    Info
+                    <i class="fa-solid fa-chevron-down"></i>
+                </span>
+
+                <ul>
+                    <li><a href="mediclaim.html">Mediclaim</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                </ul>
+
+            </li>
+
+            <li><a href="gallery.html">Gallery</a></li>
+
+            <li><a href="contact.html">Contact Us</a></li>
+
+        </ul>
+
+    </div>
+
+    <!-- JS -->
+
+    <script>
+
+        const hamburger = document.querySelector(".hamburger");
+        const mobileMenu = document.querySelector(".mobile-menu");
+
+        hamburger.addEventListener("click", () => {
+            mobileMenu.classList.toggle("active");
+        });
+
+
+        document.querySelectorAll(".dropdown-toggle").forEach(button => {
+
+            button.addEventListener("click", function (e) {
+
+                e.preventDefault();
+
+                const dropdown = this.closest(".mobile-dropdown");
+
+                dropdown.classList.toggle("open");
+
+            });
+
+        });
+
+    </script>
+
+    <!-- AOS -->
+
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+
+    <script>
+        AOS.init({
+            duration: 800,
+            once: true
+        });
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <section class="page-hero">
+
+
+        <div class="shape circle-one"></div>
+        <div class="shape circle-two"></div>
+
+        <div class="capsule capsule-one"></div>
+        <div class="capsule capsule-two"></div>
+
+        <div class="triangle triangle-one"></div>
+        <div class="triangle triangle-two"></div>
+
+
+        <div class="dot-grid dot-grid-one"></div>
+        <div class="dot-grid dot-grid-two"></div>
+
+        <img src="images/star.png" class="hero-star star-one" alt="">
+        <!-- <img src="images/star.png" class="hero-star star-two" alt=""> -->
+
+        <div class="hero-content">
+            <h1>Doctors</h1>
+        </div>
+
+        <div class="bottom-wave"></div>
+
+    </section>
+
+
+
+
+
+
+
+    <section class="life-goals-section">
+
+    <div class="life-goals-container" data-aos="fade-up">
+
+        <h2>
+          Expert Care for Every Mother and Little Heart!
+        </h2>
+
+    </div>
+
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="about-founder">
+
+    <div class="about-founder-container">
+
+        <!-- Content -->
+        <div class="about-founder-content" data-aos="fade-right">
+
+            <span class="about-founder-subtitle">
+                ESTABLISHED HOSPITAL & YOUR FAMILY DOCTOR
+            </span>
+
+         
+            <p>
+               Established in 2018 by Dr. B. Ramesh, Rishika Mother and Child Hospital has become a trusted center for maternal, pediatric, and neonatal care in Jammikunta. With a vision to provide affordable and high-quality healthcare, the hospital is equipped with advanced medical infrastructure and a compassionate team dedicated to the well-being of mothers and children.
+            </p>
+
+            <p>
+              Specializing in newborn, children’s, and maternal care, the hospital offers state-of-the-art facilities and personalized treatment. Known for maintaining the highest standards of safety and hygiene, Rishika Mother and Child Hospital operates in compliance with national medical guidelines.
+            </p>
+
+            <p>
+                Serving as a beacon of hope for families across Telangana, the hospital remains committed to its mission of delivering accessible and reliable healthcare for mothers and children.
+            </p>
+        </div>
+
+        <!-- Image Side -->
+        <div class="about-founder-image" data-aos="fade-left">
+
+            <img src="images/doc.png" alt="" class="doctor-img">
+
+            <img src="images/star.png" alt="" class="star-img">
+
+            <img src="images/docup.png" alt="" class="hand-img">
+
+            <div class="dot-pattern"></div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+
+
+
+
+
+
+
+
+<section class="doctors-section">
+
+    <div class="section-title" data-aos="fade-up">
+
+        <span class="subtitle">
+            MEET OUR DOCTORS
+        </span>
+
+        <h2>
+            Trusted Care for Mother and Child,
+            Dedicated to Your Family!
+        </h2>
+
+    </div>
+
+    <div class="doctors-grid">
+
+        <!-- Doctor 1 -->
+
+        <div class="doctor-card" data-aos="fade-up" data-aos-delay="100">
+
+            <img src="images/doc1.png" alt="Dr. B. Ramesh">
+
+            <div class="doctor-overlay">
+
+                <div class="doctor-content">
+
+                    <h3>Dr. B. Ramesh</h3>
+
+                    <p>
+                        Pediatrician &
+                        Neonatologist
+                    </p>
+
+                    <div class="doctor-social">
+
+                        <a href="#">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+
+                        <a href="#">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+
+                        <a href="#">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Doctor 2 -->
+
+        <div class="doctor-card" data-aos="fade-up" data-aos-delay="200">
+
+            <img src="images/doc2.png" alt="Dr. Swami Rao">
+
+            <div class="doctor-overlay">
+
+                <div class="doctor-content">
+
+                    <h3>Dr. Swami Rao</h3>
+
+                    <p>
+                        Pediatrician &
+                        Neonatologist
+                    </p>
+
+                    <div class="doctor-social">
+
+                        <a href="#">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+
+                        <a href="#">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+
+                        <a href="#">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Doctor 3 -->
+
+        <div class="doctor-card" data-aos="fade-up" data-aos-delay="300">
+
+            <img src="images/doc3.png" alt="Dr. K. Jyothi Reddy">
+
+            <div class="doctor-overlay">
+
+                <div class="doctor-content">
+
+                    <h3>Dr. K. Jyothi Reddy</h3>
+
+                    <p>
+                        MS (OBG), FMAS, DMAS
+                    </p>
+
+                    <div class="doctor-social">
+
+                        <a href="#">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+
+                        <a href="#">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+
+                        <a href="#">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+
+
+
+
+
+
+
+
+<section class="team-section">
+    <div class="team-container">
+        <h2 class="team-title">MEET OUR TEAM</h2>
+
+        <div class="team-image-wrapper">
+            <img src="images/team.png" alt="Our Team">
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="experience-section">
+    <div class="experience-content">
+
+        <div class="left-content">
+            <h2>
+                Providing Trusted Care for Mothers and Children with Expertise
+            </h2>
+
+            <p>
+              With over 7 years of experience, we are committed to offering the best care for mothers and children. Our dedicated team ensures the health and well-being of every mother and child, delivering expert treatment with compassion.
+            </p>
+        </div>
+
+        <div class="right-content">
+            <div class="counter-box">
+                <h3><span id="counter">0</span>+</h3>
+                <p>Years of Experience</p>
+            </div>
+        </div>
+
+    </div>
+</section>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+
+    let count = 0;
+    let target = 7;
+
+    let interval = setInterval(() => {
+
+        document.getElementById("counter").innerText = count;
+
+        if (count >= target) {
+            clearInterval(interval);
+        }
+
+        count++;
+
+    }, 200);
+
+});
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="join-team-section">
+
+    <div class="overlay"></div>
+
+    <div class="join-card"
+         data-aos="zoom-in"
+         data-aos-duration="1200">
+
+        <span class="sub-title">JOIN US</span>
+
+        <h2>
+            Interested in joining our team?
+        </h2>
+
+        <p>
+            Are you passionate about making a difference in maternal and child
+            healthcare? Join our dedicated team and help us deliver exceptional
+            care to mothers, children, and families!
+        </p>
+
+        <a href="contact.html" class="join-btn">
+            Contact us
+        </a>
+
+    </div>
+
+</section>

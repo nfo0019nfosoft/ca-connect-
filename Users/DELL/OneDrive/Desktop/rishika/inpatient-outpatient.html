@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Inpatient and Outpatient - Rishika Mother & Child Hospital</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="images/fav.png">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/picu.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- AOS -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css">
+</head>
+
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+
+    <header class="header">
+
+        <div class="container">
+
+            <a href="index.html" class="logo">
+                <img src="images/logo.png" alt="Rishika Hospital">
+            </a>
+
+            <nav class="navbar">
+
+                <ul class="nav-links">
+
+                    <li><a href="index.html">Home</a></li>
+
+                    <li><a href="about.html">About Us</a></li>
+
+                    <li><a href="doctors.html">Doctors</a></li>
+
+                    <!-- Specialities -->
+                    <li class="dropdown">
+
+                        <a href="specialities.html">
+                            Specialities
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </a>
+
+                        <ul class="dropdown-menu">
+                            <li><a href="pediatric-care.html">Pediatric Care</a></li>
+                            <li><a href="neonatology.html">Neonatology</a></li>
+                            <li><a href="gynaecology.html">Gynecology</a></li>
+                            <li><a href="obstetrics.html">Obstetrics</a></li>
+                            <li><a href="infertility.html">Infertility</a></li>
+                        </ul>
+
+                    </li>
+
+                    <!-- Facilities -->
+                    <li class="dropdown">
+
+                        <a href="facilities.html">
+                            Facilities
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </a>
+
+                        <ul class="dropdown-menu">
+                            <li><a href="picu.html">PICU</a></li>
+                            <li><a href="nicu.html">NICU</a></li>
+                            <li><a href="operation-theater.html">Operation Theater</a></li>
+                            <li><a href="24-7-ambulance.html">24/7 Ambulance</a></li>
+                            <li><a href="x-ray.html">X-Ray</a></li>
+                            <li><a href="inpatient-outpatient.html">Inpatient / Outpatient</a></li>
+                        </ul>
+
+                    </li>
+
+                    <!-- Info -->
+                    <li class="dropdown">
+
+                        <a href="#">
+                            Info
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </a>
+
+                        <ul class="dropdown-menu">
+                            <li><a href="mediclam.html">Mediclam</a></li>
+                            <li><a href="blog.html">Blog</a></li>
+
+
+                        </ul>
+
+                    </li>
+
+                    <li><a href="gallery.html">Gallery</a></li>
+
+                    <li><a href="contact.html">Contact Us</a></li>
+
+                </ul>
+
+            </nav>
+
+            <a href="contact.html" class="appointment-btn">
+                Book Appointment
+            </a>
+
+            <div class="hamburger">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+
+        </div>
+
+    </header>
+
+    <!-- Mobile Menu -->
+
+    <div class="mobile-menu">
+
+        <ul>
+
+            <li><a href="index.html">Home</a></li>
+
+            <li><a href="about.html">About Us</a></li>
+
+            <li><a href="doctors.html">Doctors</a></li>
+            <li class="mobile-dropdown">
+
+                <div class="mobile-dropdown-header">
+
+                    <a href="specialities.html">
+                        Specialities
+                    </a>
+
+                    <button class="dropdown-toggle">
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </button>
+
+                </div>
+
+                <ul>
+                    <li><a href="pediatric-care.html">Pediatric Care</a></li>
+                    <li><a href="neonatology.html">Neonatology</a></li>
+                    <li><a href="gynaecology.html">Gynecology</a></li>
+                    <li><a href="obstetrics.html">Obstetrics</a></li>
+                    <li><a href="infertility.html">Infertility</a></li>
+                </ul>
+
+            </li>
+
+            <li class="mobile-dropdown">
+
+                <div class="mobile-dropdown-header">
+
+                    <a href="facilities.html">
+                        Facilities
+                    </a>
+
+                    <button class="dropdown-toggle">
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </button>
+
+                </div>
+
+                <ul>
+                    <li><a href="picu.html">PICU</a></li>
+                    <li><a href="nicu.html">NICU</a></li>
+                    <li><a href="operation-theater.html">Operation Theater</a></li>
+                    <li><a href="24-7-ambulance.html">24/7 Ambulance</a></li>
+                    <li><a href="x-ray.html">X-Ray</a></li>
+                    <li><a href="inpatient-outpatient.html">Inpatient / Outpatient</a></li>
+                </ul>
+
+            </li>
+
+            <li class="mobile-dropdown">
+
+                <span>
+                    Info
+                    <i class="fa-solid fa-chevron-down"></i>
+                </span>
+
+                <ul>
+                    <li><a href="mediclaim.html">Mediclaim</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                </ul>
+
+            </li>
+
+            <li><a href="gallery.html">Gallery</a></li>
+
+            <li><a href="contact.html">Contact Us</a></li>
+
+        </ul>
+
+    </div>
+
+    <!-- JS -->
+
+    <script>
+
+        const hamburger = document.querySelector(".hamburger");
+        const mobileMenu = document.querySelector(".mobile-menu");
+
+        hamburger.addEventListener("click", () => {
+            mobileMenu.classList.toggle("active");
+        });
+
+
+        document.querySelectorAll(".dropdown-toggle").forEach(button => {
+
+            button.addEventListener("click", function (e) {
+
+                e.preventDefault();
+
+                const dropdown = this.closest(".mobile-dropdown");
+
+                dropdown.classList.toggle("open");
+
+            });
+
+        });
+
+    </script>
+
+    <!-- AOS -->
+
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+
+    <script>
+        AOS.init({
+            duration: 800,
+            once: true
+        });
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <section class="page-hero">
+
+
+        <div class="shape circle-one"></div>
+        <div class="shape circle-two"></div>
+
+        <div class="capsule capsule-one"></div>
+        <div class="capsule capsule-two"></div>
+
+        <div class="triangle triangle-one"></div>
+        <div class="triangle triangle-two"></div>
+
+
+        <div class="dot-grid dot-grid-one"></div>
+        <div class="dot-grid dot-grid-two"></div>
+
+        <img src="images/star.png" class="hero-star star-one" alt="">
+        <!-- <img src="images/star.png" class="hero-star star-two" alt=""> -->
+
+        <div class="hero-content">
+            <h1>Inpatient and Outpatient</h1>
+        </div>
+
+        <div class="bottom-wave"></div>
+
+    </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="services-section">
+    <div class="containe">
+
+        <h2 class="section-title" data-aos="fade-down">
+            Outpatient and Inpatient Services at Rishika <br>
+            Mother and Child Hospital
+        </h2>
+
+        <div class="services-grid">
+
+            <!-- Left Images -->
+            <div class="left-images">
+
+           <div class="decorative-stars">
+    <img src="images/star.png" alt="star">
+</div>
+
+                <div class="image-card" data-aos="fade-right">
+                    <img src="images/ip1.png" alt="">
+                </div>
+
+                <div class="image-card" data-aos="fade-up">
+                    <img src="images/ip2.png" alt="">
+                </div>
+
+            </div>
+
+            <!-- Right Content -->
+            <div class="content-area" data-aos="fade-left">
+
+                <h3>Outpatient Services</h3>
+
+                <p>
+                    At <strong>Rishika Mother and Child Hospital</strong>,we offer a comprehensive range of <strong> outpatient services</strong> catering to both children and women. From general pediatrics to specialized maternal health consultations, our expert team ensures complete care under one roof.
+                </p>
+
+                <p>
+                    Led by <strong>Dr. B. Ramesh</strong>(Pediatrics) and
+                    <strong>Dr. K. Jyothi Reddy</strong>, (Gynecology & Obstetrics), our consultants bring years of experience and postgraduate training from prestigious medical institutions across India.
+                </p>
+
+                <p>
+                    Our <strong>General Pediatrics</strong> services address common childhood conditions such as fever, cough, cold, vomiting, loose motions, and more. Children are carefully assessed and guided through the right treatment, with referrals to subspecialties when needed.
+                </p>
+
+                <p>
+                    For <strong>women's health</strong>, we provide outpatient care covering menstrual issues, pregnancy checkups, fertility concerns, hormonal imbalances, and menopause-related support — all managed with compassion and clinical expertise.
+                </p>
+
+                <h4>We also offer <strong>routine wellness care </strong>such as:</h4>
+
+                <ul>
+                    <li>Vaccinations and immunizations</li>
+                    <li>Growth and development monitoring</li>
+                    <li>Diet and nutrition counseling</li>
+                    <li>Preventive dental care for children</li>
+                    <li>Health screenings and maternal wellness advice</li>
+                </ul>
+
+                <p>
+                   At Rishika Mother and Child Hospital, your family’s health is in expert hands — from infancy to motherhood and beyond.
+
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="inpatient-section">
+    <div class="containe">
+
+        <div class="services-grid">
+
+            <!-- Left Images -->
+            <div class="left-images">
+
+                <div class="image-card" data-aos="fade-right">
+                    <img src="images/ip3.png" alt="">
+                </div>
+
+                <div class="image-card" data-aos="fade-up">
+                    <img src="images/ip4.png" alt="">
+                </div>
+
+            </div>
+
+            <!-- Content -->
+            <div class="content-area" data-aos="fade-left">
+
+                <h3>Inpatient Services</h3>
+
+                <p>
+                    At Rishika Mother and Child Hospital,
+                    Jammikunta...
+                </p>
+
+                <p>
+                    At <strong>Rishika Mother and Child Hospital</strong>,
+                   we provide compassionate and expert <strong>inpatient care </strong> for both mothers and children. Whether it’s a child requiring medical attention or a mother needing observation during or after pregnancy, our hospital is fully equipped to meet every need.
+                </p>
+
+                <p>
+                   If <strong>Dr. B. Ramesh,</strong> our senior pediatrician, recommends that your child needs <strong>IV fluids or medications, </strong>they may be admitted to our safe and supportive inpatient ward. Similarly, expectant or new mothers who require close monitoring or postnatal care are given dedicated rooms and round-the-clock medical support.
+                </p>
+
+                <h4>Our hospital includes:</h4>
+
+                <ul>
+                    <li><strong>Pediatric Wards</strong> with a nurturing and child-friendly environment</li>
+                    <li><strong>Maternity Rooms</strong> designed for comfort and recovery</li>
+                    <li><strong>24/7 Specialist Availability of Dr. B. Ramesh and Dr. K. Jyothi Reddy</strong>for expert decisions</li>
+                    <li><strong>Trained Nursing Staff</strong> on every floor to provide constant care</li>
+                    <li><strong>Pediatric ICU (PICU)</strong>for emergencies and backup support</li>
+                </ul>
+
+                <p>
+                   Unlike many hospitals where care is delegated to junior staff, we ensure that your loved ones are attended  <strong>experienced specialists at all times.</strong>
+                </p>
+                <p>We understand the anxiety that can come with hospital admission. That’s why our <strong> compassionate team is here to support you every step of the way, </strong>ensuring a comfortable and safe stay for both mother and child.</p>
+                <p>For room details, amenities, and services, please visit our <strong>front office</strong> or request a <strong> hospital tour</strong>  today.</p>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="op-banner">
+    <div class="containe">
+
+        <div class="op-wrapper">
+
+            <!-- Left Content -->
+            <div class="op-content">
+
+                <span class="top-text"
+                      data-aos="fade-right"
+                      data-aos-duration="1000">
+                    EMERGENCY SERVICES ARE AVAILABLE 24*7
+                </span>
+
+                <h1 data-aos="fade-up"
+                    data-aos-delay="200"
+                    data-aos-duration="1200">
+                    Mother and Child <br>
+                    Outpatient Services
+                </h1>
+
+                <p class="working-days"
+                   data-aos="zoom-in"
+                   data-aos-delay="500">
+                    on all working days
+                </p>
+
+                <a href="contact.html"
+                   class="appointment-btn"
+                   data-aos="fade-up"
+                   data-aos-delay="700">
+                    Book An Appointment
+                </a>
+
+            </div>
+
+            <!-- Right Image -->
+            <div class="op-image"
+                 data-aos="fade-left"
+                 data-aos-duration="1500">
+                <img src="images/ip5.png" alt="">
+            </div>
+
+        </div>
+
+    </div>
+</section>

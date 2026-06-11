@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>PICU - Rishika Mother & Child Hospital</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="images/fav.png">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/picu.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- AOS -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css">
+</head>
+
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+
+    <header class="header">
+
+        <div class="container">
+
+            <a href="index.html" class="logo">
+                <img src="images/logo.png" alt="Rishika Hospital">
+            </a>
+
+            <nav class="navbar">
+
+                <ul class="nav-links">
+
+                    <li><a href="index.html">Home</a></li>
+
+                    <li><a href="about.html">About Us</a></li>
+
+                    <li><a href="doctors.html">Doctors</a></li>
+
+                    <!-- Specialities -->
+                    <li class="dropdown">
+
+                        <a href="specialities.html">
+                            Specialities
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </a>
+
+                        <ul class="dropdown-menu">
+                            <li><a href="pediatric-care.html">Pediatric Care</a></li>
+                            <li><a href="neonatology.html">Neonatology</a></li>
+                            <li><a href="gynaecology.html">Gynecology</a></li>
+                            <li><a href="obstetrics.html">Obstetrics</a></li>
+                            <li><a href="infertility.html">Infertility</a></li>
+                        </ul>
+
+                    </li>
+
+                    <!-- Facilities -->
+                    <li class="dropdown">
+
+                        <a href="facilities.html">
+                            Facilities
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </a>
+
+                        <ul class="dropdown-menu">
+                            <li><a href="picu.html">PICU</a></li>
+                            <li><a href="nicu.html">NICU</a></li>
+                            <li><a href="operation-theater.html">Operation Theater</a></li>
+                            <li><a href="24-7-ambulance.html">24/7 Ambulance</a></li>
+                            <li><a href="x-ray.html">X-Ray</a></li>
+                            <li><a href="inpatient-outpatient.html">Inpatient / Outpatient</a></li>
+                        </ul>
+
+                    </li>
+
+                    <!-- Info -->
+                    <li class="dropdown">
+
+                        <a href="#">
+                            Info
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </a>
+
+                        <ul class="dropdown-menu">
+                            <li><a href="mediclam.html">Mediclam</a></li>
+                            <li><a href="blog.html">Blog</a></li>
+
+
+                        </ul>
+
+                    </li>
+
+                    <li><a href="gallery.html">Gallery</a></li>
+
+                    <li><a href="contact.html">Contact Us</a></li>
+
+                </ul>
+
+            </nav>
+
+            <a href="contact.html" class="appointment-btn">
+                Book Appointment
+            </a>
+
+            <div class="hamburger">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+
+        </div>
+
+    </header>
+
+    <!-- Mobile Menu -->
+
+    <div class="mobile-menu">
+
+        <ul>
+
+            <li><a href="index.html">Home</a></li>
+
+            <li><a href="about.html">About Us</a></li>
+
+            <li><a href="doctors.html">Doctors</a></li>
+            <li class="mobile-dropdown">
+
+                <div class="mobile-dropdown-header">
+
+                    <a href="specialities.html">
+                        Specialities
+                    </a>
+
+                    <button class="dropdown-toggle">
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </button>
+
+                </div>
+
+                <ul>
+                    <li><a href="pediatric-care.html">Pediatric Care</a></li>
+                    <li><a href="neonatology.html">Neonatology</a></li>
+                    <li><a href="gynaecology.html">Gynecology</a></li>
+                    <li><a href="obstetrics.html">Obstetrics</a></li>
+                    <li><a href="infertility.html">Infertility</a></li>
+                </ul>
+
+            </li>
+
+            <li class="mobile-dropdown">
+
+                <div class="mobile-dropdown-header">
+
+                    <a href="facilities.html">
+                        Facilities
+                    </a>
+
+                    <button class="dropdown-toggle">
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </button>
+
+                </div>
+
+                <ul>
+                    <li><a href="picu.html">PICU</a></li>
+                    <li><a href="nicu.html">NICU</a></li>
+                    <li><a href="operation-theater.html">Operation Theater</a></li>
+                    <li><a href="24-7-ambulance.html">24/7 Ambulance</a></li>
+                    <li><a href="x-ray.html">X-Ray</a></li>
+                    <li><a href="inpatient-outpatient.html">Inpatient / Outpatient</a></li>
+                </ul>
+
+            </li>
+
+            <li class="mobile-dropdown">
+
+                <span>
+                    Info
+                    <i class="fa-solid fa-chevron-down"></i>
+                </span>
+
+                <ul>
+                    <li><a href="mediclaim.html">Mediclaim</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                </ul>
+
+            </li>
+
+            <li><a href="gallery.html">Gallery</a></li>
+
+            <li><a href="contact.html">Contact Us</a></li>
+
+        </ul>
+
+    </div>
+
+    <!-- JS -->
+
+    <script>
+
+        const hamburger = document.querySelector(".hamburger");
+        const mobileMenu = document.querySelector(".mobile-menu");
+
+        hamburger.addEventListener("click", () => {
+            mobileMenu.classList.toggle("active");
+        });
+
+
+        document.querySelectorAll(".dropdown-toggle").forEach(button => {
+
+            button.addEventListener("click", function (e) {
+
+                e.preventDefault();
+
+                const dropdown = this.closest(".mobile-dropdown");
+
+                dropdown.classList.toggle("open");
+
+            });
+
+        });
+
+    </script>
+
+    <!-- AOS -->
+
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+
+    <script>
+        AOS.init({
+            duration: 800,
+            once: true
+        });
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <section class="page-hero">
+
+
+        <div class="shape circle-one"></div>
+        <div class="shape circle-two"></div>
+
+        <div class="capsule capsule-one"></div>
+        <div class="capsule capsule-two"></div>
+
+        <div class="triangle triangle-one"></div>
+        <div class="triangle triangle-two"></div>
+
+
+        <div class="dot-grid dot-grid-one"></div>
+        <div class="dot-grid dot-grid-two"></div>
+
+        <img src="images/star.png" class="hero-star star-one" alt="">
+        <!-- <img src="images/star.png" class="hero-star star-two" alt=""> -->
+
+        <div class="hero-content">
+            <h1>PICU</h1>
+        </div>
+
+        <div class="bottom-wave"></div>
+
+    </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <section class="picu-section">
+  <div class="picu-container">
+
+    <span class="subtitle">PICU</span>
+
+    <h2 class="main-title">
+      State-of-the-Art PICU Services
+    </h2>
+
+    <div class="content-wrapper">
+
+      <div class="image-box">
+        <img src="images/picu1.png" alt="PICU">
+      </div>
+
+      <div class="content-box">
+        <span class="overview">OVERVIEW</span>
+
+        <h3 class="content-title">
+          Pediatric Intensive Care Unit (PICU) at Rishika Mother and Child Hospital
+        </h3>
+
+        <p>
+          At <strong>Rishika Mother and Child Hospital</strong>,our PICU is a specialized unit where advanced technology, expert care, and compassion come together to provide life-saving treatment. With a dedicated team of pediatric intensivists, we ensure the best possible outcomes for critically ill children. We understand the vital role family involvement plays in the healing process and offer continuous support and communication to help families during this challenging time. Your child’s well-being is our top priority, and we are here to provide expert care every step of the way. Infants to adolescents. We believe in nurturing not just their physical health but also their emotional well-being, ensuring they grow into healthy, happy individuals.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="facility-highlights">
+
+    <div class="section-title" data-aos="fade-up">
+        <h2>Facility Highlights</h2>
+    </div>
+
+    <div class="facility-grid">
+
+        <div class="facility-card" data-aos="fade-up">
+            <img src="images/picu2.png" alt="">
+            <h3>State-of-the-Art PICU</h3>
+          <p>Our advanced Pediatric Intensive Care Unit (PICU) provides specialized care for critically ill children, ensuring the highest standards of safety and treatment.</p>
+        </div>
+
+        <div class="facility-card" data-aos="fade-up" data-aos-delay="100">
+            <img src="images/picu3.png" alt="">
+            <h3>Expert Pediatric Intensivists</h3>
+           <p>Our PICU is managed by a team of pediatric intensivists who are available around the clock to provide specialized care.</p>
+        </div>
+
+        <div class="facility-card" data-aos="fade-up" data-aos-delay="200">
+            <img src="images/picu4.png" alt="">
+            <h3>Ambulance Transport</h3>
+           <p>We provide a well-equipped ambulance service to transport critically ill babies safely and swiftly to our PICU.</p>
+        </div>
+
+        <div class="facility-card" data-aos="fade-up">
+            <img src="images/picu5.png" alt="">
+            <h3>Family Support</h3>
+         <p>We prioritize keeping parents informed and supported during critical care, offering regular counseling to address concerns and ensure comfort throughout the process.</p>
+        </div>
+
+        <div class="facility-card" data-aos="fade-up" data-aos-delay="100">
+            <img src="images/picu6.png" alt="">
+            <h3>Central Monitoring</h3>
+          <p>We use central monitoring with IBP (Invasive Blood Pressure) and EtCo2 (End-Tidal Carbon Dioxide) monitoring to closely track and assess the vital signs of our young patients.</p>
+        </div>
+
+        <div class="facility-card" data-aos="fade-up" data-aos-delay="200">
+            <img src="images/picu7.png" alt="">
+            <h3>Specialized Procedures</h3>
+          <p>Our PICU provides specialized care, including peritoneal dialysis, CVP monitoring, noninvasive ventilation, and more, to meet each child’s unique needs.</p>
+        </div>
+
+    </div>
+
+    <div class="facility-card facility-full" data-aos="fade-up">
+        <img src="images/picu8.png" alt="">
+        <h3>CPAP And HFNC Support</h3>
+      <p>Our PICU offers CPAP and HFNC support to assist with respiratory distress, providing non-invasive solutions to improve oxygenation and ease breathing for critically ill children.</p>
+    </div>
+
+</section>

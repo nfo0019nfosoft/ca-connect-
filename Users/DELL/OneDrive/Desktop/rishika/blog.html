@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Blog - Rishika Mother & Child Hospital</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="images/fav.png">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/blog.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- AOS -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css">
+</head>
+
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+
+    <header class="header">
+
+        <div class="container">
+
+            <a href="index.html" class="logo">
+                <img src="images/logo.png" alt="Rishika Hospital">
+            </a>
+
+            <nav class="navbar">
+
+                <ul class="nav-links">
+
+                    <li><a href="index.html">Home</a></li>
+
+                    <li><a href="about.html">About Us</a></li>
+
+                    <li><a href="doctors.html">Doctors</a></li>
+
+                    <!-- Specialities -->
+                    <li class="dropdown">
+
+                        <a href="specialities.html">
+                            Specialities
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </a>
+
+                        <ul class="dropdown-menu">
+                            <li><a href="pediatric-care.html">Pediatric Care</a></li>
+                            <li><a href="neonatology.html">Neonatology</a></li>
+                            <li><a href="gynaecology.html">Gynecology</a></li>
+                            <li><a href="obstetrics.html">Obstetrics</a></li>
+                            <li><a href="infertility.html">Infertility</a></li>
+                        </ul>
+
+                    </li>
+
+                    <!-- Facilities -->
+                    <li class="dropdown">
+
+                        <a href="facilities.html">
+                            Facilities
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </a>
+
+                        <ul class="dropdown-menu">
+                            <li><a href="picu.html">PICU</a></li>
+                            <li><a href="nicu.html">NICU</a></li>
+                            <li><a href="operation-theater.html">Operation Theater</a></li>
+                            <li><a href="24-7-ambulance.html">24/7 Ambulance</a></li>
+                            <li><a href="x-ray.html">X-Ray</a></li>
+                            <li><a href="inpatient-outpatient.html">Inpatient / Outpatient</a></li>
+                        </ul>
+
+                    </li>
+
+                    <!-- Info -->
+                    <li class="dropdown">
+
+                        <a href="#">
+                            Info
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </a>
+
+                        <ul class="dropdown-menu">
+                            <li><a href="mediclam.html">Mediclam</a></li>
+                            <li><a href="blog.html">Blog</a></li>
+
+
+                        </ul>
+
+                    </li>
+
+                    <li><a href="gallery.html">Gallery</a></li>
+
+                    <li><a href="contact.html">Contact Us</a></li>
+
+                </ul>
+
+            </nav>
+
+            <a href="contact.html" class="appointment-btn">
+                Book Appointment
+            </a>
+
+            <div class="hamburger">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+
+        </div>
+
+    </header>
+
+    <!-- Mobile Menu -->
+
+    <div class="mobile-menu">
+
+        <ul>
+
+            <li><a href="index.html">Home</a></li>
+
+            <li><a href="about.html">About Us</a></li>
+
+            <li><a href="doctors.html">Doctors</a></li>
+            <li class="mobile-dropdown">
+
+                <div class="mobile-dropdown-header">
+
+                    <a href="specialities.html">
+                        Specialities
+                    </a>
+
+                    <button class="dropdown-toggle">
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </button>
+
+                </div>
+
+                <ul>
+                    <li><a href="pediatric-care.html">Pediatric Care</a></li>
+                    <li><a href="neonatology.html">Neonatology</a></li>
+                    <li><a href="gynaecology.html">Gynecology</a></li>
+                    <li><a href="obstetrics.html">Obstetrics</a></li>
+                    <li><a href="infertility.html">Infertility</a></li>
+                </ul>
+
+            </li>
+
+            <li class="mobile-dropdown">
+
+                <div class="mobile-dropdown-header">
+
+                    <a href="facilities.html">
+                        Facilities
+                    </a>
+
+                    <button class="dropdown-toggle">
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </button>
+
+                </div>
+
+                <ul>
+                    <li><a href="picu.html">PICU</a></li>
+                    <li><a href="nicu.html">NICU</a></li>
+                    <li><a href="operation-theater.html">Operation Theater</a></li>
+                    <li><a href="24-7-ambulance.html">24/7 Ambulance</a></li>
+                    <li><a href="x-ray.html">X-Ray</a></li>
+                    <li><a href="inpatient-outpatient.html">Inpatient / Outpatient</a></li>
+                </ul>
+
+            </li>
+
+            <li class="mobile-dropdown">
+
+                <span>
+                    Info
+                    <i class="fa-solid fa-chevron-down"></i>
+                </span>
+
+                <ul>
+                    <li><a href="mediclaim.html">Mediclaim</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                </ul>
+
+            </li>
+
+            <li><a href="gallery.html">Gallery</a></li>
+
+            <li><a href="contact.html">Contact Us</a></li>
+
+        </ul>
+
+    </div>
+
+    <!-- JS -->
+
+    <script>
+
+        const hamburger = document.querySelector(".hamburger");
+        const mobileMenu = document.querySelector(".mobile-menu");
+
+        hamburger.addEventListener("click", () => {
+            mobileMenu.classList.toggle("active");
+        });
+
+
+        document.querySelectorAll(".dropdown-toggle").forEach(button => {
+
+            button.addEventListener("click", function (e) {
+
+                e.preventDefault();
+
+                const dropdown = this.closest(".mobile-dropdown");
+
+                dropdown.classList.toggle("open");
+
+            });
+
+        });
+
+    </script>
+
+    <!-- AOS -->
+
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+
+    <script>
+        AOS.init({
+            duration: 800,
+            once: true
+        });
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <section class="page-hero">
+
+
+        <div class="shape circle-one"></div>
+        <div class="shape circle-two"></div>
+
+        <div class="capsule capsule-one"></div>
+        <div class="capsule capsule-two"></div>
+
+        <div class="triangle triangle-one"></div>
+        <div class="triangle triangle-two"></div>
+
+
+        <div class="dot-grid dot-grid-one"></div>
+        <div class="dot-grid dot-grid-two"></div>
+
+        <img src="images/star.png" class="hero-star star-one" alt="">
+        <!-- <img src="images/star.png" class="hero-star star-two" alt=""> -->
+
+        <div class="hero-content">
+            <h1>Mediclaim</h1>
+        </div>
+
+        <div class="bottom-wave"></div>
+
+    </section>
+
+
+
+
+<section class="child-care">
+    <div class="child-container">
+
+        <h2 data-aos="fade-up" data-aos-duration="1000">
+            Don't let your child's struggles define their future
+        </h2>
+
+        <p data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000">
+          Every child faces challenges at some point, but those struggles should never limit their potential. At Rishika Mother and Child Hospital, we believe in providing compassionate and expert care to help your little one overcome health obstacles and thrive. With timely medical support and nurturing guidance, we ensure that every child has the opportunity to grow, learn, and enjoy a bright, healthy future.
+        </p>
+
+        <a href="contact.html" class="appointment-btn"
+           data-aos="zoom-in"
+           data-aos-delay="400"
+           data-aos-duration="1000">
+            <i class="fa-regular fa-calendar"></i>
+            Get an Appointment
+        </a>
+
+    </div>
+</section>

@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>X-Ray - Rishika Mother & Child Hospital</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="images/fav.png">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/picu.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- AOS -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css">
+</head>
+
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+
+    <header class="header">
+
+        <div class="container">
+
+            <a href="index.html" class="logo">
+                <img src="images/logo.png" alt="Rishika Hospital">
+            </a>
+
+            <nav class="navbar">
+
+                <ul class="nav-links">
+
+                    <li><a href="index.html">Home</a></li>
+
+                    <li><a href="about.html">About Us</a></li>
+
+                    <li><a href="doctors.html">Doctors</a></li>
+
+                    <!-- Specialities -->
+                    <li class="dropdown">
+
+                        <a href="specialities.html">
+                            Specialities
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </a>
+
+                        <ul class="dropdown-menu">
+                            <li><a href="pediatric-care.html">Pediatric Care</a></li>
+                            <li><a href="neonatology.html">Neonatology</a></li>
+                            <li><a href="gynaecology.html">Gynecology</a></li>
+                            <li><a href="obstetrics.html">Obstetrics</a></li>
+                            <li><a href="infertility.html">Infertility</a></li>
+                        </ul>
+
+                    </li>
+
+                    <!-- Facilities -->
+                    <li class="dropdown">
+
+                        <a href="facilities.html">
+                            Facilities
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </a>
+
+                        <ul class="dropdown-menu">
+                            <li><a href="picu.html">PICU</a></li>
+                            <li><a href="nicu.html">NICU</a></li>
+                            <li><a href="operation-theater.html">Operation Theater</a></li>
+                            <li><a href="24-7-ambulance.html">24/7 Ambulance</a></li>
+                            <li><a href="x-ray.html">X-Ray</a></li>
+                            <li><a href="inpatient-outpatient.html">Inpatient / Outpatient</a></li>
+                        </ul>
+
+                    </li>
+
+                    <!-- Info -->
+                    <li class="dropdown">
+
+                        <a href="#">
+                            Info
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </a>
+
+                        <ul class="dropdown-menu">
+                            <li><a href="mediclam.html">Mediclam</a></li>
+                            <li><a href="blog.html">Blog</a></li>
+
+
+                        </ul>
+
+                    </li>
+
+                    <li><a href="gallery.html">Gallery</a></li>
+
+                    <li><a href="contact.html">Contact Us</a></li>
+
+                </ul>
+
+            </nav>
+
+            <a href="contact.html" class="appointment-btn">
+                Book Appointment
+            </a>
+
+            <div class="hamburger">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+
+        </div>
+
+    </header>
+
+    <!-- Mobile Menu -->
+
+    <div class="mobile-menu">
+
+        <ul>
+
+            <li><a href="index.html">Home</a></li>
+
+            <li><a href="about.html">About Us</a></li>
+
+            <li><a href="doctors.html">Doctors</a></li>
+            <li class="mobile-dropdown">
+
+                <div class="mobile-dropdown-header">
+
+                    <a href="specialities.html">
+                        Specialities
+                    </a>
+
+                    <button class="dropdown-toggle">
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </button>
+
+                </div>
+
+                <ul>
+                    <li><a href="pediatric-care.html">Pediatric Care</a></li>
+                    <li><a href="neonatology.html">Neonatology</a></li>
+                    <li><a href="gynaecology.html">Gynecology</a></li>
+                    <li><a href="obstetrics.html">Obstetrics</a></li>
+                    <li><a href="infertility.html">Infertility</a></li>
+                </ul>
+
+            </li>
+
+            <li class="mobile-dropdown">
+
+                <div class="mobile-dropdown-header">
+
+                    <a href="facilities.html">
+                        Facilities
+                    </a>
+
+                    <button class="dropdown-toggle">
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </button>
+
+                </div>
+
+                <ul>
+                    <li><a href="picu.html">PICU</a></li>
+                    <li><a href="nicu.html">NICU</a></li>
+                    <li><a href="operation-theater.html">Operation Theater</a></li>
+                    <li><a href="24-7-ambulance.html">24/7 Ambulance</a></li>
+                    <li><a href="x-ray.html">X-Ray</a></li>
+                    <li><a href="inpatient-outpatient.html">Inpatient / Outpatient</a></li>
+                </ul>
+
+            </li>
+
+            <li class="mobile-dropdown">
+
+                <span>
+                    Info
+                    <i class="fa-solid fa-chevron-down"></i>
+                </span>
+
+                <ul>
+                    <li><a href="mediclaim.html">Mediclaim</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                </ul>
+
+            </li>
+
+            <li><a href="gallery.html">Gallery</a></li>
+
+            <li><a href="contact.html">Contact Us</a></li>
+
+        </ul>
+
+    </div>
+
+    <!-- JS -->
+
+    <script>
+
+        const hamburger = document.querySelector(".hamburger");
+        const mobileMenu = document.querySelector(".mobile-menu");
+
+        hamburger.addEventListener("click", () => {
+            mobileMenu.classList.toggle("active");
+        });
+
+
+        document.querySelectorAll(".dropdown-toggle").forEach(button => {
+
+            button.addEventListener("click", function (e) {
+
+                e.preventDefault();
+
+                const dropdown = this.closest(".mobile-dropdown");
+
+                dropdown.classList.toggle("open");
+
+            });
+
+        });
+
+    </script>
+
+    <!-- AOS -->
+
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+
+    <script>
+        AOS.init({
+            duration: 800,
+            once: true
+        });
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <section class="page-hero">
+
+
+        <div class="shape circle-one"></div>
+        <div class="shape circle-two"></div>
+
+        <div class="capsule capsule-one"></div>
+        <div class="capsule capsule-two"></div>
+
+        <div class="triangle triangle-one"></div>
+        <div class="triangle triangle-two"></div>
+
+
+        <div class="dot-grid dot-grid-one"></div>
+        <div class="dot-grid dot-grid-two"></div>
+
+        <img src="images/star.png" class="hero-star star-one" alt="">
+        <!-- <img src="images/star.png" class="hero-star star-two" alt=""> -->
+
+        <div class="hero-content">
+            <h1>X-Ray</h1>
+        </div>
+
+        <div class="bottom-wave"></div>
+
+    </section>
+
+
+
+
+
+
+
+
+<section class="xray-section">
+
+    <div class="x-container">
+
+        <!-- Section Header -->
+        <div class="xray-header">
+
+            <span class="xray-tag"
+                  data-aos="fade-down"
+                  data-aos-duration="800">
+                X-RAY
+            </span>
+
+            <h2 class="xray-main-title"
+                data-aos="fade-up"
+                data-aos-duration="1000"
+                data-aos-delay="100">
+                Advanced X-Ray Services at Rishika Mother and Child Hospital
+            </h2>
+
+        </div>
+
+        <!-- Content Area -->
+        <div class="xray-wrapper">
+
+            <!-- Left Side Images -->
+            <div class="xray-images">
+
+                <div class="xray-image-card"
+                     data-aos="fade-right"
+                     data-aos-duration="1200">
+
+                    <img src="images/xray1.png"
+                         alt="Advanced X-Ray Laboratory">
+                </div>
+
+                <div class="xray-image-card"
+                     data-aos="fade-right"
+                     data-aos-duration="1200"
+                     data-aos-delay="200">
+
+                    <img src="images/xray2.png"
+                         alt="Digital X-Ray Equipment">
+                </div>
+
+            </div>
+
+            <!-- Right Side Content -->
+            <div class="xray-content">
+
+                <h3 class="xray-content-title"
+                    data-aos="fade-left"
+                    data-aos-duration="1000">
+                    Clear Imaging for Accurate Diagnosis and Care
+                </h3>
+
+                <p data-aos="fade-left"
+                   data-aos-duration="1000"
+                   data-aos-delay="100">
+
+                    At <strong>Rishika Mother and Child Hospital</strong>,
+                    our Advanced Level 3 NICU is dedicated to providing the highest quality care for critically ill newborns. Equipped with cutting-edge technology and a team of skilled neonatologists, we offer round-the-clock monitoring and specialized treatments. Every baby receives personalized care tailored to their specific needs. Our compassionate team ensures a safe, supportive environment for both infants and families.<strong>Trust Rishika Mother and Child Hospital</strong> to provide exceptional care during your baby’s most vulnerable moments
+
+                </p>
+
+                <p data-aos="fade-left"
+                   data-aos-duration="1000"
+                   data-aos-delay="200">
+
+                 <strong> A Commitment to Excellence: </strong>We prioritize continuous care, ensuring that each newborn receives the best medical attention, nurturing recovery, and growth.
+
+                </p>
+
+                <ul class="xray-features">
+
+                    <li data-aos="fade-left"
+                        data-aos-delay="300">
+                        <strong>State-of-the-Art Technology:</strong>
+                         Our X-ray services are powered by the latest equipment, ensuring high-quality images for precise diagnosis.
+                    </li>
+
+                    <li data-aos="fade-left"
+                        data-aos-delay="400">
+                        <strong>Safety First:</strong>
+                        We prioritize minimal radiation exposure and use child-friendly techniques to keep your little one safe and comfortable.
+                    </li>
+
+                    <li data-aos="fade-left"
+                        data-aos-delay="500">
+                        <strong>Quick and Efficient:</strong>
+                         Our X-ray services are available for both emergency and routine diagnostics, providing fast results to aid in timely treatment.
+                    </li>
+
+                    <li data-aos="fade-left"
+                        data-aos-delay="600">
+                        <strong>Expert Care:</strong>
+                        Our experienced radiologists ensure accurate readings and detailed reports to support your child’s healthcare needs.
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
