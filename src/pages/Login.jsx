@@ -21,7 +21,11 @@ import {
 function Login() {
   const [phone, setPhone] = useState("");
   const [userType, setUserType] = useState("user");
+  
 const handleOtp = async () => {
+  
+  console.log("PHONE SENT =>", phone);
+console.log("ROLE SENT =>", userType);
   try {
 
     console.log("Sending phone:", phone);
@@ -41,9 +45,12 @@ const handleOtp = async () => {
     );
 
     const data = await response.json();
+    
 
     console.log("STATUS:", response.status);
     console.log("FULL DATA:", data);
+
+console.log("TOKEN:", data.token);
 
     if (data.success) {
 
@@ -52,18 +59,21 @@ const handleOtp = async () => {
         data.token
       );
 
+  console.log(
+    "TOKEN SAVED =>",
+    localStorage.getItem("token")
+  );
+
       localStorage.setItem(
         "user",
         JSON.stringify(data.user)
       );
 
-      if (data.user.role === "vendor") {
-        window.location.href =
-          "/vendor-dashboard";
-      } else {
-        window.location.href = "/";
-      }
-
+    if (userType === "ca") {
+  window.location.href = "/vendor-dashboard";
+} else {
+  window.location.href = "/";
+}
     } else {
 
       alert(
