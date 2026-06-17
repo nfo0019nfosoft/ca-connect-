@@ -11,6 +11,7 @@ import {
   FaCreditCard,
   FaCog,
   FaHeadset,
+  FaHeart,
   FaSignOutAlt,
   FaCrown,
 } from "react-icons/fa";
@@ -68,7 +69,7 @@ function Sidebar() {
           <li>
 
             <Link
-              to="/vendor-dashboard"
+              to="/user-dashboard"
               className={
                 location.pathname ===
                 "/vendor-dashboard"
@@ -85,10 +86,10 @@ function Sidebar() {
           <li>
 
             <Link
-              to="/vendor-profile"
+              to="/user-profile"
               className={
                 [
-                  "/vendor-profile",
+                  "/user-profile",
                   "/vendor-kyc",
                   "/vendor-services",
                   "/vendor-pricing",
@@ -102,7 +103,7 @@ function Sidebar() {
               }
             >
               <FaUser />
-              Vendor Profile
+              My Profile
             </Link>
 
           </li>
@@ -110,7 +111,7 @@ function Sidebar() {
           <li>
 
             <Link
-              to="/vendor-leads"
+              to="/user-enquiry"
               className={
                 location.pathname ===
                 "/leads"
@@ -119,7 +120,7 @@ function Sidebar() {
               }
             >
               <FaClipboardList />
-              My Leads
+              My Enquiry
             </Link>
 
           </li>
@@ -127,7 +128,7 @@ function Sidebar() {
           <li>
 
             <Link
-              to="/vendor-appointments"
+              to="/user-appointments"
               className={
                 location.pathname ===
                 "/appointments"
@@ -144,7 +145,7 @@ function Sidebar() {
           <li>
 
             <Link
-              to="/vendor-subscription"
+              to="/user-subscription"
               className={
                 location.pathname ===
                 "/subscription"
@@ -152,8 +153,8 @@ function Sidebar() {
                   : ""
               }
             >
-              <FaCreditCard />
-              Subscription
+              <FaHeart />
+            Saved CAs
             </Link>
 
           </li>
@@ -161,7 +162,7 @@ function Sidebar() {
           <li>
 
             <Link
-              to="/vendor-settings"
+              to="/user-settings"
               className={
                 location.pathname ===
                 "/settings"
@@ -178,7 +179,7 @@ function Sidebar() {
           <li>
 
             <Link
-              to="/vendor-support"
+              to="/user-support"
               className={
                 location.pathname ===
                 "/support"

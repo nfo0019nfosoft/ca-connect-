@@ -2,7 +2,7 @@ import React, {
   useEffect,
   useState
 } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import PhoneInputModule from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
@@ -40,9 +40,11 @@ import {
 } from "react-icons/ri";
 
 function VendorKyc() {
+    const navigate = useNavigate();
 
   const [vendor, setVendor] =
     useState({});
+
 const [steps, setSteps] = useState({
   profile: false,
   firm: false,
@@ -160,16 +162,16 @@ useEffect(() => {
     const token =
       localStorage.getItem("token");
 
-  await axios.put(
+ await axios.put(
   "http://localhost:5000/api/vendor/profile",
   vendor,
   {
     headers: {
-      Authorization:
-        `Bearer ${token}`
+      Authorization: `Bearer ${token}`
     }
   }
 );
+
 
     alert(
       "Profile Updated Successfully"
@@ -187,7 +189,9 @@ useEffect(() => {
   }
 
 };
-  
+
+
+
 
   const [files, setFiles] = useState({
     panCard: null,
@@ -197,45 +201,83 @@ useEffect(() => {
     caCertificate: null,
   });
 
-  const handleFileChange = (e, field) => {
-    setFiles({
-      ...files,
-      [field]: e.target.files[0],
-    });
-  };
+const handleFileChange = (
+  field,
+  file
+) => {
 
-  const saveKyc = async () => {
-    const formData = new FormData();
+  console.log("FIELD =>", field);
+  console.log("FILE =>", file);
 
-    Object.keys(files).forEach((key) => {
-      if (files[key]) {
-        formData.append(key, files[key]);
-      }
-    });
+  setFiles((prev) => ({
+    ...prev,
+    [field]: file,
+  }));
+};
 
-    try {
-      const token = localStorage.getItem("token");
+const saveKyc = async () => {
 
-      const response = await fetch(
+  const formData = new FormData();
+
+  Object.keys(files).forEach((key) => {
+    if (files[key]) {
+      formData.append(key, files[key]);
+    }
+  });
+
+  // DEBUG LOGS
+  console.log("FILES =>", files);
+
+  for (let pair of formData.entries()) {
+    console.log(pair[0], pair[1]);
+  }
+
+  try {
+
+    const token =
+      localStorage.getItem("token");
+
+    const response =
+      await fetch(
         "http://localhost:5000/api/vendor/kyc",
         {
           method: "POST",
           headers: {
-            Authorization: token,
+            Authorization: `Bearer ${token}`,
           },
           body: formData,
         }
       );
 
-      const data = await response.json();
+    const data =
+      await response.json();
 
-      if (data.success) {
-        alert("KYC Uploaded Successfully");
-      }
-    } catch (error) {
-      console.log(error);
+    console.log(
+      "KYC RESPONSE =>",
+      data
+    );
+
+    if (data.success) {
+
+      alert(
+        "KYC Uploaded Successfully"
+      );
+
+      setTimeout(() => {
+        navigate(
+          "/vendor-services"
+        );
+      }, 500);
+
     }
-  };
+
+  } catch (error) {
+
+    console.log(error);
+
+  }
+
+};
 
 const documents = [
   {
@@ -314,13 +356,15 @@ const documents = [
 
             <div className="vendor-info">
 
-              <img
-                src={
-                  vendor.photo ||
-                  "/avatar.png"
-                }
-                alt=""
-              />
+             <img
+  src={
+    vendor.photo
+      ? `http://localhost:5000/uploads/${vendor.photo}`
+      : "/avatar.png"
+  }
+  alt=""
+/>
+
 
               <div>
 
@@ -434,48 +478,42 @@ const documents = [
 
       {/* UPLOAD BOX */}
 
-      <div className="upload-box">
 
-        <label
-          htmlFor={doc.key}
-          className="upload-label"
-        >
+<div className="upload-box">
+  <label
+    htmlFor={doc.key}
+    className="upload-label"
+  >
+    <div className="upload-content">
 
-          <div className="upload-content">
+      {vendor?.kyc?.[doc.key] ? (
+        <>
+          <div className="upload-icon">✅</div>
+          <strong>File Uploaded</strong>
+          <p>Click here to replace</p>
+        </>
+      ) : (
+        <>
+          <div className="upload-icon">☁</div>
+          <strong>Click to upload</strong>
+          <p>or drag and drop</p>
+        </>
+      )}
 
-            <div className="upload-icon">
-              ☁
-            </div>
+    </div>
+  </label>
 
-            <div>
+  <input
+    id={doc.key}
+    type="file"
+    hidden
+    onChange={(e) =>
+      handleFileChange(doc.key, e.target.files[0])
+    }
+  />
+</div>
 
-              <strong>
-                Click to upload
-              </strong>
 
-              <p>
-                or drag and drop
-              </p>
-
-            </div>
-
-          </div>
-
-        </label>
-
-        <input
-          id={doc.key}
-          type="file"
-          hidden
-          onChange={(e) =>
-            handleFileChange(
-              e,
-              doc.key
-            )
-          }
-        />
-
-      </div>
 
       {/* FILE INFO */}
 
@@ -524,22 +562,23 @@ const documents = [
 
   {/* BUTTONS */}
 
-  <div className="kyc-buttons">
+<div className="kyc-buttons">
 
-    <button
-      className="draft-btn"
-    >
-      Save as Draft
-    </button>
+  <button
+    className="draft-btn"
+    onClick={saveKyc}
+  >
+    Save as Draft
+  </button>
+<button
+  type="button"
+  className="save-btn"
+  onClick={saveKyc}
+>
+  Save & Continue
+</button>
 
-    <button
-      className="save-btn"
-      onClick={saveKyc}
-    >
-      Save & Continue →
-    </button>
-
-  </div>
+</div>
 
 </div>
 
@@ -589,23 +628,7 @@ const documents = [
       )}
     </div>
 
-    <div className="step-item">
-      <span
-        className={`step-dot ${
-          steps.firm ? "active" : ""
-        }`}
-      ></span>
-
-      <span className="step-label">
-        Firm Details
-      </span>
-
-      {steps.firm ? (
-        <FaCheckCircle className="green" />
-      ) : (
-        <div className="empty-circle"></div>
-      )}
-    </div>
+    
 
     <div className="step-item">
       <span

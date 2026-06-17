@@ -21,7 +21,7 @@ const [serviceOpen, setServiceOpen] = useState(false);
 const [profileOpen, setProfileOpen] = useState(false);
 
 const user = JSON.parse(
-  localStorage.getItem("user")
+  localStorage.getItem("user") || "null"
 );
 
 const handleLogout = () => {
@@ -186,11 +186,9 @@ const closeMenu = () => {
             className="popup-avatar"
           />
 
-          <h4>
-            {user?.role === "vendor"
-              ? "CA Professional"
-              : "User"}
-          </h4>
+        <h4>
+  {user?.name || "User"}
+</h4>
         </div>
 
         <div className="profile-item">
@@ -259,12 +257,9 @@ const closeMenu = () => {
           <FaUserCircle
             className="popup-avatar"
           />
-
-          <h4>
-            {user?.role === "vendor"
-              ? "CA Professional"
-              : "User"}
-          </h4>
+<h4>
+  {user?.name || "User"}
+</h4>
         </div>
 
         <div className="profile-item">

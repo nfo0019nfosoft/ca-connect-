@@ -23,34 +23,40 @@ function Login() {
   const [userType, setUserType] = useState("user");
   
 const handleOtp = async () => {
-  
-  console.log("PHONE SENT =>", phone);
-console.log("ROLE SENT =>", userType);
   try {
 
-    console.log("Sending phone:", phone);
+    console.log("PHONE SENT =>", phone);
+    console.log("ROLE SENT =>", userType);
+
+    const loginUrl =
+      userType === "ca"
+        ? "http://localhost:5000/api/vendor/login"
+        : "http://localhost:5000/api/auth/login";
 
     const response = await fetch(
-      "http://localhost:5000/api/auth/login",
+      loginUrl,
       {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type":
+            "application/json",
         },
-       body: JSON.stringify({
-  phone,
-  role: userType === "ca" ? "vendor" : "user",
-}),
+        body: JSON.stringify(
+          userType === "ca"
+            ? {
+                mobile: phone,
+              }
+            : {
+                phone,
+              }
+        ),
       }
     );
 
-    const data = await response.json();
-    
+    const data =
+      await response.json();
 
-    console.log("STATUS:", response.status);
-    console.log("FULL DATA:", data);
-
-console.log("TOKEN:", data.token);
+    console.log(data);
 
     if (data.success) {
 
@@ -59,25 +65,28 @@ console.log("TOKEN:", data.token);
         data.token
       );
 
-  console.log(
-    "TOKEN SAVED =>",
-    localStorage.getItem("token")
-  );
-
       localStorage.setItem(
         "user",
-        JSON.stringify(data.user)
+        JSON.stringify(
+          data.user
+        )
       );
 
-    if (userType === "ca") {
-  window.location.href = "/vendor-dashboard";
-} else {
-  window.location.href = "/";
-}
+      if (
+        userType === "ca"
+      ) {
+        window.location.href =
+          "/vendor-dashboard";
+      } else {
+        window.location.href =
+          "/";
+      }
+
     } else {
 
       alert(
-        data.message || "Login Failed"
+        data.message ||
+          "Login Failed"
       );
 
     }
@@ -87,7 +96,7 @@ console.log("TOKEN:", data.token);
     console.log(error);
 
     alert(
-      "Something went wrong"
+      "Server not running"
     );
 
   }

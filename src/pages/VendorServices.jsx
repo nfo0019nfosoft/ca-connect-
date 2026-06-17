@@ -110,6 +110,11 @@ const finalServices =
       serviceName:
         service.serviceName,
 
+      pricingModel:
+        pricingData[
+          service.serviceName
+        ]?.pricingModel || "",
+
       price:
         pricingData[
           service.serviceName
@@ -126,13 +131,22 @@ const finalServices =
         ]?.includes || "",
     })
   );
-const removeService = (service) => {
+const removeService = (serviceName) => {
 
   setSelectedServices(
     selectedServices.filter(
-      (item) => item !== service
+      (item) =>
+        item.serviceName !== serviceName
     )
   );
+
+  setPricingData((prev) => {
+    const updated = { ...prev };
+
+    delete updated[serviceName];
+
+    return updated;
+  });
 
 };
 useEffect(() => {
@@ -154,25 +168,45 @@ useEffect(() => {
           localStorage.getItem(
             "token"
           );
-
-      const res =
-await axios.put(
-  "http://localhost:5000/api/vendor/services",
-  {
-    services: finalServices,
-  },
+const res = await axios.get(
+  "http://localhost:5000/api/vendor/profile",
   {
     headers: {
-      Authorization:
-        `Bearer ${token}`,
+      Authorization: `Bearer ${token}`,
     },
   }
 );
+  
 
         const data =
           res.data.vendor;
 
         setVendor(data);
+          
+
+        if (data.services?.length > 0) {
+
+  setSelectedServices(
+    data.services.map((service) => ({
+      serviceName: service.serviceName,
+      description: service.description,
+    }))
+  );
+
+  const pricingObj = {};
+
+  data.services.forEach((service) => {
+    pricingObj[service.serviceName] = {
+      pricingModel: service.pricingModel || "",
+      price: service.price || "",
+      deliveryTime: service.deliveryTime || "",
+      includes: service.description || "",
+    };
+  });
+
+  setPricingData(pricingObj);
+}
+
 
         setSteps({
           profile:
@@ -228,18 +262,16 @@ await axios.put(
       localStorage.getItem("token");
 
     await axios.put(
-      "http://localhost:5000/api/vendor/services",
-      {
-        services:
-          selectedServices,
-      },
-      {
-        headers: {
-          Authorization:
-            token,
-        },
-      }
-    );
+  "http://localhost:5000/api/vendor/services",
+  {
+    services: finalServices,
+  },
+  {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }
+);
 
     alert(
       "Services Saved Successfully"
@@ -371,14 +403,15 @@ const services = [
             <FaBell className="icon" />
 
             <div className="vendor-info">
+ <img
+  src={
+    vendor.photo
+      ? `http://localhost:5000/uploads/${vendor.photo}`
+      : "/avatar.png"
+  }
+  alt=""
+/>
 
-              <img
-                src={
-                  vendor.photo ||
-                  "/avatar.png"
-                }
-                alt=""
-              />
 
               <div>
 
@@ -722,16 +755,16 @@ const services = [
 
               <td>
 
-                <button
-                  className="delete-btn"
-                  onClick={() =>
-                    removeService(
-                      service.serviceName
-                    )
-                  }
-                >
-                  Delete
-                </button>
+             <button
+  className="delete-btn"
+  onClick={() =>
+    removeService(
+      service.serviceName
+    )
+  }
+>
+  Delete
+</button>
 
               </td>
 
@@ -825,23 +858,7 @@ const services = [
       )}
     </div>
 
-    <div className="step-item">
-      <span
-        className={`step-dot ${
-          steps.firm ? "active" : ""
-        }`}
-      ></span>
-
-      <span className="step-label">
-        Firm Details
-      </span>
-
-      {steps.firm ? (
-        <FaCheckCircle className="green" />
-      ) : (
-        <div className="empty-circle"></div>
-      )}
-    </div>
+    
 
     <div className="step-item">
       <span

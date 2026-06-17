@@ -27,7 +27,9 @@ import {
 } from "react-icons/hi";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import { useEffect } from "react";
+
+import { useEffect, useState } from "react";
+import axios from "axios";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Autoplay } from "swiper/modules";
 import "swiper/css";
@@ -48,6 +50,38 @@ function Home() {
       easing: "ease-in-out",
     });
   }, []);
+
+
+const [vendors, setVendors] = useState([]);
+
+useEffect(() => {
+  fetchTopVendors();
+}, []);
+
+
+const fetchTopVendors = async () => {
+  try {
+    const res = await axios.get(
+      "http://localhost:5000/api/vendor"
+    );
+
+    console.log(res.data);
+
+    setVendors(res.data);
+
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+
+
+
+
+
+
+
+
 
   return (
     <>
@@ -344,83 +378,38 @@ function Home() {
     <button className="ca-next">
       <FaChevronRight />
     </button>
+<Swiper
+  modules={[Navigation]}
+  onBeforeInit={(swiper) => {
+    swiper.params.navigation.prevEl = ".ca-prev";
+    swiper.params.navigation.nextEl = ".ca-next";
+  }}
+  navigation={{
+    prevEl: ".ca-prev",
+    nextEl: ".ca-next",
+  }}
+  spaceBetween={20}
+  slidesPerView={3}
+  speed={700}
+  breakpoints={{
+  320: {
+    slidesPerView: 1,
+    spaceBetween: 15,
+  },
+  768: {
+    slidesPerView: 2,
+    spaceBetween: 20,
+  },
+  1024: {
+    slidesPerView: 3,
+    spaceBetween: 20,
+  },
+}}
+  className="ca-swiper"
+>
+      {vendors.map((ca, index) => (
 
-    <Swiper
-      modules={[Navigation]}
-      navigation={{
-        prevEl: ".ca-prev",
-        nextEl: ".ca-next",
-      }}
-      spaceBetween={20}
-      slidesPerView={4}
-      slidesPerGroup={1}
-      speed={700}
-      breakpoints={{
-        320: {
-          slidesPerView: 1.1,
-        },
-        768: {
-          slidesPerView: 2,
-        },
-        1024: {
-          slidesPerView: 4,
-        },
-      }}
-      className="ca-swiper"
-    >
-
-      {[
-        {
-          img: "https://randomuser.me/api/portraits/men/32.jpg",
-          name: "Verma & Associates",
-          rating: "4.8 (230)",
-          city: "Mumbai, Maharashtra",
-          service: "GST Filing, ITR, Audit",
-          price: "₹999",
-        },
-        {
-          img: "https://randomuser.me/api/portraits/women/44.jpg",
-          name: "Sharma Tax Experts",
-          rating: "4.9 (186)",
-          city: "Delhi, Delhi",
-          service: "ITR, GST, ROC Filing",
-          price: "₹799",
-        },
-        {
-          img: "https://randomuser.me/api/portraits/men/45.jpg",
-          name: "Rao & Co. Chartered Accountants",
-          rating: "4.7 (150)",
-          city: "Bengaluru, Karnataka",
-          service: "Audit, Accounting, Tax",
-          price: "₹899",
-        },
-        {
-          img: "https://randomuser.me/api/portraits/women/65.jpg",
-          name: "Mehta CA Firm",
-          rating: "4.8 (205)",
-          city: "Pune, Maharashtra",
-          service: "GST, ITR, Bookkeeping",
-          price: "₹699",
-        },
-        {
-          img: "https://randomuser.me/api/portraits/men/55.jpg",
-          name: "Gupta & Associates",
-          rating: "4.9 (310)",
-          city: "Hyderabad, Telangana",
-          service: "GST, Audit, Tax Filing",
-          price: "₹1099",
-        },
-        {
-          img: "https://randomuser.me/api/portraits/women/50.jpg",
-          name: "Agarwal Tax Solutions",
-          rating: "4.8 (278)",
-          city: "Chennai, Tamil Nadu",
-          service: "ROC, ITR, Accounting",
-          price: "₹899",
-        },
-      ].map((ca, index) => (
-
-        <SwiperSlide key={index}>
+        <SwiperSlide key={ca._id || index}>
 
           <div
             className="ca-card"
@@ -431,41 +420,62 @@ function Home() {
             <div className="ca-card-top">
 
               <img
-                src={ca.img}
-                alt={ca.name}
+                src={
+                  ca.photo
+                    ? `http://localhost:5000/uploads/${ca.photo}`
+                    : "/avatar.png"
+                }
+                alt={ca.fullName}
               />
 
               <div className="ca-content">
 
                 <div className="ca-head">
 
-                  <h4>{ca.name}</h4>
+                  <h4>
+                    {ca.firmName ||
+                      ca.fullName}
+                  </h4>
 
                   <FaRegBookmark className="bookmark-icon" />
 
                 </div>
 
                 <p className="rating">
-                  ⭐ {ca.rating}
+                  ⭐ {ca.rating || "4.8 (0)"}
                 </p>
 
                 <p className="location">
-                  {ca.city}
+                  {ca.city || "Location"}
+                  {ca.state
+                    ? `, ${ca.state}`
+                    : ""}
                 </p>
 
-                <p className="service">
-                  {ca.service}
-                </p>
+               <p className="service">
+  {ca.services?.length > 0
+    ? ca.services
+        .map(
+          (service) =>
+            service.serviceName
+        )
+        .join(", ")
+    : "CA Services"}
+</p>
 
-                <h5>
-                  Starting from {ca.price}
-                </h5>
-
+              <h5>
+  Starting from ₹
+  {ca.services?.length > 0
+    ? ca.services[0].price
+    : 999}
+</h5>
               </div>
 
             </div>
 
-            <button className="profile-btn">
+            <button
+              className="profile-btn"
+            >
               View Profile
             </button>
 

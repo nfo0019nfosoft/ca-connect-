@@ -27,8 +27,17 @@ import "./VendorProfile.css";
 
 function VendorProfile() {
 
-  const [vendor, setVendor] =
-    useState({});
+  const [vendor, setVendor] = useState({
+  fullName: "",
+  email: "",
+  mobile: "",
+  designation: "",
+  qualification: "",
+  experience: "",
+  about: "",
+  profileType: "individual",
+});
+
 const [steps, setSteps] = useState({
   profile: false,
   firm: false,
@@ -38,7 +47,6 @@ const [steps, setSteps] = useState({
   preview: false,
   payment: false,
 });
-
 const totalSteps = 7;
 
 const completedSteps = [
@@ -140,27 +148,78 @@ useEffect(() => {
     });
 
   };
-  const saveProfile = async () => {
+const handlePhotoChange = async (e) => {
+
+  const file = e.target.files[0];
+
+  if (!file) return;
 
   try {
 
     const token =
       localStorage.getItem("token");
 
-  await axios.put(
-  "http://localhost:5000/api/vendor/profile",
-  vendor,
-  {
-    headers: {
-      Authorization:
-        `Bearer ${token}`
-    }
-  }
-);
+    const formData =
+      new FormData();
+
+    formData.append(
+      "photo",
+      file
+    );
+
+    await axios.post(
+      "http://localhost:5000/api/vendor/photo",
+      formData,
+      {
+        headers: {
+          Authorization:
+            `Bearer ${token}`
+        }
+      }
+    );
+
+    fetchProfile();
 
     alert(
-      "Profile Updated Successfully"
+      "Photo Updated Successfully"
     );
+
+  } catch (error) {
+
+    console.log(error);
+
+    alert(
+      "Photo Upload Failed"
+    );
+
+  }
+
+};
+const saveProfile = async () => {
+
+  console.log("VENDOR DATA =>", vendor);
+
+  if (!vendor.mobile) {
+    alert("Mobile Number Missing");
+    return;
+  }
+
+  try {
+
+    const token =
+      localStorage.getItem("token");
+
+    await axios.put(
+      "http://localhost:5000/api/vendor/profile",
+      vendor,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }
+    );
+
+    alert("Profile Updated Successfully");
 
     fetchProfile();
 
@@ -168,11 +227,8 @@ useEffect(() => {
 
     console.log(error);
 
-    alert(
-      "Update Failed"
-    );
+    alert("Update Failed");
   }
-
 };
 
   return (
@@ -219,13 +275,14 @@ useEffect(() => {
 
             <div className="vendor-info">
 
-              <img
-                src={
-                  vendor.photo ||
-                  "/avatar.png"
-                }
-                alt=""
-              />
+         <img
+  src={
+    vendor.photo
+      ? `http://localhost:5000/uploads/${vendor.photo}`
+      : "/avatar.png"
+  }
+  alt=""
+/>
 
               <div>
 
@@ -319,118 +376,111 @@ useEffect(() => {
                 personal details
               </p>
 
-              <div className="profile-section">
+          <div className="profile-section">
 
-                <div className="profile-image">
+  <div className="profile-image">
 
-                  <img
-                    src={
-                      vendor.photo ||
-                      "/avatar.png"
-                    }
-                    alt=""
-                  />
+    <img
+      src={
+        vendor.photo
+          ? `http://localhost:5000/uploads/${vendor.photo}`
+          : "/avatar.png"
+      }
+      alt=""
+    />
 
-                  <button>
-                    Change
-                    Photo
-                  </button>
+    <input
+      type="file"
+      id="photo"
+      hidden
+      accept="image/*"
+      onChange={handlePhotoChange}
+    />
 
-                </div>
+    <label
+      htmlFor="photo"
+      className="save-btn"
+    >
+      Change Photo
+    </label>
 
-                <div className="form-area">
+  </div>
 
-                  <div className="form-grid">
+  <div className="form-area">
 
-                    <input
-                      name="fullName"
-                      value={
-                        vendor.fullName ||
-                        ""
-                      }
-                      onChange={
-                        handleChange
-                      }
-                      placeholder="Full Name"
-                    />
+    <div className="form-grid">
 
-                    <input
-                      name="email"
-                      value={
-                        vendor.email ||
-                        ""
-                      }
-                      onChange={
-                        handleChange
-                      }
-                      placeholder="Email"
-                    />
+      <div className="form-group">
+        <label>Full Name</label>
+        <input
+          name="fullName"
+          value={vendor.fullName || ""}
+          onChange={handleChange}
+        />
+      </div>
 
-                    <input
-                      name="mobile"
-                      value={
-                        vendor.mobile ||
-                        ""
-                      }
-                      onChange={
-                        handleChange
-                      }
-                      placeholder="Mobile"
-                    />
+      <div className="form-group">
+        <label>Email Address</label>
+        <input
+          name="email"
+          value={vendor.email || ""}
+          onChange={handleChange}
+        />
+      </div>
 
-                    <input
-                      name="designation"
-                      value={
-                        vendor.designation ||
-                        ""
-                      }
-                      onChange={
-                        handleChange
-                      }
-                      placeholder="Designation"
-                    />
+      <div className="form-group">
+        <label>Mobile Number(91)</label>
+        <input
+          name="mobile"
+          value={vendor.mobile || ""}
+          onChange={handleChange}
+        />
+      </div>
 
-                    <input
-                      name="experience"
-                      value={
-                        vendor.experience ||
-                        ""
-                      }
-                      onChange={
-                        handleChange
-                      }
-                      placeholder="Experience"
-                    />
+      <div className="form-group">
+        <label>Designation / Position</label>
+        <input
+          name="designation"
+          value={vendor.designation || ""}
+          onChange={handleChange}
+        />
+      </div>
 
-                    <input
-                      name="qualification"
-                      value={
-                        vendor.qualification ||
-                        ""
-                      }
-                      onChange={
-                        handleChange
-                      }
-                      placeholder="Qualification"
-                    />
+      <div className="form-group">
+        <label>Experience (In Years)</label>
+        <input
+          name="experience"
+          value={vendor.experience || ""}
+          onChange={handleChange}
+        />
+      </div>
 
-                  </div>
+      <div className="form-group">
+        <label>Qualification</label>
+        <input
+          name="qualification"
+          value={vendor.qualification || ""}
+          onChange={handleChange}
+        />
+      </div>
 
-                  <textarea
-                    name="about"
-                    value={
-                      vendor.about ||
-                      ""
-                    }
-                    onChange={
-                      handleChange
-                    }
-                    placeholder="About You"
-                  />
+    </div>
 
-                </div>
+    <div className="form-group full-width">
 
-              </div>
+      <label>About You</label>
+
+      <textarea
+        name="about"
+        value={vendor.about || ""}
+        onChange={handleChange}
+      />
+
+    </div>
+
+  </div>
+
+</div>
 <div className="firm-card">
 
   <h3>Firm Details</h3>
@@ -473,82 +523,99 @@ useEffect(() => {
   ========================= */}
 
   {vendor.profileType !== "firm" && (
+<div className="firm-grid">
 
-    <div className="firm-grid">
+  <div className="form-group">
+    <label>CA Number</label>
+    <input
+      name="caNumber"
+      value={vendor.caNumber || ""}
+      onChange={handleChange}
+    />
+  </div>
 
-      <input
-        name="caNumber"
-        value={vendor.caNumber || ""}
-        onChange={handleChange}
-        placeholder="CA Number"
-      />
+  <div className="form-group">
+    <label>Membership Number</label>
+    <input
+      name="membershipNumber"
+      value={vendor.membershipNumber || ""}
+      onChange={handleChange}
+    />
+  </div>
 
-      <input
-        name="membershipNumber"
-        value={vendor.membershipNumber || ""}
-        onChange={handleChange}
-        placeholder="Membership Number"
-      />
-
+  <div className="form-group">
+    <label>Contact Number</label>
     <PhoneInput
-  country={"in"}
-  enableSearch
-  value={vendor.officeMobile || ""}
-  onChange={(value, data) => {
-    setVendor({
-      ...vendor,
-      officeMobile: value,
-      officeCountryCode: data?.dialCode
-        ? `+${data.dialCode}`
-        : "+91",
-      country: data?.name || "",
-    });
-  }}
-/>
+      country={"in"}
+      enableSearch
+      value={vendor.officeMobile || ""}
+      onChange={(value, data) => {
+        setVendor({
+          ...vendor,
+          officeMobile: value,
+          officeCountryCode: data?.dialCode
+            ? `+${data.dialCode}`
+            : "+91",
+        });
+      }}
+    />
+  </div>
 
-      <input
-        name="addressLine1"
-        value={vendor.addressLine1 || ""}
-        onChange={handleChange}
-        placeholder="Address Line 1"
-      />
+  <div className="form-group">
+    <label>Address Line 1</label>
+    <input
+      name="addressLine1"
+      value={vendor.addressLine1 || ""}
+      onChange={handleChange}
+    />
+  </div>
 
-      <input
-        name="addressLine2"
-        value={vendor.addressLine2 || ""}
-        onChange={handleChange}
-        placeholder="Address Line 2"
-      />
+  <div className="form-group">
+    <label>Address Line 2</label>
+    <input
+      name="addressLine2"
+      value={vendor.addressLine2 || ""}
+      onChange={handleChange}
+    />
+  </div>
 
-      <input
-        name="country"
-        value={vendor.country || ""}
-        onChange={handleChange}
-        placeholder="Country"
-      />
+  <div className="form-group">
+    <label>Country</label>
+    <input
+      name="country"
+      value={vendor.country || ""}
+      onChange={handleChange}
+    />
+  </div>
 
-      <input
-        name="state"
-        value={vendor.state || ""}
-        onChange={handleChange}
-        placeholder="State"
-      />
+  <div className="form-group">
+    <label>State</label>
+    <input
+      name="state"
+      value={vendor.state || ""}
+      onChange={handleChange}
+    />
+  </div>
 
-      <input
-        name="city"
-        value={vendor.city || ""}
-        onChange={handleChange}
-        placeholder="City"
-      />
+  <div className="form-group">
+    <label>City</label>
+    <input
+      name="city"
+      value={vendor.city || ""}
+      onChange={handleChange}
+    />
+  </div>
 
-      <input
-        name="pincode"
-        value={vendor.pincode || ""}
-        onChange={handleChange}
-        placeholder="Pincode"
-      />
+  <div className="form-group">
+    <label>Pincode</label>
+    <input
+      name="pincode"
+      value={vendor.pincode || ""}
+      onChange={handleChange}
+    />
+  </div>
 
-    </div>
+</div>
 
   )}
 
@@ -557,165 +624,192 @@ useEffect(() => {
   ========================= */}
 
   {vendor.profileType === "firm" && (
+<div className="firm-grid">
 
-    <div className="firm-type-box">
+  <div className="form-group">
+    <label>Firm Name</label>
+    <input
+      name="firmName"
+      value={vendor.firmName || ""}
+      onChange={handleChange}
+    />
+  </div>
 
-      <h4>Firm Information</h4>
+  <div className="form-group">
+    <label>Firm Registration No</label>
+    <input
+      name="firmRegistrationNo"
+      value={vendor.firmRegistrationNo || ""}
+      onChange={handleChange}
+    />
+  </div>
 
-      <div className="firm-grid">
+  <div className="form-group">
+    <label>Firm Type</label>
+    <select
+      name="firmType"
+      value={vendor.firmType || ""}
+      onChange={handleChange}
+    >
+      <option value="">Select Firm Type</option>
+      <option value="Proprietorship">Proprietorship</option>
+      <option value="Partnership">Partnership</option>
+      <option value="LLP">LLP</option>
+      <option value="Private Limited">Private Limited</option>
+    </select>
+  </div>
 
-        <input
-          name="firmName"
-          value={vendor.firmName || ""}
-          onChange={handleChange}
-          placeholder="Firm Name"
-        />
+  <div className="form-group">
+    <label>Established On</label>
+    <input
+      type="date"
+      name="establishedOn"
+      value={
+        vendor.establishedOn
+          ? vendor.establishedOn.slice(0, 10)
+          : ""
+      }
+      onChange={handleChange}
+    />
+  </div>
 
-        <input
-          name="firmRegistrationNo"
-          value={vendor.firmRegistrationNo || ""}
-          onChange={handleChange}
-          placeholder="Firm Registration No"
-        />
+  <div className="form-group">
+    <label>GST Number</label>
+    <input
+      name="gstNumber"
+      value={vendor.gstNumber || ""}
+      onChange={handleChange}
+    />
+  </div>
 
-        <select
-          name="firmType"
-          value={vendor.firmType || ""}
-          onChange={handleChange}
-        >
-          <option value="">
-            Select Firm Type
-          </option>
-          <option value="Proprietorship">
-            Proprietorship
-          </option>
-          <option value="Partnership">
-            Partnership
-          </option>
-          <option value="LLP">
-            LLP
-          </option>
-          <option value="Private Limited">
-            Private Limited
-          </option>
-        </select>
+  <div className="form-group">
+    <label>PAN Number</label>
+    <input
+      name="panNumber"
+      value={vendor.panNumber || ""}
+      onChange={handleChange}
+    />
+  </div>
 
-        <input
-          type="date"
-          name="establishedOn"
-          value={
-            vendor.establishedOn
-              ? vendor.establishedOn.slice(0, 10)
-              : ""
-          }
-          onChange={handleChange}
-        />
+  <div className="form-group">
+    <label>Address Line 1</label>
+    <input
+      name="addressLine1"
+      value={vendor.addressLine1 || ""}
+      onChange={handleChange}
+    />
+  </div>
 
-        <input
-          name="gstNumber"
-          value={vendor.gstNumber || ""}
-          onChange={handleChange}
-          placeholder="GST Number"
-        />
+  <div className="form-group">
+    <label>Address Line 2</label>
+    <input
+      name="addressLine2"
+      value={vendor.addressLine2 || ""}
+      onChange={handleChange}
+    />
+  </div>
 
-        <input
-          name="panNumber"
-          value={vendor.panNumber || ""}
-          onChange={handleChange}
-          placeholder="PAN Number"
-        />
+  <div className="form-group">
+    <label>Country</label>
+    <input
+      name="country"
+      value={vendor.country || ""}
+      onChange={handleChange}
+    />
+  </div>
 
-        <input
-          name="addressLine1"
-          value={vendor.addressLine1 || ""}
-          onChange={handleChange}
-          placeholder="Address Line 1"
-        />
+  <div className="form-group">
+    <label>State</label>
+    <input
+      name="state"
+      value={vendor.state || ""}
+      onChange={handleChange}
+    />
+  </div>
 
-        <input
-          name="addressLine2"
-          value={vendor.addressLine2 || ""}
-          onChange={handleChange}
-          placeholder="Address Line 2"
-        />
+  <div className="form-group">
+    <label>City</label>
+    <input
+      name="city"
+      value={vendor.city || ""}
+      onChange={handleChange}
+    />
+  </div>
 
-        <input
-          name="country"
-          value={vendor.country || ""}
-          onChange={handleChange}
-          placeholder="Country"
-        />
+  <div className="form-group">
+    <label>Pincode</label>
+    <input
+      name="pincode"
+      value={vendor.pincode || ""}
+      onChange={handleChange}
+    />
+  </div>
 
-        <input
-          name="state"
-          value={vendor.state || ""}
-          onChange={handleChange}
-          placeholder="State"
-        />
+  <div className="form-group">
+    <label>Landmark</label>
+    <input
+      name="landmark"
+      value={vendor.landmark || ""}
+      onChange={handleChange}
+    />
+  </div>
 
-        <input
-          name="city"
-          value={vendor.city || ""}
-          onChange={handleChange}
-          placeholder="City"
-        />
+  <div className="form-group">
+    <label>Office Contact Number</label>
+    <PhoneInput
+      country={"in"}
+      enableSearch
+      value={vendor.officeMobile || ""}
+      onChange={(value, data) => {
+        setVendor({
+          ...vendor,
+          officeMobile: value,
+          officeCountryCode: data?.dialCode
+            ? `+${data.dialCode}`
+            : "+91",
+        });
+      }}
+    />
+  </div>
 
-        <input
-          name="pincode"
-          value={vendor.pincode || ""}
-          onChange={handleChange}
-          placeholder="Pincode"
-        />
+  <div className="form-group">
+    <label>Email Address</label>
+    <input
+      name="officeEmail"
+      value={vendor.officeEmail || ""}
+      onChange={handleChange}
+    />
+  </div>
 
-        <input
-          name="landmark"
-          value={vendor.landmark || ""}
-          onChange={handleChange}
-          placeholder="Landmark"
-        />
+  <div className="form-group">
+    <label>Website</label>
+    <input
+      name="website"
+      value={vendor.website || ""}
+      onChange={handleChange}
+    />
+  </div>
 
-       <PhoneInput
-  country={"in"}
-  enableSearch
-  value={vendor.officeMobile || ""}
-  onChange={(value, data) => {
-    setVendor({
-      ...vendor,
-      officeMobile: value,
-      officeCountryCode: data?.dialCode
-        ? `+${data.dialCode}`
-        : "+91",
-      country: data?.name || "",
-    });
-  }}
-/>
-
-        <input
-          name="officeEmail"
-          value={vendor.officeEmail || ""}
-          onChange={handleChange}
-          placeholder="Email Address"
-        />
-
-        <input
-          name="website"
-          value={vendor.website || ""}
-          onChange={handleChange}
-          placeholder="Website"
-        />
-
-      </div>
-
-    </div>
+</div>
 
   )}
+<div className="service-buttons">
 
-  <button
+ <button
+  className="draft-btn"
+  onClick={saveProfile}
+>
+  Save as Draft
+</button>
+  <Link
+    to="/vendor-kyc"
     className="save-btn"
     onClick={saveProfile}
   >
-    Save Changes
-  </button>
+    Save & Continue
+  </Link>
+
+</div>
 
 </div>
 
@@ -769,23 +863,7 @@ useEffect(() => {
       )}
     </div>
 
-    <div className="step-item">
-      <span
-        className={`step-dot ${
-          steps.firm ? "active" : ""
-        }`}
-      ></span>
-
-      <span className="step-label">
-        Firm Details
-      </span>
-
-      {steps.firm ? (
-        <FaCheckCircle className="green" />
-      ) : (
-        <div className="empty-circle"></div>
-      )}
-    </div>
+    
 
     <div className="step-item">
       <span
