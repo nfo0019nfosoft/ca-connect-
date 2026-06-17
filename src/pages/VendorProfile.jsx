@@ -88,7 +88,7 @@ useEffect(() => {
 
       const res =
   await axios.get(
-    "http://localhost:5000/api/vendor/profile",
+    "https://ca-backend-d9tc.onrender.com/api/vendor/profile",
     {
       headers: {
         Authorization:
@@ -168,7 +168,7 @@ const handlePhotoChange = async (e) => {
     );
 
     await axios.post(
-      "http://localhost:5000/api/vendor/photo",
+      "https://ca-backend-d9tc.onrender.com/api/vendor/photo",
       formData,
       {
         headers: {
@@ -210,7 +210,7 @@ const saveProfile = async () => {
       localStorage.getItem("token");
 
     await axios.put(
-      "http://localhost:5000/api/vendor/profile",
+      "https://ca-backend-d9tc.onrender.com/api/vendor/profile",
       vendor,
       {
         headers: {
@@ -278,7 +278,7 @@ const saveProfile = async () => {
          <img
   src={
     vendor.photo
-      ? `http://localhost:5000/uploads/${vendor.photo}`
+      ? `https://ca-backend-d9tc.onrender.com/uploads/${vendor.photo}`
       : "/avatar.png"
   }
   alt=""
@@ -383,7 +383,7 @@ const saveProfile = async () => {
     <img
       src={
         vendor.photo
-          ? `http://localhost:5000/uploads/${vendor.photo}`
+          ? `https://ca-backend-d9tc.onrender.com/uploads/${vendor.photo}`
           : "/avatar.png"
       }
       alt=""

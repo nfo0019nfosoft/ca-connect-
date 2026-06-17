@@ -96,7 +96,7 @@ useEffect(() => {
 
       const res =
   await axios.get(
-    "http://localhost:5000/api/vendor/profile",
+    "https://ca-backend-d9tc.onrender.com/api/vendor/profile",
     {
      headers: {
   Authorization: `Bearer ${token}`,
@@ -163,7 +163,7 @@ useEffect(() => {
       localStorage.getItem("token");
 
  await axios.put(
-  "http://localhost:5000/api/vendor/profile",
+  "https://ca-backend-d9tc.onrender.com/api/vendor/profile",
   vendor,
   {
     headers: {
@@ -239,7 +239,7 @@ const saveKyc = async () => {
 
     const response =
       await fetch(
-        "http://localhost:5000/api/vendor/kyc",
+      "https://ca-backend-d9tc.onrender.com/api/vendor/kyc",
         {
           method: "POST",
           headers: {
@@ -359,7 +359,7 @@ const documents = [
              <img
   src={
     vendor.photo
-      ? `http://localhost:5000/uploads/${vendor.photo}`
+      ? `https://ca-backend-d9tc.onrender.com/uploads/${vendor.photo}`
       : "/avatar.png"
   }
   alt=""

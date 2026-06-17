@@ -169,7 +169,7 @@ useEffect(() => {
             "token"
           );
 const res = await axios.get(
-  "http://localhost:5000/api/vendor/profile",
+  "https://ca-backend-d9tc.onrender.com/api/vendor/profile",
   {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -262,7 +262,7 @@ const res = await axios.get(
       localStorage.getItem("token");
 
     await axios.put(
-  "http://localhost:5000/api/vendor/services",
+  "https://ca-backend-d9tc.onrender.com/api/vendor/services",
   {
     services: finalServices,
   },
@@ -406,7 +406,7 @@ const services = [
  <img
   src={
     vendor.photo
-      ? `http://localhost:5000/uploads/${vendor.photo}`
+      ? `https://ca-backend-d9tc.onrender.com/uploads/${vendor.photo}`
       : "/avatar.png"
   }
   alt=""

@@ -165,7 +165,7 @@ function UserUploadDocuments() {
                 localStorage.getItem("token");
 
             const res = await axios.get(
-                "http://localhost:5000/api/users/profile",
+                "https://ca-backend-d9tc.onrender.com/api/users/profile",
                 {
                     headers: {
                         Authorization:
@@ -246,7 +246,7 @@ function UserUploadDocuments() {
             );
 
             await axios.post(
-                "http://localhost:5000/api/users/photo",
+                "https://ca-backend-d9tc.onrender.com/api/users/photo",
                 formData,
                 {
                     headers: {
@@ -273,7 +273,7 @@ function UserUploadDocuments() {
   try {
 
     await axios.put(
-      "http://localhost:5000/api/users/profile",
+      "https://ca-backend-d9tc.onrender.com/api/users/profile",
       {
         ...user,
         documentsCompleted: true,
@@ -325,7 +325,7 @@ const handleDocumentUpload = async (
       localStorage.getItem("token");
 
     await axios.post(
-      "http://localhost:5000/api/users/upload-document",
+      "https://ca-backend-d9tc.onrender.com/api/users/upload-document",
       formData,
       {
         headers: {
@@ -445,7 +445,7 @@ const documents = [
                             <img
                                 src={
                                     user.profileImage
-                                        ? `http://localhost:5000${user.profileImage}`
+                                        ? `https://ca-backend-d9tc.onrender.com${user.profileImage}`
                                         : "/avatar.png"
                                 }
                                 alt="Profile"

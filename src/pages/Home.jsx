@@ -62,7 +62,7 @@ useEffect(() => {
 const fetchTopVendors = async () => {
   try {
     const res = await axios.get(
-      "http://localhost:5000/api/vendor"
+      "https://ca-backend-d9tc.onrender.com/api/vendor"
     );
 
     console.log(res.data);
@@ -422,7 +422,7 @@ const fetchTopVendors = async () => {
               <img
                 src={
                   ca.photo
-                    ? `http://localhost:5000/uploads/${ca.photo}`
+                    ? `https://ca-backend-d9tc.onrender.com/uploads/${ca.photo}`
                     : "/avatar.png"
                 }
                 alt={ca.fullName}

@@ -104,7 +104,7 @@ const fetchProfile = async () => {
       localStorage.getItem("token");
 
     const res = await axios.get(
-      "http://localhost:5000/api/users/profile",
+      "https://ca-backend-d9tc.onrender.com/api/users/profile",
       {
         headers: {
           Authorization:
@@ -180,7 +180,7 @@ const handleImageUpload = async (e) => {
     );
 
     await axios.post(
-      "http://localhost:5000/api/users/photo",
+      "https://ca-backend-d9tc.onrender.com/api/users/photo",
       formData,
       {
         headers: {
@@ -213,7 +213,7 @@ const saveProfile = async () => {
       localStorage.getItem("token");
 
     await axios.put(
-      "http://localhost:5000/api/users/profile",
+      "https://ca-backend-d9tc.onrender.com/api/users/profile",
       {
         ...user,
         personalCompleted: true,
@@ -302,7 +302,7 @@ const saveProfile = async () => {
 <img
   src={
     user.profileImage
-      ? `http://localhost:5000${user.profileImage}`
+      ? `https://ca-backend-d9tc.onrender.com${user.profileImage}`
       : "/avatar.png"
   }
   alt="Profile"
@@ -408,7 +408,7 @@ const saveProfile = async () => {
 <img
   src={
     user.profileImage
-      ? `http://localhost:5000${user.profileImage}`
+      ? `https://ca-backend-d9tc.onrender.com${user.profileImage}`
       : "/avatar.png"
   }
   alt="Profile"
