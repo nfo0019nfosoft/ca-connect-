@@ -569,3 +569,13 @@ margin-left:8px;
 .logout-btn:hover{
   background:#1d4ed8;
 }
+
+
+
+.profile-header{
+  cursor:pointer;
+}
+
+.profile-header:hover{
+  background:#f5f7fb;
+}

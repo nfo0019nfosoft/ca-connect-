@@ -1,8 +1,7 @@
 import "./Navbar.css";
 import { useState } from "react";
 import logo from "../assets/logo.png";
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { Link , useNavigate} from "react-router-dom";
 
 import {
   FaBars,
@@ -21,7 +20,10 @@ const [menuOpen, setMenuOpen] = useState(false);
 const [serviceOpen, setServiceOpen] = useState(false);
 const [profileOpen, setProfileOpen] = useState(false);
 
+
+
 const navigate = useNavigate();
+
 
 const user = JSON.parse(
   localStorage.getItem("user") || "null"
@@ -184,17 +186,15 @@ const closeMenu = () => {
     {profileOpen && (
       <div className="profile-popup">
 
-      <div
-  className="profile-header"
-  onClick={() => navigate("/user-dashboard")}
-  style={{ cursor: "pointer" }}
->
-  <FaUserCircle className="popup-avatar" />
+        <div className="profile-header">
+          <FaUserCircle
+            className="popup-avatar"
+          />
 
-  <h4>
-    {user?.name || "User"}
-  </h4>
-</div>
+        <h4>
+  {user?.name || "User"}
+</h4>
+        </div>
 
         <div className="profile-item">
           <FaPhoneAlt />
@@ -258,14 +258,17 @@ const closeMenu = () => {
     {profileOpen && (
       <div className="profile-popup">
 
-        <div className="profile-header">
-          <FaUserCircle
-            className="popup-avatar"
-          />
-<h4>
-  {user?.name || "User"}
-</h4>
-        </div>
+   
+
+  <div
+    className="profile-header"
+    onClick={() => navigate("/user-dashboard")}
+  >
+    <FaUserCircle className="popup-avatar" />
+    <h4>{user?.name || "User"}</h4>
+  </div>
+
+
 
         <div className="profile-item">
           <FaPhoneAlt />

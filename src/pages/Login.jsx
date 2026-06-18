@@ -38,8 +38,7 @@ const handleOtp = async () => {
       {
         method: "POST",
         headers: {
-          "Content-Type":
-            "application/json",
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(
           userType === "ca"
@@ -53,47 +52,62 @@ const handleOtp = async () => {
       }
     );
 
-    const data =
-      await response.json();
+    const data = await response.json();
 
-    console.log(data);
+    console.log("FULL RESPONSE =>", data);
+    console.log("SUCCESS =>", data.success);
 
     if (data.success) {
 
+      console.log(
+        "LOGIN SUCCESS =>",
+        data
+      );
+
       localStorage.setItem(
         "token",
-        data.token
+        data.token || ""
       );
 
       localStorage.setItem(
         "user",
         JSON.stringify(
-          data.user
+          data.user || {}
         )
       );
 
-      if (
-        userType === "ca"
-      ) {
+      if (userType === "ca") {
+
         window.location.href =
           "/vendor-dashboard";
+
       } else {
+
         window.location.href =
           "/";
+
       }
 
     } else {
 
+      console.log(
+        "LOGIN FAILED =>",
+        data
+      );
+
       alert(
         data.message ||
-          "Login Failed"
+        "Login Failed"
       );
 
     }
 
   } catch (error) {
 
-    console.log(error);
+    console.log(
+      "ERROR =>",
+      error
+    );
 
     alert(
       "Server not running"
