@@ -365,7 +365,7 @@ const saveProfile = async () => {
 
           <div className="profile-main">
 
-            <div className="profile-card">
+            <div className="profile-car">
 
               <h3>
                 Profile Information

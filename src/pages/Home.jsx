@@ -40,6 +40,8 @@ import home3 from "../assets/home3.png";
 import home4 from "../assets/home4.png";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
 
 function Home() {
 
@@ -76,7 +78,7 @@ const fetchTopVendors = async () => {
 
 
 
-
+const navigate = useNavigate();
 
 
 
@@ -473,11 +475,13 @@ const fetchTopVendors = async () => {
 
             </div>
 
-            <button
-              className="profile-btn"
-            >
-              View Profile
-            </button>
+         
+<button
+  className="profile-btn"
+  onClick={() => navigate("/find-ca")}
+>
+  View Profile
+</button>
 
           </div>
 

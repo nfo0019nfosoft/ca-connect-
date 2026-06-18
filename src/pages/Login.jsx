@@ -63,6 +63,7 @@ const handleOtp = async () => {
         "LOGIN SUCCESS =>",
         data
       );
+      console.log("TOKEN =>", data.token);
 
       localStorage.setItem(
         "token",

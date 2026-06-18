@@ -17,6 +17,8 @@ import Support from "./pages/Support";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsAndConditions from "./pages/TermsAndConditions";
 import AboutUs from "./pages/AboutUs";
+import FindCA from "./pages/FindCA";
+import VendorDetails from "./pages/VendorDetails"
 
 import VendorDashboard from "./pages/VendorDashboard";
 import VendorProfile from "./pages/VendorProfile";
@@ -28,14 +30,30 @@ import UserProfile from "./pages/UserProfile";
 import UserBusinessDetails from "./pages/UserBusinessDetails";
 import UserUploadedDocuments from "./pages/UserUploadedDocuments";
 import UserAccountVerification from "./pages/UserAccountVerification";
+import FreeEnquiry from "./pages/FreeEnquiry"
 
 
 function Layout() {
   const location = useLocation();
 
-  const hideNavbarFooter =
-    location.pathname.startsWith("/vendor") ||
-    location.pathname.startsWith("/user");
+
+
+
+  const dashboardRoutes = [
+  "/vendor-dashboard",
+  "/vendor-profile",
+  "/vendor-kyc",
+  "/vendor-services",
+  "/vendor-preview",
+  "/user-dashboard",
+  "/user-profile",
+  "/user-business-details",
+  "/user-uploaded-documents",
+  "/user-account-verification",
+];
+
+const hideNavbarFooter =
+  dashboardRoutes.includes(location.pathname);
 
   console.log("PATH:", location.pathname);
   console.log("HIDE:", hideNavbarFooter);
@@ -55,6 +73,11 @@ function Layout() {
         <Route path="/privacypolicy" element={<PrivacyPolicy />} />
         <Route path="/termsandconditions" element={<TermsAndConditions />} />
         <Route path="/aboutus" element={<AboutUs />} />
+        <Route path="/find-ca" element={<FindCA />} />
+        <Route path="/vendor/:id" element={<VendorDetails/>}/>
+        <Route path="/free-enquiry/:vendorId" element={<FreeEnquiry />}
+/>
+
 
         {/* Vendor Pages */}
         <Route path="/vendor-dashboard" element={<VendorDashboard />} />
