@@ -30,8 +30,8 @@ const handleOtp = async () => {
 
     const loginUrl =
       userType === "ca"
-        ? "http://localhost:5000/api/vendor/login"
-        : "http://localhost:5000/api/auth/login";
+        ? "https://ca-backend-d9tc.onrender.com/api/vendor/login"
+        : "https://ca-backend-d9tc.onrender.com/api/auth/login";
 
     const response = await fetch(
       loginUrl,
