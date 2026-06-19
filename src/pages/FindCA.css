@@ -261,27 +261,25 @@
 
 
 
+/* ==========================
+   ADVISOR LIST
+========================== */
 
-/* ==================================
-   VENDORS LIST
-================================== */
-
-.vendors-list{
+.advisor-list{
   display:flex;
   flex-direction:column;
-  gap:16px;
-  margin:20px 50px;
+  gap:36px;
+  margin:50px 90px;
 }
 
-/* ==================================
+/* ==========================
    CARD
-================================== */
+========================== */
 
-.vendor-card{
+.advisor-card{
   background:#fff;
   border:1px solid #e5e7eb;
   border-radius:12px;
-
   padding:18px 24px;
 
   display:flex;
@@ -291,39 +289,39 @@
   transition:.3s;
 }
 
-.vendor-card:hover{
+.advisor-card:hover{
   box-shadow:0 8px 20px rgba(0,0,0,.08);
 }
 
-/* ==================================
-   LEFT
-================================== */
+/* ==========================
+   LEFT AREA
+========================== */
 
-.vendor-left{
+.advisor-main{
   display:flex;
   align-items:flex-start;
-  gap:18px;
+  gap:58px;
   flex:1;
 }
 
-/* ==================================
+/* ==========================
    IMAGE
-================================== */
+========================== */
 
-.vendor-image{
+.advisor-photo-wrap{
   position:relative;
   flex-shrink:0;
 }
 
-.vendor-img{
-  width:72px;
-  height:72px;
+.advisor-photo{
+  width:132px;
+  height:132px;
   border-radius:50%;
   object-fit:cover;
   border:2px solid #f3f4f6;
 }
 
-.online-dot{
+.advisor-status{
   position:absolute;
   right:0;
   bottom:0;
@@ -345,50 +343,50 @@
   border:2px solid #fff;
 }
 
-/* ==================================
+/* ==========================
    CONTENT
-================================== */
+========================== */
 
-.vendor-content{
+.advisor-info{
   flex:1;
   max-width:750px;
 }
 
-.vendor-top{
+.advisor-header{
   display:flex;
   align-items:center;
   gap:6px;
   margin-bottom:6px;
 }
 
-.vendor-top h3{
+.advisor-header h3{
   margin:0;
   font-size:24px;
   font-weight:700;
   color:#111827;
 }
 
-.verified-icon{
+.advisor-verified{
   color:#2563eb;
   font-size:16px;
 }
 
-/* ==================================
+/* ==========================
    SERVICES
-================================== */
+========================== */
 
-.service-name{
+.advisor-services{
   font-size:13px;
   color:#6b7280;
   margin-bottom:10px;
   line-height:1.5;
 }
 
-/* ==================================
+/* ==========================
    STATS
-================================== */
+========================== */
 
-.vendor-stats{
+.advisor-metrics{
   display:flex;
   align-items:center;
   gap:20px;
@@ -396,7 +394,7 @@
   flex-wrap:wrap;
 }
 
-.vendor-stats span{
+.advisor-metrics span{
   display:flex;
   align-items:center;
   gap:5px;
@@ -405,26 +403,26 @@
   color:#4b5563;
 }
 
-.vendor-stats svg{
+.advisor-metrics svg{
   color:#facc15;
 }
 
-.vendor-stats small{
+.advisor-metrics small{
   color:#6b7280;
 }
 
-/* ==================================
-   TAGS
-================================== */
+/* ==========================
+   BADGES
+========================== */
 
-.vendor-tags{
+.advisor-badges{
   display:flex;
   gap:8px;
   margin-bottom:10px;
   flex-wrap:wrap;
 }
 
-.vendor-tags span{
+.advisor-badges span{
   padding:5px 10px;
   border-radius:20px;
 
@@ -432,32 +430,32 @@
   font-weight:600;
 }
 
-.verified-tag{
+.badge-verified{
   background:#ecfdf5;
   color:#15803d;
 }
 
-.pricing-tag{
+.badge-pricing{
   background:#eef2ff;
   color:#2563eb;
 }
 
-.available-tag{
+.badge-available{
   background:#f0fdf4;
   color:#16a34a;
 }
 
-/* ==================================
-   LOCATION
-================================== */
+/* ==========================
+   ADDRESS
+========================== */
 
-.vendor-location{
+.advisor-address{
   display:flex;
   gap:20px;
   flex-wrap:wrap;
 }
 
-.vendor-location span{
+.advisor-address span{
   display:flex;
   align-items:center;
   gap:6px;
@@ -466,11 +464,11 @@
   font-size:13px;
 }
 
-/* ==================================
-   RIGHT BUTTONS
-================================== */
+/* ==========================
+   BUTTONS
+========================== */
 
-.vendor-actions{
+.advisor-buttons{
   width:180px;
 
   border-left:1px solid #e5e7eb;
@@ -483,7 +481,7 @@
   flex-shrink:0;
 }
 
-.profile-btn{
+.btn-enquiry{
   height:42px;
 
   border:1px solid #2563eb;
@@ -499,12 +497,12 @@
   transition:.3s;
 }
 
-.profile-btn:hover{
+.btn-enquiry:hover{
   background:#2563eb;
   color:#fff;
 }
 
-.consult-btn{
+.btn-consultation{
   height:42px;
 
   border:none;
@@ -520,72 +518,50 @@
   transition:.3s;
 }
 
-.consult-btn:hover{
+.btn-consultation:hover{
   background:#1d4ed8;
 }
 
-.compare-btn{
-  border:none;
-  background:none;
-
-  color:#6b7280;
-  font-size:13px;
-
-  cursor:pointer;
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:6px;
-}
-
-/* ==================================
+/* ==========================
    MOBILE
-================================== */
+========================== */
 
 @media(max-width:768px){
 
-  .vendors-list{
+  .advisor-list{
     margin:20px 15px;
   }
 
-  .vendor-card{
+  .advisor-card{
     flex-direction:column;
     gap:18px;
   }
 
-  .vendor-left{
+  .advisor-main{
     width:100%;
   }
 
-  .vendor-actions{
+  .advisor-buttons{
     width:100%;
     border-left:none;
     padding-left:0;
   }
 
-  .profile-btn,
-  .consult-btn{
+  .btn-enquiry,
+  .btn-consultation{
     width:100%;
   }
 
-  .vendor-location{
+  .advisor-address{
     flex-direction:column;
     gap:8px;
   }
 
-  .vendor-top h3{
+  .advisor-header h3{
     font-size:20px;
   }
 
 }
-
-
-
-
-
-
-
 
 
 

@@ -405,7 +405,7 @@ const [ratingFilter, setRatingFilter] = useState("");
 
    {/* VENDORS */}
 
-<div className="vendors-list">
+<div className="advisor-list">
 
   {filteredVendors.map((vendor) => {
 
@@ -433,15 +433,13 @@ const [ratingFilter, setRatingFilter] = useState("");
     return (
 
       <div
-        className="vendor-card"
+        className="advisor-card"
         key={vendor._id}
       >
 
-        {/* LEFT */}
+        <div className="advisor-main">
 
-        <div className="vendor-left">
-
-          <div className="vendor-image">
+          <div className="advisor-photo-wrap">
 
             <img
               src={
@@ -450,42 +448,36 @@ const [ratingFilter, setRatingFilter] = useState("");
                   : "/avatar.png"
               }
               alt={vendor.fullName}
-              className="vendor-img"
+              className="advisor-photo"
             />
 
             {vendor.isVerified && (
-              <span className="online-dot">
+              <span className="advisor-status">
                 ✓
               </span>
             )}
 
           </div>
 
-          <div className="vendor-content">
+          <div className="advisor-info">
 
-            {/* NAME */}
-
-            <div className="vendor-top">
+            <div className="advisor-header">
 
               <h3>
                 {vendor.fullName}
               </h3>
 
               {vendor.isVerified && (
-                <FaCheckCircle className="verified-icon" />
+                <FaCheckCircle className="advisor-verified" />
               )}
 
             </div>
 
-            {/* SERVICES */}
-
-            <p className="service-name">
+            <p className="advisor-services">
               {services}
             </p>
 
-            {/* STATS */}
-
-            <div className="vendor-stats">
+            <div className="advisor-metrics">
 
               <span>
                 <FaStar />
@@ -506,21 +498,19 @@ const [ratingFilter, setRatingFilter] = useState("");
 
             </div>
 
-            {/* TAGS */}
-
-            <div className="vendor-tags">
+            <div className="advisor-badges">
 
               {vendor.isVerified && (
-                <span className="verified-tag">
+                <span className="badge-verified">
                   Verified CA
                 </span>
               )}
 
-              <span className="pricing-tag">
+              <span className="badge-pricing">
                 {pricing}
               </span>
 
-              <span className="available-tag">
+              <span className="badge-available">
                 {vendor.available
                   ? "Available Today"
                   : "Available Tomorrow"}
@@ -528,9 +518,7 @@ const [ratingFilter, setRatingFilter] = useState("");
 
             </div>
 
-            {/* LOCATION */}
-
-            <div className="vendor-location">
+            <div className="advisor-address">
 
               <span>
                 <FaMapMarkerAlt />
@@ -550,28 +538,25 @@ const [ratingFilter, setRatingFilter] = useState("");
 
         </div>
 
-        {/* RIGHT BUTTONS */}
+        <div className="advisor-buttons">
 
-        <div className="vendor-actions">
-<button
-  className="profile-btn"
-  onClick={() =>
-    navigate(`/vendor/${vendor._id}`)
-  }
->
-  Enquire
-</button>
+          <button
+            className="btn-enquiry"
+            onClick={() =>
+              navigate(`/vendor/${vendor._id}`)
+            }
+          >
+            Enquire
+          </button>
 
-<button
-  className="consult-btn"
-  onClick={() =>
-    navigate(`/vendor/${vendor._id}`)
-  }
->
-  Book Consultation
-</button>
-
-         
+          <button
+            className="btn-consultation"
+            onClick={() =>
+              navigate(`/vendor/${vendor._id}`)
+            }
+          >
+            Book Consultation
+          </button>
 
         </div>
 

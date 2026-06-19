@@ -1124,3 +1124,101 @@
   padding:20px;
   color:#666;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ===========================
+   TRUST STRIP
+=========================== */
+
+.trust-strip-wrapper{
+  max-width:1200px;
+  margin:20px auto;
+
+  background:#ffffff;
+  border:1px solid #e5e7eb;
+  border-radius:12px;
+
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+
+  overflow:hidden;
+}
+
+.trust-strip-item{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+
+  padding:14px 18px;
+
+  border-right:1px solid #eef2f7;
+
+  font-size:13px;
+  font-weight:600;
+  color:#475569;
+
+  transition:.3s;
+}
+
+.trust-strip-item:last-child{
+  border-right:none;
+}
+
+.trust-strip-item:hover{
+  background:#f8fafc;
+}
+
+.trust-strip-icon{
+  color:#2563eb;
+  font-size:15px;
+  flex-shrink:0;
+}
+
+/* ===========================
+   MOBILE
+=========================== */
+
+@media (max-width:768px){
+
+  .trust-strip-wrapper{
+    grid-template-columns:1fr 1fr;
+    margin:15px;
+  }
+
+  .trust-strip-item{
+    justify-content:flex-start;
+    padding:12px;
+    font-size:12px;
+  }
+
+}
+
+@media (max-width:480px){
+
+  .trust-strip-wrapper{
+    grid-template-columns:1fr;
+  }
+
+  .trust-strip-item{
+    border-right:none;
+    border-bottom:1px solid #eef2f7;
+  }
+
+  .trust-strip-item:last-child{
+    border-bottom:none;
+  }
+
+}

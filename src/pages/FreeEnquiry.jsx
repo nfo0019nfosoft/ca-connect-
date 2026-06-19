@@ -21,6 +21,11 @@ import {
   FaPhoneAlt,
   FaEnvelope,
   FaUserTie,
+  FaUsers,
+  FaUserCheck,
+
+
+
 } from "react-icons/fa";
 
 function FreeEnquiry() {
@@ -72,7 +77,7 @@ function FreeEnquiry() {
     },
   ];
 const [formData, setFormData] = useState({
-  serviceName: "",
+  serviceName: [],
   fullName: "",
   email: "",
   mobile: "",
@@ -89,8 +94,8 @@ const [formData, setFormData] = useState({
  const [agreeTerms, setAgreeTerms] =
   useState(false);
 
-const isFormValid =
-  formData.serviceName &&
+  const isFormValid =
+  formData.serviceName.length > 0 &&
   formData.fullName &&
   formData.email &&
   formData.mobile &&
@@ -116,32 +121,32 @@ useEffect(() => {
 
   let currentStep = 1;
 
-  if (formData.serviceName) {
-    currentStep = 2;
-  }
+  if (formData.serviceName.length > 0) {
+  currentStep = 2;
+}
 
   if (
-    formData.serviceName &&
-    formData.fullName &&
-    formData.email &&
-    formData.mobile
-  ) {
+  formData.serviceName.length > 0 &&
+  formData.fullName &&
+  formData.email &&
+  formData.mobile
+) {
     currentStep = 3;
   }
 
   if (
-    formData.serviceName &&
-    formData.fullName &&
-    formData.email &&
-    formData.mobile &&
-    formData.businessType &&
-    formData.businessStructure
-  ) {
+  formData.serviceName.length > 0 &&
+  formData.fullName &&
+  formData.email &&
+  formData.mobile &&
+  formData.businessType &&
+  formData.businessStructure
+) {
     currentStep = 4;
   }
 
   if (
-    formData.serviceName &&
+  formData.serviceName.length > 0 && 
     formData.fullName &&
     formData.email &&
     formData.mobile &&
@@ -322,7 +327,7 @@ useEffect(() => {
       1. SELECT SERVICE
   ======================= */}
 
-  <div className="enquiry-card">
+ <div className="enquiry-card">
 
   <h3>
     1. Select Service
@@ -334,44 +339,78 @@ useEffect(() => {
 
   <div className="service-grid">
 
-  {vendor.services?.map((service) => (
+    {vendor.services?.map((service) => (
 
-    <div
-      key={service._id}
-      className={`service-box ${
-        formData.serviceName === service.serviceName
-          ? "active"
-          : ""
-      }`}
-      onClick={() =>
-        setFormData((prev) => ({
-          ...prev,
-          serviceName: service.serviceName,
-        }))
-      }
-    >
+      <div
+        key={service._id}
+        className={`service-box ${
+          formData.serviceName.includes(
+            service.serviceName
+          )
+            ? "active"
+            : ""
+        }`}
+        onClick={() => {
 
-      <FaBriefcase />
+          const exists =
+            formData.serviceName.includes(
+              service.serviceName
+            );
 
-      <h4>{service.serviceName}</h4>
+          if (exists) {
 
-      <p>₹{service.price}</p>
+            setFormData((prev) => ({
+              ...prev,
+              serviceName:
+                prev.serviceName.filter(
+                  (item) =>
+                    item !==
+                    service.serviceName
+                ),
+            }));
 
-      {formData.serviceName === service.serviceName && (
-        <span className="selected-badge">
-          ✓ Selected
-        </span>
-      )}
+          } else {
 
-    </div>
+            setFormData((prev) => ({
+              ...prev,
+              serviceName: [
+                ...prev.serviceName,
+                service.serviceName,
+              ],
+            }));
 
-  ))}
+          }
 
-</div>
+        }}
+      >
 
-  {!formData.serviceName && (
+        <FaBriefcase />
+
+        <h4>
+          {service.serviceName}
+        </h4>
+
+        <p>
+          ₹{service.price}
+        </p>
+
+        {formData.serviceName.includes(
+          service.serviceName
+        ) && (
+          <span className="selected-badge">
+            ✓ Selected
+          </span>
+        )}
+
+      </div>
+
+    ))}
+
+  </div>
+
+  {formData.serviceName.length === 0 && (
     <p className="service-note">
-      Please select a service to continue
+      Please select at least one service to continue
     </p>
   )}
 
@@ -943,9 +982,10 @@ useEffect(() => {
         </h5>
 
         <p>
-          {formData.serviceName ||
-            "Not Selected"}
-        </p>
+  {formData.serviceName.length > 0
+    ? formData.serviceName.join(", ")
+    : "Not Selected"}
+</p>
 
       </div>
 
@@ -1140,6 +1180,41 @@ useEffect(() => {
 
 </div>
     </div>
+
+
+
+
+<div className="trust-strip-wrapper">
+
+  <div className="trust-strip-item">
+    <FaUsers className="trust-strip-icon" />
+    <span>
+      Trusted by 10,000+ Clients
+    </span>
+  </div>
+
+  <div className="trust-strip-item">
+    <FaUserCheck className="trust-strip-icon" />
+    <span>
+      Verified CA Professionals
+    </span>
+  </div>
+
+  <div className="trust-strip-item">
+    <FaShieldAlt className="trust-strip-icon" />
+    <span>
+      Secure & Confidential
+    </span>
+  </div>
+
+  <div className="trust-strip-item">
+    <FaBolt className="trust-strip-icon" />
+    <span>
+      Quick & Easy Process
+    </span>
+  </div>
+
+</div>
     </div>
   );
 }
