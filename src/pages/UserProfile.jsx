@@ -378,11 +378,11 @@ const saveProfile = async () => {
 </div>
 
   {/* Card */}
-<div className="profile-card">
+<div className="account-info-panel">
 
-  <div className="card-header">
+  <div className="account-panel-top">
 
-    <div>
+    <div className="account-heading-wrap">
       <h3>Personal Information</h3>
 
       <p>
@@ -391,7 +391,7 @@ const saveProfile = async () => {
       </p>
     </div>
 
-    <label className="change-photo-btn">
+    <label className="upload-avatar-btn">
       Change Photo
 
       <input
@@ -404,18 +404,20 @@ const saveProfile = async () => {
 
   </div>
 
-  <div className="profile-image-box">
-<img
-  src={
-    user.profileImage
-      ? `https://ca-backend-d9tc.onrender.com${user.profileImage}`
-      : "/avatar.png"
-  }
-  alt="Profile"
-/>
+  <div className="avatar-preview-area">
+
+    <img
+      src={
+        user.profileImage
+          ? `https://ca-backend-d9tc.onrender.com${user.profileImage}`
+          : "/avatar.png"
+      }
+      alt="Profile"
+    />
+
   </div>
 
-  <div className="form-grid">
+  <div className="account-fields-layout">
 
     <div className="form-group">
       <label>Full Name</label>
@@ -439,24 +441,24 @@ const saveProfile = async () => {
       />
     </div>
 
-<div className="form-group">
-  <label>Mobile Number</label>
+    <div className="form-group">
+      <label>Mobile Number</label>
 
-  <PhoneInput
-    country={"in"}
-    enableSearch
-    value={user.phone || ""}
-    onChange={(value, data) => {
-      setUser({
-        ...user,
-        phone: value,
-        countryCode: data?.dialCode
-          ? `+${data.dialCode}`
-          : "+91",
-      });
-    }}
-  />
-</div>
+      <PhoneInput
+        country={"in"}
+        enableSearch
+        value={user.phone || ""}
+        onChange={(value, data) => {
+          setUser({
+            ...user,
+            phone: value,
+            countryCode: data?.dialCode
+              ? `+${data.dialCode}`
+              : "+91",
+          });
+        }}
+      />
+    </div>
 
     <div className="form-group">
       <label>Designation</label>
@@ -481,7 +483,6 @@ const saveProfile = async () => {
         <option value="Partner">
           Partner
         </option>
-
       </select>
     </div>
 
@@ -575,37 +576,38 @@ const saveProfile = async () => {
         onChange={handleChange}
       />
     </div>
-<div className="form-group">
-  <label>Contact Number</label>
 
-  <PhoneInput
-    country={"in"}
-    enableSearch
-    value={
-      user.officeContactNumber || ""
-    }
-    onChange={(value, data) => {
-      setUser({
-        ...user,
-        officeContactNumber: value,
-        officeCountryCode:
-          data?.dialCode
-            ? `+${data.dialCode}`
-            : "+91",
-      });
-    }}
-  />
-</div>
+    <div className="form-group">
+      <label>Contact Number</label>
+
+      <PhoneInput
+        country={"in"}
+        enableSearch
+        value={
+          user.officeContactNumber || ""
+        }
+        onChange={(value, data) => {
+          setUser({
+            ...user,
+            officeContactNumber: value,
+            officeCountryCode:
+              data?.dialCode
+                ? `+${data.dialCode}`
+                : "+91",
+          });
+        }}
+      />
+    </div>
 
   </div>
 
-  <div className="address-section">
+  <div className="business-location-section">
 
-    <h4 className="address-title">
+    <h4 className="business-location-title">
       Business Address
     </h4>
 
-    <div className="address-grid-2">
+    <div className="location-row-two">
 
       <div className="form-group">
         <label>
@@ -635,7 +637,7 @@ const saveProfile = async () => {
 
     </div>
 
-    <div className="address-grid-4">
+    <div className="location-row-four">
 
       <div className="form-group">
         <label>Country</label>
@@ -685,35 +687,38 @@ const saveProfile = async () => {
 
   </div>
 
-  <div className="save-wrapper">
-
+  <div className="action-btn-area">
 
     <Link
       to="/business-details"
-      className="save-btn"
-       onClick={saveProfile}
+      className="continue-save-btn"
+      onClick={saveProfile}
     >
       Save & Continue
     </Link>
 
   </div>
-<div className="profile-note">
 
-  <div className="note-icon">
-    <FaShieldAlt />
+  <div className="security-note-box">
+
+    <div className="security-note-icon">
+      <FaShieldAlt />
+    </div>
+
+    <div className="security-note-text">
+
+      <h4>Note:</h4>
+
+      <p>
+        This information will help us match you
+        with the right CA professionals and
+        relevant services.
+      </p>
+
+    </div>
+
   </div>
 
-  <div className="note-content">
-    <h4>Note:</h4>
-
-    <p>
-      This information will help us match you
-      with the right CA professionals and
-      relevant services.
-    </p>
-  </div>
-
-</div>
 </div>
 
 </div>

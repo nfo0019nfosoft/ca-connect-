@@ -77,9 +77,40 @@ const navigate = useNavigate();
 
   <div className="vendor-page">
 
-   <div className="breadcrumb">
-  Home &gt; Services &gt; Income Tax Services &gt; {vendor.fullName}
-</div>
+    <div className="consultation-breadcrumb">
+
+    <span>Home</span>
+    <span>›</span>
+
+    <span>Services</span>
+    <span>›</span>
+
+    <span>
+      {vendor?.services?.[0]?.serviceName ||
+        "CA Services"}
+    </span>
+
+    <span>›</span>
+
+    <span>
+      CA Professionals in {
+        vendor?.city || "India"
+      }
+    </span>
+
+    <span>›</span>
+
+    <span>
+      {vendor?.fullName}
+    </span>
+
+    <span>›</span>
+
+    <span className="active-breadcrumb">
+      Book a Consultation
+    </span>
+
+  </div>
 
     {/* TOP PROFILE CARD */}
     <div className="profile-card">
@@ -222,15 +253,17 @@ const navigate = useNavigate();
 
     </button>
 
-    <button className="outline-btn">
-
-      <FaCalendarCheck />
-
-      <span>
-        Book Consultation
-      </span>
-
-    </button>
+   <button
+  className="outline-btn"
+  onClick={() =>
+    navigate(
+      `/book-consultation/${vendor._id}`
+    )
+  }
+>
+  <FaCalendarCheck />
+  <span>Book Consultation</span>
+</button>
 
     <button className="outline-btn">
 
@@ -656,15 +689,17 @@ const navigate = useNavigate();
 
   </button>
 
-  <button className="bottom-consult-btn">
-
-    <FaCalendarCheck />
-
-    <span>
-      Book Consultation
-    </span>
-
-  </button>
+  <button
+  className="bottom-consult-btn"
+  onClick={() =>
+    navigate(
+      `/book-consultation/${vendor._id}`
+    )
+  }
+>
+  <FaCalendarCheck />
+  <span>Book Consultation</span>
+</button>
 
 </div>
 

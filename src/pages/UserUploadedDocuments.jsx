@@ -551,7 +551,7 @@ const documents = [
 
 
 
-                            </div>
+                            
 
 
                         <div className="documents-list">
@@ -674,6 +674,7 @@ const documents = [
       Save & Continue
     </button>
 
+  </div>
   </div>
                         </div>
 

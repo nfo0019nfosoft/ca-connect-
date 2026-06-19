@@ -31,6 +31,9 @@ import UserBusinessDetails from "./pages/UserBusinessDetails";
 import UserUploadedDocuments from "./pages/UserUploadedDocuments";
 import UserAccountVerification from "./pages/UserAccountVerification";
 import FreeEnquiry from "./pages/FreeEnquiry"
+import VendorPayment from "./pages/VendorPayment";
+import BookConsultation from "./pages/BookConsultation";
+import Admin from "./pages/Admin";
 
 
 function Layout() {
@@ -45,11 +48,13 @@ function Layout() {
   "/vendor-kyc",
   "/vendor-services",
   "/vendor-preview",
+  "/vendor-payment",
   "/user-dashboard",
   "/user-profile",
   "/user-business-details",
   "/user-uploaded-documents",
   "/user-account-verification",
+  "/admin"
 ];
 
 const hideNavbarFooter =
@@ -75,8 +80,20 @@ const hideNavbarFooter =
         <Route path="/aboutus" element={<AboutUs />} />
         <Route path="/find-ca" element={<FindCA />} />
         <Route path="/vendor/:id" element={<VendorDetails/>}/>
-        <Route path="/free-enquiry/:vendorId" element={<FreeEnquiry />}
-/>
+        <Route path="/free-enquiry/:vendorId" element={<FreeEnquiry />}/>
+        <Route path="/book-consultation/:id" element={<BookConsultation />}
+  />
+        
+          {/* Admin Pages */}
+
+  <Route path="/admin" element={<Admin />} />
+
+
+
+
+
+
+
 
 
         {/* Vendor Pages */}
@@ -85,6 +102,7 @@ const hideNavbarFooter =
         <Route path="/vendor-kyc" element={<VendorKyc />} />
         <Route path="/vendor-services" element={<VendorServices />} />
         <Route path="/vendor-preview" element={<VendorPreview />} />
+          <Route path="/vendor-payment" element={<VendorPayment />} />
 
         {/* User Pages */}
         <Route path="/user-dashboard" element={<UserDashboard />} />

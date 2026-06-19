@@ -5,29 +5,34 @@ import React, {
 
 import axios from "axios";
 import Sidebar from "../components/UserSidebar";
-import {Link, useNavigate} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   FaSearch,
-    FaBell,
-    FaComments,
-    FaUser,
-    FaBuilding,
-    FaFileAlt,
-    FaCheckCircle,
-    FaShieldAlt,
-    FaIdCard,
-    FaInfoCircle,
-    FaFileInvoice,
-    FaUniversity,
-    FaExclamationCircle,
-    FaFileUpload,
-    FaAward,
-    FaUserShield,
-    FaHeadset,
-    FaArrowRight,
-    FaEllipsisV,
-    FaRocket,
-    FaRegStar
+  FaBell,
+  FaComments,
+  FaUser,
+  FaFileAlt,
+  FaCheckCircle,
+  FaShieldAlt,
+  FaIdCard,
+  FaInfoCircle,
+  FaFileInvoice,
+  FaUniversity,
+  FaExclamationCircle,
+  FaFileUpload,
+  FaAward,
+  FaUserShield,
+  FaHeadset,
+  FaArrowRight,
+  FaEllipsisV,
+  FaRocket,
+  FaRegStar,
+  FaEnvelopeOpenText,
+  FaMobileAlt,
+  FaBuilding,
+  FaClock,
+  FaChevronRight,
+
 } from "react-icons/fa";
 
 import "./UserProfile.css";
@@ -40,7 +45,7 @@ const PhoneInput =
 
 
 
-function  UserAccountVerification() {
+function UserAccountVerification() {
 
   const navigate = useNavigate();
 
@@ -94,199 +99,199 @@ function  UserAccountVerification() {
     (completedSteps / 4) * 100
   );
 
-  
-const defaultServices = [
-  "GST Compliance",
-  "Income Tax Filing",
-  "Accounting & Bookkeeping",
-  "TDS Return Filing",
-  "ROC Compliance",
-  "Audit & Assurance",
-];
 
-const extraServices = [
-  "Business Registration",
-  "GST Registration",
-  "Company Incorporation",
-  "Payroll Management",
-  "Trademark Registration",
-  "Startup Advisory",
-  "Project Reports",
-  "Tax Planning",
-  "Import Export License",
-];
+  const defaultServices = [
+    "GST Compliance",
+    "Income Tax Filing",
+    "Accounting & Bookkeeping",
+    "TDS Return Filing",
+    "ROC Compliance",
+    "Audit & Assurance",
+  ];
 
-const [showMore, setShowMore] =
-  useState(false);
+  const extraServices = [
+    "Business Registration",
+    "GST Registration",
+    "Company Incorporation",
+    "Payroll Management",
+    "Trademark Registration",
+    "Startup Advisory",
+    "Project Reports",
+    "Tax Planning",
+    "Import Export License",
+  ];
 
-const [selectedServices, setSelectedServices] =
-  useState([]);
+  const [showMore, setShowMore] =
+    useState(false);
 
-const handleServiceChange = (
-  service
-) => {
+  const [selectedServices, setSelectedServices] =
+    useState([]);
 
-  if (
-    selectedServices.includes(service)
-  ) {
+  const handleServiceChange = (
+    service
+  ) => {
 
-    setSelectedServices(
-      selectedServices.filter(
-        (item) => item !== service
-      )
-    );
+    if (
+      selectedServices.includes(service)
+    ) {
 
-  } else {
+      setSelectedServices(
+        selectedServices.filter(
+          (item) => item !== service
+        )
+      );
 
-    setSelectedServices([
-      ...selectedServices,
-      service,
-    ]);
+    } else {
 
-  }
+      setSelectedServices([
+        ...selectedServices,
+        service,
+      ]);
 
-};
+    }
+
+  };
 
 
 
-/* =====================
-   GET PROFILE
-===================== */
+  /* =====================
+     GET PROFILE
+  ===================== */
 
-const fetchProfile = async () => {
+  const fetchProfile = async () => {
 
-  try {
+    try {
 
-    const token =
-      localStorage.getItem("token");
+      const token =
+        localStorage.getItem("token");
 
-    const res = await axios.get(
-      "https://ca-backend-d9tc.onrender.com/api/users/profile",
-      {
-        headers: {
-          Authorization:
-            `Bearer ${token}`,
-        },
+      const res = await axios.get(
+        "https://ca-backend-d9tc.onrender.com/api/users/profile",
+        {
+          headers: {
+            Authorization:
+              `Bearer ${token}`,
+          },
+        }
+      );
+      if (res.data.user) {
+
+        setUser((prev) => ({
+          ...prev,
+          ...res.data.user,
+        }));
+
+        setSelectedServices(
+          res.data.user
+            .preferredServices || []
+        );
+
       }
-    );
-if (res.data.user) {
-
-  setUser((prev) => ({
-    ...prev,
-    ...res.data.user,
-  }));
-
-  setSelectedServices(
-    res.data.user
-      .preferredServices || []
-  );
-
-}
-    
-
-  } catch (error) {
-
-    console.log(error);
-
-  }
-
-};
-
-/* =====================
-   LOAD DATA
-===================== */
-
-useEffect(() => {
-
-  fetchProfile();
-
-}, []);
-
-/* =====================
-   COMMON INPUT CHANGE
-===================== */
-
-const handleChange = (e) => {
-
-  const { name, value } =
-    e.target;
-
-  setUser((prev) => ({
-    ...prev,
-    [name]: value,
-  }));
-
-};
 
 
-/* =====================
-   PROFILE IMAGE
-===================== */
-const handleImageUpload = async (e) => {
+    } catch (error) {
 
-  const file = e.target.files[0];
+      console.log(error);
 
-  if (!file) return;
+    }
 
-  try {
+  };
 
-    const token =
-      localStorage.getItem("token");
+  /* =====================
+     LOAD DATA
+  ===================== */
 
-    const formData =
-      new FormData();
-
-    formData.append(
-      "photo",
-      file
-    );
-
-    await axios.post(
-      "https://ca-backend-d9tc.onrender.com/api/users/photo",
-      formData,
-      {
-        headers: {
-          Authorization:
-            `Bearer ${token}`,
-        },
-      }
-    );
+  useEffect(() => {
 
     fetchProfile();
 
-  } catch (error) {
+  }, []);
 
-    console.log(error);
+  /* =====================
+     COMMON INPUT CHANGE
+  ===================== */
 
-  }
+  const handleChange = (e) => {
 
-};
-/* =====================
-   SAVE BUSINESS
-===================== */
-const saveBusinessDetails = async () => {
+    const { name, value } =
+      e.target;
 
-  await axios.put(
-    "https://ca-backend-d9tc.onrender.com/api/users/profile",
-    {
-      ...user,
+    setUser((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
 
-      preferredServices:
-        selectedServices,
+  };
 
-      businessCompleted: true,
-    },
-    {
-      headers: {
-        Authorization:
-          `Bearer ${localStorage.getItem("token")}`,
-      },
+
+  /* =====================
+     PROFILE IMAGE
+  ===================== */
+  const handleImageUpload = async (e) => {
+
+    const file = e.target.files[0];
+
+    if (!file) return;
+
+    try {
+
+      const token =
+        localStorage.getItem("token");
+
+      const formData =
+        new FormData();
+
+      formData.append(
+        "photo",
+        file
+      );
+
+      await axios.post(
+        "https://ca-backend-d9tc.onrender.com/api/users/photo",
+        formData,
+        {
+          headers: {
+            Authorization:
+              `Bearer ${token}`,
+          },
+        }
+      );
+
+      fetchProfile();
+
+    } catch (error) {
+
+      console.log(error);
+
     }
-  );
 
-  
+  };
+  /* =====================
+     SAVE BUSINESS
+  ===================== */
+  const saveBusinessDetails = async () => {
 
-};
+    await axios.put(
+      "https://ca-backend-d9tc.onrender.com/api/users/profile",
+      {
+        ...user,
+
+        preferredServices:
+          selectedServices,
+
+        businessCompleted: true,
+      },
+      {
+        headers: {
+          Authorization:
+            `Bearer ${localStorage.getItem("token")}`,
+        },
+      }
+    );
+
+
+
+  };
 
 
 
@@ -340,26 +345,26 @@ const saveBusinessDetails = async () => {
             <FaBell className="icon" />
 
             <div className="user-info">
-<img
-  src={
-    user.profileImage
-      ? `https://ca-backend-d9tc.onrender.com${user.profileImage}`
-      : "/avatar.png"
-  }
-  alt="Profile"
-/>
+              <img
+                src={
+                  user.profileImage
+                    ? `https://ca-backend-d9tc.onrender.com${user.profileImage}`
+                    : "/avatar.png"
+                }
+                alt="Profile"
+              />
 
-  <div>
-    <h4>
-      {user.name || "User Name"}
-    </h4>
+              <div>
+                <h4>
+                  {user.name || "User Name"}
+                </h4>
 
-    <p>
-      {user.role || "Business User"}
-    </p>
-  </div>
+                <p>
+                  {user.role || "Business User"}
+                </p>
+              </div>
 
-</div>
+            </div>
 
           </div>
 
@@ -370,704 +375,640 @@ const saveBusinessDetails = async () => {
         <div className="profile-wrapper">
 
           {/* Left Content */}
-<div className="left-content">
-
-  {/* Tabs */}
-
-<div className="profile-tabs">
-
-  <Link
-    to="/user-profile"
-    className="tab-btn "
-  >
-    <FaUser />
-    <span>
-      Personal Information
-    </span>
-  </Link>
-
-  <Link
-    to="/user-business-details"
-    className="tab-btn "
-  >
-    <FaBuilding />
-    <span>
-      Business Details
-    </span>
-  </Link>
-
-  <Link
-    to="/user-uploaded-documents"
-    className="tab-btn "
-  >
-    <FaFileAlt />
-    <span>
-      Uploaded Documents
-    </span>
-  </Link>
-
-  <Link
-    to="/user-account-verification"
-    className="tab-btn active"
-  >
-    <FaCheckCircle />
-    <span>
-      Account Verification
-    </span>
-  </Link>
-
-</div>
-
-  {/* Card */}
-<div className="profile-card">
-
-  <div className="card-header">
-
-    <div className="breadcrumb">
-
-  <Link to="/">
-    Home
-  </Link>
-
-  <span className="separator">
-    ›
-  </span>
-
-  <Link to="/user-profile">
-    My Profile
-  </Link>
-
-  <span className="separator">
-    ›
-  </span>
-
-  <span className="current-page">
-    Business Details
-  </span>
-
-</div>
-
-  
-
-  </div>
-
-
- <div className="profile-card">
-
-  <div className="card-header">
-    <div>
-      <h3>Business Details</h3>
-      <p>
-        Provide information about your business
-        to help us connect you with the right
-        CA professionals.
-      </p>
-    </div>
-  </div>
-
-  <div className="form-grid">
-
-    <div className="form-group">
-      <label>Company / Firm Name</label>
-      <input
-        type="text"
-        name="companyName"
-        value={user.companyName}
-        onChange={handleChange}
-      />
-    </div>
-
-    <div className="form-group">
-      <label>Industry / Business Sector</label>
-      <select
-        name="industrySector"
-        value={user.industrySector}
-        onChange={handleChange}
-      >
-        <option value="">Select Sector</option>
-        <option value="Trading">Trading</option>
-        <option value="Manufacturing">Manufacturing</option>
-        <option value="Services">Services</option>
-        <option value="IT">IT</option>
-      </select>
-    </div>
-
-    <div className="form-group">
-      <label>Nature of Business</label>
-      <select
-        name="natureOfBusiness"
-        value={user.natureOfBusiness}
-        onChange={handleChange}
-      >
-        <option value="">Select</option>
-        <option value="Wholesale Trading">
-          Wholesale Trading
-        </option>
-        <option value="Retail Trading">
-          Retail Trading
-        </option>
-        <option value="Service Provider">
-          Service Provider
-        </option>
-      </select>
-    </div>
-
-    <div className="form-group">
-      <label>Business Type</label>
-      <select
-        name="businessType"
-        value={user.businessType}
-        onChange={handleChange}
-      >
-        <option value="">
-          Select Business Type
-        </option>
-
-        <option value="Proprietorship">
-          Proprietorship
-        </option>
-
-        <option value="Partnership">
-          Partnership
-        </option>
-
-        <option value="Private Limited">
-          Private Limited
-        </option>
-
-      </select>
-    </div>
-
-    <div className="form-group">
-      <label>Registration Type</label>
-      <select
-        name="registrationType"
-        value={user.registrationType}
-        onChange={handleChange}
-      >
-        <option value="">
-          Select Registration
-        </option>
-
-        <option value="GST Registered">
-          GST Registered
-        </option>
-
-        <option value="GST Exempt">
-          GST Exempt
-        </option>
-
-      </select>
-    </div>
-
-    <div className="form-group">
-      <label>Date Of Establishment</label>
-      <input
-        type="date"
-        name="dateOfEstablishment"
-        value={user.dateOfEstablishment}
-        onChange={handleChange}
-      />
-    </div>
-
-    <div className="form-group">
-      <label>GST Status</label>
-      <select
-        name="gstStatus"
-        value={user.gstStatus}
-        onChange={handleChange}
-      >
-        <option value="">Select</option>
-        <option value="Active">Active</option>
-        <option value="Inactive">Inactive</option>
-      </select>
-    </div>
-
-    <div className="form-group">
-      <label>GST Number</label>
-      <input
-        type="text"
-        name="gstNumber"
-        value={user.gstNumber}
-        onChange={handleChange}
-      />
-    </div>
-
-    <div className="form-group">
-      <label>GST Registration Date</label>
-      <input
-        type="date"
-        name="gstRegistrationDate"
-        value={user.gstRegistrationDate}
-        onChange={handleChange}
-      />
-    </div>
-
-    <div className="form-group">
-      <label>Annual Turnover</label>
-      <select
-        name="annualTurnover"
-        value={user.annualTurnover}
-        onChange={handleChange}
-      >
-        <option value="">
-          Select Turnover
-        </option>
-
-        <option value="Below 10L">
-          Below 10L
-        </option>
-
-        <option value="10L - 50L">
-          10L - 50L
-        </option>
-
-        <option value="50L - 1Cr">
-          50L - 1Cr
-        </option>
-
-        <option value="1Cr - 5Cr">
-          1Cr - 5Cr
-        </option>
-      </select>
-    </div>
-
-    <div className="form-group">
-      <label>Team Size</label>
-      <select
-        name="teamSize"
-        value={user.teamSize}
-        onChange={handleChange}
-      >
-        <option value="">
-          Select Team Size
-        </option>
-
-        <option value="1-5 Employees">
-          1-5 Employees
-        </option>
-
-        <option value="5-10 Employees">
-          5-10 Employees
-        </option>
-
-        <option value="10-50 Employees">
-          10-50 Employees
-        </option>
-      </select>
-    </div>
-
-    <div className="form-group">
-      <label>Number Of Branches</label>
-      <input
-        type="number"
-        name="numberOfBranches"
-        value={user.numberOfBranches}
-        onChange={handleChange}
-      />
-    </div>
-
-    <div className="form-group">
-      <label>Accounting Method</label>
-      <select
-        name="accountingMethod"
-        value={user.accountingMethod}
-        onChange={handleChange}
-      >
-        <option value="">
-          Select Method
-        </option>
-
-        <option value="Accrual Basis">
-          Accrual Basis
-        </option>
-
-        <option value="Cash Basis">
-          Cash Basis
-        </option>
-      </select>
-    </div>
-
-    <div className="form-group">
-      <label>Financial Year</label>
-      <select
-        name="financialYear"
-        value={user.financialYear}
-        onChange={handleChange}
-      >
-        <option value="">
-          Select Financial Year
-        </option>
-
-        <option value="April-March">
-          April - March
-        </option>
-      </select>
-    </div>
-
-    <div className="form-group">
-      <label>TDS Applicable</label>
-      <select
-        name="tdsApplicable"
-        value={user.tdsApplicable}
-        onChange={handleChange}
-      >
-        <option value="">Select</option>
-        <option value="Yes">Yes</option>
-        <option value="No">No</option>
-      </select>
-    </div>
-
-  </div>
-
-
-
-
-<div className="services-section">
-
-  <label className="service-label">
-    Preferred CA Services
-    <span>
-      (Select all that apply)
-    </span>
-  </label>
-
-  <div className="services-grid">
-
-    {defaultServices.map(
-      (service) => (
-
-        <label
-          key={service}
-          className="service-card"
-        >
-
-          <input
-            type="checkbox"
-            checked={selectedServices.includes(
-              service
-            )}
-            onChange={() =>
-              handleServiceChange(
-                service
-              )
-            }
-          />
-
-          <span>{service}</span>
-
-        </label>
-
-      )
-    )}
-
-    {showMore &&
-      extraServices.map(
-        (service) => (
-
-          <label
-            key={service}
-            className="service-card"
-          >
-
-            <input
-              type="checkbox"
-              checked={selectedServices.includes(
-                service
-              )}
-              onChange={() =>
-                handleServiceChange(
-                  service
-                )
-              }
-            />
-
-            <span>{service}</span>
-
-          </label>
-
-        )
-      )}
-
-    <button
-      type="button"
-      className="add-more-btn"
-      onClick={() =>
-        setShowMore(!showMore)
-      }
-    >
-      {showMore
-        ? "Show Less"
-        : "+ Add More"}
-    </button>
-
-  </div>
-
-</div>
-
-
-  <div className="form-group full-width">
-    <label>Business Description</label>
-
-    <textarea
-      rows="4"
-      name="businessDescription"
-      value={user.businessDescription}
-      onChange={handleChange}
-    />
-  </div>
-
-  <div className="save-wrapper">
-
-    <button
-      className="save-btn"
-      onClick={saveBusinessDetails}
-    >
-      Save & Continue
-    </button>
-
-  </div>
-
-</div>
-
-<div className="profile-note">
-
-  <div className="note-icon">
-    <FaShieldAlt />
-  </div>
-
-  <div className="note-content">
-    <h4>Note:</h4>
+          <div className="left-content">
+
+            {/* Tabs */}
+
+            <div className="profile-tabs">
+
+              <Link
+                to="/user-profile"
+                className="tab-btn "
+              >
+                <FaUser />
+                <span>
+                  Personal Information
+                </span>
+              </Link>
+
+              <Link
+                to="/user-business-details"
+                className="tab-btn "
+              >
+                <FaBuilding />
+                <span>
+                  Business Details
+                </span>
+              </Link>
+
+              <Link
+                to="/user-uploaded-documents"
+                className="tab-btn "
+              >
+                <FaFileAlt />
+                <span>
+                  Uploaded Documents
+                </span>
+              </Link>
+
+              <Link
+                to="/user-account-verification"
+                className="tab-btn active"
+              >
+                <FaCheckCircle />
+                <span>
+                  Account Verification
+                </span>
+              </Link>
+
+            </div>
+
+            {/* Card */}
+            <div className="profile-card">
+
+              <div className="card-header">
+
+                <div className="breadcrumb">
+
+                  <Link to="/">
+                    Home
+                  </Link>
+
+                  <span className="separator">
+                    ›
+                  </span>
+
+                  <Link to="/user-profile">
+                    My Profile
+                  </Link>
+
+                  <span className="separator">
+                    ›
+                  </span>
+
+                  <span className="current-page">
+                    Business Details
+                  </span>
+                </div>
+
+
+<div className="verification-panel">
+
+  <div className="verification-header">
+
+    <h2>Account Verification</h2>
 
     <p>
-      This information will help us match you
-      with the right CA professionals and
-      relevant services.
+      Complete the verification process to
+      build trust and get better support from
+      our CA professionals.
     </p>
+
+  </div>
+
+  {/* Email */}
+
+  <div className="verification-item">
+
+    <div className="verification-left">
+
+      <div className="verification-icon email-bg">
+        <FaEnvelopeOpenText />
+      </div>
+
+      <div className="verification-content">
+
+        <h4>Email Verification</h4>
+
+        <p>
+          Verifying your email ensures secure
+          communication.
+        </p>
+
+        <span>
+          Email:
+          amit.patel@business.com
+        </span>
+
+      </div>
+
+    </div>
+
+    <div className="verification-right">
+
+      <div className="verification-status verified">
+
+        <FaCheckCircle />
+
+        Verified
+
+      </div>
+
+      <small>
+        Verified on:
+        18 May 2024, 02:25 PM
+      </small>
+
+      <FaChevronRight className="arrow-icon" />
+
+    </div>
+
+  </div>
+
+  {/* Mobile */}
+
+  <div className="verification-item">
+
+    <div className="verification-left">
+
+      <div className="verification-icon mobile-bg">
+        <FaMobileAlt />
+      </div>
+
+      <div className="verification-content">
+
+        <h4>Mobile Verification</h4>
+
+        <p>
+          Verifying your mobile number ensures
+          secure access.
+        </p>
+
+        <span>
+          Mobile:
+          +91 9876543210
+        </span>
+
+      </div>
+
+    </div>
+
+    <div className="verification-right">
+
+      <div className="verification-status verified">
+
+        <FaCheckCircle />
+
+        Verified
+
+      </div>
+
+      <small>
+        Verified on:
+        18 May 2024, 02:27 PM
+      </small>
+
+      <FaChevronRight className="arrow-icon" />
+
+    </div>
+
+  </div>
+
+  {/* GST */}
+
+  <div className="verification-item">
+
+    <div className="verification-left">
+
+      <div className="verification-icon gst-bg">
+        <FaFileInvoice />
+      </div>
+
+      <div className="verification-content">
+
+        <h4>GST Verification</h4>
+
+        <p>
+          Verify your GST number to enable
+          seamless compliance services.
+        </p>
+
+        <span>
+          GST Number:
+          24ABCDE1234F1Z5
+        </span>
+
+      </div>
+
+    </div>
+
+    <div className="verification-right">
+
+      <div className="verification-status verified">
+
+        <FaCheckCircle />
+
+        Verified
+
+      </div>
+
+      <small>
+        Verified on:
+        20 May 2024, 11:50 AM
+      </small>
+
+      <FaChevronRight className="arrow-icon" />
+
+    </div>
+
+  </div>
+
+  {/* PAN */}
+
+  <div className="verification-item">
+
+    <div className="verification-left">
+
+      <div className="verification-icon pan-bg">
+        <FaIdCard />
+      </div>
+
+      <div className="verification-content">
+
+        <h4>PAN Verification</h4>
+
+        <p>
+          Verify your PAN to proceed with tax
+          and financial services.
+        </p>
+
+        <span>
+          PAN Number:
+          ABCDE1234F
+        </span>
+
+      </div>
+
+    </div>
+
+    <div className="verification-right">
+
+      <div className="verification-status verified">
+
+        <FaCheckCircle />
+
+        Verified
+
+      </div>
+
+      <small>
+        Verified on:
+        18 May 2024, 02:28 PM
+      </small>
+
+      <FaChevronRight className="arrow-icon" />
+
+    </div>
+
+  </div>
+
+  {/* Business */}
+
+  <div className="verification-item">
+
+    <div className="verification-left">
+
+      <div className="verification-icon business-bg">
+        <FaBuilding />
+      </div>
+
+      <div className="verification-content">
+
+        <h4>Business Verification</h4>
+
+        <p>
+          Verify your business details and
+          registration information.
+        </p>
+
+        <span>
+          Status:
+          In Review
+        </span>
+
+      </div>
+
+    </div>
+
+    <div className="verification-right">
+
+      <div className="verification-status review">
+
+        <FaClock />
+
+        In Review
+
+      </div>
+
+      <small>
+        Submitted on:
+        21 May 2024, 10:15 AM
+      </small>
+
+      <FaChevronRight className="arrow-icon" />
+
+    </div>
+
+  </div>
+
+  {/* Bank */}
+
+  <div className="verification-item">
+
+    <div className="verification-left">
+
+      <div className="verification-icon bank-bg">
+        <FaUniversity />
+      </div>
+
+      <div className="verification-content">
+
+        <h4>
+          Bank Account Verification
+        </h4>
+
+        <p>
+          Verify your bank account for secure
+          transactions.
+        </p>
+
+        <span>
+          Status:
+          Pending
+        </span>
+
+      </div>
+
+    </div>
+
+    <div className="verification-right">
+
+      <div className="verification-status pending">
+
+        <FaClock />
+
+        Pending
+
+      </div>
+
+      <button className="verify-now-btn">
+        Verify Now
+      </button>
+
+      <FaChevronRight className="arrow-icon" />
+
+    </div>
+
+  </div>
+
+  <div className="verification-footer">
+
+    <div className="footer-left-info">
+
+      <FaInfoCircle />
+
+      <p>
+        All verifications are safe and secure.
+        Your information is encrypted and
+        will never be shared.
+      </p>
+
+    </div>
+
+    <a href="/">
+      Contact Support
+      <FaChevronRight />
+    </a>
+
   </div>
 
 </div>
-</div>
 
-</div>
+
+
+
+
+
+
+
+              </div>
+            </div>
+
+          </div>
 
           {/* Right Content */}
 
-<div className="right-content">
+          <div className="right-content">
 
-  <div className="completion-card">
+            <div className="completion-card">
 
-    <h3>Profile Completion</h3>
+              <h3>Profile Completion</h3>
 
-    <div className="completion-top">
+              <div className="completion-top">
 
-      <div
-        className="progress-circle"
-        style={{
-          background: `conic-gradient(
+                <div
+                  className="progress-circle"
+                  style={{
+                    background: `conic-gradient(
             #22c55e 0deg,
             #22c55e ${percentage * 3.6}deg,
             #2563eb ${percentage * 3.6}deg,
             #2563eb 360deg
           )`
-        }}
-      >
-        <div className="progress-inner">
-          {percentage}%
-        </div>
-      </div>
+                  }}
+                >
+                  <div className="progress-inner">
+                    {percentage}%
+                  </div>
+                </div>
 
-      <div className="completion-text">
+                <div className="completion-text">
 
-        <p>
-          Great! You're almost there.
-          Complete your profile to get
-          better matches.
-        </p>
+                  <p>
+                    Great! You're almost there.
+                    Complete your profile to get
+                    better matches.
+                  </p>
 
-        <Link
-          to="/user-profile"
-          className="view-profile-btn"
-        >
-          View My Profile
-        </Link>
+                  <Link
+                    to="/user-profile"
+                    className="view-profile-btn"
+                  >
+                    View My Profile
+                  </Link>
 
-      </div>
+                </div>
 
-    </div>
+              </div>
 
-    <div className="steps-list">
+              <div className="steps-list">
 
-      <div className="step-item">
+                <div className="step-item">
 
-        <span
-          className={`step-dot ${
-            steps.personal
-              ? "active"
-              : ""
-          }`}
-        ></span>
+                  <span
+                    className={`step-dot ${steps.personal
+                        ? "active"
+                        : ""
+                      }`}
+                  ></span>
 
-        <span className="step-label">
-          Personal Information
-        </span>
+                  <span className="step-label">
+                    Personal Information
+                  </span>
 
-        {steps.personal ? (
-          <FaCheckCircle className="green" />
-        ) : (
-          <div className="empty-circle"></div>
-        )}
+                  {steps.personal ? (
+                    <FaCheckCircle className="green" />
+                  ) : (
+                    <div className="empty-circle"></div>
+                  )}
 
-      </div>
+                </div>
 
-      <div className="step-item">
+                <div className="step-item">
 
-        <span
-          className={`step-dot ${
-            steps.business
-              ? "active"
-              : ""
-          }`}
-        ></span>
+                  <span
+                    className={`step-dot ${steps.business
+                        ? "active"
+                        : ""
+                      }`}
+                  ></span>
 
-        <span className="step-label">
-          Business Details
-        </span>
+                  <span className="step-label">
+                    Business Details
+                  </span>
 
-        {steps.business ? (
-          <FaCheckCircle className="green" />
-        ) : (
-          <div className="empty-circle"></div>
-        )}
+                  {steps.business ? (
+                    <FaCheckCircle className="green" />
+                  ) : (
+                    <div className="empty-circle"></div>
+                  )}
 
-      </div>
+                </div>
 
-      <div className="step-item">
+                <div className="step-item">
 
-        <span
-          className={`step-dot ${
-            steps.documents
-              ? "active"
-              : ""
-          }`}
-        ></span>
+                  <span
+                    className={`step-dot ${steps.documents
+                        ? "active"
+                        : ""
+                      }`}
+                  ></span>
 
-        <span className="step-label">
-          Uploaded Documents
-        </span>
+                  <span className="step-label">
+                    Uploaded Documents
+                  </span>
 
-        {steps.documents ? (
-          <FaCheckCircle className="green" />
-        ) : (
-          <div className="empty-circle"></div>
-        )}
+                  {steps.documents ? (
+                    <FaCheckCircle className="green" />
+                  ) : (
+                    <div className="empty-circle"></div>
+                  )}
 
-      </div>
+                </div>
 
-      <div className="step-item">
+                <div className="step-item">
 
-        <span
-          className={`step-dot ${
-            steps.verification
-              ? "active"
-              : ""
-          }`}
-        ></span>
+                  <span
+                    className={`step-dot ${steps.verification
+                        ? "active"
+                        : ""
+                      }`}
+                  ></span>
 
-        <span className="step-label">
-          Account Verification
-        </span>
+                  <span className="step-label">
+                    Account Verification
+                  </span>
 
-        {steps.verification ? (
-          <FaCheckCircle className="green" />
-        ) : (
-          <FaExclamationCircle className="orange" />
-        )}
+                  {steps.verification ? (
+                    <FaCheckCircle className="green" />
+                  ) : (
+                    <FaExclamationCircle className="orange" />
+                  )}
 
-      </div>
+                </div>
 
-    </div>
+              </div>
 
-  <div className="verification-benefits">
-  
-    <h3>Verification Benefits</h3>
-  
-    <div className="benefit-item">
-  
-      <div className="benefit-icon green-bg">
-        <FaShieldAlt />
-      </div>
-  
-      <div className="benefit-content">
-        <h4>Build Trust</h4>
-        <p>
-          Verified accounts get higher trust
-          from CA professionals.
-        </p>
-      </div>
-  
-    </div>
-  
-    <div className="benefit-item">
-  
-      <div className="benefit-icon blue-bg">
-        <FaRocket />
-      </div>
-  
-      <div className="benefit-content">
-        <h4>Faster Service</h4>
-        <p>
-          Get quicker responses and
-          priority support.
-        </p>
-      </div>
-  
-    </div>
-  
-    <div className="benefit-item">
-  
-      <div className="benefit-icon orange-bg">
-        <FaRegStar />
-      </div>
-  
-      <div className="benefit-content">
-        <h4>Unlock All Features</h4>
-        <p>
-          Access all services and advanced
-          features.
-        </p>
-      </div>
-  
-    </div>
-  
-  </div>
-  
-  <div className="help-section">
-  
-    <div className="help-icon">
-      <FaHeadset />
-    </div>
-  
-    <h4>Need Help?</h4>
-  
-    <p>
-      Our support team is here to help
-      you with your profile and account.
-    </p>
-  
-    <Link
-      to="/support"
-      className="support-link"
-    >
-      Contact Support
-      <FaArrowRight />
-    </Link>
-  
-  </div>
+              <div className="verification-benefits">
 
-  </div>
+                <h3>Verification Benefits</h3>
 
-</div>
+                <div className="benefit-item">
+
+                  <div className="benefit-icon green-bg">
+                    <FaShieldAlt />
+                  </div>
+
+                  <div className="benefit-content">
+                    <h4>Build Trust</h4>
+                    <p>
+                      Verified accounts get higher trust
+                      from CA professionals.
+                    </p>
+                  </div>
+
+                </div>
+
+                <div className="benefit-item">
+
+                  <div className="benefit-icon blue-bg">
+                    <FaRocket />
+                  </div>
+
+                  <div className="benefit-content">
+                    <h4>Faster Service</h4>
+                    <p>
+                      Get quicker responses and
+                      priority support.
+                    </p>
+                  </div>
+
+                </div>
+
+                <div className="benefit-item">
+
+                  <div className="benefit-icon orange-bg">
+                    <FaRegStar />
+                  </div>
+
+                  <div className="benefit-content">
+                    <h4>Unlock All Features</h4>
+                    <p>
+                      Access all services and advanced
+                      features.
+                    </p>
+                  </div>
+
+                </div>
+
+              </div>
+
+              <div className="help-section">
+
+                <div className="help-icon">
+                  <FaHeadset />
+                </div>
+
+                <h4>Need Help?</h4>
+
+                <p>
+                  Our support team is here to help
+                  you with your profile and account.
+                </p>
+
+                <Link
+                  to="/support"
+                  className="support-link"
+                >
+                  Contact Support
+                  <FaArrowRight />
+                </Link>
+
+              </div>
+
+            </div>
+
+          </div>
         </div>
 
       </div>

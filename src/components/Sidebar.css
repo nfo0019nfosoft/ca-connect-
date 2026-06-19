@@ -107,30 +107,6 @@
   display: none;
 }
 
-@media (max-width: 768px) {
-  .mobile-toggle {
-    display: block;
-    position: fixed;
-    top: 15px;
-    left: 15px;
-    z-index: 1200;
-    border: none;
-    background: #021a4d;
-    color: white;
-    padding: 10px;
-    border-radius: 8px;
-  }
-
-  .sidebar {
-    left: -100%;
-    transition: 0.3s;
-  }
-
-  .sidebar.active {
-    left: 0;
-  }
-}
-
 
 
 
@@ -247,4 +223,157 @@
 
 .upgrade-card p {
   display: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ==========================
+   MOBILE SIDEBAR
+========================== */
+
+.mobile-toggle{
+  display:none;
+}
+
+.sidebar-overlay{
+  display:none;
+}
+
+@media (max-width:768px){
+
+  .mobile-toggle{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    position:fixed;
+    top:5px;
+    left:15px;
+
+    width:20px;
+    height:20px;
+
+    border:none;
+    border-radius:10px;
+
+    background:#021a4d;
+    color:#fff;
+
+    font-size:10px;
+    cursor:pointer;
+
+    z-index:1201;
+  }
+
+  .sidebar{
+    width:280px;
+    max-width:85%;
+
+    position:fixed;
+    top:0;
+    left:-100%;
+
+    transition:left .35s ease;
+
+    overflow-y:auto;
+
+    z-index:1200;
+  }
+
+  .sidebar.active{
+    left:0;
+  }
+
+  .sidebar-overlay{
+    display:block;
+
+    position:fixed;
+    inset:0;
+
+    background:rgba(0,0,0,.45);
+
+    opacity:0;
+    visibility:hidden;
+
+    transition:.3s;
+
+    z-index:1199;
+  }
+
+  .sidebar-overlay.active{
+    opacity:1;
+    visibility:visible;
+  }
+
+  .profile-content{
+    margin-left:0;
+    width:100%;
+    padding:70px 15px 20px;
+  }
+
+  .sidebar-logo-img{
+    width:120px;
+  }
+
+  .sidebar-menu a{
+    font-size:14px;
+    padding:12px;
+  }
+
+  .upgrade-card{
+    margin-top:15px;
+  }
+
+  .upgrade-card p{
+    display:block;
+    font-size:11px;
+  }
+}
+
+/* ==========================
+   SMALL MOBILE
+========================== */
+
+@media (max-width:480px){
+
+  .sidebar{
+    width:260px;
+  }
+
+  .profile-content{
+    padding:70px 12px 15px;
+  }
+
+  .sidebar-menu a{
+    font-size:13px;
+    gap:8px;
+  }
+
+  .upgrade-card h4{
+    font-size:12px;
+  }
+
+  .upgrade-card p{
+    font-size:10px;
+  }
+
+  .upgrade-btn{
+    font-size:11px;
+    padding:7px;
+  }
 }

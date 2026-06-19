@@ -32,23 +32,29 @@ function Sidebar() {
 
   };
 
-  return (
-    <>
-      <button
-        className="mobile-toggle"
-        onClick={() => setMenuOpen(!menuOpen)}
-      >
-        <FaBars />
-      </button>
+ return (
+  <>
+    <button
+      className="mobile-toggle"
+      onClick={() => setMenuOpen(!menuOpen)}
+    >
+      <FaBars />
+    </button>
 
-      <aside
-        className={
-          menuOpen
-            ? "sidebar active"
-            : "sidebar"
-        }
-      >
+    <div
+      className={`sidebar-overlay ${
+        menuOpen ? "active" : ""
+      }`}
+      onClick={() => setMenuOpen(false)}
+    ></div>
 
+    <aside
+      className={
+        menuOpen
+          ? "sidebar active"
+          : "sidebar"
+      }
+    >
         {/* Logo */}
 
         <div className="sidebar-logo">

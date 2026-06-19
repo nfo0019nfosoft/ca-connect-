@@ -33,27 +33,46 @@ import Sidebar from "../components/Sidebar";
 import "./VendorProfile.css";
 
 function VendorPreview() {
+ const handleLogout = () => {
 
+  localStorage.removeItem("token");
+  localStorage.removeItem("user");
+
+  window.location.href = "/login";
+};
+useEffect(() => {
+
+  const token =
+    localStorage.getItem("token");
+
+  if (!token) {
+    window.location.href = "/login";
+    return;
+  }
+
+  fetchProfile();
+
+}, []);
   const [vendor, setVendor] =
     useState({});
   const [steps, setSteps] = useState({
     profile: false,
-    firm: false,
+    
     kyc: false,
     services: false,
-    pricing: false,
+   
     preview: false,
     payment: false,
   });
 
-  const totalSteps = 7;
+  const totalSteps = 5;
 
   const completedSteps = [
     steps.profile,
-    steps.firm,
+  
     steps.kyc,
     steps.services,
-    steps.pricing,
+   
     steps.preview,
     steps.payment,
   ].filter(Boolean).length;
@@ -226,14 +245,18 @@ function VendorPreview() {
 
             <div className="vendor-info">
 
-              <img
-                src={
-                  vendor.photo
-                    ? `https://ca-backend-d9tc.onrender.com/uploads/${vendor.photo}`
-                    : "/avatar.png"
-                }
-                alt=""
-              />
+          <img
+  src={
+    vendor.photo
+      ? `https://ca-backend-d9tc.onrender.com/uploads/${vendor.photo}`
+      : "/avatar.png"
+  }
+  alt="Profile"
+  onClick={handleLogout}
+  style={{
+    cursor: "pointer"
+  }}
+/>
 
 
               <div>
@@ -284,14 +307,6 @@ function VendorPreview() {
           >
             <FaBriefcase />
             Services Offered
-          </Link>
-
-          <Link
-            to="/vendor-pricing"
-            className="tab-link"
-          >
-            <FaTag />
-            Pricing & Packages
           </Link>
 
           <Link
@@ -674,23 +689,7 @@ function VendorPreview() {
               )}
             </div>
         
-            <div className="step-item">
-              <span
-                className={`step-dot ${
-                  steps.pricing ? "active" : ""
-                }`}
-              ></span>
-        
-              <span className="step-label">
-                Pricing & Packages
-              </span>
-        
-              {steps.pricing ? (
-                <FaCheckCircle className="green" />
-              ) : (
-                <div className="empty-circle"></div>
-              )}
-            </div>
+          
         
             <div className="step-item">
               <span

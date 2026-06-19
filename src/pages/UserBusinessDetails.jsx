@@ -70,6 +70,19 @@ function  UserBusinessDetails() {
     businessCompleted: false,
     documentsCompleted: false,
     verificationCompleted: false,
+    industrySector: "",
+natureOfBusiness: "",
+registrationType: "",
+dateOfEstablishment: "",
+gstStatus: "",
+gstRegistrationDate: "",
+annualTurnover: "",
+teamSize: "",
+numberOfBranches: "",
+accountingMethod: "",
+financialYear: "",
+tdsApplicable: "",
+businessDescription: "",
   });
 
   const [loading, setLoading] = useState(false);
@@ -445,37 +458,44 @@ const saveBusinessDetails = async () => {
 
   
 
+  
+
+
+<div className="company-info-card">
+
+  <div className="company-info-header">
+
+    <h3 className="company-info-title">
+      Business Details
+    </h3>
+
+    <p className="company-info-subtitle">
+      Provide information about your business
+      to help us connect you with the right
+      CA professionals.
+    </p>
+
   </div>
 
+  <div className="company-form-grid">
 
- <div className="profile-card">
-
-  <div className="card-header">
-    <div>
-      <h3>Business Details</h3>
-      <p>
-        Provide information about your business
-        to help us connect you with the right
-        CA professionals.
-      </p>
-    </div>
-  </div>
-
-  <div className="form-grid">
-
-    <div className="form-group">
+    <div className="company-form-item">
       <label>Company / Firm Name</label>
+
       <input
         type="text"
+        className="company-textbox"
         name="companyName"
         value={user.companyName}
         onChange={handleChange}
       />
     </div>
 
-    <div className="form-group">
+    <div className="company-form-item">
       <label>Industry / Business Sector</label>
+
       <select
+        className="company-dropdown"
         name="industrySector"
         value={user.industrySector}
         onChange={handleChange}
@@ -488,9 +508,11 @@ const saveBusinessDetails = async () => {
       </select>
     </div>
 
-    <div className="form-group">
-      <label>Nature of Business</label>
+    <div className="company-form-item">
+      <label>Nature Of Business</label>
+
       <select
+        className="company-dropdown"
         name="natureOfBusiness"
         value={user.natureOfBusiness}
         onChange={handleChange}
@@ -508,9 +530,11 @@ const saveBusinessDetails = async () => {
       </select>
     </div>
 
-    <div className="form-group">
+    <div className="company-form-item">
       <label>Business Type</label>
+
       <select
+        className="company-dropdown"
         name="businessType"
         value={user.businessType}
         onChange={handleChange}
@@ -530,13 +554,14 @@ const saveBusinessDetails = async () => {
         <option value="Private Limited">
           Private Limited
         </option>
-
       </select>
     </div>
 
-    <div className="form-group">
+    <div className="company-form-item">
       <label>Registration Type</label>
+
       <select
+        className="company-dropdown"
         name="registrationType"
         value={user.registrationType}
         onChange={handleChange}
@@ -552,23 +577,26 @@ const saveBusinessDetails = async () => {
         <option value="GST Exempt">
           GST Exempt
         </option>
-
       </select>
     </div>
 
-    <div className="form-group">
+    <div className="company-form-item">
       <label>Date Of Establishment</label>
+
       <input
         type="date"
+        className="company-textbox"
         name="dateOfEstablishment"
         value={user.dateOfEstablishment}
         onChange={handleChange}
       />
     </div>
 
-    <div className="form-group">
+    <div className="company-form-item">
       <label>GST Status</label>
+
       <select
+        className="company-dropdown"
         name="gstStatus"
         value={user.gstStatus}
         onChange={handleChange}
@@ -579,29 +607,35 @@ const saveBusinessDetails = async () => {
       </select>
     </div>
 
-    <div className="form-group">
+    <div className="company-form-item">
       <label>GST Number</label>
+
       <input
         type="text"
+        className="company-textbox"
         name="gstNumber"
         value={user.gstNumber}
         onChange={handleChange}
       />
     </div>
 
-    <div className="form-group">
+    <div className="company-form-item">
       <label>GST Registration Date</label>
+
       <input
         type="date"
+        className="company-textbox"
         name="gstRegistrationDate"
         value={user.gstRegistrationDate}
         onChange={handleChange}
       />
     </div>
 
-    <div className="form-group">
+    <div className="company-form-item">
       <label>Annual Turnover</label>
+
       <select
+        className="company-dropdown"
         name="annualTurnover"
         value={user.annualTurnover}
         onChange={handleChange}
@@ -628,9 +662,11 @@ const saveBusinessDetails = async () => {
       </select>
     </div>
 
-    <div className="form-group">
+    <div className="company-form-item">
       <label>Team Size</label>
+
       <select
+        className="company-dropdown"
         name="teamSize"
         value={user.teamSize}
         onChange={handleChange}
@@ -653,19 +689,23 @@ const saveBusinessDetails = async () => {
       </select>
     </div>
 
-    <div className="form-group">
+    <div className="company-form-item">
       <label>Number Of Branches</label>
+
       <input
         type="number"
+        className="company-textbox"
         name="numberOfBranches"
         value={user.numberOfBranches}
         onChange={handleChange}
       />
     </div>
 
-    <div className="form-group">
+    <div className="company-form-item">
       <label>Accounting Method</label>
+
       <select
+        className="company-dropdown"
         name="accountingMethod"
         value={user.accountingMethod}
         onChange={handleChange}
@@ -684,9 +724,11 @@ const saveBusinessDetails = async () => {
       </select>
     </div>
 
-    <div className="form-group">
+    <div className="company-form-item">
       <label>Financial Year</label>
+
       <select
+        className="company-dropdown"
         name="financialYear"
         value={user.financialYear}
         onChange={handleChange}
@@ -701,9 +743,11 @@ const saveBusinessDetails = async () => {
       </select>
     </div>
 
-    <div className="form-group">
+    <div className="company-form-item">
       <label>TDS Applicable</label>
+
       <select
+        className="company-dropdown"
         name="tdsApplicable"
         value={user.tdsApplicable}
         onChange={handleChange}
@@ -716,107 +760,91 @@ const saveBusinessDetails = async () => {
 
   </div>
 
+  <div className="company-service-section">
 
+    <label className="company-service-heading">
+      Preferred CA Services
+      <span>
+        (Select all that apply)
+      </span>
+    </label>
 
+    <div className="company-service-grid">
 
-<div className="services-section">
-
-  <label className="service-label">
-    Preferred CA Services
-    <span>
-      (Select all that apply)
-    </span>
-  </label>
-
-  <div className="services-grid">
-
-    {defaultServices.map(
-      (service) => (
+      {defaultServices.map((service) => (
 
         <label
           key={service}
-          className="service-card"
+          className="company-service-box"
         >
-
           <input
             type="checkbox"
-            checked={selectedServices.includes(
-              service
-            )}
+            checked={selectedServices.includes(service)}
             onChange={() =>
-              handleServiceChange(
-                service
-              )
+              handleServiceChange(service)
             }
           />
 
           <span>{service}</span>
-
         </label>
 
-      )
-    )}
+      ))}
 
-    {showMore &&
-      extraServices.map(
-        (service) => (
+      {showMore &&
+        extraServices.map((service) => (
 
           <label
             key={service}
-            className="service-card"
+            className="company-service-box"
           >
-
             <input
               type="checkbox"
-              checked={selectedServices.includes(
-                service
-              )}
+              checked={selectedServices.includes(service)}
               onChange={() =>
-                handleServiceChange(
-                  service
-                )
+                handleServiceChange(service)
               }
             />
 
             <span>{service}</span>
-
           </label>
 
-        )
-      )}
+        ))}
 
-    <button
-      type="button"
-      className="add-more-btn"
-      onClick={() =>
-        setShowMore(!showMore)
-      }
-    >
-      {showMore
-        ? "Show Less"
-        : "+ Add More"}
-    </button>
+      <button
+        type="button"
+        className="company-service-btn"
+        onClick={() =>
+          setShowMore(!showMore)
+        }
+      >
+        {showMore
+          ? "Show Less"
+          : "+ Add More"}
+      </button>
+
+    </div>
 
   </div>
 
-</div>
+  <div className="company-description-box">
 
-
-  <div className="form-group full-width">
-    <label>Business Description</label>
+    <label>
+      Business Description
+    </label>
 
     <textarea
-      rows="4"
+      rows="5"
       name="businessDescription"
       value={user.businessDescription}
       onChange={handleChange}
     />
+
   </div>
 
-  <div className="save-wrapper">
+  <div className="company-action-area">
 
     <button
-      className="save-btn"
+      className="company-submit-btn"
       onClick={saveBusinessDetails}
     >
       Save & Continue
@@ -824,27 +852,30 @@ const saveBusinessDetails = async () => {
 
   </div>
 
-</div>
+  <div className="company-note-card">
 
-<div className="profile-note">
+    <div className="company-note-icon">
+      <FaShieldAlt />
+    </div>
 
-  <div className="note-icon">
-    <FaShieldAlt />
+    <div className="company-note-content">
+
+      <h4>Note:</h4>
+
+      <p>
+        This information will help us match you
+        with the right CA professionals and
+        relevant services.
+      </p>
+
+    </div>
+
   </div>
 
-  <div className="note-content">
-    <h4>Note:</h4>
-
-    <p>
-      This information will help us match you
-      with the right CA professionals and
-      relevant services.
-    </p>
-  </div>
-
 </div>
 </div>
 
+</div>
 </div>
 
           {/* Right Content */}

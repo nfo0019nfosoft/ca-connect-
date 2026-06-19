@@ -2,7 +2,10 @@ import React, {
   useEffect,
   useState
 } from "react";
-import { Link } from "react-router-dom";
+import {
+  Link,
+  useNavigate,
+} from "react-router-dom";
 import axios from "axios";
 import PhoneInputModule from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
@@ -42,7 +45,7 @@ import Sidebar from "../components/Sidebar";
 // import "./VendorProfile.css";
 import "./VendorServices.css";
 
-function VendorServices() {
+function VendorPayment() {
  const handleLogout = () => {
 
   localStorage.removeItem("token");
@@ -67,7 +70,7 @@ useEffect(() => {
     useState({});
 const [steps, setSteps] = useState({
   profile: false,
-
+ 
   kyc: false,
   services: false,
  
@@ -79,10 +82,10 @@ const totalSteps = 5;
 
 const completedSteps = [
   steps.profile,
-
+ 
   steps.kyc,
   steps.services,
-
+ 
   steps.preview,
   steps.payment,
 ].filter(Boolean).length;
@@ -199,7 +202,55 @@ const res = await axios.get(
 
         const data =
           res.data.vendor;
+if (data.bankDetails) {
+  setBankData({
+    accountHolderName:
+      data.bankDetails.accountHolderName || "",
 
+    bankName:
+      data.bankDetails.bankName || "",
+
+    accountNumber:
+      data.bankDetails.accountNumber || "",
+
+    confirmAccountNumber:
+      data.bankDetails.accountNumber || "",
+
+    ifscCode:
+      data.bankDetails.ifscCode || "",
+
+    branchName:
+      data.bankDetails.branchName || "",
+
+    accountType:
+      data.bankDetails.accountType ||
+      "Current Account",
+
+    upiId:
+      data.bankDetails.upiId || "",
+
+    preferredPayoutMethod:
+      data.bankDetails.preferredPayoutMethod ||
+      "NEFT / IMPS",
+
+    payoutFrequency:
+      data.bankDetails.payoutFrequency ||
+      "Weekly",
+
+    minimumPayoutThreshold:
+      data.bankDetails.minimumPayoutThreshold ||
+      1000,
+  });
+}
+
+
+
+    console.log("VENDOR =", data);
+    console.log("BANK =", data.bankDetails);
+    console.log(
+      "Payment Step =",
+      !!data.bankDetails?.accountNumber
+    );
         setVendor(data);
           
 
@@ -304,80 +355,90 @@ const res = await axios.get(
 
   }
 };
-const services = [
-  {
-    name: "Income Tax Filing",
-    icon: <FaFileInvoiceDollar />,
-    description:
-      "ITR filing for individuals, HUF, firms, companies, etc.",
-  },
-  {
-    name: "GST Registration",
-    icon: <FaFileSignature />,
-    description:
-      "New GST registration for businesses.",
-  },
-  {
-    name: "GST Return Filing",
-    icon: <FaFileInvoice />,
-    description:
-      "GSTR-1, GSTR-3B and other GST returns.",
-  },
-  {
-    name: "TDS Return Filing",
-    icon: <FaFileAlt />,
-    description:
-      "TDS return preparation and filing.",
-  },
-  {
-    name: "Tax Planning & Advisory",
-    icon: <FaRocket />,
-    description:
-      "Tax planning and savings strategies.",
-  },
-  {
-    name: "ROC Compliance",
-    icon: <FaClipboardCheck />,
-    description:
-      "Company registration, ROC filings.",
-  },
-  {
-    name: "Accounting & Bookkeeping",
-    icon: <FaCalculator />,
-    description:
-      "Maintain books and bank reconciliation.",
-  },
-  {
-    name: "Audit & Assurance",
-    icon: <FaSearch />,
-    description:
-      "Statutory audit and internal audit.",
-  },
-  {
-    name: "Business Registration",
-    icon: <FaBuilding />,
-    description:
-      "Pvt Ltd, LLP, OPC registration.",
-  },
-  {
-    name: "Payroll Management",
-    icon: <FaMoneyCheck />,
-    description:
-      "Payroll processing and compliance.",
-  },
-  {
-    name: "Project Reports / CMA Data",
-    icon: <FaChartBar />,
-    description:
-      "Project reports and CMA data.",
-  },
-  {
-    name: "Other Services",
-    icon: <FaBriefcase />,
-    description:
-      "Any other professional services.",
-  },
-];
+
+  const navigate = useNavigate();
+const token =
+  localStorage.getItem("token");
+const [bankData, setBankData] = useState({
+  accountHolderName: "",
+  bankName: "",
+  accountNumber: "",
+  confirmAccountNumber: "",
+  ifscCode: "",
+  branchName: "",
+  accountType: "Current Account",
+  upiId: "",
+  preferredPayoutMethod: "NEFT / IMPS",
+  payoutFrequency: "Weekly",
+  minimumPayoutThreshold: 1000,
+});
+
+const [accountError, setAccountError] =
+  useState("");
+
+  
+
+ const saveBankDetails = async () => {
+
+  try {
+
+    const token =
+      localStorage.getItem("token");
+
+    const res = await axios.put(
+      "https://ca-backend-d9tc.onrender.com/api/vendor/update-bank-details",
+      {
+        bankDetails: bankData,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    console.log(
+      "SAVE RESPONSE =",
+      res.data
+    );
+
+    await fetchProfile();
+
+    alert(
+      "Bank Details Saved Successfully"
+    );
+
+  } catch (error) {
+
+    console.log(
+      "SAVE ERROR =",
+      error.response?.data ||
+      error.message
+    );
+
+  }
+
+};
+
+ const handleSaveBankDetails =
+  async () => {
+
+  if (
+    bankData.accountNumber !==
+    bankData.confirmAccountNumber
+  ) {
+
+    setAccountError(
+      "Account Number and Confirm Account Number do not match"
+    );
+
+    return;
+  }
+
+  setAccountError("");
+
+  await saveBankDetails();
+};
 
   return (
     <div className="profile-layout">
@@ -422,7 +483,7 @@ const services = [
             <FaBell className="icon" />
 
             <div className="vendor-info">
-<img
+ <img
   src={
     vendor.photo
       ? `https://ca-backend-d9tc.onrender.com/uploads/${vendor.photo}`
@@ -480,7 +541,7 @@ const services = [
 
   <Link
     to="/vendor-services"
-    className="tab-link active"
+    className="tab-link"
   >
     <FaBriefcase />
     Services Offered
@@ -490,7 +551,7 @@ const services = [
 
   <Link
     to="/vendor-preview"
-    className="tab-link"
+    className="tab-link "
   >
     <FaEye />
     Public Profile Preview
@@ -498,7 +559,7 @@ const services = [
 
   <Link
     to="/vendor-payment"
-    className="tab-link"
+    className="tab-link active"
   >
     <FaCreditCard />
     Payment Details
@@ -510,11 +571,10 @@ const services = [
           {/* LEFT */}
 <div className="services-card">
 
-  <h2>Services Offered</h2>
+  <h2>Payment Details</h2>
 
   <p className="section-desc">
-    Select the services you provide and add pricing,
-    delivery time and other relevant details.
+   Add Your bank account details to receive payments from clinets securely
   </p>
 
   <div className="info-box">
@@ -522,313 +582,355 @@ const services = [
     <FaInfoCircle />
 
     <div>
-      <strong>Select Services</strong>
+      <strong>Important Note</strong>
 
       <p>
-        Choose all the services that you provide
-        to your clients.
+       Ensure the bank details provided are accurate.
+  Payments will be processed to this account only.
       </p>
     </div>
 
   </div>
 
   <h4 className="service-section-title">
-    Select Services
-    <span>
-      (You can choose multiple services)
-    </span>
+    Bank Acoount Details
+   
   </h4>
 
   {/* SERVICES GRID */}
 
-  <div className="services-grid">
-
-    {services.map((service) => {
-
-      const isSelected =
-        selectedServices.some(
-          (s) =>
-            s.serviceName === service.name
-        );
-
-      return (
-
-        <div
-          key={service.name}
-          className={`service-card ${
-            isSelected ? "active" : ""
-          }`}
-          onClick={() =>
-            handleServiceSelect(service)
-          }
-        >
-
-          <div className="service-header">
-
-            <div className="service-icon">
-              {service.icon}
-            </div>
-
-            <input
-              type="checkbox"
-              checked={isSelected}
-              readOnly
-            />
-
-          </div>
-
-          <h4>{service.name}</h4>
-
-          <p>{service.description}</p>
-
-        </div>
-
-      );
-
-    })}
-
-  </div>
-
-  <p className="selected-count">
-    Selected {selectedServices.length} Services
-  </p>
-
-  {/* PRICING SECTION */}
-
-  <div className="pricing-card">
+<div className="vendor-bank-card">
 
   <h2>
-    Set Pricing & Service Details
+    Bank Account Details
   </h2>
 
-  <p className="section-desc">
-    Set your pricing, delivery time and
-    other details for the selected services.
+  <p className="vendor-bank-desc">
+    Enter your bank account details for receiving payouts.
   </p>
 
-  <div className="table-wrapper">
+ <div className="vendor-bank-grid">
 
-    <table className="pricing-table">
+  <div className="vendor-bank-field">
+    <label>Account Holder Name</label>
 
-      <thead>
-
-        <tr>
-          <th>Service</th>
-          <th>Pricing Model</th>
-          <th>Charges (₹)</th>
-          <th>Delivery Time</th>
-          <th>Includes</th>
-          <th>Actions</th>
-        </tr>
-
-      </thead>
-
-      <tbody>
-
-        {selectedServices.length > 0 ? (
-
-          selectedServices.map(
-            (service, index) => (
-
-            <tr key={index}>
-
-              <td>
-                {service.serviceName}
-              </td>
-
-              {/* Pricing Model */}
-
-              <td>
-
-                <select
-                  value={
-                    pricingData[
-                      service.serviceName
-                    ]?.pricingModel || ""
-                  }
-                  onChange={(e) =>
-                    setPricingData({
-                      ...pricingData,
-                      [service.serviceName]: {
-                        ...pricingData[
-                          service.serviceName
-                        ],
-                        pricingModel:
-                          e.target.value,
-                      },
-                    })
-                  }
-                >
-
-                  <option value="">
-                    Select
-                  </option>
-
-                  <option value="Fixed Price">
-                    Fixed Price
-                  </option>
-
-                  <option value="Per Return">
-                    Per Return
-                  </option>
-
-                  <option value="Hourly Basis">
-                    Hourly Basis
-                  </option>
-
-                  <option value="Monthly">
-                    Monthly
-                  </option>
-
-                </select>
-
-              </td>
-
-              {/* Charges */}
-
-              <td>
-
-                <input
-                  type="number"
-                  placeholder="2499"
-                  value={
-                    pricingData[
-                      service.serviceName
-                    ]?.price || ""
-                  }
-                  onChange={(e) =>
-                    setPricingData({
-                      ...pricingData,
-                      [service.serviceName]: {
-                        ...pricingData[
-                          service.serviceName
-                        ],
-                        price:
-                          e.target.value,
-                      },
-                    })
-                  }
-                />
-
-              </td>
-
-              {/* Delivery Time */}
-
-              <td>
-
-                <input
-                  type="text"
-                  placeholder="3 - 5 Days"
-                  value={
-                    pricingData[
-                      service.serviceName
-                    ]?.deliveryTime || ""
-                  }
-                  onChange={(e) =>
-                    setPricingData({
-                      ...pricingData,
-                      [service.serviceName]: {
-                        ...pricingData[
-                          service.serviceName
-                        ],
-                        deliveryTime:
-                          e.target.value,
-                      },
-                    })
-                  }
-                />
-
-              </td>
-
-              {/* Includes */}
-
-              <td>
-
-                <input
-                  type="text"
-                  placeholder="What's Included?"
-                  value={
-                    pricingData[
-                      service.serviceName
-                    ]?.includes || ""
-                  }
-                  onChange={(e) =>
-                    setPricingData({
-                      ...pricingData,
-                      [service.serviceName]: {
-                        ...pricingData[
-                          service.serviceName
-                        ],
-                        includes:
-                          e.target.value,
-                      },
-                    })
-                  }
-                />
-
-              </td>
-
-              {/* Delete */}
-
-              <td>
-
-             <button
-  className="delete-btn"
-  onClick={() =>
-    removeService(
-      service.serviceName
-    )
-  }
->
-  Delete
-</button>
-
-              </td>
-
-            </tr>
-
-          ))
-
-        ) : (
-
-          <tr>
-
-            <td
-              colSpan="6"
-              className="empty-row"
-            >
-              No Services Selected
-            </td>
-
-          </tr>
-
-        )}
-
-      </tbody>
-
-    </table>
-
+    <input
+      type="text"
+      value={bankData.accountHolderName}
+      onChange={(e) =>
+        setBankData({
+          ...bankData,
+          accountHolderName:
+            e.target.value,
+        })
+      }
+    />
   </div>
 
-  <div className="service-buttons">
+  <div className="vendor-bank-field">
+    <label>Bank Name</label>
 
-    <button className="draft-btn">
-      Save as Draft
-    </button>
+    <select
+      value={bankData.bankName}
+      onChange={(e) =>
+        setBankData({
+          ...bankData,
+          bankName:
+            e.target.value,
+        })
+      }
+    >
+      <option value="">
+        Select Bank
+      </option>
 
-     <Link
-       to="/vendor-payment"
-       className="save-btn"
-       onClick={saveServices}
-     >
-       Save & Continue
-     </Link>
+      <option>
+        HDFC Bank
+      </option>
 
+      <option>
+        ICICI Bank
+      </option>
+
+      <option>
+        SBI
+      </option>
+
+      <option>
+        Axis Bank
+      </option>
+    </select>
+  </div>
+
+  <div className="vendor-bank-field">
+    <label>Account Number</label>
+
+    <input
+      type="text"
+      value={bankData.accountNumber}
+      onChange={(e) =>
+        setBankData({
+          ...bankData,
+          accountNumber:
+            e.target.value,
+        })
+      }
+    />
+  </div>
+
+  <div className="vendor-bank-field">
+    <label>IFSC Code</label>
+
+    <input
+      type="text"
+      value={bankData.ifscCode}
+      onChange={(e) =>
+        setBankData({
+          ...bankData,
+          ifscCode:
+            e.target.value,
+        })
+      }
+    />
+  </div>
+
+  <div className="vendor-bank-field">
+    <label>Account Type</label>
+
+    <select
+      value={bankData.accountType}
+      onChange={(e) =>
+        setBankData({
+          ...bankData,
+          accountType:
+            e.target.value,
+        })
+      }
+    >
+      <option>
+        Current Account
+      </option>
+
+      <option>
+        Savings Account
+      </option>
+    </select>
+  </div>
+
+  <div className="vendor-bank-field">
+    <label>Branch Name</label>
+
+    <input
+      type="text"
+      value={bankData.branchName}
+      onChange={(e) =>
+        setBankData({
+          ...bankData,
+          branchName:
+            e.target.value,
+        })
+      }
+    />
+  </div>
+
+  <div className="vendor-bank-field">
+    <label>UPI ID (Optional)</label>
+
+    <input
+      type="text"
+      value={bankData.upiId}
+      onChange={(e) =>
+        setBankData({
+          ...bankData,
+          upiId:
+            e.target.value,
+        })
+      }
+    />
+  </div>
+
+  <div className="vendor-bank-field">
+    <label>
+      Confirm Account Number
+    </label>
+
+    <input
+      type="text"
+      value={
+        bankData.confirmAccountNumber
+      }
+      onChange={(e) =>
+        setBankData({
+          ...bankData,
+          confirmAccountNumber:
+            e.target.value,
+        })
+      }
+    />
   </div>
 
 </div>
 
+{accountError && (
+  <p className="account-error">
+    {accountError}
+  </p>
+)}
+
+<div className="bank-success-box">
+  ✓ Your bank details are secure and
+  will only be used for processing
+  payments.
 </div>
+
+<div className="additional-payout-box">
+
+  <h3>
+    Additional Information
+  </h3>
+
+  <div className="additional-grid">
+
+    <div className="vendor-bank-field">
+
+      <label>
+        Preferred Payout Method
+      </label>
+
+     <div className="radio-group">
+
+  <label className="radio-option">
+    <input
+      type="radio"
+      name="payoutMethod"
+      value="NEFT / IMPS"
+      checked={
+        bankData.preferredPayoutMethod ===
+        "NEFT / IMPS"
+      }
+      onChange={(e) =>
+        setBankData({
+          ...bankData,
+          preferredPayoutMethod:
+            e.target.value,
+        })
+      }
+    />
+
+    <span>NEFT / IMPS</span>
+  </label>
+
+  <label className="radio-option">
+    <input
+      type="radio"
+      name="payoutMethod"
+      value="UPI"
+      checked={
+        bankData.preferredPayoutMethod ===
+        "UPI"
+      }
+      onChange={(e) =>
+        setBankData({
+          ...bankData,
+          preferredPayoutMethod:
+            e.target.value,
+        })
+      }
+    />
+
+    <span>UPI</span>
+  </label>
+
+</div>
+
+    </div>
+
+    <div className="vendor-bank-field">
+
+      <label>
+        Payout Frequency
+      </label>
+
+      <select
+        value={
+          bankData.payoutFrequency
+        }
+        onChange={(e) =>
+          setBankData({
+            ...bankData,
+            payoutFrequency:
+              e.target.value,
+          })
+        }
+      >
+        <option>Weekly</option>
+        <option>Monthly</option>
+      </select>
+
+    </div>
+
+    <div className="vendor-bank-field">
+
+      <label>
+        Minimum Payout Threshold
+      </label>
+
+      <input
+        type="number"
+        value={
+          bankData.minimumPayoutThreshold
+        }
+        onChange={(e) =>
+          setBankData({
+            ...bankData,
+            minimumPayoutThreshold:
+              e.target.value,
+          })
+        }
+      />
+
+    </div>
+
+  </div>
+
+  <div className="note-box">
+    <strong>Note:</strong>
+    Payouts are processed as per the
+    selected frequency. You will be
+    notified via email once payment
+    is initiated.
+  </div>
+
+</div>
+
+
+
+ 
+
+
+
+   <div className="service-buttons">
+  
+      <button className="draft-btn">
+        Save as Draft
+      </button>
+  
+       <Link
+        //  to="/vendor-dashboard"
+         className="save-btn"
+         onClick={handleSaveBankDetails}
+       >
+         Save & Continue
+       </Link>
+  
+    </div>
+
+</div>
+
+ 
+
+</div>
+
           
 
           {/* RIGHT */}
@@ -955,12 +1057,13 @@ const services = [
   </div>
 
 </div>
+</div>
 
         </div>
 
       </div>
 
-    </div>
+    
 
 
 
@@ -978,4 +1081,4 @@ const services = [
   );
 }
 
-export default VendorServices;
+export default VendorPayment;

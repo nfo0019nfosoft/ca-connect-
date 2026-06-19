@@ -10,9 +10,11 @@ import {
   FaCalendarAlt,
   FaMapMarkerAlt,
   FaUserCircle,
-    FaPhoneAlt,
+  FaPhoneAlt,
   FaUserTag,
-  FaSignOutAlt
+  FaSignOutAlt,
+  FaUser,
+  FaCog,
 } from "react-icons/fa";
 
 function Navbar() {
@@ -173,55 +175,58 @@ const closeMenu = () => {
               Location
             </Link>
 {user ? (
-  <div className="profile-wrapper">
+<div className="profil-wrapper">
 
+  <div
+    className="profile-trigger"
+    onClick={() =>
+      setProfileOpen(!profileOpen)
+    }
+  >
     <FaUserCircle
       className="profile-icon"
-      size={35}
-      onClick={() =>
-        setProfileOpen(!profileOpen)
-      }
     />
-
-    {profileOpen && (
-      <div className="profile-popup">
-
-        <div className="profile-header">
-          <FaUserCircle
-            className="popup-avatar"
-          />
-
-        <h4>
-  {user?.name || "User"}
-</h4>
-        </div>
-
-        <div className="profile-item">
-          <FaPhoneAlt />
-          <span>
-            {user?.phone}
-          </span>
-        </div>
-
-        <div className="profile-item">
-          <FaUserTag />
-          <span>
-            {user?.role}
-          </span>
-        </div>
-
-        <button
-          onClick={handleLogout}
-          className="logout-btn"
-        >
-          <FaSignOutAlt />
-          Logout
-        </button>
-
-      </div>
-    )}
-
   </div>
+
+  {profileOpen && (
+
+    <div className="profile-popup">
+
+      <Link
+        to="/user-profile"
+        className="profile-link"
+        onClick={() =>
+          setProfileOpen(false)
+        }
+      >
+        <FaUser />
+        My Profile
+      </Link>
+
+      <Link
+        to="/user-profile"
+        className="profile-link"
+        onClick={() =>
+          setProfileOpen(false)
+        }
+      >
+        <FaCog />
+        Settings
+      </Link>
+
+      <button
+        onClick={handleLogout}
+        className="profile-link logout-btn"
+      >
+        <FaSignOutAlt />
+        Logout
+      </button>
+
+    </div>
+
+  )}
+
+</div>
 ) : (
   <Link
     to="/login"
@@ -229,7 +234,7 @@ const closeMenu = () => {
   >
     Login / Register
   </Link>
-)}          </li>
+)}:          </li>
 
         </ul>
 
@@ -245,67 +250,66 @@ const closeMenu = () => {
             Location
           </Link>
 {user ? (
-  <div className="profile-wrapper">
-
-    <FaUserCircle
-      className="profile-icon"
-      size={30}
-      onClick={() =>
-        setProfileOpen(!profileOpen)
-      }
-    />
-
-    {profileOpen && (
-      <div className="profile-popup">
-
-   
+ <div className="profil-wrapper">
 
   <div
-    className="profile-header"
-    onClick={() => navigate("/user-dashboard")}
+    className="profile-trigger"
+    onClick={() =>
+      setProfileOpen(!profileOpen)
+    }
   >
-    <FaUserCircle className="popup-avatar" />
-    <h4>{user?.name || "User"}</h4>
+    <FaUserCircle
+      className="profile-icon"
+    />
   </div>
 
+  {profileOpen && (
 
+    <div className="profile-popup">
 
-        <div className="profile-item">
-          <FaPhoneAlt />
-          <span>
-            {user?.phone}
-          </span>
-        </div>
+      <Link
+        to="/user-profile"
+        className="profile-link"
+        onClick={() =>
+          setProfileOpen(false)
+        }
+      >
+        <FaUser />
+        My Profile
+      </Link>
 
-        <div className="profile-item">
-          <FaUserTag />
-          <span>
-            {user?.role}
-          </span>
-        </div>
+      <Link
+        to="/user-profile"
+        className="profile-link"
+        onClick={() =>
+          setProfileOpen(false)
+        }
+      >
+        <FaCog />
+        Settings
+      </Link>
 
-        <button
-          onClick={handleLogout}
-          className="logout-btn"
-        >
-          <FaSignOutAlt />
-          Logout
-        </button>
+      <button
+        onClick={handleLogout}
+        className="profile-link logout-btn"
+      >
+        <FaSignOutAlt />
+        Logout
+      </button>
 
-      </div>
-    )}
+    </div>
 
-  </div>
+  )}
+
+</div>
 ) : (
   <Link
     to="/login"
     className="login-btn"
-    onClick={closeMenu}
   >
     Login / Register
   </Link>
 )}
-
         </div>
 
         <div

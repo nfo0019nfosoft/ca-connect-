@@ -27,6 +27,17 @@ import "./VendorProfile.css";
 
 function VendorProfile() {
 
+
+
+  const handleLogout = () => {
+
+  localStorage.removeItem("token");
+  localStorage.removeItem("user");
+
+  window.location.href = "/login";
+};
+
+
   const [vendor, setVendor] = useState({
   fullName: "",
   email: "",
@@ -40,21 +51,21 @@ function VendorProfile() {
 
 const [steps, setSteps] = useState({
   profile: false,
-  firm: false,
+ 
   kyc: false,
   services: false,
-  pricing: false,
+  
   preview: false,
   payment: false,
 });
-const totalSteps = 7;
+const totalSteps = 5;
 
 const completedSteps = [
   steps.profile,
-  steps.firm,
+
   steps.kyc,
   steps.services,
-  steps.pricing,
+
   steps.preview,
   steps.payment,
 ].filter(Boolean).length;
@@ -71,72 +82,62 @@ useEffect(() => {
   const token =
     localStorage.getItem("token");
 
-  console.log("TOKEN =", token);
+  if (!token) {
+    window.location.href = "/login";
+    return;
+  }
 
   fetchProfile();
 
 }, []);
-  const fetchProfile =
-    async () => {
+ const fetchProfile = async () => {
 
-      try {
+  const token =
+    localStorage.getItem("token");
 
-        const token =
-          localStorage.getItem(
-            "token"
-          );
+  try {
 
-      const res =
-  await axios.get(
-    "https://ca-backend-d9tc.onrender.com/api/vendor/profile",
-    {
-      headers: {
-        Authorization:
-          `Bearer ${token}`
+    const res = await axios.get(
+      "https://ca-backend-d9tc.onrender.com/api/vendor/profile",
+      {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
       }
-    }
-  );
+    );
 
-        const data =
-          res.data.vendor;
+    const data =
+      res.data.vendor;
 
-        setVendor(data);
+    setVendor(data);
 
-        setSteps({
-          profile:
-            !!data.fullName &&
-            !!data.email &&
-            !!data.mobile,
+    setSteps({
+      profile:
+        !!data.fullName &&
+        !!data.email &&
+        !!data.mobile,
 
-          firm:
-            !!data.firmName &&
-            !!data.gstNumber,
+      kyc:
+        !!data.kyc?.panCard,
 
-          kyc:
-            !!data.kyc
-              ?.panCard,
+      services:
+        data.services?.length > 0,
 
-          services:
-            data.services
-              ?.length > 0,
+      preview:
+        !!data.photo,
 
-          pricing:
-            true,
+      payment:
+        !!data.bankDetails
+          ?.accountNumber,
+    });
 
-          preview:
-            !!data.photo,
+  } catch (error) {
 
-          payment:
-            !!data
-              .bankDetails
-              ?.accountNumber
-        });
+    console.log(error);
 
-      } catch (error) {
-        console.log(error);
-      }
-    };
+  }
 
+};
   const handleChange = (
     e
   ) => {
@@ -274,14 +275,17 @@ const saveProfile = async () => {
             <FaBell className="icon" />
 
             <div className="vendor-info">
-
-         <img
+<img
   src={
     vendor.photo
       ? `https://ca-backend-d9tc.onrender.com/uploads/${vendor.photo}`
       : "/avatar.png"
   }
-  alt=""
+  alt="Profile"
+  onClick={handleLogout}
+  style={{
+    cursor: "pointer"
+  }}
 />
 
               <div>
@@ -334,13 +338,6 @@ const saveProfile = async () => {
     Services Offered
   </Link>
 
-  <Link
-    to="/vendor-pricing"
-    className="tab-link"
-  >
-    <FaTag />
-    Pricing & Packages
-  </Link>
 
   <Link
     to="/vendor-preview"
@@ -901,23 +898,7 @@ const saveProfile = async () => {
       )}
     </div>
 
-    <div className="step-item">
-      <span
-        className={`step-dot ${
-          steps.pricing ? "active" : ""
-        }`}
-      ></span>
-
-      <span className="step-label">
-        Pricing & Packages
-      </span>
-
-      {steps.pricing ? (
-        <FaCheckCircle className="green" />
-      ) : (
-        <div className="empty-circle"></div>
-      )}
-    </div>
+   
 
     <div className="step-item">
       <span

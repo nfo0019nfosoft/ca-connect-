@@ -579,3 +579,135 @@ margin-left:8px;
 .profile-header:hover{
   background:#f5f7fb;
 }
+
+
+
+
+
+
+
+
+
+.profil-wrapper{
+  position: relative;
+}
+
+.profile-trigger{
+  width: 46px;
+  height: 46px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+  border-radius: 50%;
+
+  transition: all .3s ease;
+}
+
+.profile-trigger:hover{
+  background: #f1f5ff;
+}
+
+.profile-icon{
+  font-size: 40px;
+  color: #2563eb;
+}
+
+/* Popup */
+
+.profile-popup{
+  position: absolute;
+  top: 60px;
+  right: 0;
+
+  width: 240px;
+
+  background: #ffffff;
+  border-radius: 18px;
+
+  border: 1px solid #e5e7eb;
+
+  padding: 8px;
+
+  box-shadow:
+    0 20px 40px rgba(37,99,235,.12),
+    0 8px 20px rgba(0,0,0,.08);
+
+  z-index: 9999;
+
+  animation: popupFade .25s ease;
+}
+
+@keyframes popupFade{
+  from{
+    opacity:0;
+    transform:translateY(10px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+/* Links */
+
+.profile-link{
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  padding: 14px 16px;
+
+  border: none;
+  border-radius: 12px;
+
+  background: transparent;
+  color: #1e293b;
+
+  font-size: 15px;
+  font-weight: 500;
+
+  text-decoration: none;
+  cursor: pointer;
+
+  transition: all .25s ease;
+}
+
+.profile-link svg{
+  font-size: 16px;
+  color: #2563eb;
+}
+
+.profile-link:hover{
+  background: #f8fafc;
+  color: #2563eb;
+}
+
+/* Logout */
+
+.logout-btn{
+  margin-top: 6px;
+
+  background: #fff1f2 !important;
+  color: #e11d48 !important;
+
+  border: 1px solid #fecdd3;
+}
+
+.logout-btn svg{
+  color: #e11d48 !important;
+}
+
+.logout-btn:hover{
+  background: #e11d48 !important;
+  color: #ffffff !important;
+  transform: translateY(-1px);
+}
+
+.logout-btn:hover svg{
+  color: #ffffff !important;
+}
