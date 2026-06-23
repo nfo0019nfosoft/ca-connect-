@@ -30,195 +30,203 @@ function Login() {
     });
   };
 
-  const handleLogin = async (e) => {
-    e.preventDefault();
+ const handleLogin = async (e) => {
+  e.preventDefault();
 
-    try {
-      const res = await fetch(
-        "http://localhost:5000/api/admin/login",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formData),
-        }
+  try {
+
+    const res = await fetch(
+      "https://ca-backend-d9tc.onrender.com/api/admin/login",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: formData.email,
+          password: formData.password,
+        }),
+      }
+    );
+
+    const data = await res.json();
+
+    if (data.success) {
+
+      localStorage.setItem(
+        "token",
+        data.token
       );
 
-      const data = await res.json();
+      localStorage.setItem(
+        "role",
+        data.role
+      );
 
-      if (data.success) {
-        localStorage.setItem("token", data.token);
-        localStorage.setItem("userType", data.user.userType);
+      navigate("/admin-dashboard");
 
-        if (data.user.userType === "admin") {
-          navigate("/admin-dashboard");
-        } else if (data.user.userType === "vendor") {
-          navigate("/vendor-dashboard");
-        } else {
-          navigate("/user-dashboard");
-        }
-      } else {
-        alert(data.message);
-      }
-    } catch (err) {
-      console.log(err);
-      alert("Login Failed");
+    } else {
+
+      alert(data.message);
+
     }
-  };
+
+  } catch (err) {
+
+    console.log(err);
+    alert("Login Failed");
+
+  }
+};
 
   return (
-   <div className="login-page">
-  <div className="login-container">
+  <div className="adminlogin-page">
+<div className="adminlogin-container">
 
-    <div className="login-left">
-      <img
-        src={adminImg}
-        alt="Admin"
-        className="admin-image"
-      />
-    </div>
-
-    <div className="login-right">
-
-      <div className="login-card">
-
-        <div className="login-icon">
-          <FaUserShield />
-        </div>
-
-        <h2 className="login-title">
-          Sign In to Your Account
-        </h2>
-
-        <p className="login-subtitle">
-          Access the CA Connect Admin Portal
-        </p>
-
-        <form onSubmit={handleLogin}>
-
-          <label>Email Address</label>
-
-          <div className="input-box">
-            <FaEnvelope />
-            <input
-              type="email"
-              name="email"
-              placeholder="Enter your email address"
-              value={formData.email}
-              onChange={handleChange}
-            />
-          </div>
-
-          <label>Password</label>
-
-          <div className="input-box">
-            <FaLock />
-
-            <input
-              type={
-                showPassword
-                  ? "text"
-                  : "password"
-              }
-              name="password"
-              placeholder="Enter your password"
-              value={formData.password}
-              onChange={handleChange}
-            />
-
-            <span
-              className="eye"
-              onClick={() =>
-                setShowPassword(
-                  !showPassword
-                )
-              }
-            >
-              {showPassword
-                ? <FaEyeSlash />
-                : <FaEye />}
-            </span>
-
-          </div>
-
-          <label>User Type</label>
-
-          <div className="input-box">
-            <FaUserTag />
-
-            <select
-              name="userType"
-              value={formData.userType}
-              onChange={handleChange}
-            >
-              <option value="admin">
-                Admin
-              </option>
-
-              <option value="vendor">
-                Vendor
-              </option>
-
-              <option value="user">
-                User
-              </option>
-            </select>
-          </div>
-
-          <div className="remember-box">
-            <input type="checkbox" />
-            <span>
-              Remember Me
-            </span>
-          </div>
-
-          <button
-            type="submit"
-            className="login-btn"
-          >
-            Sign In
-          </button>
-
-        </form>
-
-        <div className="secure-box">
-          <FaLock />
-
-          <div>
-            <h4>
-              Secure Access
-            </h4>
-
-            <p>
-              Your information is protected
-              with advanced encryption.
-            </p>
-          </div>
-        </div>
-<div className="login-footer">
-  <div className="footer-bottom">
-    <p>
-      © 2026 CA Platform. All Rights Reserved.
-    </p>
-
-    <div className="footer-links">
-      <a href="/privacy-policy">
-        Privacy Policy
-      </a>
-
-      <a href="/terms">
-        Terms & Conditions
-      </a>
-    </div>
-  </div>
+<div className="adminlogin-left">
+<img
+  src={adminImg}
+  alt="Admin"
+  className="adminlogin-image"
+/>
 </div>
 
-      </div>
+<div className="adminlogin-right">
 
-    </div>
+<div className="adminlogin-card">
 
-  </div>
+<div className="adminlogin-icon">
+<FaUserShield />
+</div>
+
+<h2 className="adminlogin-title">
+Sign In to Your Account
+</h2>
+
+<p className="adminlogin-subtitle">
+Access the CA Connect Admin Portal
+</p>
+
+<form onSubmit={handleLogin}>
+
+<label>Email Address</label>
+
+<div className="adminlogin-input-group">
+<FaEnvelope />
+
+<input
+type="email"
+name="email"
+placeholder="Enter your email address"
+value={formData.email}
+onChange={handleChange}
+/>
+
+</div>
+
+<label>Password</label>
+
+<div className="adminlogin-input-group">
+
+<FaLock />
+
+<input
+type={showPassword ? "text" : "password"}
+name="password"
+placeholder="Enter your password"
+value={formData.password}
+onChange={handleChange}
+/>
+
+<span
+className="adminlogin-eye"
+onClick={() => setShowPassword(!showPassword)}
+>
+{showPassword ? <FaEyeSlash /> : <FaEye />}
+</span>
+
+</div>
+
+<label>User Type</label>
+
+<div className="adminlogin-input-group">
+
+<FaUserTag />
+
+<select
+name="userType"
+value={formData.userType}
+onChange={handleChange}
+>
+<option value="admin">Admin</option>
+<option value="vendor">Vendor</option>
+<option value="user">User</option>
+</select>
+
+</div>
+
+<div className="adminlogin-remember">
+
+<input type="checkbox" />
+
+<span>Remember Me</span>
+
+</div>
+
+<button
+type="submit"
+className="adminlogin-btn"
+>
+Sign In
+</button>
+
+</form>
+
+<div className="adminlogin-secure">
+
+<FaLock />
+
+<div>
+<h4>Secure Access</h4>
+
+<p>
+Your information is protected
+with advanced encryption.
+</p>
+</div>
+
+</div>
+
+<div className="adminlogin-footer">
+
+<div className="adminlogin-footer-bottom">
+
+<p>
+© 2026 CA Platform. All Rights Reserved.
+</p>
+
+<div className="adminlogin-footer-links">
+
+<a href="/PrivacyPolicy">
+Privacy Policy
+</a>
+
+<a href="/TermsAndConditions">
+Terms & Conditions
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
 </div>
   );
 }

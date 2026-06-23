@@ -66,6 +66,9 @@ function Sidebar() {
           />
 
         </div>
+        <span className="admin-super-admin">
+     &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;Vendor Dashboard
+  </span>
 
         {/* Menu */}
 

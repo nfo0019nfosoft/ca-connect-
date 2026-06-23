@@ -18,6 +18,7 @@ import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsAndConditions from "./pages/TermsAndConditions";
 import AboutUs from "./pages/AboutUs";
 import FindCA from "./pages/FindCA";
+import Blogs from "./pages/Blogs";
 import VendorDetails from "./pages/VendorDetails"
 
 import VendorDashboard from "./pages/VendorDashboard";
@@ -34,6 +35,17 @@ import FreeEnquiry from "./pages/FreeEnquiry"
 import VendorPayment from "./pages/VendorPayment";
 import BookConsultation from "./pages/BookConsultation";
 import Admin from "./pages/Admin";
+import AdminProtectedRoute from "./pages/AdminProtectedRoute";
+import AdminDashboard from "./pages/AdminDashboard";
+import AdminUsers from "./pages/AdminUsers";
+import AdminLeads from "./pages/AdminLeads";
+import VendorLeads from "./pages/VendorLeads";
+import LeadDetails from "./pages/LeadDetails";
+
+import BlogDetails from "./pages/BlogDetails";
+import AdminBlogs from "./pages/AdminBlogs";
+import AdminBlogDetails from "./pages/AdminBlogDetails";
+import AdminVendors from "./pages/AdminVendors";
 
 
 function Layout() {
@@ -54,11 +66,18 @@ function Layout() {
   "/user-business-details",
   "/user-uploaded-documents",
   "/user-account-verification",
-  "/admin"
+  "/admin",
+  "/admin-dashboard",
+  "/vendor-leads",
+  "/lead-details",
+  "/admin-vendors",
+   "/admin-users"
 ];
 
 const hideNavbarFooter =
-  dashboardRoutes.includes(location.pathname);
+  dashboardRoutes.some(route =>
+    location.pathname.startsWith(route)
+  );
 
   console.log("PATH:", location.pathname);
   console.log("HIDE:", hideNavbarFooter);
@@ -79,6 +98,7 @@ const hideNavbarFooter =
         <Route path="/termsandconditions" element={<TermsAndConditions />} />
         <Route path="/aboutus" element={<AboutUs />} />
         <Route path="/find-ca" element={<FindCA />} />
+         <Route path="/blogs" element={<Blogs />} />
         <Route path="/vendor/:id" element={<VendorDetails/>}/>
         <Route path="/free-enquiry/:vendorId" element={<FreeEnquiry />}/>
         <Route path="/book-consultation/:id" element={<BookConsultation />}
@@ -87,9 +107,68 @@ const hideNavbarFooter =
           {/* Admin Pages */}
 
   <Route path="/admin" element={<Admin />} />
+  <Route
+  path="/admin-dashboard"
+  element={
+    <AdminProtectedRoute>
+      <AdminDashboard />
+    </AdminProtectedRoute>
+  }
+/>
+
+
+<Route
+  path="/lead-details/:id"
+  element={<LeadDetails />}
+/>
+{/* Admin */}
+
+<Route
+  path="/admin-blogs"
+  element={<AdminBlogs />}
+/>
+
+<Route
+  path="/admin-blog-details"
+  element={<AdminBlogDetails />}
+/>
+
+{/* Frontend */}
+
+<Route
+  path="/blogs"
+  element={<Blogs />}
+/>
+
+<Route
+  path="/blog/:slug"
+  element={<BlogDetails />}
+/>
+
+
+<Route
+  path="/admin-vendors"
+  element={<AdminVendors />}
+/>
 
 
 
+
+
+<Route
+  path="/admin-users"
+  element={<AdminUsers />}
+/>
+
+
+
+
+
+
+<Route
+  path="/admin-leads"
+  element={<AdminLeads />}
+/>
 
 
 
@@ -102,7 +181,8 @@ const hideNavbarFooter =
         <Route path="/vendor-kyc" element={<VendorKyc />} />
         <Route path="/vendor-services" element={<VendorServices />} />
         <Route path="/vendor-preview" element={<VendorPreview />} />
-          <Route path="/vendor-payment" element={<VendorPayment />} />
+        <Route path="/vendor-payment" element={<VendorPayment />} />
+        <Route path="/vendor-leads" element={<VendorLeads />} />
 
         {/* User Pages */}
         <Route path="/user-dashboard" element={<UserDashboard />} />

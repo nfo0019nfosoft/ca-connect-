@@ -492,12 +492,12 @@ const services = [
     to="/vendor-preview"
     className="tab-link"
   >
-    <FaEye />
+    <FaEye />    
     Public Profile Preview
   </Link>
 
   <Link
-    to="/vendor-payment"
+    to="/vendor-profile"
     className="tab-link"
   >
     <FaCreditCard />

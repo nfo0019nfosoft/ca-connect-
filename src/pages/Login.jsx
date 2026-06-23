@@ -79,10 +79,27 @@ const handleOtp = async () => {
 
       if (userType === "ca") {
 
-        window.location.href =
-          "/vendor-dashboard";
+  console.log(data);
 
-      } else {
+  localStorage.setItem(
+    "vendorId",
+    data.vendor?._id ||
+    data.user?._id ||
+    ""
+  );
+
+  localStorage.setItem(
+    "vendor",
+    JSON.stringify(
+      data.vendor ||
+      data.user
+    )
+  );
+
+  window.location.href =
+    "/vendor-dashboard";
+
+} else {
 
         window.location.href =
           "/";

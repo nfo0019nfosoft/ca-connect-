@@ -39,7 +39,25 @@ function FreeEnquiry() {
 
   const [step, setStep] =
     useState(1);
+const handleSubmit = async () => {
+  try {
+    await axios.post(
+      "https://ca-backend-d9tc.onrender.com/api/enquiries",
+      {
+        vendorId,
+        ...formData,
+      }
+    );
 
+    alert("Enquiry Submitted Successfully");
+
+    navigate("/enquiry-success");
+
+  } catch (err) {
+    console.log(err);
+    alert("Failed to submit enquiry");
+  }
+};
   const steps = [
     {
       id: 1,
@@ -895,16 +913,12 @@ useEffect(() => {
 
 <button
   className={`review-btn ${
-    !isFormValid
-      ? "disabled"
-      : ""
+    !isFormValid ? "disabled" : ""
   }`}
   disabled={!isFormValid}
-  onClick={() => {
-    setStep(5);
-  }}
+  onClick={handleSubmit}
 >
-  Review Enquiry →
+  Submit Enquiry  →
 </button>
 
 </div>
