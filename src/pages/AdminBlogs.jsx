@@ -10,7 +10,6 @@ function AdminBlogs() {
 
   const [blogs, setBlogs] = useState([]);
   const [editId, setEditId] = useState(null);
-
   const [formData, setFormData] = useState({
     title: "",
     slug: "",
@@ -24,6 +23,8 @@ function AdminBlogs() {
     tags: "",
     shortDescription: "",
     content: "",
+    coverImageFile: null,
+    authorImageFile: null,
   });
 
   useEffect(() => {
@@ -65,65 +66,71 @@ function AdminBlogs() {
 
   const handleChange = (e) => {
 
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+    const { name, value, files } = e.target;
+
+    if (files) {
+
+      setFormData({
+        ...formData,
+        [name]: files[0],
+      });
+
+    } else {
+
+      setFormData({
+        ...formData,
+        [name]: value,
+      });
+
+    }
 
   };
-
   const handleSubmit = async (e) => {
 
     e.preventDefault();
 
     try {
 
+      const data = new FormData();
+
+      Object.keys(formData).forEach((key) => {
+
+        if (key === "tags") {
+
+          data.append(
+            "tags",
+            JSON.stringify(
+              formData.tags.split(",").map((tag) => tag.trim())
+            )
+          );
+
+        } else {
+
+          data.append(key, formData[key]);
+
+        }
+
+      });
+
       if (editId) {
 
         await axios.put(
           `https://ca-backend-d9tc.onrender.com/api/blogs/${editId}`,
-          {
-            ...formData,
-            tags: formData.tags
-              .split(",")
-              .map((tag) => tag.trim()),
-          }
+          data
         );
 
         alert("Blog Updated Successfully");
-
-        setEditId(null);
 
       } else {
 
         await axios.post(
           "https://ca-backend-d9tc.onrender.com/api/blogs",
-          {
-            ...formData,
-            tags: formData.tags
-              .split(",")
-              .map((tag) => tag.trim()),
-          }
+          data
         );
 
         alert("Blog Added Successfully");
 
       }
-
-      setFormData({
-        title: "",
-        slug: "",
-        category: "",
-        coverImage: "",
-        author: "",
-        authorImage: "",
-        authorDesignation: "",
-        publishDate: "",
-        readTime: "",
-        tags: "",
-        shortDescription: "",
-        content: "",
-      });
 
       fetchBlogs();
 
@@ -190,116 +197,382 @@ function AdminBlogs() {
 
     <div className="admin-layout">
 
-      <AdminSidebar />
+  <AdminSidebar />
 
-      <div className="admin-blogs-page">
+  <div className="admin-blogs-page">
 
-        <h2>Add Blog</h2>
+    <div className="admin-blog-header">
 
-        <form
-          className="admin-blog-form"
-          onSubmit={handleSubmit}
-        >
+      <h2>
+        {editId ? "Update Blog" : "Add Blog"}
+      </h2>
+
+    </div>
+
+    <div className="admin-blog-top">
+
+      {/* LEFT SIDE */}
+
+      <form
+        className="admin-blog-form"
+        onSubmit={handleSubmit}
+      >
+
+        <div className="admin-blog-card">
+
+          <h3>Blog Information</h3>
+
+          <div className="admin-blog-grid">
+
+            <div className="admin-blog-field">
+
+              <label>Blog Title</label>
+
+              <input
+                type="text"
+                name="title"
+                value={formData.title}
+                onChange={handleChange}
+              />
+
+            </div>
+
+            <div className="admin-blog-field">
+
+              <label>Slug</label>
+
+              <input
+                type="text"
+                name="slug"
+                value={formData.slug}
+                onChange={handleChange}
+              />
+
+            </div>
+
+          </div>
+
+          <div className="admin-blog-grid">
+
+            <div className="admin-blog-field">
+
+              <label>Category</label>
+
+              <input
+                type="text"
+                name="category"
+                value={formData.category}
+                onChange={handleChange}
+              />
+
+            </div>
+
+            <div className="admin-blog-field">
+
+              <label>Author Name</label>
+
+              <input
+                type="text"
+                name="author"
+                value={formData.author}
+                onChange={handleChange}
+              />
+
+            </div>
+
+          </div>
+
+          <div className="admin-blog-grid">
+
+            <div className="admin-blog-field">
+
+              <label>Cover Image URL</label>
+
+              <input
+                type="text"
+                name="coverImage"
+                value={formData.coverImage}
+                onChange={handleChange}
+              />
+
+            </div>
+
+            <div className="admin-blog-field">
+
+              <label>Upload Cover Image</label>
+
+              <input
+                type="file"
+                name="coverImageFile"
+                accept="image/*"
+                onChange={handleChange}
+              />
+
+            </div>
+
+          </div>
+
+          <div className="admin-blog-grid">
+
+            <div className="admin-blog-field">
+
+              <label>Author Image URL</label>
+
+              <input
+                type="text"
+                name="authorImage"
+                value={formData.authorImage}
+                onChange={handleChange}
+              />
+
+            </div>
+
+            <div className="admin-blog-field">
+
+              <label>Upload Author Image</label>
+
+              <input
+                type="file"
+                name="authorImageFile"
+                accept="image/*"
+                onChange={handleChange}
+              />
+
+            </div>
+
+          </div>
+
+          <div className="admin-blog-grid">
+
+            <div className="admin-blog-field">
+
+              <label>Author Designation</label>
+
+              <input
+                type="text"
+                name="authorDesignation"
+                value={formData.authorDesignation}
+                onChange={handleChange}
+              />
+
+            </div>
+
+            <div className="admin-blog-field">
+
+              <label>Publish Date</label>
+
+              <input
+                type="text"
+                name="publishDate"
+                value={formData.publishDate}
+                onChange={handleChange}
+              />
+
+            </div>
+
+          </div>
+
+          <div className="admin-blog-grid">
+
+            <div className="admin-blog-field">
+
+              <label>Read Time</label>
+
+              <input
+                type="text"
+                name="readTime"
+                value={formData.readTime}
+                onChange={handleChange}
+              />
+
+            </div>
+
+            <div className="admin-blog-field">
+
+              <label>Tags</label>
+
+              <input
+                type="text"
+                name="tags"
+                value={formData.tags}
+                onChange={handleChange}
+              />
+
+            </div>
+
+          </div>
+
+          <div className="admin-blog-field">
+
+            <label>Short Description</label>
+
+            <textarea
+              rows="4"
+              name="shortDescription"
+              value={formData.shortDescription}
+              onChange={handleChange}
+            />
+
+          </div>
+
+          <div className="admin-blog-field">
+
+            <label>Blog Content</label>
+
+            <textarea
+              rows="10"
+              name="content"
+              value={formData.content}
+              onChange={handleChange}
+            />
+
+          </div>
+
+          <button
+            type="submit"
+            className="save-blog-btn"
+          >
+            {editId ? "Update Blog" : "Save Blog"}
+          </button>
+
+        </div>
+
+      </form>
+
+
+      {/* RIGHT SIDE */}
+
+      <div className="blog-sidebar">
+
+        <div className="blog-side-card">
+
+          <h3>Publish</h3>
+
+          <div className="publish-actions">
+
+            <button
+              type="button"
+              className="draft-btn"
+            >
+              Save Draft
+            </button>
+
+            <button
+              type="button"
+              className="preview-btn"
+            >
+              Preview
+            </button>
+
+          </div>
+
+          <button
+            type="button"
+            className="publish-btn"
+          >
+            Publish Now
+          </button>
+
+          <button
+            type="button"
+            className="schedule-btn"
+          >
+            Schedule For Later
+          </button>
+
+        </div>
+
+        <div className="blog-side-card">
+
+          <h3>Blog Settings</h3>
+
+          <label>Status</label>
+
+          <select>
+
+            <option>Draft</option>
+
+            <option>Published</option>
+
+            <option>Archived</option>
+
+          </select>
+
+          <label>Visibility</label>
+
+          <select>
+
+            <option>Public</option>
+
+            <option>Private</option>
+
+          </select>
+
+          <div className="toggle-row">
+
+            <span>Allow Comments</span>
+
+            <input
+              type="checkbox"
+              defaultChecked
+            />
+
+          </div>
+
+        </div>
+
+        <div className="blog-side-card">
+
+          <h3>Additional Options</h3>
+
+          <label>Tags</label>
 
           <input
             type="text"
-            name="title"
-            placeholder="Blog Title"
-            value={formData.title}
-            onChange={handleChange}
-          />
-
-          <input
-            type="text"
-            name="slug"
-            placeholder="Slug"
-            value={formData.slug}
-            onChange={handleChange}
-          />
-
-          <input
-            type="text"
-            name="category"
-            placeholder="Category"
-            value={formData.category}
-            onChange={handleChange}
-          />
-
-          <input
-            type="text"
-            name="coverImage"
-            placeholder="Cover Image URL"
-            value={formData.coverImage}
-            onChange={handleChange}
-          />
-
-          <input
-            type="text"
-            name="author"
-            placeholder="Author Name"
-            value={formData.author}
-            onChange={handleChange}
-          />
-
-          <input
-            type="text"
-            name="authorImage"
-            placeholder="Author Image URL"
-            value={formData.authorImage}
-            onChange={handleChange}
-          />
-
-          <input
-            type="text"
-            name="authorDesignation"
-            placeholder="Author Designation"
-            value={formData.authorDesignation}
-            onChange={handleChange}
-          />
-
-          <input
-            type="text"
-            name="publishDate"
-            placeholder="Publish Date (20 May 2025)"
-            value={formData.publishDate}
-            onChange={handleChange}
-          />
-
-          <input
-            type="text"
-            name="readTime"
-            placeholder="Read Time (5 min read)"
-            value={formData.readTime}
-            onChange={handleChange}
-          />
-
-          <input
-            type="text"
-            name="tags"
             placeholder="GST, Taxation, Business"
-            value={formData.tags}
-            onChange={handleChange}
           />
+
+          <label>Meta Description</label>
 
           <textarea
-            name="shortDescription"
-            placeholder="Short Description"
-            value={formData.shortDescription}
-            onChange={handleChange}
+            rows="4"
+            placeholder="Enter Meta Description"
           />
 
-          <textarea
-            name="content"
-            placeholder="Blog Content"
-            value={formData.content}
-            onChange={handleChange}
-          />
+        </div>
 
-           <button type="submit">
-          {editId ? "Update Blog" : "Save Blog"}
-        </button>
-        
-        </form>
+        <div className="blog-side-card">
+
+          <h3>SEO Preview</h3>
+
+          <div className="seo-preview">
+
+            <small>
+              https://caconnect.com/blog/enter-blog-slug
+            </small>
+
+            <h4>
+              Blog Title Will Appear Here
+            </h4>
+
+            <p>
+              This is where your meta description will appear.
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+
+
+
+
+
         <div className="manage-blogs">
 
           <h2>Manage Blogs</h2>

@@ -81,22 +81,25 @@ function AboutUs() {
 
         <div className="hero-right">
 
-          <img
-                                       src={about}
-                                       alt="Support Team"
-                                     />
+  <img
+    className="hero-main-image"
+    src={about}
+    alt="Support Team"
+  />
 
-          <div className="hero-stats-card">
-            <h3>5000+</h3>
-            <span>Clients Served</span>
+  <div className="hero-stats-card">
 
-            <hr />
+    <h3>5000+</h3>
+    <span>Clients Served</span>
 
-            <h3>150+</h3>
-            <span>Expert CAs</span>
-          </div>
+    <hr />
 
-        </div>
+    <h3>150+</h3>
+    <span>Expert CAs</span>
+
+  </div>
+
+</div>
 
       </div>
 
@@ -104,17 +107,17 @@ function AboutUs() {
     
 
 
-<section className="values-section">
+<section className="vaues-section">
 
   {/* Values Card */}
-  <div className="values-card">
+  <div className="vaues-card">
 
     <h2>Our Values</h2>
 
-    <div className="values-grid">
+    <div className="vaues-grid">
 
-      <div className="value-item">
-        <div className="value-icon">
+      <div className="vaue-item">
+        <div className="vaue-icon">
           <FaShieldAlt />
         </div>
         <div>
@@ -126,8 +129,8 @@ function AboutUs() {
         </div>
       </div>
 
-      <div className="value-item">
-        <div className="value-icon">
+      <div className="vaue-item">
+        <div className="vaue-icon">
           <FaUser />
         </div>
         <div>
@@ -139,8 +142,8 @@ function AboutUs() {
         </div>
       </div>
 
-      <div className="value-item">
-        <div className="value-icon">
+      <div className="vaue-item">
+        <div className="vaue-icon">
           <FaLightbulb />
         </div>
         <div>
@@ -152,8 +155,8 @@ function AboutUs() {
         </div>
       </div>
 
-      <div className="value-item">
-        <div className="value-icon">
+      <div className="vaue-item">
+        <div className="vaue-icon">
           <FaRocket />
         </div>
         <div>
@@ -203,133 +206,109 @@ function AboutUs() {
 
 
 
-<section className="team-faq-section">
+<section className="leadersfaq-section">
 
-  {/* LEFT SIDE */}
+  {/* Left */}
 
-  <div className="team-side">
+  <div className="leadersfaq-left">
 
-    <div className="section-title">
+    <div className="leadersfaq-top">
+
       <h2>Our Leadership Team</h2>
 
-      <a href="/">
-        View All Team →
-      </a>
+      <a href="/">View All Team →</a>
+
     </div>
 
-    <div className="team-grid">
+    <div className="leaders-grid">
 
-      <div className="team-card">
+      <div className="leaders-card">
 
         <img
           src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400"
-          alt="CEO"
+          alt=""
         />
 
-        <div className="team-content">
+        <div className="leaders-content">
           <h3>Rohit Mehta</h3>
           <span>Co-Founder & CEO</span>
-
-          <p>
-            Rohit leads CA Connect with a vision
-            to simplify compliance and empower
-            businesses across India.
-          </p>
+          <p>Rohit leads CA Connect with a vision to simplify compliance.</p>
         </div>
 
       </div>
 
-      <div className="team-card">
+      <div className="leaders-card">
 
         <img
           src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400"
-          alt="COO"
+          alt=""
         />
 
-        <div className="team-content">
+        <div className="leaders-content">
           <h3>Neha Sharma</h3>
           <span>Co-Founder & COO</span>
-
-          <p>
-            Neha ensures seamless operations and
-            client success through expert support.
-          </p>
+          <p>Ensuring seamless operations and client success.</p>
         </div>
 
       </div>
 
-      <div className="team-card">
+      <div className="leaders-card">
 
         <img
           src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400"
-          alt="Manager"
+          alt=""
         />
 
-        <div className="team-content">
+        <div className="leaders-content">
           <h3>Arjun Nair</h3>
           <span>Head - Client Relations</span>
-
-          <p>
-            Building strong relationships and
-            delivering exceptional client experiences.
-          </p>
+          <p>Building strong client relationships and experiences.</p>
         </div>
 
       </div>
 
-      <div className="team-card">
+      <div className="leaders-card">
 
         <img
           src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400"
-          alt="Compliance"
+          alt=""
         />
 
-        <div className="team-content">
+        <div className="leaders-content">
           <h3>Priya Iyer</h3>
           <span>Head - Compliance</span>
-
-          <p>
-            Ensuring accuracy, security and
-            regulatory compliance for every client.
-          </p>
+          <p>Ensuring security and regulatory compliance.</p>
         </div>
 
       </div>
 
     </div>
 
-    {/* Mission Vision */}
+    <div className="leaders-bottom">
 
-    <div className="mission-vision">
+      <div className="leaders-mission">
 
-      <div className="mission-box">
-
-       <div className="mission-icon">
-  <img
-    src={awardImg}
-    alt="Mission Trophy"
-  />
-</div>
+        <div className="leaders-icon">
+          <img src={awardImg} alt="" />
+        </div>
 
         <div>
           <h3>Our Mission</h3>
-
           <p>
-            To simplify financial management and
-            compliance by connecting businesses
-            with trusted CA experts.
+            To simplify financial management and compliance by connecting
+            businesses with trusted experts.
           </p>
         </div>
 
       </div>
 
-      <div className="vision-box">
+      <div className="leaders-vision">
 
         <h3>Our Vision</h3>
 
         <p>
-          To be India's most trusted platform for
-          financial and compliance solutions.
+          To be India's most trusted platform for financial and
+          compliance solutions.
         </p>
 
       </div>
@@ -338,81 +317,56 @@ function AboutUs() {
 
   </div>
 
-  {/* RIGHT SIDE */}
+  {/* Right */}
 
-  <div className="faq-side">
+  <div className="leadersfaq-right">
 
-    <div className="faq-header">
+    <div className="leadersfaq-top">
+
       <h2>Frequently Asked Questions</h2>
 
-      <a href="/">
-        View all FAQs →
-      </a>
+      <a href="/">View all FAQs →</a>
+
     </div>
 
-    <details className="faq-item">
+    <details className="leaders-faq-item">
       <summary>What is CA Connect?</summary>
-
-      <p>
-        CA Connect helps businesses connect with
-        trusted Chartered Accountants and financial experts.
-      </p>
+      <p>CA Connect helps businesses connect with trusted CAs.</p>
     </details>
 
-    <details className="faq-item">
+    <details className="leaders-faq-item">
       <summary>How does CA Connect work?</summary>
-
-      <p>
-        Submit your requirement and get connected
-        with verified professionals.
-      </p>
+      <p>Submit your requirement and connect with verified experts.</p>
     </details>
 
-    <details className="faq-item">
+    <details className="leaders-faq-item">
       <summary>How do I book a consultation?</summary>
-
-      <p>
-        Simply visit the contact page and schedule
-        a consultation.
-      </p>
+      <p>Visit contact page and schedule consultation.</p>
     </details>
 
-    <details className="faq-item">
-      <summary>Are the CAs on CA connect verified?</summary>
+    <div className="leaders-support">
 
-      <p>
-        Yes, every professional is verified before onboarding.
-      </p>
-    </details>
+      <div className="leaders-support-left">
 
-    <details className="faq-item">
-      <summary>Is my data secure with CA connect ?</summary>
+        <div className="leaders-support-icon">
+          <FaHeadset />
+        </div>
 
-      <p>
-        Absolutely. We follow strict security and
-        privacy standards.
-      </p>
-    </details>
-<div className="support-box">
+        <div>
 
-  <div className="support-left">
+          <h3>Need Help?</h3>
 
-    <div className="support-icon">
-      <FaHeadset />
+          <p>Our support team is here to help you.</p>
+
+        </div>
+
+      </div>
+
+      <Link to="/support" className="leaders-support-btn">
+        Visit Support Center →
+      </Link>
+
     </div>
-
-    <div>
-      <h3>Need Help?</h3>
-      <p>Our support team is here to help you.</p>
-    </div>
-
-  </div>
-  </div>
-
-  <Link to="/support" className="support-btn">
-    Visit Support Center →
-  </Link>
-
 
   </div>
 

@@ -4,6 +4,7 @@ import "./AdminUsers.css";
 import AdminSidebar from "../components/AdminSidebar";
 import * as XLSX from "xlsx";
 import { saveAs } from "file-saver";
+import { useNavigate } from "react-router-dom";
 
 import {
   FaUsers,
@@ -22,6 +23,19 @@ import {
 } from "react-icons/fa";
 
 function AdminUsers() {
+   const navigate = useNavigate();
+  useEffect(() => {
+
+    const token = localStorage.getItem("token");
+    const role = localStorage.getItem("role");
+
+    if (!token || role !== "admin") {
+
+      navigate("/admin");
+
+    }
+
+  }, [navigate]);
     const exportExcel = () => {
 
   const excelData = users.map((user) => ({

@@ -47,7 +47,117 @@
   color:#6b7280;
   font-size:15px;
 }
+/* =========================
+   TABLET
+========================= */
 
+@media (max-width:992px){
+
+  .findca-page{
+    padding:20px;
+  }
+
+  .page-header h1{
+    font-size:36px;
+  }
+
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width:768px){
+
+  .findca-page{
+    padding:18px 15px;
+  }
+
+  .breadcrumb{
+    font-size:12px;
+    margin-bottom:20px;
+    line-height:1.6;
+    word-break:break-word;
+  }
+
+  .page-header{
+    margin-bottom:25px;
+  }
+
+  .page-header h1{
+    font-size:30px;
+    line-height:1.4;
+  }
+
+  .page-header h1 span{
+    display:block;
+  }
+
+  .page-header p{
+    font-size:14px;
+    line-height:1.7;
+    margin-top:12px;
+  }
+
+}
+
+
+/* =========================
+   SMALL MOBILE
+========================= */
+
+@media (max-width:480px){
+
+  .findca-page{
+    padding:15px 12px;
+  }
+
+  .breadcrumb{
+    font-size:11px;
+    margin-bottom:18px;
+  }
+
+  .page-header{
+    margin-bottom:22px;
+  }
+
+  .page-header h1{
+    font-size:24px;
+    line-height:1.5;
+  }
+
+  .page-header p{
+    font-size:13px;
+    line-height:1.7;
+  }
+
+}
+
+
+/* =========================
+   333px MOBILE
+========================= */
+
+@media (max-width:360px){
+
+  .findca-page{
+    padding:12px 10px;
+  }
+
+  .breadcrumb{
+    font-size:10px;
+  }
+
+  .page-header h1{
+    font-size:15px;
+  }
+
+  .page-header p{
+    font-size:12px;
+  }
+
+}
 /* SEARCH CARD */
 
 .search-card{
@@ -65,10 +175,78 @@
   gap:15px;
   margin-bottom:25px;
 }
+.search-card{
+  background:#fff;
+  border:1px solid #e5e7eb;
+  border-radius:14px;
+  padding:20px;
+  display:grid;
+  grid-template-columns:
+  2fr
+  1.3fr
+  1.2fr
+  1.4fr
+  auto;
+  gap:15px;
+  margin-bottom:25px;
+  margin-top: -20px;
+}
 
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width:992px){
+
+  .search-card{
+    grid-template-columns:
+    repeat(2,minmax(0,1fr));
+    gap:14px;
+    padding:18px;
+  }
+
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width:768px){
+
+  .search-card{
+    grid-template-columns:1fr;
+    gap:12px;
+    padding:16px;
+    border-radius:12px;
+  }
+
+  .search-card > *{
+    width:100%;
+  }
+
+}
+
+
+/* =========================
+   SMALL MOBILE
+========================= */
+
+@media (max-width:480px){
+
+  .search-card{
+    padding:14px;
+    gap:10px;
+    border-radius:10px;
+    margin-bottom:20px;
+  }
+
+}
 .field{
   display:flex;
   flex-direction:column;
+
 }
 
 .field label{
@@ -224,16 +402,134 @@
   font-weight:600;
   color:#111827;
 }
+/* =========================
+   MOBILE RESPONSIVE
+========================= */
 
-@media(max-width:768px){
+@media (max-width:768px){
 
   .filter-row{
-    justify-content:flex-start;
+    display:grid;
+    grid-template-columns:1fr;
+    gap:12px;
+    margin:20px 0;
   }
 
   .filter-chip{
     width:100%;
     min-width:100%;
+    height:50px;
+    padding:0 14px;
+    border-radius:10px;
+  }
+
+  .filter-chip svg{
+    font-size:15px;
+  }
+
+  .filter-chip span{
+    font-size:14px;
+  }
+
+  .filter-chip select{
+    font-size:14px;
+  }
+
+  .search-btn{
+    width:100%;
+    height:50px;
+    padding:0;
+    font-size:15px;
+    border-radius:10px;
+    margin-top:5px;
+  }
+
+  .filter-select{
+    width:100%;
+    padding:12px 14px;
+    border-radius:10px;
+  }
+
+  .filter-select select{
+    width:100%;
+    font-size:14px;
+  }
+
+  .stats{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+  }
+
+  .stats span{
+    font-size:13px;
+    gap:4px;
+  }
+
+  .location{
+    flex-direction:column;
+    gap:8px;
+    margin-top:12px;
+  }
+
+  .location span{
+    font-size:13px;
+  }
+
+  .view-btn,
+  .enquire-btn,
+  .compare-btn{
+    width:100%;
+    height:44px;
+    font-size:14px;
+    gap:6px;
+  }
+
+}
+
+
+/* =========================
+   SMALL MOBILE
+========================= */
+
+@media (max-width:480px){
+
+  .filter-row{
+    gap:10px;
+  }
+
+  .filter-chip{
+    height:48px;
+    padding:0 12px;
+  }
+
+  .filter-chip svg{
+    font-size:14px;
+  }
+
+  .filter-chip span,
+  .filter-chip select{
+    font-size:13px;
+  }
+
+  .search-btn{
+    height:48px;
+    font-size:14px;
+  }
+
+  .stats span{
+    font-size:12px;
+  }
+
+  .location span{
+    font-size:12px;
+  }
+
+  .view-btn,
+  .enquire-btn,
+  .compare-btn{
+    height:42px;
+    font-size:13px;
   }
 
 }
@@ -526,30 +822,179 @@
    MOBILE
 ========================== */
 
-@media(max-width:768px){
+/* ==========================
+   TABLET
+========================== */
+
+@media (max-width:992px){
 
   .advisor-list{
-    margin:20px 15px;
+    margin:40px 20px;
+    gap:25px;
   }
 
   .advisor-card{
     flex-direction:column;
-    gap:18px;
+    gap:20px;
   }
 
   .advisor-main{
-    width:100%;
+    gap:30px;
   }
 
   .advisor-buttons{
     width:100%;
     border-left:none;
+    border-top:1px solid #e5e7eb;
     padding-left:0;
+    padding-top:20px;
+
+    flex-direction:row;
   }
 
   .btn-enquiry,
   .btn-consultation{
+    flex:1;
+  }
+
+}
+
+
+/* ==========================
+   MOBILE
+========================== */
+
+@media (max-width:768px){
+
+  .advisor-list{
+    margin:25px 0;
+    gap:20px;
+  }
+
+  .advisor-card{
+    padding:18px;
+    flex-direction:column;
+    gap:20px;
+  }
+
+  .advisor-main{
+    flex-direction:column;
+    align-items:center;
+    gap:18px;
+    text-align:center;
+  }
+
+  .advisor-photo{
+    width:100px;
+    height:100px;
+  }
+
+  .advisor-status{
+    width:16px;
+    height:16px;
+    font-size:8px;
+  }
+
+  .advisor-info{
+    max-width:100%;
+  }
+
+  .advisor-header{
+    justify-content:center;
+    flex-wrap:wrap;
+  }
+
+  .advisor-header h3{
+    font-size:20px;
+  }
+
+  .advisor-services{
+    font-size:13px;
+  }
+
+  .advisor-metrics{
+    justify-content:center;
+    gap:12px;
+  }
+
+  .advisor-metrics span{
+    font-size:12px;
+  }
+
+  .advisor-badges{
+    justify-content:center;
+  }
+
+  .advisor-address{
+    justify-content:center;
+    gap:12px;
+  }
+
+  .advisor-address span{
+    font-size:12px;
+  }
+
+  .advisor-buttons{
     width:100%;
+    border-left:none;
+    border-top:1px solid #e5e7eb;
+    padding-left:0;
+    padding-top:18px;
+
+    flex-direction:column;
+  }
+
+  .btn-enquiry,
+  .btn-consultation{
+    width:50%;
+    height:54px;
+  }
+
+}
+
+
+/* ==========================
+   SMALL MOBILE (333px)
+========================== */
+
+@media (max-width:480px){
+
+  .advisor-card{
+    padding:15px;
+    border-radius:10px;
+  }
+
+  .advisor-photo{
+    width:85px;
+    height:85px;
+  }
+
+  .advisor-header h3{
+    font-size:18px;
+    line-height:1.4;
+  }
+
+  .advisor-verified{
+    font-size:14px;
+  }
+
+  .advisor-services{
+    font-size:12px;
+    line-height:1.7;
+  }
+
+  .advisor-metrics{
+    flex-direction:column;
+    gap:8px;
+  }
+
+  .advisor-metrics span{
+    font-size:11px;
+  }
+
+  .advisor-badges span{
+    font-size:10px;
+    padding:4px 8px;
   }
 
   .advisor-address{
@@ -557,12 +1002,18 @@
     gap:8px;
   }
 
-  .advisor-header h3{
-    font-size:20px;
+  .advisor-address span{
+    justify-content:center;
+    font-size:11px;
+  }
+
+  .btn-enquiry,
+  .btn-consultation{
+    height:42px;
+    font-size:12px;
   }
 
 }
-
 
 
 

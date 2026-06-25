@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import contact from "../assets/contact.png";
 import "./Contact.css";
@@ -23,7 +24,7 @@ import {
 } from "react-icons/fa";
 function Contact() {
     
-
+const navigate = useNavigate();
 const [openFaq, setOpenFaq] = useState(null);
 const faqData = [
   {
@@ -434,11 +435,14 @@ const faqData = [
 
     </div>
 
-    <button className="consultation-btn">
-      <FaCalendarCheck className="btn-icon" />
-      <span>Book a Consultation</span>
-      <FaArrowRight className="btn-arrow" />
-    </button>
+    <button
+  className="consultation-btn"
+  onClick={() => navigate("/find-ca")}
+>
+  <FaCalendarCheck className="btn-icon" />
+  <span>Book a Consultation</span>
+  <FaArrowRight className="btn-arrow" />
+</button>
 
   </div>
 </section>

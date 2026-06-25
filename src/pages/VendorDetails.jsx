@@ -42,9 +42,10 @@ const navigate = useNavigate();
   const [vendor, setVendor] =
     useState(null);
 
-  useEffect(() => {
-    fetchVendor();
-  }, [id]);
+useEffect(() => {
+  fetchVendor();
+  addRecentView();
+}, [id]);
 
   const fetchVendor = async () => {
     try {
@@ -61,12 +62,50 @@ const navigate = useNavigate();
     }
   };
 
+
+
+  const addRecentView = async () => {
+  try {
+    const token = localStorage.getItem("token");
+
+    if (!token) return;
+
+    await axios.post(
+      "http://localhost:5000/api/recent/view",
+      {
+        vendorId: id,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+
+
+
+
+
+
+
+
+
+
+
   if (!vendor)
     return (
       <div className="loading">
         Loading...
       </div>
     );
+
+
+
 
 
 

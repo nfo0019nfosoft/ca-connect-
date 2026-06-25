@@ -31,6 +31,7 @@ import UserProfile from "./pages/UserProfile";
 import UserBusinessDetails from "./pages/UserBusinessDetails";
 import UserUploadedDocuments from "./pages/UserUploadedDocuments";
 import UserAccountVerification from "./pages/UserAccountVerification";
+import UserSavedCA from "./pages/UserSavedCA.jsx";
 import FreeEnquiry from "./pages/FreeEnquiry"
 import VendorPayment from "./pages/VendorPayment";
 import BookConsultation from "./pages/BookConsultation";
@@ -71,7 +72,9 @@ function Layout() {
   "/vendor-leads",
   "/lead-details",
   "/admin-vendors",
-   "/admin-users"
+   "/admin-users",
+   "/login",
+   "/user-saved-ca",
 ];
 
 const hideNavbarFooter =
@@ -190,6 +193,8 @@ const hideNavbarFooter =
           <Route path="/user-business-details" element={<UserBusinessDetails />} />
            <Route path="/user-uploaded-documents" element={<UserUploadedDocuments />} />
             <Route path="/user-account-verification" element={<UserAccountVerification />} />
+            <Route path="/user-saved-ca" element={<UserSavedCA />}
+/>
       </Routes>
 
       {!hideNavbarFooter && <Footer />}

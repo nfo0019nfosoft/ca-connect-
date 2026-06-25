@@ -14,6 +14,7 @@ import {
   FaLightbulb,
   FaMapMarkerAlt,
   FaSearch,
+  FaBookmark,
   FaPaperPlane,
   FaCheckCircle,
   FaChevronLeft,
@@ -55,7 +56,8 @@ function Home() {
       easing: "ease-in-out",
     });
   }, []);
-
+    const [searchDone, setSearchDone] = useState(false);
+const [searchResults, setSearchResults] = useState([]);
   const [city, setCity] = useState("");
   const [businessType, setBusinessType] = useState("");
   const [service, setService] = useState("");
@@ -79,6 +81,83 @@ function Home() {
 
 
 
+const handleSearch = async (selectedService = service) => {
+
+  try{
+
+    const res = await axios.get(
+      "https://ca-backend-d9tc.onrender.com/api/vendor/search",
+      {
+        params:{
+          service:selectedService,
+          city,
+          businessType
+        }
+      }
+    );
+
+    setSearchDone(true);
+
+    setSearchResults(
+      Array.isArray(res.data)
+        ? res.data
+        : res.data.vendors || []
+    );
+
+  }catch(err){
+
+    setSearchDone(true);
+    setSearchResults([]);
+
+  }
+
+}
+
+
+
+
+
+const [savedVendors, setSavedVendors] = useState([]);
+
+const handleSaveVendor = async (vendorId) => {
+
+  const token = localStorage.getItem("token");
+
+  if (!token) {
+
+    alert("Please login to save vendors.");
+
+    navigate("/login");
+
+    return;
+
+  }
+
+  try {
+
+    const res = await axios.post(
+      "http://localhost:5000/api/saved/save",
+      { vendorId },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    alert(res.data.message);
+
+    setSavedVendors((prev) => [...prev, vendorId]);
+
+  } catch (err) {
+
+    console.log(err);
+
+    alert("Unable to save vendor.");
+
+  }
+
+};
 
 
   const [blogs, setBlogs] = useState([]);
@@ -128,57 +207,37 @@ function Home() {
 
   };
 
+ 
+
   const fetchTopVendors = async () => {
-    try {
-      const res = await axios.get(
-        "https://ca-backend-d9tc.onrender.com/api/vendor"
-      );
 
-      console.log(res.data);
+  try {
 
-      setVendors(res.data);
+    const res = await axios.get(
+      "https://ca-backend-d9tc.onrender.com/api/vendor"
+    );
 
-    } catch (err) {
-      console.log(err);
-    }
-  };
+    setVendors(
+      Array.isArray(res.data)
+        ? res.data
+        : res.data.vendors || []
+    );
 
+  }
+
+  catch (err) {
+
+    console.log(err);
+
+  }
+
+};
 
 
   const navigate = useNavigate();
 
 
 
-
-
-  const handleSearch = async (
-    selectedService = service
-  ) => {
-
-    try {
-
-      const res = await axios.get(
-        "https://ca-backend-d9tc.onrender.com/api/vendor/search",
-        {
-          params: {
-            service: selectedService,
-            city,
-            businessType
-          }
-        }
-      );
-
-      setVendors(res.data);
-
-    }
-
-    catch (err) {
-
-      console.log(err);
-
-    }
-
-  };
 
 
 
@@ -257,7 +316,7 @@ function Home() {
 
       </section>
 
-      {/* SEARCH CARD */}
+   
       {/* SEARCH CARD */}
 
       <section className="ca-search-box">
@@ -403,6 +462,78 @@ function Home() {
           }
 
         </div>
+{searchDone && (
+
+  <div className="ca-search-results">
+
+    {searchResults.length > 0 ? (
+
+      <div className="ca-search-result-list">
+
+        {searchResults.map((vendor) => (
+
+          <div
+            className="ca-search-result-card"
+            key={vendor._id}
+          >
+
+            <img
+              src={
+                vendor.photo
+                  ? `https://ca-backend-d9tc.onrender.com/uploads/${vendor.photo}`
+                  : "/avatar.png"
+              }
+              alt={vendor.fullName}
+            />
+
+            <div className="ca-search-result-info">
+
+              <h4>{vendor.firmName || vendor.fullName}</h4>
+
+              <p>
+                📍 {vendor.city}, {vendor.state}
+              </p>
+
+              <p>
+                {vendor.services?.length > 0
+                  ? vendor.services
+                      .map((s) => s.serviceName)
+                      .join(", ")
+                  : "No Services"}
+              </p>
+
+            </div>
+
+            <button
+              className="ca-view-profile-btn"
+              onClick={() => navigate(`/vendor/${vendor._id}`)}
+            >
+              View Profile
+            </button>
+
+          </div>
+
+        ))}
+
+      </div>
+
+    ) : (
+
+      <div className="ca-no-results">
+
+        <h3>No CA / Firm Found</h3>
+
+        <p>
+          No Chartered Accountant available for your search.
+        </p>
+
+      </div>
+
+    )}
+
+  </div>
+
+)}
 
       </section>
 
@@ -417,7 +548,7 @@ function Home() {
         >
           <h2>Popular Services</h2>
 
-          <a href="/" className="popula-view-all">
+          <a href="/service" className="popula-view-all">
             View All Services
             <FaArrowRight />
           </a>
@@ -497,7 +628,7 @@ function Home() {
         <div className="top-ca-header">
           <h2>Top Rated CA & Firms</h2>
 
-          <a href="/" className="view-all-ca">
+          <a href="/find-ca" className="view-all-ca">
             View All →
           </a>
         </div>
@@ -570,7 +701,24 @@ function Home() {
                             ca.fullName}
                         </h4>
 
-                        <FaRegBookmark className="bookmark-icon" />
+
+{
+  savedVendors.includes(ca._id) ? (
+
+    <FaBookmark
+      className="bookmark-icon saved"
+      onClick={() => handleSaveVendor(ca._id)}
+    />
+
+  ) : (
+
+    <FaRegBookmark
+      className="bookmark-icon"
+      onClick={() => handleSaveVendor(ca._id)}
+    />
+
+  )
+}
 
                       </div>
 
@@ -607,12 +755,12 @@ function Home() {
                   </div>
 
 
-                  <button
-                    className="profile-btn"
-                    onClick={() => navigate("/find-ca")}
-                  >
-                    View Profile
-                  </button>
+                <button
+  className="profile-btn"
+  onClick={() => navigate(`/vendor/${ca._id}`)}
+>
+  View Profile
+</button>
 
                 </div>
 
@@ -636,112 +784,91 @@ function Home() {
 
       {/* HOW IT WORKS */}
 
-      <section className="how-section">
+  <section className="how-section">
 
-        <div
-          className="how-heading"
-          data-aos="fade-up"
-        >
-          <h2>How It Works</h2>
-        </div>
+  <div className="how-heading">
+    <span className="how-tag">Simple Process</span>
+    <h2>How It Works</h2>
+    <p>
+      Connect with verified Chartered Accountants in just four simple steps.
+    </p>
+  </div>
 
-        <div className="how-grid">
+  <div className="how-grid">
 
-          {/* STEP 1 */}
+    <div className="how-card">
 
-          <div
-            className="how-card"
-            data-aos="fade-right"
-            data-aos-delay="100"
-          >
-            <div className="how-icon">
-              <FaSearch />
-            </div>
+      <div className="how-number">01</div>
 
-            <div className="how-content">
-              <h4>1. Search</h4>
+      <div className="how-icon">
+        <FaSearch />
+      </div>
 
-              <p>
-                Search for services
+      <h4>Search</h4>
 
-                or CAs near you
-              </p>
-            </div>
-          </div>
+      <p>
+        Search for the service you need and choose your preferred location.
+      </p>
 
-          <div className="how-arrow"></div>
+    </div>
 
-          {/* STEP 2 */}
+    <div className="how-line"></div>
 
-          <div
-            className="how-card"
-            data-aos="fade-right"
-            data-aos-delay="200"
-          >
-            <div className="how-icon">
-              <FaClipboardList />
-            </div>
+    <div className="how-card">
 
-            <div className="how-content">
-              <h4>2. Compare</h4>
+      <div className="how-number">02</div>
 
-              <p>
-                Compare profiles,
-                reviews and pricing
-              </p>
-            </div>
-          </div>
+      <div className="how-icon">
+        <FaClipboardList />
+      </div>
 
-          <div className="how-arrow"></div>
+      <h4>Compare</h4>
 
-          {/* STEP 3 */}
+      <p>
+        Compare CA profiles, pricing, experience and customer reviews.
+      </p>
 
-          <div
-            className="how-card"
-            data-aos="fade-right"
-            data-aos-delay="300"
-          >
-            <div className="how-icon">
-              <FaPaperPlane />
-            </div>
+    </div>
 
-            <div className="how-content">
-              <h4>3. Connect</h4>
+    <div className="how-line"></div>
 
-              <p>
-                Submit enquiry or
-                book consultation
-              </p>
-            </div>
-          </div>
+    <div className="how-card">
 
-          <div className="how-arrow"></div>
+      <div className="how-number">03</div>
 
-          {/* STEP 4 */}
+      <div className="how-icon">
+        <FaPaperPlane />
+      </div>
 
-          <div
-            className="how-card"
-            data-aos="fade-right"
-            data-aos-delay="400"
-          >
-            <div className="how-icon">
-              <FaCheckCircle />
-            </div>
+      <h4>Connect</h4>
 
-            <div className="how-content">
-              <h4>4. Get It Done</h4>
+      <p>
+        Send enquiry or instantly book an online consultation.
+      </p>
 
-              <p>
-                Get your work done
-                with ease
-              </p>
-            </div>
-          </div>
+    </div>
 
-        </div>
+    <div className="how-line"></div>
 
-      </section>
+    <div className="how-card">
 
+      <div className="how-number">04</div>
+
+      <div className="how-icon">
+        <FaCheckCircle />
+      </div>
+
+      <h4>Get It Done</h4>
+
+      <p>
+        Complete your compliance work quickly and securely.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
 
 
 
@@ -911,10 +1038,12 @@ function Home() {
                 <span>Upload documents and get guidance</span>
               </li>
             </ul>
-
-            <button className="assistant-btn">
-              Try AI Assistant
-            </button>
+<button
+  className="assistant-btn"
+  onClick={() => navigate("/ai-assistant")}
+>
+  Try AI Assistant
+</button>
           </div>
 
           {/* RIGHT ROBOT */}
@@ -1156,7 +1285,7 @@ function Home() {
                   Contact Support
                 </Link>
 
-                <Link to="/ai-assisstant" className="chat-btn">
+                <Link to="/ai-assistant" className="chat-btn">
                   Live Chat
                 </Link>
 

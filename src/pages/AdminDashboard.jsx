@@ -1,14 +1,26 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import UserSidebar from "../components/AdminSidebar";
 
 function AdminDashboard() {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    const role = localStorage.getItem("role");
+
+    if (!token || role !== "admin") {
+      navigate("/admin");
+    }
+  }, [navigate]);
+
   return (
     <>
       <UserSidebar />
 
       <div
         style={{
-          marginLeft: "220px",
+          marginLeft: "270px",
           minHeight: "100vh",
           padding: "30px",
           background: "#f7f8fc",

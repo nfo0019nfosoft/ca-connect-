@@ -690,7 +690,7 @@ const saveProfile = async () => {
   <div className="action-btn-area">
 
     <Link
-      to="/business-details"
+      to="/user-business-details"
       className="continue-save-btn"
       onClick={saveProfile}
     >
@@ -865,7 +865,7 @@ const saveProfile = async () => {
       <h3>Quick Actions</h3>
 
       <Link
-        to="/uploaded-documents"
+        to="/user-uploaded-documents"
         className="quick-item"
       >
 
@@ -889,7 +889,7 @@ const saveProfile = async () => {
       </Link>
 
       <Link
-        to="/account-verification"
+        to="/user-account-verification"
         className="quick-item"
       >
 
@@ -913,7 +913,7 @@ const saveProfile = async () => {
       </Link>
 
       <Link
-        to="/business-details"
+        to="/user-account-verification"
         className="quick-item"
       >
 

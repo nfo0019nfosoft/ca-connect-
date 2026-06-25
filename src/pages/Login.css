@@ -45,7 +45,7 @@ body{
 ========================= */
 
 .login-logo{
-  height:90px;
+  height:70px;
   display:flex;
   justify-content:center;
   align-items:center;
@@ -53,7 +53,7 @@ body{
 }
 
 .login-logo img{
-  width:170px;
+  width:120px;
 }
 
 /* =========================
@@ -126,7 +126,7 @@ body{
 
 .login-form{
   margin:0 18px 18px;
-  padding:24px;
+  padding:20px;
   border:1px solid #edf2f7;
   border-radius:14px;
 }
@@ -134,8 +134,9 @@ body{
 .form-title{
   text-align:center;
   color:#2563eb;
-  font-size:18px;
+  font-size:15px;
   font-weight:700;
+ 
 }
 
 .form-divider{
@@ -151,11 +152,11 @@ body{
 .otp-image{
   display:flex;
   justify-content:center;
-  margin-bottom:15px;
+  margin-bottom:10px;
 }
 
 .otp-image img{
-  width:140px;
+  width:120px;
 }
 
 /* =========================
@@ -591,4 +592,155 @@ body{
   height:40px !important;
   padding:0 12px 0 35px !important;
   border-radius:8px !important;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* PAGE */
+.login-page{
+  padding:12px;
+}
+
+/* CARD */
+.login-card{
+  max-width:420px;
+  border-radius:10px;
+}
+
+/* LOGO */
+.login-logo{
+  height:55px;
+}
+
+.login-logo img{
+  width:95px;
+}
+
+/* HEADER */
+.login-header{
+  padding:14px;
+}
+
+.login-header h2{
+  font-size:17px;
+  margin-bottom:4px;
+}
+
+.login-header p{
+  font-size:12px;
+}
+
+/* USER TYPES */
+.user-types{
+  gap:8px;
+  padding:12px;
+}
+
+.user-type{
+  padding:10px;
+  gap:8px;
+  border-radius:8px;
+}
+
+.user-type svg{
+  font-size:15px;
+}
+
+.user-type h4{
+  font-size:13px;
+}
+
+.user-type span{
+  font-size:10px;
+}
+
+/* FORM */
+.login-form{
+  margin:0 12px 12px;
+  padding:16px;
+  border-radius:10px;
+}
+
+.form-title{
+  font-size:16px;
+}
+
+.form-divider{
+  margin:10px 0 14px;
+}
+
+/* OTP IMAGE */
+.otp-image{
+  margin-bottom:10px;
+}
+
+.otp-image img{
+  width:100px;
+}
+
+/* TEXT */
+.login-form h3{
+  font-size:17px;
+  margin-bottom:5px;
+}
+
+.otp-desc{
+  font-size:12px;
+  line-height:1.5;
+  margin-bottom:6px;
+}
+
+/* PHONE */
+.phone-wrapper{
+  margin-bottom:10px;
+}
+
+.phone-container .form-control{
+  height:44px !important;
+  font-size:13px !important;
+}
+
+.phone-container .selected-flag{
+  width:64px !important;
+}
+
+/* BUTTON */
+.otp-btn{
+  height:44px;
+  font-size:14px;
+  border-radius:6px;
+}
+
+/* SECURITY */
+.secure-text{
+  margin-top:12px;
+  font-size:11px;
+}
+
+/* FEATURES */
+.feature{
+  padding:14px 8px;
+}
+
+.feature svg{
+  font-size:16px;
+  margin-bottom:5px;
+}
+
+.feature span{
+  font-size:11px;
 }

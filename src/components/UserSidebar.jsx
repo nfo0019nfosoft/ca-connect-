@@ -61,10 +61,10 @@ function Sidebar() {
           />
 
         </div>
-          <span className="admin-super-admin">
-     &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-     User Dashboard
-  </span>
+        <span className="admin-super-admin">
+          &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+          User Dashboard
+        </span>
 
         {/* Menu */}
 
@@ -76,7 +76,7 @@ function Sidebar() {
               to="/user-dashboard"
               className={
                 location.pathname ===
-                "/vendor-dashboard"
+                  "/vendor-dashboard"
                   ? "active"
                   : ""
               }
@@ -118,7 +118,7 @@ function Sidebar() {
               to="/user-enquiry"
               className={
                 location.pathname ===
-                "/leads"
+                  "/leads"
                   ? "active"
                   : ""
               }
@@ -135,7 +135,7 @@ function Sidebar() {
               to="/user-appointments"
               className={
                 location.pathname ===
-                "/appointments"
+                  "/appointments"
                   ? "active"
                   : ""
               }
@@ -149,16 +149,15 @@ function Sidebar() {
           <li>
 
             <Link
-              to="/user-subscription"
+              to="/user-saved-ca"
               className={
-                location.pathname ===
-                "/subscription"
+                location.pathname === "/user-saved-ca"
                   ? "active"
                   : ""
               }
             >
               <FaHeart />
-            Saved CAs
+              Saved CAs
             </Link>
 
           </li>
@@ -169,7 +168,7 @@ function Sidebar() {
               to="/user-settings"
               className={
                 location.pathname ===
-                "/settings"
+                  "/settings"
                   ? "active"
                   : ""
               }
@@ -186,7 +185,7 @@ function Sidebar() {
               to="/user-support"
               className={
                 location.pathname ===
-                "/support"
+                  "/support"
                   ? "active"
                   : ""
               }

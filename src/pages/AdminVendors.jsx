@@ -4,6 +4,7 @@ import "./AdminVendors.css";
 import AdminSidebar from "../components/AdminSidebar";
 import * as XLSX from "xlsx";
 import { saveAs } from "file-saver";
+import { useNavigate } from "react-router-dom";
 
 import {
     FaUsers,
@@ -43,6 +44,19 @@ ChartJS.register(
 );
 
 function AdminVendors() {
+     const navigate = useNavigate();
+  useEffect(() => {
+
+    const token = localStorage.getItem("token");
+    const role = localStorage.getItem("role");
+
+    if (!token || role !== "admin") {
+
+      navigate("/admin");
+
+    }
+
+  }, [navigate]);
 
     const [dashboard, setDashboard] = useState({});
     const [vendors, setVendors] = useState([]);

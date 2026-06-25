@@ -1,0 +1,610 @@
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { Link, useNavigate } from "react-router-dom";
+import UserSidebar from "../components/UserSidebar";
+
+import {
+    FaHeart,
+    FaSearch,
+    FaStar,
+    FaMapMarkerAlt,
+    FaBuilding,
+    FaPhoneAlt,
+    FaEllipsisV,
+    FaEye,
+    FaClock,
+    FaExchangeAlt,
+    FaRegCommentDots,
+    FaBell,
+    FaCheckCircle 
+
+} from "react-icons/fa";
+
+import "./UserSavedCA.css";
+
+function UserSavedCA() {
+
+    const navigate = useNavigate();
+    const [user, setUser] = useState({});
+    const [recentViewed, setRecentViewed] = useState([]);
+    const [savedCAs, setSavedCAs] = useState([]);
+    const [compareCAs, setCompareCAs] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [search, setSearch] = useState("");
+    const [sortBy, setSortBy] = useState("recent");
+
+useEffect(() => {
+  fetchSavedCAs();
+  fetchUserProfile();
+    fetchCompare();
+      fetchRecentViewed();  
+}, []);
+
+useEffect(() => {
+  console.log("Saved CAs", savedCAs);
+}, [savedCAs]);
+
+
+
+    const fetchSavedCAs = async () => {
+  try {
+    const token = localStorage.getItem("token");
+
+    const res = await axios.get(
+      "http://localhost:5000/api/saved/save",
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    console.log("Saved API:", res.data);
+
+    setSavedCAs(res.data.savedCAs || []);
+
+  } catch (err) {
+    console.log(err);
+  } finally {
+    setLoading(false);
+  }
+};
+
+
+
+const fetchRecentViewed = async () => {
+  const token = localStorage.getItem("token");
+
+  const res = await axios.get(
+    "http://localhost:5000/api/recent",
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+
+  setRecentViewed(res.data);
+};
+
+
+
+
+
+const fetchCompare = async () => {
+  const token = localStorage.getItem("token");
+
+  const res = await axios.get(
+    "http://localhost:5000/api/compare",
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+
+  setCompareCAs(res.data);
+};
+
+
+
+    const fetchUserProfile = async () => {
+        try {
+            const token = localStorage.getItem("token");
+
+            const res = await axios.get(
+                "http://localhost:5000/api/users/profile",
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                }
+            );
+
+         setUser(res.data.user);
+
+        } catch (err) {
+            console.log(err);
+        }
+    };
+
+
+
+    const removeSavedCA = async (id) => {
+
+        try {
+
+            const token = localStorage.getItem("token");
+
+            await axios.delete(
+                `http://localhost:5000/api/saved/save/${id}`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                }
+            );
+
+            setSavedCAs(savedCAs.filter((item) => item._id !== id));
+
+        } catch (err) {
+
+            console.log(err);
+
+        }
+    };
+
+    const filteredCAs = savedCAs.filter((ca) =>
+        ca.fullName.toLowerCase().includes(search.toLowerCase())
+    );
+
+    return (
+        <>
+            <UserSidebar />
+            <div className="dashboard-header">
+
+                <div>
+                    <h1>Saved CAs</h1>
+                    <p>
+                        Manage your favorite, recently viewed and compared CAs in one place
+                    </p>
+                </div>
+
+                <div className="dashboard-right">
+
+                    <div className="dashboard-search">
+                        <FaSearch />
+
+                        <input
+                            type="text"
+                            placeholder="Search anything..."
+                        />
+
+                        <span>Ctrl + K</span>
+                    </div>
+
+                    <button className="dashboard-icon">
+                        <FaRegCommentDots />
+                    </button>
+
+                    <button className="dashboard-icon notification">
+
+                        <FaBell />
+
+
+
+                    </button>
+
+                  <div className="dashboard-user">
+  <img
+    src={
+      user.profileImage
+        ? `http://localhost:5000${user.profileImage}`
+        : "/avatar.png"
+    }
+    alt={user.name}
+  />
+
+ 
+
+                        <div>
+
+                            <h4>{user.name}</h4>
+
+
+
+                        </div>
+
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <div className="usersavedca-container">
+
+                {/* LEFT SIDE */}
+
+               {/* LEFT SIDE */}
+
+<div className="usersavedca-left">
+
+  {/* ===========================
+      Favorite Professionals
+  ============================ */}
+
+  <div className="usersavedca-favorites-section">
+
+    <div className="usersavedca-favorites-header">
+
+      <div>
+        <h2>Favorite Professionals</h2>
+
+        <p>
+          Your most trusted CAs that you have saved for quick access.
+        </p>
+      </div>
+
+      <div className="usersavedca-sort">
+
+        <label>Sort by :</label>
+
+        <select>
+          <option>Recently Added</option>
+          <option>Highest Rating</option>
+          <option>Experience</option>
+        </select>
+
+      </div>
+
+    </div>
+
+    {/* Cards */}
+
+    {loading ? (
+
+      <h3>Loading...</h3>
+
+    ) : (
+
+      savedCAs.map((ca) => (
+
+        <div
+          className="usersavedca-favorite-card"
+          key={ca._id}
+        >
+
+          {/* LEFT */}
+
+          <div className="usersavedca-card-left">
+
+            <div className="usersavedca-image-box">
+
+              <img
+                src={
+                  ca.photo
+                    ? `http://localhost:5000/uploads/${ca.photo}`
+                    : "/avatar.png"
+                }
+                alt={ca.fullName}
+              />
+
+              <div className="usersavedca-fav-icon">
+                <FaHeart />
+              </div>
+
+            </div>
+
+            <div className="usersavedca-card-info">
+
+              <h3>{ca.fullName}</h3>
+
+              <p>{ca.designation}</p>
+
+              <div className="usersavedca-rating">
+
+                <FaStar />
+
+                <strong>{ca.rating || 4.8}</strong>
+
+                <span>({ca.totalReviews || 128} Reviews)</span>
+
+                <span className="usersavedca-dot">•</span>
+
+                <span>{ca.experience}+ Years Exp.</span>
+
+              </div>
+
+            </div>
+
+          </div>
+
+          {/* CENTER */}
+
+          <div className="usersavedca-card-center">
+
+            <p>
+              <FaMapMarkerAlt />
+              {ca.city}, {ca.state}
+            </p>
+
+            <p>
+              <FaBuilding />
+              {ca.firmName}
+            </p>
+
+            <span>
+              <FaCheckCircle />
+              {ca.available ? "Available" : "Unavailable"}
+            </span>
+
+          </div>
+
+          {/* RIGHT */}
+
+          <div className="usersavedca-card-right">
+
+            <button className="usersavedca-profile-btn">
+              View Profile
+            </button>
+
+            <button className="usersavedca-contact-btn">
+              Contact
+            </button>
+
+          </div>
+
+        </div>
+
+      ))
+
+    )}
+
+  </div>
+
+  {/* ===========================
+      Recently Viewed
+  ============================ */}
+
+  <div className="usersavedca-recent">
+
+    <div className="usersavedca-recent-header">
+
+      <div>
+
+        <h3>Recently Viewed CAs</h3>
+
+        <p>
+          CAs you have recently viewed on the platform.
+        </p>
+
+      </div>
+
+      <button>View All</button>
+
+    </div>
+
+    <div className="usersavedca-recent-list">
+
+      {recentViewed.map((ca) => (
+
+        <div
+          className="usersavedca-recent-card"
+          key={ca.vendor._id}
+        >
+
+          <img
+            src={
+              ca.vendor.photo
+                ? `http://localhost:5000/uploads/${ca.vendor.photo}`
+                : "/avatar.png"
+            }
+            alt={ca.vendor.fullName}
+          />
+
+          <h4>{ca.vendor.fullName}</h4>
+
+          <p>{ca.vendor.designation}</p>
+
+          <div className="usersavedca-rating">
+
+            <FaStar />
+
+            <strong>4.8</strong>
+
+            <span>(128 Reviews)</span>
+
+          </div>
+
+        </div>
+
+      ))}
+
+    </div>
+
+  </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+{/* RIGHT SIDE */}
+
+<div className="usersavedca-right">
+
+  {/* Saved Overview */}
+
+  <div className="usersavedca-overview">
+
+    <h3>Saved Overview</h3>
+
+    <div className="usersavedca-overview-item">
+
+      <FaHeart />
+
+      <div>
+        <h2>{savedCAs.length}</h2>
+        <p>Favorite Professionals</p>
+      </div>
+
+    </div>
+
+    <div className="usersavedca-overview-item">
+
+      <FaClock />
+
+      <div>
+        <h2>{recentViewed.length}</h2>
+        <p>Recently Viewed CAs</p>
+      </div>
+
+    </div>
+
+    <div className="usersavedca-overview-item">
+
+      <FaExchangeAlt />
+
+      <div>
+        <h2>{compareCAs.length}</h2>
+        <p>CAs in Compare</p>
+      </div>
+
+    </div>
+
+    <div className="usersavedca-overview-item">
+
+      <FaEye />
+
+      <div>
+        <h2>
+          {savedCAs.length + recentViewed.length + compareCAs.length}
+        </h2>
+
+        <p>Total Interactions</p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  {/* Compare */}
+
+  <div className="usersavedca-compare">
+
+    <div className="usersavedca-compare-header">
+
+      <h3>
+        Compare CAs ({compareCAs.length}/4)
+      </h3>
+
+      <button>View All</button>
+
+    </div>
+
+    {compareCAs.map((item) => (
+
+      <div
+        className="usersavedca-compare-item"
+        key={item._id}
+      >
+
+        <img
+          src={
+            item.vendor.photo
+              ? `http://localhost:5000/uploads/${item.vendor.photo}`
+              : "/avatar.png"
+          }
+          alt={item.vendor.fullName}
+        />
+
+        <div className="usersavedca-compare-info">
+
+          <h4>{item.vendor.fullName}</h4>
+
+          <small>
+            ⭐ {item.vendor.rating || 4.8} • {item.vendor.experience}+ Years
+          </small>
+
+        </div>
+
+        <button
+          className="usersavedca-remove-btn"
+          onClick={() => removeCompare(item.vendor._id)}
+        >
+          ✕
+        </button>
+
+      </div>
+
+    ))}
+
+    <button
+      className="usersavedca-add-btn"
+      onClick={() => navigate("/find-ca")}
+    >
+      + Add another CA to compare
+    </button>
+
+    <button
+      className="compare-btn"
+      onClick={() => navigate("/compare")}
+    >
+      Compare Now
+    </button>
+
+  </div>
+
+  {/* Help */}
+
+  <div className="usersavedca-help">
+
+    <h3>Need Help?</h3>
+
+    <p>
+      Our support team is here to help you
+      find the right CA.
+    </p>
+
+    <button className="usersavedca-help-btn">
+      Contact Support
+    </button>
+
+  </div>
+
+</div>
+  
+
+
+
+
+
+
+                </div>
+
+
+
+
+            
+
+            
+
+
+        </>
+    );
+}
+
+export default UserSavedCA;

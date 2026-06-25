@@ -158,7 +158,7 @@ const closeMenu = () => {
           <li className="mobile-buttons">
 
             <Link
-              to="/consultation"
+              to="/find-ca"
               className="consult-btn"
               onClick={closeMenu}
             >
@@ -240,7 +240,7 @@ const closeMenu = () => {
 
         <div className="nav-actions">
 
-          <Link to="/consultation" className="consult-btn">
+          <Link to="/find-ca" className="consult-btn">
             <FaCalendarAlt />
             Book Consultation
           </Link>
