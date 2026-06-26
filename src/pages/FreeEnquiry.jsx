@@ -46,12 +46,60 @@ const handleSubmit = async () => {
       localStorage.getItem("user")
     );
 
+    const data = new FormData();
+
+    data.append(
+      "vendorId",
+      vendorId
+    );
+
+    data.append(
+      "userId",
+      user?._id || ""
+    );
+
+    Object.keys(formData).forEach(
+      (key) => {
+
+        if (
+          key !== "files" &&
+          key !== "serviceName"
+        ) {
+          data.append(
+            key,
+            formData[key]
+          );
+        }
+
+      }
+    );
+
+    formData.serviceName.forEach(
+      (service) => {
+        data.append(
+          "serviceName",
+          service
+        );
+      }
+    );
+
+    formData.files.forEach(
+      (file) => {
+        data.append(
+          "documents",
+          file
+        );
+      }
+    );
+
     await axios.post(
       "https://ca-backend-d9tc.onrender.com/api/enquiries",
+      data,
       {
-        vendorId,
-        userId: user?._id,
-        ...formData,
+        headers: {
+          "Content-Type":
+            "multipart/form-data",
+        },
       }
     );
 
@@ -111,12 +159,21 @@ const [formData, setFormData] = useState({
   fullName: "",
   email: "",
   mobile: "",
+
+  city: "",
+  state: "",
+
   preferredContact: "Call",
   preferredTime: "",
+
   businessType: "",
   annualTurnover: "",
   businessStructure: "",
+
   panNumber: "",
+
+  gstRequired: "",
+  hearAboutUs: "",
 
   budget: "",
   timeline: "",
@@ -529,6 +586,46 @@ useEffect(() => {
 
       </div>
 
+  <div className="form-group">
+
+  <label>
+    City *
+  </label>
+
+  <input
+    type="text"
+    placeholder="Enter your city"
+    value={formData.city}
+    onChange={(e) =>
+      setFormData({
+        ...formData,
+        city: e.target.value
+      })
+    }
+  />
+
+</div>
+
+<div className="form-group">
+
+  <label>
+    State *
+  </label>
+
+  <input
+    type="text"
+    placeholder="Enter your state"
+    value={formData.state}
+    onChange={(e) =>
+      setFormData({
+        ...formData,
+        state: e.target.value
+      })
+    }
+  />
+
+</div>
+
       <div className="form-group">
 
         <label>
@@ -572,7 +669,7 @@ useEffect(() => {
 
       </div>
 
-    </div>
+    
 
     <div className="radio-group">
 
@@ -645,7 +742,7 @@ useEffect(() => {
     </div>
 
   </div>
-
+</div>
   {/* ======================
       3. BUSINESS DETAILS
   ======================= */}
@@ -814,7 +911,92 @@ useEffect(() => {
 
       </div>
 
-    </div>
+    
+    <div className="form-group">
+
+  <label>
+    GST Required
+  </label>
+
+  <select
+    value={formData.gstRequired}
+    onChange={(e) =>
+      setFormData({
+        ...formData,
+        gstRequired: e.target.value,
+      })
+    }
+  >
+    <option value="">
+      Select GST Requirement
+    </option>
+
+    <option value="Yes">
+      Yes
+    </option>
+
+    <option value="No">
+      No
+    </option>
+
+  </select>
+
+</div>
+
+<div className="form-group">
+
+  <label>
+    How did you hear about us?
+  </label>
+
+  <select
+    value={formData.hearAboutUs}
+    onChange={(e) =>
+      setFormData({
+        ...formData,
+        hearAboutUs: e.target.value,
+      })
+    }
+  >
+    <option value="">
+      Select Source
+    </option>
+
+    <option value="Google Search">
+      Google Search
+    </option>
+
+    <option value="Social Media">
+      Social Media
+    </option>
+
+    <option value="Friend or Family">
+      Friend or Family
+    </option>
+
+    
+
+    <option value="LinkedIn">
+      LinkedIn
+    </option>
+
+
+    <option value="Advertisement">
+      Advertisement
+    </option>
+
+    <option value="Referral">
+      Referral
+    </option>
+
+    <option value="Other">
+      Other
+    </option>
+
+  </select>
+
+</div>
+</div>
 
   </div>
 

@@ -40,6 +40,7 @@ const navigate = useNavigate();
 const [lead, setLead] = useState(null);
 const [vendor, setVendor] = useState(null);
 const [loading, setLoading] = useState(true);
+const [notes, setNotes] = useState("");
 
 useEffect(() => {
 
@@ -52,16 +53,18 @@ useEffect(() => {
 
 
 
-
 const fetchLead = async () => {
-
   try {
 
     const res = await axios.get(
       `https://ca-backend-d9tc.onrender.com/api/enquiries/${id}`
     );
 
-    setLead(res.data);
+    setLead(res.data.enquiry);
+
+    setNotes(
+      res.data.enquiry.notes || ""
+    );
 
   } catch (err) {
 
@@ -72,8 +75,40 @@ const fetchLead = async () => {
     setLoading(false);
 
   }
+};
+
+
+
+
+const saveNotes = async () => {
+
+  try {
+
+    await axios.put(
+      `https://ca-backend-d9tc.onrender.com/api/enquiries/${id}/notes`,
+      {
+        notes
+      }
+    );
+
+    alert("Notes saved successfully");
+
+  } catch (err) {
+
+    console.log(err);
+
+    alert("Failed to save notes");
+
+  }
 
 };
+
+
+
+
+
+
+
 
 const fetchVendor = async () => {
 
@@ -205,22 +240,22 @@ if (!lead) {
   </div>
 
 </div>
-<div className="lead-header-actions">
+<div className="leaddetails-header-actions">
 
   <button
-    className="back-btn"
+    className="leaddetails-back-btn"
     onClick={() => navigate("/vendor-leads")}
   >
     <FaArrowLeft />
     Back to Leads
   </button>
 
-  <button className="convert-btn">
+  <button className="leaddetails-convert-btn">
     <FaCheck />
     Mark as Converted
   </button>
 
-  <button className="schedule-btn">
+  <button className="leaddetails-schedule-btn">
     <FaCalendarAlt />
     Schedule Appointment
   </button>
@@ -235,76 +270,81 @@ if (!lead) {
 
   {/* Top Card */}
 
-  <div className="lead-profile-card">
+ <div className="leaddetails-profile-card">
 
-    <div className="lead-profile-left">
+  <div className="leaddetails-profile-left">
 
-      <div className="lead-avatar-circle">
-        {lead.fullName?.charAt(0)}
-      </div>
-
-      <div>
-
-        <h2>{lead.fullName}</h2>
-
-        <p className="lead-date">
-          New Lead • Received on
-          {new Date(
-            lead.createdAt
-          ).toLocaleString()}
-        </p>
-
-        <div className="lead-contact-row">
-
-          <span>
-            <FaEnvelope />
-            {lead.email}
-          </span>
-
-          <span>
-            <FaPhoneAlt />
-            {lead.mobile}
-          </span>
-
-        <span>
-  <FaMapMarkerAlt />
-  {lead.city}, {lead.state}
-</span>
-
-        </div>
-
-      </div>
-
+    <div className="leaddetails-avatar-circle">
+      {lead?.fullName?.charAt(0)}
     </div>
 
-    <div className="lead-profile-right">
+    <div>
 
-      <div>
+      <h2>{lead?.fullName}</h2>
 
-        <small>Budget</small>
+      <p className="leaddetails-date">
+        New Lead • Received on{" "}
+        {lead?.createdAt
+          ? new Date(
+              lead.createdAt
+            ).toLocaleString()
+          : "N/A"}
+      </p>
 
-        <h4>
-          ₹{lead.budgetMin}
-          {" - "}
-          ₹{lead.budgetMax}
-        </h4>
+      <div className="leaddetails-contact-row">
 
-      </div>
+        <span>
+          <FaEnvelope />
+          {lead?.email || "N/A"}
+        </span>
 
-      <div>
+        <span>
+          <FaPhoneAlt />
+          {lead?.mobile || "N/A"}
+        </span>
 
-        <small>Timeline</small>
-
-        <h4>
-          {lead.timeline}
-        </h4>
+       
+         <span>
+  <FaMapMarkerAlt />
+  {lead?.city}, {lead?.state}
+</span>
+      
 
       </div>
 
     </div>
 
   </div>
+<div className="leaddetails-profile-right">
 
+  <div className="leaddetails-budget-box">
+
+    <span className="leaddetails-profile-label">
+      Budget
+    </span>
+
+    <h4 className="leaddetails-profile-value">
+      {lead?.budgetMin || lead?.budgetMax
+        ? `₹${lead?.budgetMin || 0} - ₹${lead?.budgetMax || 0}`
+        : lead?.budget || "Not Provided"}
+    </h4>
+
+  </div>
+
+  <div className="leaddetails-timeline-box">
+
+    <span className="leaddetails-profile-label">
+      Timeline
+    </span>
+
+    <h4 className="leaddetails-profile-value">
+      {lead?.timeline || "Not Provided"}
+    </h4>
+
+  </div>
+
+</div>
+</div>
   {/* Tabs */}
 
   <div className="lead-tabs">
@@ -348,236 +388,335 @@ if (!lead) {
 
   {/* Lead Information */}
 
-  <div className="lead-info-card">
+<div className="leaddetails-info-card">
 
-    <h3>
-      Lead Information
-    </h3>
+  <h3 className="leaddetails-info-title">
+    Lead Information
+  </h3>
 
-    <div className="lead-info-grid">
+  <div className="leaddetails-info-grid">
 
-      <div>
+    <div className="leaddetails-info-item">
+      <small>Service Required</small>
 
-        <small>
-          Service Required
-        </small>
+      <h4>
+        {Array.isArray(lead?.serviceName)
+          ? lead.serviceName.join(", ")
+          : lead?.serviceName || "N/A"}
+      </h4>
+    </div>
 
-        <h4>
-          {Array.isArray(
-            lead.serviceName
-          )
-            ? lead.serviceName.join(", ")
-            : lead.serviceName}
-        </h4>
+    <div className="leaddetails-info-item">
+      <small>Preferred Contact Time</small>
 
-      </div>
+      <h4>
+        {lead?.preferredTime || "N/A"}
+      </h4>
+    </div>
 
-      <div>
+    <div className="leaddetails-info-item">
+      <small>PAN</small>
 
-        <small>
-          <FaClock />
-          Preferred Contact Time
-        </small>
+      <h4>
+        {lead?.panNumber || "N/A"}
+      </h4>
+    </div>
 
-        <h4>
-          {lead.preferredTime}
-        </h4>
+    <div className="leaddetails-info-item">
+      <small>
+        Preferred Mode Of Communication
+      </small>
 
-      </div>
+      <h4>
+        {lead?.preferredContact || "N/A"}
+      </h4>
+    </div>
 
-      <div>
+    <div className="leaddetails-info-item">
+      <small>
+        Company / Business Name
+      </small>
 
-        <small>
-          <FaIdCard />
-          PAN
-        </small>
+      <h4>
+        {lead?.businessName ||
+          lead?.companyName ||
+          lead?.firmName ||
+          lead?.businessType ||
+          "N/A"}
+      </h4>
+    </div>
 
-        <h4>
-          {lead.panNumber}
-        </h4>
+    <div className="leaddetails-info-item">
+      <small>
+        GST Required
+      </small>
 
-      </div>
+      <h4>
+        {lead?.gstRequired || "N/A"}
+      </h4>
+    </div>
 
-      <div>
+    <div className="leaddetails-info-item">
+      <small>
+        How Did You Hear About Us?
+      </small>
 
-        <small>
-          Preferred Mode Of Communication
-        </small>
+      <h4>
+        {lead?.hearAboutUs || "N/A"}
+      </h4>
+    </div>
 
-        <h4>
-          {lead.preferredContact}
-        </h4>
+    <div className="leaddetails-info-item">
+      <small>
+        Annual Turnover
+      </small>
 
-      </div>
+      <h4>
+        {lead?.annualTurnover || "N/A"}
+      </h4>
+    </div>
 
-      <div>
+    <div className="leaddetails-info-item">
+      <small>
+        Additional Requirements
+      </small>
 
-        <small>
-          <FaBuilding />
-          Company / Business Name
-        </small>
-
-        <h4>
-          {lead.businessType}
-        </h4>
-
-      </div>
-
-      <div>
-
-        <small>
-          GST Required
-        </small>
-
-        <h4>
-          Yes
-        </h4>
-
-      </div>
-
-      <div>
-
-        <small>
-          <FaWallet />
-          Annual Turnover
-        </small>
-
-        <h4>
-          {lead.annualTurnover}
-        </h4>
-
-      </div>
-
-      <div>
-
-        <small>
-          Additional Requirements
-        </small>
-
-        <h4>
-          {lead.requirements}
-        </h4>
-
-      </div>
-
+      <h4>
+        {lead?.requirements ||
+          lead?.description ||
+          "N/A"}
+      </h4>
     </div>
 
   </div>
 
+</div>
   {/* Notes */}
+<div className="notes-card">
 
-  <div className="notes-card">
+  <h3>
+    Lead Notes (Internal)
+  </h3>
 
-    <h3>
-      Lead Notes (Internal)
-    </h3>
+  <textarea
+    value={notes}
+    onChange={(e) =>
+      setNotes(e.target.value)
+    }
+    placeholder="Add your notes about this lead..."
+  />
 
-    <textarea
-      placeholder="Add your notes about this lead..."
-    />
+  <button
+    className="save-note-btn"
+    onClick={saveNotes}
+  >
 
-    <button className="save-note-btn">
+    <FaSave />
 
-      <FaSave />
+    Save Note
 
-      Save Note
+  </button>
 
-    </button>
-
-  </div>
+</div>
 
   {/* Attachments */}
 
-  <div className="attachment-card">
+ <div className="attachment-card">
 
-    <h3>
-      Attachments (0)
-    </h3>
+  <h3>
+    Attachments (
+    {lead?.documents?.length || 0}
+    )
+  </h3>
 
-    <div className="attachment-box">
+  {
+    lead?.documents?.length > 0 ? (
 
-      <div>
+      <div className="attachments-list">
 
-        <FaFileAlt />
+        {
+          lead.documents.map(
+            (doc, index) => (
 
-        <p>
-          No documents uploaded yet
-        </p>
+              <div
+                className="attachment-item"
+                key={index}
+              >
 
-        <small>
-          Upload documents shared by the lead
-        </small>
+                <div className="attachment-left">
+
+                  <FaFileAlt />
+
+                  <div>
+
+                    <h4>
+                      {doc.fileName}
+                    </h4>
+
+                    <small>
+                      Uploaded by customer
+                    </small>
+
+                  </div>
+
+                </div>
+
+                <a
+                  href={`https://ca-backend-d9tc.onrender.com/uploads/${doc.fileUrl}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="attachment-view-btn"
+                >
+                  View
+                </a>
+
+              </div>
+
+            )
+          )
+        }
 
       </div>
 
-      <button className="upload-btn">
+    ) : (
 
-        <FaUpload />
+      <div className="attachment-box">
 
-        Upload Document
+        <div>
 
-      </button>
+          <FaFileAlt />
 
-    </div>
+          <p>
+            No documents uploaded yet
+          </p>
 
-  </div>
+          <small>
+            Upload documents shared by the lead
+          </small>
 
+        </div>
+
+        <button className="upload-btn">
+
+          <FaUpload />
+
+          Upload Document
+
+        </button>
+
+      </div>
+
+    )
+  }
+
+</div>
 
 
   
 
 </div>
         {/* Content */}
-<div className="lead-sidebar">
+<div className="leaddetails-sidebar">
 
   {/* Lead Status */}
-  <div className="sidebar-card">
+  <div className="leaddetails-status-card">
 
     <h3>Lead Status</h3>
 
-    <select className="status-select">
-      <option>{lead.status || "New"}</option>
-      <option>In Progress</option>
-      <option>Converted</option>
-      <option>Closed</option>
+    <select className="leaddetails-status-select">
+
+      <option>
+        {lead.status || "New"}
+      </option>
+
+      <option>
+        In Progress
+      </option>
+
+      <option>
+        Converted
+      </option>
+
+      <option>
+        Closed
+      </option>
+
     </select>
 
-    <p className="status-text">
+    <p className="leaddetails-status-text">
       Update the status of this lead as you move forward.
     </p>
 
-    <div className="status-list">
+    <div className="leaddetails-status-list">
 
-      <div className="status-item">
-        <span className="dot blue"></span>
+      <div className="leaddetails-status-item">
+
+        <span className="leaddetails-dot leaddetails-blue"></span>
+
         <div>
+
           <h5>New</h5>
-          <small>Just received</small>
+
+          <small>
+            Just received
+          </small>
+
         </div>
+
       </div>
 
-      <div className="status-item">
-        <span className="dot blue"></span>
+      <div className="leaddetails-status-item">
+
+        <span className="leaddetails-dot leaddetails-blue"></span>
+
         <div>
-          <h5>In Progress</h5>
-          <small>Contacted the lead</small>
+
+          <h5>
+            In Progress
+          </h5>
+
+          <small>
+            Contacted the lead
+          </small>
+
         </div>
+
       </div>
 
-      <div className="status-item">
-        <span className="dot green"></span>
+      <div className="leaddetails-status-item">
+
+        <span className="leaddetails-dot leaddetails-green"></span>
+
         <div>
-          <h5>Converted</h5>
-          <small>Lead converted to client</small>
+
+          <h5>
+            Converted
+          </h5>
+
+          <small>
+            Lead converted to client
+          </small>
+
         </div>
+
       </div>
 
-      <div className="status-item">
-        <span className="dot red"></span>
+      <div className="leaddetails-status-item">
+
+        <span className="leaddetails-dot leaddetails-red"></span>
+
         <div>
-          <h5>Closed</h5>
-          <small>Not interested / Lost</small>
+
+          <h5>
+            Closed
+          </h5>
+
+          <small>
+            Not interested / Lost
+          </small>
+
         </div>
+
       </div>
 
     </div>
@@ -585,96 +724,166 @@ if (!lead) {
   </div>
 
   {/* Lead Activity */}
-  <div className="sidebar-card">
+  <div className="leaddetails-activity-card">
 
-    <h3>Lead Activity</h3>
+    <h3>
+      Lead Activity
+    </h3>
 
-    <div className="activity-item">
+    <div className="leaddetails-activity-item">
+
       <FaEnvelope />
+
       <div>
-        <h5>Lead received</h5>
+
+        <h5>
+          Lead received
+        </h5>
+
         <small>
-          {new Date(lead.createdAt).toLocaleString()}
+          {
+            lead?.createdAt
+              ? new Date(
+                  lead.createdAt
+                ).toLocaleString()
+              : "N/A"
+          }
         </small>
+
       </div>
+
     </div>
 
-    <div className="activity-item">
+    <div className="leaddetails-activity-item">
+
       <FaEye />
+
       <div>
-        <h5>Lead viewed your profile</h5>
+
+        <h5>
+          Lead viewed your profile
+        </h5>
+
         <small>
-          {new Date(lead.createdAt).toLocaleString()}
+          {
+            lead?.createdAt
+              ? new Date(
+                  lead.createdAt
+                ).toLocaleString()
+              : "N/A"
+          }
         </small>
+
       </div>
+
     </div>
 
-    <div className="activity-item">
+    <div className="leaddetails-activity-item">
+
       <FaEnvelope />
+
       <div>
-        <h5>Email opened</h5>
+
+        <h5>
+          Email opened
+        </h5>
+
         <small>
-          {new Date(lead.createdAt).toLocaleString()}
+          {
+            lead?.createdAt
+              ? new Date(
+                  lead.createdAt
+                ).toLocaleString()
+              : "N/A"
+          }
         </small>
+
       </div>
+
     </div>
 
-    <div className="activity-item">
+    <div className="leaddetails-activity-item">
+
       <FaRegCommentDots />
+
       <div>
-        <h5>Message sent to lead</h5>
+
+        <h5>
+          Message sent to lead
+        </h5>
+
         <small>
-          {new Date(lead.createdAt).toLocaleString()}
+          {
+            lead?.createdAt
+              ? new Date(
+                  lead.createdAt
+                ).toLocaleString()
+              : "N/A"
+          }
         </small>
+
       </div>
+
     </div>
 
   </div>
 
   {/* Quick Actions */}
-  <div className="sidebar-card">
+  <div className="leaddetails-quickactions-card">
 
-    <h3>Quick Actions</h3>
+    <h3>
+      Quick Actions
+    </h3>
 
-    <button className="quick-btn">
+    <button className="leaddetails-quick-btn">
+
       <FaRegCommentDots />
+
       Send Message
+
     </button>
 
-    <button className="quick-btn">
+    <button className="leaddetails-quick-btn">
+
       <FaStickyNote />
+
       Add Note
+
     </button>
 
-    <button className="quick-btn">
+    <button className="leaddetails-quick-btn">
+
       <FaUpload />
+
       Upload Document
+
     </button>
 
   </div>
 
   {/* Need Help */}
-  <div className="sidebar-card">
+  <div className="leaddetails-help-card">
 
-    <div className="help-icon">
+    <div className="leaddetails-help-icon">
       ?
     </div>
 
-    <h4>Need Help?</h4>
+    <h4>
+      Need Help?
+    </h4>
 
     <p>
       If you have any questions or need assistance,
       we're here to help.
     </p>
 
-    <a href="Support">
+    <a href="/support">
       Contact Support
     </a>
 
   </div>
 
 </div>
-       
 
       </div>
 
