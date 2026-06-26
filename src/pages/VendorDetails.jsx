@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 
 import "./VendorDetails.css";
@@ -37,14 +37,18 @@ import {
 
 
 function VendorDetails() {
+  const recentAdded = useRef(false);
   const { id } = useParams();
 const navigate = useNavigate();
   const [vendor, setVendor] =
     useState(null);
-
 useEffect(() => {
   fetchVendor();
-  addRecentView();
+
+  if (!recentAdded.current) {
+    recentAdded.current = true;
+    addRecentView();
+  }
 }, [id]);
 
   const fetchVendor = async () => {
@@ -201,10 +205,11 @@ useEffect(() => {
 
       <div className="profile-stats">
 
-        <span>
-          <FaStar className="star-icon" />
-          4.9 (128 Reviews)
-        </span>
+      
+  <span>
+  <FaStar className="star-icon" />
+  {vendor.rating || 4.9} ({vendor.totalReviews || 128} Reviews)
+</span>
 
         <span>
           <FaBriefcase />

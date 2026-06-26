@@ -51,29 +51,29 @@ const navigate = useNavigate();
   }, []);
 
   const fetchLeads = async () => {
+  try {
 
-    try {
+    const vendorId =
+      localStorage.getItem("vendorId");
 
-      const vendorId =
-        localStorage.getItem("vendorId");
+    const res = await axios.get(
+      `https://ca-backend-d9tc.onrender.com/api/enquiries/vendor/${vendorId}`
+    );
 
-      const res = await axios.get(
-        `https://ca-backend-d9tc.onrender.com/api/enquiries/vendor/${vendorId}`
-      );
+    setLeads(
+      res.data.enquiries || []
+    );
 
-      setLeads(res.data);
+  } catch (err) {
 
-    } catch (err) {
+    console.log(err);
 
-      console.log(err);
+  } finally {
 
-    } finally {
+    setLoading(false);
 
-      setLoading(false);
-
-    }
-
-  };
+  }
+};
 
   const fetchVendor = async () => {
 
@@ -259,7 +259,7 @@ const navigate = useNavigate();
 
         <div className="lead-actions">
 
-          <button className="filter-btn">
+          <button className="filte-btn">
             <FaFilter />
             Filters
           </button>
@@ -337,21 +337,18 @@ const navigate = useNavigate();
 
     <div className="lead-budget-box">
 
-      <span>
-        Business Type
-      </span>
+       <span>Budget</span>
 
-      <h4>
-        {lead.businessType || "N/A"}
-      </h4>
+  <h5>
+    {lead.budget || "Not Provided"}
+  </h5>
 
-      <span>
-        Structure
-      </span>
 
-      <h5>
-        {lead.businessStructure || "N/A"}
-      </h5>
+  <span>Timeline</span>
+
+  <h5>
+    {lead.timeline || "Not Provided"}
+  </h5>
 
     </div>
 

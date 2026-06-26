@@ -41,23 +41,35 @@ function FreeEnquiry() {
     useState(1);
 const handleSubmit = async () => {
   try {
+
+    const user = JSON.parse(
+      localStorage.getItem("user")
+    );
+
     await axios.post(
       "https://ca-backend-d9tc.onrender.com/api/enquiries",
       {
         vendorId,
+        userId: user?._id,
         ...formData,
       }
     );
 
-    alert("Enquiry Submitted Successfully");
-
-    navigate("/enquiry-success");
+    alert(
+      "Enquiry Submitted Successfully"
+    );
 
   } catch (err) {
+
     console.log(err);
-    alert("Failed to submit enquiry");
+
+    alert(
+      "Failed to submit enquiry"
+    );
+
   }
 };
+
   const steps = [
     {
       id: 1,
@@ -105,6 +117,10 @@ const [formData, setFormData] = useState({
   annualTurnover: "",
   businessStructure: "",
   panNumber: "",
+
+  budget: "",
+  timeline: "",
+
   requirements: "",
   files: [],
 });
@@ -816,6 +832,70 @@ useEffect(() => {
       Share more details about your requirement
     </p>
 
+
+<div className="requirement-extra-fields">
+
+  <div className="form-group">
+    <label>Budget Range</label>
+
+    <select
+      value={formData.budget}
+      onChange={(e) =>
+        setFormData({
+          ...formData,
+          budget: e.target.value
+        })
+      }
+    >
+      <option value="">
+        Select Budget
+      </option>
+
+      <option>Below ₹1,000</option>
+      <option>₹1,000 - ₹2,000</option>
+      <option>₹3,000 - ₹4,000</option>
+      <option>₹4,000 - ₹5,000</option>
+      <option>Above ₹5,000</option>
+    </select>
+
+  </div>
+
+  <div className="form-group">
+
+    <label>Expected Timeline</label>
+
+    <select
+      value={formData.timeline}
+      onChange={(e) =>
+        setFormData({
+          ...formData,
+          timeline: e.target.value
+        })
+      }
+    >
+      <option value="">
+        Select Timeline
+      </option>
+
+      <option>Immediate</option>
+      <option>Within 1 Week</option>
+      <option>Within 2 Weeks</option>
+      <option>Within 1 Month</option>
+      <option>Flexible</option>
+    </select>
+
+  </div>
+
+</div>
+
+
+
+
+
+
+
+
+
     <textarea
       rows="6"
       placeholder="Tell us more about your requirement..."
@@ -900,28 +980,32 @@ useEffect(() => {
   </label>
 
 </div>
+{!isFormValid && (
+  <p className="enquiry-warning">
+    Please fill all the details to submit your enquiry.
+  </p>
+)}
 <div className="enquiry-footer">
 
   <button
     className="cancel-btn"
-    onClick={() =>
-      navigate(-1)
-    }
+    onClick={() => navigate(-1)}
   >
     Cancel
   </button>
 
-<button
-  className={`review-btn ${
-    !isFormValid ? "disabled" : ""
-  }`}
-  disabled={!isFormValid}
-  onClick={handleSubmit}
->
-  Submit Enquiry  →
-</button>
+  <button
+    className={`review-btn ${
+      !isFormValid ? "disabled" : ""
+    }`}
+    disabled={!isFormValid}
+    onClick={handleSubmit}
+  >
+    Submit Enquiry →
+  </button>
 
 </div>
+
 
 </div>
 <div className="right-sidebar">

@@ -2,6 +2,10 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import UserSidebar from "../components/UserSidebar";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+
+dayjs.extend(relativeTime);
 
 import {
     FaHeart,
@@ -32,6 +36,9 @@ function UserSavedCA() {
     const [loading, setLoading] = useState(true);
     const [search, setSearch] = useState("");
     const [sortBy, setSortBy] = useState("recent");
+   
+    const [showComparePopup, setShowComparePopup] = useState(false);
+const [showCompareTable, setShowCompareTable] = useState(false);
 
 useEffect(() => {
   fetchSavedCAs();
@@ -158,8 +165,226 @@ const fetchCompare = async () => {
         ca.fullName.toLowerCase().includes(search.toLowerCase())
     );
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     return (
         <>
+        
+
+{showComparePopup && (
+  <div className="compare-popup-overlay">
+
+    <div className="compare-popup">
+
+      <div className="compare-popup-header">
+
+        <h2>Compare CAs ({compareCAs.length}/4)</h2>
+
+        <button
+          className="compare-close"
+          onClick={() => {
+            setShowComparePopup(false);
+            setShowCompareTable(false);
+          }}
+        >
+          ✕
+        </button>
+
+      </div>
+
+      {/* IKKADE NUVVU PAMPIINA compare-popup-body PASTE CHEYYALI */}
+
+      <div className="compare-popup-body">
+
+        {!showCompareTable ? (
+
+          <>
+            {compareCAs.map((item) => (
+
+              <div
+                className="compare-popup-card"
+                key={item.vendor._id}
+              >
+
+                <img
+                  src={
+                    item.vendor.photo
+                      ? `http://localhost:5000/uploads/${item.vendor.photo}`
+                      : "/avatar.png"
+                  }
+                  alt=""
+                />
+
+                <div className="compare-popup-info">
+
+                  <h4>{item.vendor.fullName}</h4>
+
+                  <p>{item.vendor.designation}</p>
+
+                  <span>⭐ {item.vendor.rating || 4.8}</span>
+
+                </div>
+
+              </div>
+
+            ))}
+
+          </>
+
+        ) : (
+
+          <div className="compare-table">
+
+            <div className="compare-row compare-header">
+
+              <div>Feature</div>
+
+              {compareCAs.map((item) => (
+
+                <div key={item.vendor._id}>
+
+                  <img
+                    src={
+                      item.vendor.photo
+                        ? `http://localhost:5000/uploads/${item.vendor.photo}`
+                        : "/avatar.png"
+                    }
+                    alt=""
+                  />
+
+                  <h4>{item.vendor.fullName}</h4>
+
+                </div>
+
+              ))}
+
+            </div>
+
+            <div className="compare-row">
+
+              <div>Designation</div>
+
+              {compareCAs.map((item) => (
+                <div key={item.vendor._id + "designation"}>
+                  {item.vendor.designation}
+                </div>
+              ))}
+
+            </div>
+
+            <div className="compare-row">
+
+              <div>Experience</div>
+
+              {compareCAs.map((item) => (
+                <div key={item.vendor._id + "experience"}>
+                  {item.vendor.experience} Years
+                </div>
+              ))}
+
+            </div>
+
+            <div className="compare-row">
+
+              <div>Rating</div>
+
+              {compareCAs.map((item) => (
+                <div key={item.vendor._id + "rating"}>
+                  ⭐ {item.vendor.rating || 4.8}
+                </div>
+              ))}
+
+            </div>
+
+            <div className="compare-row">
+
+              <div>Firm</div>
+
+              {compareCAs.map((item) => (
+                <div key={item.vendor._id + "firm"}>
+                  {item.vendor.firmName}
+                </div>
+              ))}
+
+            </div>
+
+            <div className="compare-row">
+
+              <div>Location</div>
+
+              {compareCAs.map((item) => (
+                <div key={item.vendor._id + "location"}>
+                  {item.vendor.city}
+                </div>
+              ))}
+
+            </div>
+
+            <div className="compare-row">
+
+              <div>Status</div>
+
+              {compareCAs.map((item) => (
+                <div key={item.vendor._id + "status"}>
+                  {item.vendor.available ? "Available" : "Unavailable"}
+                </div>
+              ))}
+
+            </div>
+
+          </div>
+
+        )}
+
+      </div>
+
+      <div className="compare-popup-footer">
+
+        {!showCompareTable && (
+          <button
+            className="compare-now-btn"
+            onClick={() => setShowCompareTable(true)}
+          >
+            Compare Now
+          </button>
+        )}
+
+      </div>
+
+    </div>
+
+  </div>
+)}
+
+
             <UserSidebar />
             <div className="dashboard-header">
 
@@ -313,7 +538,6 @@ const fetchCompare = async () => {
 
                 <span>({ca.totalReviews || 128} Reviews)</span>
 
-                <span className="usersavedca-dot">•</span>
 
                 <span>{ca.experience}+ Years Exp.</span>
 
@@ -394,7 +618,7 @@ const fetchCompare = async () => {
 
         <div
           className="usersavedca-recent-card"
-          key={ca.vendor._id}
+          key={`${ca.vendor._id}-${ca.viewedAt}`}
         >
 
           <img
@@ -419,6 +643,9 @@ const fetchCompare = async () => {
             <span>(128 Reviews)</span>
 
           </div>
+          <p className="usersavedca-recent-time">
+  {dayjs(ca.viewedAt).fromNow()}
+</p>
 
         </div>
 
@@ -558,14 +785,15 @@ const fetchCompare = async () => {
     >
       + Add another CA to compare
     </button>
-
-    <button
-      className="compare-btn"
-      onClick={() => navigate("/compare")}
-    >
-      Compare Now
-    </button>
-
+<button
+  className="compare-btn"
+  onClick={() => {
+    setShowComparePopup(true);
+    setShowCompareTable(false);
+  }}
+>
+  Compare Now
+</button>
   </div>
 
   {/* Help */}
@@ -579,10 +807,12 @@ const fetchCompare = async () => {
       find the right CA.
     </p>
 
-    <button className="usersavedca-help-btn">
-      Contact Support
-    </button>
-
+   <Link
+  to="/support"
+  className="usersavedca-help-btn"
+>
+  Contact Support
+</Link>
   </div>
 
 </div>
