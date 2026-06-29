@@ -10,9 +10,20 @@ import {
   FaRegClock,
   FaHourglassHalf,
   FaCheckCircle,
-  FaPlus
+  FaPlus,
+  FaEye,
+  FaChevronRight,
+  FaQuestionCircle,
+  FaCalendarAlt,
+  FaHeadset,
+  FaComments
+
 } from "react-icons/fa";
 import "./UserEnquiry.css";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+
+dayjs.extend(relativeTime);
 
 function UserEnquiry() {
 
@@ -41,26 +52,27 @@ function UserEnquiry() {
   }, []);
 
   // ================= User Profile =================
-  const fetchUser = async () => {
-    try {
+ const fetchUser = async () => {
+  try {
+    const token = localStorage.getItem("token");
 
-      const token = localStorage.getItem("token");
+    const res = await axios.get(
+      "https://ca-backend-d9tc.onrender.com/api/users/profile",
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
 
-      const res = await axios.get(
-        "http://localhost:5000/api/users/profile",
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+    console.log("PROFILE RESPONSE:", res.data);
 
-      setUser(res.data.user);
+    setUser(res.data.user);
 
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  } catch (err) {
+    console.log(err);
+  }
+};
 
   // ================= Enquiries =================
  const fetchEnquiries = async () => {
@@ -75,7 +87,7 @@ function UserEnquiry() {
     const token = localStorage.getItem("token");
 
     const res = await axios.get(
-      `http://localhost:5000/api/enquiries/user/${storedUser._id}`,
+      `https://ca-backend-d9tc.onrender.com/api/enquiries/user/${storedUser._id}`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -180,26 +192,23 @@ function UserEnquiry() {
 
           </button>
 
-          <div className="userenquiry-user">
+        <div className="userenquiry-user">
 
-            <img
-              src={
-                user.profileImage
-                  ? `http://localhost:5000${user.profileImage}`
-                  : "/avatar.png"
-              }
-              alt=""
-            />
+  <img
+    src={
+      user?.profileImage
+        ? `https://ca-backend-d9tc.onrender.com${user.profileImage}`
+        : "/avatar.png"
+    }
+    alt=""
+  />
 
-            <div>
+  <div>
+    <h4>{user?.name || user?.fullName || "Guest User"}</h4>
+   
+  </div>
 
-              <h4>{user.name}</h4>
-
-              <p>Business User</p>
-
-            </div>
-
-          </div>
+</div>
 
         </div>
 
@@ -361,31 +370,116 @@ function UserEnquiry() {
 
               <td>#{item._id.slice(-8)}</td>
 
-              <td>
-                <strong>{item.requirements}</strong>
-              </td>
+             <td>
+  <strong className="userenquiry-subject">
+    {item.requirements}
+  </strong>
+</td>
 
               <td>
                 {item.serviceName?.join(", ")}
               </td>
+<td>
+  <span className={`enquiry-status ${item.status}`}>
+    {item.status}
+  </span>
+</td>
+<td>
 
-              <td>
-                {item.status}
-              </td>
+  <div className="enquiry-vendor">
 
-              <td>
-                {item.vendorId?.fullName}
-              </td>
+    <img
+      src={
+        item.vendorId?.photo
+          ? `https://ca-backend-d9tc.onrender.com/uploads/${item.vendorId.photo}`
+          : "/avatar.png"
+      }
+      alt=""
+      className="enquiry-vendor-img"
+    />
 
-              <td>
-                {new Date(
-                  item.createdAt
-                ).toLocaleDateString()}
-              </td>
+    <div>
 
-              <td>
-                View
-              </td>
+      <h4>
+        {item.vendorId?.fullName ||
+          "Awaiting CA Response"}
+      </h4>
+
+     <p>
+  {item.vendorId
+    ? dayjs(
+        item.updatedAt
+      ).fromNow()
+    : "Awaiting response"}
+</p>
+    </div>
+
+  </div>
+
+</td>
+<td>
+
+  <div className="enquiry-date-box">
+
+    <span>
+      {new Date(
+        item.createdAt
+      ).toLocaleDateString(
+        "en-IN",
+        {
+          day: "2-digit",
+          month: "short",
+          year: "numeric",
+        }
+      )}
+    </span>
+
+    <small>
+      {new Date(
+        item.createdAt
+      ).toLocaleTimeString(
+        "en-IN",
+        {
+          hour: "2-digit",
+          minute: "2-digit",
+          hour12: true,
+        }
+      )}
+    </small>
+
+  </div>
+
+</td>
+
+            <td>
+
+<div className="enquiry-actions">
+
+  <button
+  className="action-btn view"
+  onClick={() =>
+    navigate(
+      `/enquiry-details/${item._id}`
+    )
+  }
+>
+  <FaEye />
+</button>
+
+  <button
+    className="action-btn open"
+    onClick={() =>
+      navigate(
+        `/vendor/${item.vendorId?._id}`
+      )
+    }
+  >
+    <FaChevronRight />
+  </button>
+
+</div>
+
+</td>
 
             </tr>
 
@@ -400,71 +494,178 @@ function UserEnquiry() {
   </div>
 
   {/* RIGHT SIDE */}
-  <div className="userenquiry-rightpanel">
+<div className="userenquiry-rightpanel">
 
-    {/* Overview */}
-    <div className="overview-card">
+  {/* OVERVIEW */}
+  <div className="overview-card">
 
-      <h3>Enquiries Overview</h3>
+    <h3>Enquiries Overview</h3>
 
-      <div className="overview-grid">
+    <div className="overview-grid">
 
-        <div className="overview-box">
+      <div className="overview-box total">
+        <div className="overview-top">
           <h2>{stats.all}</h2>
-          <p>Total Enquiries</p>
+          <FaClipboardList className="overview-icon" />
         </div>
 
-        <div className="overview-box">
+        <p>Total Enquiries</p>
+      </div>
+
+      <div className="overview-box active">
+        <div className="overview-top">
           <h2>{stats.active}</h2>
-          <p>Active Enquiries</p>
+          <FaRegCommentDots className="overview-icon" />
         </div>
 
-        <div className="overview-box">
+        <p>Active Enquiries</p>
+      </div>
+
+      <div className="overview-box pending">
+        <div className="overview-top">
           <h2>{stats.pending}</h2>
-          <p>Pending Responses</p>
+          <FaHourglassHalf className="overview-icon" />
         </div>
 
-        <div className="overview-box">
+        <p>Pending Responses</p>
+      </div>
+
+      <div className="overview-box closed">
+        <div className="overview-top">
           <h2>{stats.closed}</h2>
-          <p>Closed Enquiries</p>
+          <FaCheckCircle className="overview-icon" />
         </div>
 
+        <p>Closed Enquiries</p>
       </div>
 
     </div>
 
-    {/* Quick Actions */}
-    <div className="quick-actions">
+  </div>
 
-      <h3>Quick Actions</h3>
+  {/* QUICK ACTIONS */}
+<div className="quick-actions">
 
-      <button>New Enquiry</button>
-      <button>Check Enquiry Status</button>
-      <button>Browse Services</button>
-      <button>Schedule Appointment</button>
+  <h3>Quick Actions</h3>
+
+  <div
+    className="quick-item"
+    onClick={() => navigate("/find-ca")}
+  >
+    <div className="quick-left">
+
+      <div className="quick-icon blue">
+        <FaPlus />
+      </div>
+
+      <div>
+        <h4>New Enquiry</h4>
+        <p>Ask a new question</p>
+      </div>
+
+    </div>
+
+    <FaChevronRight />
+  </div>
+
+  <div className="quick-item">
+
+    <div className="quick-left">
+
+      <div className="quick-icon purple">
+        <FaSearch />
+      </div>
+
+      <div>
+        <h4>Check Enquiry Status</h4>
+        <p>Track your enquiry status</p>
+      </div>
 
     </div>
 
-    {/* Help */}
-    <div className="help-card">
-
-      <h3>Need Help?</h3>
-
-      <p>
-        Our support team is here to assist you.
-      </p>
-
-     
-        <Link
-       to="/support"
-       className="usersavedca-help-btn"
-     >
-       Contact Support
-     </Link>
-
-    </div>
+    <FaChevronRight />
 
   </div>
+
+  <div
+    className="quick-item"
+    onClick={() => navigate("/service")}
+  >
+
+    <div className="quick-left">
+
+      <div className="quick-icon green">
+        <FaClipboardList />
+      </div>
+
+      <div>
+        <h4>Browse Services</h4>
+        <p>Explore our services</p>
+      </div>
+
+    </div>
+
+    <FaChevronRight />
+
+  </div>
+
+  <div
+    className="quick-item"
+    onClick={() =>
+      navigate(
+        `/book-consultation/${enquiries[0]?.vendorId?._id}`
+      )
+    }
+  >
+
+    <div className="quick-left">
+
+      <div className="quick-icon orange">
+        <FaRegClock />
+      </div>
+
+      <div>
+        <h4>Schedule Appointment</h4>
+        <p>Book a consultation</p>
+      </div>
+
+    </div>
+
+    <FaChevronRight />
+
+  </div>
+
+</div>
+
+  {/* HELP */}
+<div className="help-card">
+
+  <div className="help-header">
+
+    <div className="help-icon">
+      <FaHeadset />
+    </div>
+
+    <h3>Need Help?</h3>
+
+  </div>
+
+  <p>
+    Our support team is here to assist you
+    with your enquiries.
+  </p>
+
+  <Link
+    to="/support"
+    className="help-btn"
+  >
+    Contact Support
+    <FaChevronRight />
+  </Link>
+
+</div>
+
+</div>
 
 </div>
 

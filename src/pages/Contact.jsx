@@ -136,7 +136,7 @@ const faqData = [
 
             <div>
               <h4>Phone</h4>
-              <p>+91 22 1234 5678</p>
+              <p>+91 99999 99999</p>
               <span>Mon - Sat | 9:00 AM - 7:00 PM</span>
             </div>
           </div>
@@ -148,7 +148,7 @@ const faqData = [
 
             <div>
               <h4>Email</h4>
-              <p>support@caconnect.com</p>
+              <p>support@bussult.com</p>
               <span>We reply within 24 hours</span>
             </div>
           </div>
@@ -161,7 +161,7 @@ const faqData = [
             <div>
               <h4>Office</h4>
               <p>
-                CA Connect Private Limited,
+                Bussult Private Limited,
                 12th Floor, Times Square Building,
                 Andheri East,
                 Mumbai - 400059,India

@@ -971,6 +971,216 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* =========================
+   PAYMENT SECTION
+========================= */
+
+.bc-payment-summary{
+  border:1px solid #e2e8f0;
+  border-radius:12px;
+  padding:18px;
+  margin-bottom:18px;
+  background:#fff;
+}
+
+.bc-payment-summary div{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.bc-payment-summary span{
+  font-size:15px;
+  color:#64748b;
+}
+
+.bc-payment-summary strong{
+  font-size:26px;
+  font-weight:700;
+  color:#0f172a;
+}
+
+/* Secure Box */
+
+.bc-secure-box{
+  display:flex;
+  align-items:center;
+  gap:15px;
+
+  padding:15px 18px;
+
+  border:1px solid #bbf7d0;
+  background:#f0fdf4;
+
+  border-radius:12px;
+
+  margin-bottom:25px;
+}
+
+.bc-secure-box svg{
+  color:#16a34a;
+  font-size:24px;
+}
+
+.bc-secure-box h4{
+  margin:0;
+  font-size:15px;
+  color:#166534;
+}
+
+.bc-secure-box span{
+  font-size:13px;
+  color:#15803d;
+}
+
+/* Payment Title */
+
+.bc-payment-title{
+  font-size:16px;
+  font-weight:700;
+  color:#0f172a;
+  margin-bottom:18px;
+}
+
+/* Payment Methods */
+
+.bc-payment-methods{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:15px;
+  margin-bottom:25px;
+}
+
+.bc-payment-option{
+  border:2px solid #e2e8f0;
+  border-radius:14px;
+
+  padding:18px;
+
+  display:flex;
+  align-items:center;
+  gap:14px;
+
+  cursor:pointer;
+  transition:0.3s ease;
+
+  background:#fff;
+}
+
+.bc-payment-option:hover{
+  border-color:#2563eb;
+}
+
+.bc-payment-option.active{
+  border-color:#2563eb;
+  background:#eff6ff;
+}
+
+.bc-payment-option input{
+  width:18px;
+  height:18px;
+  accent-color:#2563eb;
+}
+
+.bc-payment-option h5{
+  margin:0;
+  font-size:15px;
+  font-weight:700;
+  color:#0f172a;
+}
+
+.bc-payment-option span{
+  font-size:12px;
+  color:#64748b;
+}
+
+/* Pay Button */
+
+.bc-pay-btn{
+  width:100%;
+  height:56px;
+
+  border:none;
+  border-radius:12px;
+
+  background:#2563eb;
+  color:#fff;
+
+  font-size:16px;
+  font-weight:700;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:10px;
+
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.bc-pay-btn:hover{
+  background:#1d4ed8;
+}
+
+.bc-pay-btn svg{
+  font-size:18px;
+}
+
+/* Mobile */
+
+@media(max-width:768px){
+
+  .bc-payment-methods{
+    grid-template-columns:1fr;
+  }
+
+  .bc-payment-option{
+    padding:15px;
+  }
+
+  .bc-payment-summary strong{
+    font-size:22px;
+  }
+
+  .bc-pay-btn{
+    height:52px;
+    font-size:15px;
+  }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
 .bookconsult-right{
   display:flex;
   flex-direction:column;

@@ -43,6 +43,7 @@ import AdminUsers from "./pages/AdminUsers";
 import AdminLeads from "./pages/AdminLeads";
 import VendorLeads from "./pages/VendorLeads";
 import LeadDetails from "./pages/LeadDetails";
+import UserAppointments from "./pages/UserAppointments";
 
 import BlogDetails from "./pages/BlogDetails";
 import AdminBlogs from "./pages/AdminBlogs";
@@ -76,7 +77,8 @@ function Layout() {
    "/admin-users",
    "/login",
    "/user-saved-ca",
-   "/user-enquiry"
+   "/user-enquiry",
+   "/user-appointments"
 ];
 
 const hideNavbarFooter =
@@ -106,8 +108,9 @@ const hideNavbarFooter =
          <Route path="/blogs" element={<Blogs />} />
         <Route path="/vendor/:id" element={<VendorDetails/>}/>
         <Route path="/free-enquiry/:vendorId" element={<FreeEnquiry />}/>
-        <Route path="/book-consultation/:id" element={<BookConsultation />}
-  />
+        <Route path="/book-consultation/:id" element={<BookConsultation />}  />
+      
+
         
           {/* Admin Pages */}
 
@@ -197,6 +200,8 @@ const hideNavbarFooter =
             <Route path="/user-account-verification" element={<UserAccountVerification />} />
             <Route path="/user-saved-ca" element={<UserSavedCA />} />
              <Route path="/user-enquiry" element={<UserEnquiry />} />
+             <Route path="/user-appointments" element={<UserAppointments />} />
+               <Route path="/enquiry-details/:id" element={<FreeEnquiry />} />
 
       </Routes>
 

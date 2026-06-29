@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+
 import axios from "axios";
+import { useParams, useNavigate } from "react-router-dom";
 
 import Navbar from "../components/Navbar";
 import "./BookConsultation.css";
@@ -27,6 +28,9 @@ import "react-calendar/dist/Calendar.css";
 
 
 function BookConsultation() {
+  const navigate = useNavigate();
+  const [paymentMethod, setPaymentMethod] =
+  useState("upi");
 const [selectedDate, setSelectedDate] = useState(new Date());
   const { id } = useParams();
 
@@ -203,6 +207,133 @@ useEffect(() => {
     }
 
   };
+
+
+
+const openRazorpay = async () => {
+
+  try {
+
+    // Validation
+    if (!formData.purpose) {
+      alert("Please select a service");
+      return;
+    }
+
+    if (!consultationFee || consultationFee < 1) {
+      alert("Invalid consultation amount");
+      return;
+    }
+
+    console.log("Consultation Fee:", consultationFee);
+
+  const { data } = await axios.post(
+  "https://ca-backend-d9tc.onrender.com/api/payment/create-order",
+  {
+    amount: consultationFee
+  }
+);
+  
+    const options = {
+
+      key: "rzp_test_T71LVMkGCB6Mxh",
+
+      amount: data.amount,
+
+      currency: data.currency,
+
+      order_id: data.id,
+
+      name: "CA Connect",
+
+      description: "Consultation Booking",
+
+     handler: async function (response) {
+
+  try {
+
+    const token =
+      localStorage.getItem("token");
+
+    const storedUser =
+      JSON.parse(
+        localStorage.getItem("user")
+      );
+
+   const bookingRes =
+  await axios.post(
+    "https://ca-backend-d9tc.onrender.com/api/consultations/book",
+    {
+      userId: storedUser._id,
+      vendorId: vendor._id,
+      serviceName: formData.purpose,
+      appointmentDate: selectedDate,
+      startTime: selectedTime,
+      mode: "video",
+      amount: consultationFee,
+      paymentMethod,
+      paymentId: response.razorpay_payment_id,
+      razorpayOrderId: response.razorpay_order_id,
+      paymentStatus: "paid",
+      notes: formData.notes
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    }
+  );
+
+console.log(
+  "Consultation Saved:",
+  bookingRes.data
+);
+
+alert("Booking Successful");
+
+navigate("/user-appointments");
+  } catch (error) {
+
+    console.log(
+      "Booking Error:",
+      error.response?.data ||
+      error.message
+    );
+
+  }
+},
+
+      prefill: {
+
+        name: formData.fullName,
+
+        email: formData.email,
+
+        contact: formData.mobile
+
+      },
+
+      theme: {
+        color: "#2563eb"
+      }
+    };
+
+    const razorpay =
+      new window.Razorpay(
+        options
+      );
+
+    razorpay.open();
+
+  } catch (err) {
+
+    console.log(
+      "Razorpay Error:",
+      err
+    );
+
+  }
+};
 
   if (!vendor) {
 
@@ -659,45 +790,135 @@ const consultationFee =
 </div>
 </div>
 
-      <div className="bc-card">
+<div className="bc-card">
 
-  <h3>
-    4. Confirm & Payment
-  </h3>
+  <h3>4. Confirm & Payment</h3>
 
   <p>
-    Review and complete payment.
+    Review your booking details and complete payment.
   </p>
 
   <div className="bc-payment-summary">
 
     <div>
-
-      <span>
-        Consultation Fee
-      </span>
+      <span>Consultation Fee</span>
 
       <strong>
-
-        
-       ₹{consultationFee}
-
+        ₹ {consultationFee}
       </strong>
+    </div>
 
+  </div>
+
+  <div className="bc-secure-box">
+    <FaShieldAlt />
+
+    <div>
+      <h4>100% Secure Checkout</h4>
+      <span>
+        Your payment is safe and encrypted.
+      </span>
+    </div>
+  </div>
+
+  <h4 className="bc-payment-title">
+    Select Payment Method
+  </h4>
+
+  <div className="bc-payment-methods">
+
+    <div
+      className={`bc-payment-option ${
+        paymentMethod === "upi"
+          ? "active"
+          : ""
+      }`}
+      onClick={() =>
+        setPaymentMethod("upi")
+      }
+    >
+      <input
+        type="radio"
+        checked={
+          paymentMethod === "upi"
+        }
+        readOnly
+      />
+
+      <div>
+        <h5>UPI</h5>
+        <span>
+          Pay using any UPI app
+        </span>
+      </div>
+    </div>
+
+    <div
+      className={`bc-payment-option ${
+        paymentMethod === "card"
+          ? "active"
+          : ""
+      }`}
+      onClick={() =>
+        setPaymentMethod("card")
+      }
+    >
+      <input
+        type="radio"
+        checked={
+          paymentMethod === "card"
+        }
+        readOnly
+      />
+
+      <div>
+        <h5>Credit / Debit Card</h5>
+        <span>
+          Visa, MasterCard
+        </span>
+      </div>
+    </div>
+
+    <div
+      className={`bc-payment-option ${
+        paymentMethod ===
+        "netbanking"
+          ? "active"
+          : ""
+      }`}
+      onClick={() =>
+        setPaymentMethod(
+          "netbanking"
+        )
+      }
+    >
+      <input
+        type="radio"
+        checked={
+          paymentMethod ===
+          "netbanking"
+        }
+        readOnly
+      />
+
+      <div>
+        <h5>Net Banking</h5>
+        <span>
+          Pay using your bank
+        </span>
+      </div>
     </div>
 
   </div>
 
   <button
     className="bc-pay-btn"
-    onClick={handleBooking}
+    onClick={openRazorpay}
   >
+    <FaLock />
 
-    <FaCreditCard />
-
-    Pay &
-    Confirm Booking
-
+    Pay ₹ {consultationFee}
+    & Confirm Booking
   </button>
 
 </div>

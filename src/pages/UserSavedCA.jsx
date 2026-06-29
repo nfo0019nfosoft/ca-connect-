@@ -52,12 +52,17 @@ useEffect(() => {
 }, [savedCAs]);
 
 
-
-    const fetchSavedCAs = async () => {
+const fetchSavedCAs = async () => {
   try {
+
     const token = localStorage.getItem("token");
 
-    const res = await axios.get(
+    if (!token) {
+      setLoading(false);
+      return;
+    }
+
+    const response = await axios.get(
       "http://localhost:5000/api/saved/save",
       {
         headers: {
@@ -66,35 +71,60 @@ useEffect(() => {
       }
     );
 
-    console.log("Saved API:", res.data);
+    console.log(
+      "Saved CAs:",
+      response.data.savedCAs
+    );
 
-    setSavedCAs(res.data.savedCAs || []);
+    setSavedCAs(
+      response.data.savedCAs || []
+    );
 
-  } catch (err) {
-    console.log(err);
+  } catch (error) {
+
+    console.error(
+      "Error fetching saved CAs:",
+      error.response?.data ||
+      error.message
+    );
+
   } finally {
+
     setLoading(false);
+
   }
 };
 
 
 
 const fetchRecentViewed = async () => {
-  const token = localStorage.getItem("token");
+  try {
+    const token = localStorage.getItem("token");
 
-  const res = await axios.get(
-    "http://localhost:5000/api/recent",
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    }
-  );
+    console.log("TOKEN =>", token);
 
-  setRecentViewed(res.data);
+    const res = await axios.get(
+      "http://localhost:5000/api/recent",
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    console.log("RECENT API =>", res.data);
+
+    setRecentViewed(res.data || []);
+
+  } catch (err) {
+    console.log(
+      "RECENT ERROR =>",
+      err.response?.data || err.message
+    );
+
+    setRecentViewed([]);
+  }
 };
-
-
 
 
 
@@ -160,6 +190,38 @@ const fetchCompare = async () => {
 
         }
     };
+
+
+
+
+
+
+
+
+
+    const removeCompare = async (vendorId) => {
+  try {
+    const token = localStorage.getItem("token");
+
+    await axios.delete(
+      `http://localhost:5000/api/compare/${vendorId}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    setCompareCAs((prev) =>
+      prev.filter(
+        (item) => item.vendor._id !== vendorId
+      )
+    );
+
+  } catch (err) {
+    console.log(err);
+  }
+};
 
     const filteredCAs = savedCAs.filter((ca) =>
         ca.fullName.toLowerCase().includes(search.toLowerCase())
@@ -422,23 +484,18 @@ const fetchCompare = async () => {
 
                   <div className="dashboard-user">
   <img
-    src={
-      user.profileImage
-        ? `http://localhost:5000${user.profileImage}`
-        : "/avatar.png"
-    }
-    alt={user.name}
-  />
+  src={
+    user?.profileImage
+      ? `http://localhost:5000${user.profileImage}`
+      : "/avatar.png"
+  }
+  alt={user?.name || "User"}
+/>
 
+<h4>{user?.name || user?.fullName || "Guest User"}</h4>
  
 
-                        <div>
 
-                            <h4>{user.name}</h4>
-
-
-
-                        </div>
 
 
 

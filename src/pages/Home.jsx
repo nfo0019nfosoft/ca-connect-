@@ -124,13 +124,9 @@ const handleSaveVendor = async (vendorId) => {
   const token = localStorage.getItem("token");
 
   if (!token) {
-
-    alert("Please login to save vendors.");
-
+    alert("Please login to save vendors");
     navigate("/login");
-
     return;
-
   }
 
   try {
@@ -147,23 +143,65 @@ const handleSaveVendor = async (vendorId) => {
 
     alert(res.data.message);
 
-    setSavedVendors((prev) => [...prev, vendorId]);
+    if (!savedVendors.includes(vendorId)) {
+      setSavedVendors(prev => [
+        ...prev,
+        vendorId
+      ]);
+    }
 
   } catch (err) {
 
     console.log(err);
 
-    alert("Unable to save vendor.");
+    alert("Unable to save vendor");
 
   }
-
 };
+
+
+
+const fetchSavedVendors = async () => {
+  try {
+
+    const token = localStorage.getItem("token");
+
+    if (!token) return;
+
+    const res = await axios.get(
+      "http://localhost:5000/api/saved/save",
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    setSavedVendors(
+      res.data.savedCAs.map(
+        (vendor) => vendor._id
+      )
+    );
+
+  } catch (err) {
+
+    console.log(err);
+
+  }
+};
+
+
+
+
+
+
 
 
   const [blogs, setBlogs] = useState([]);
 
   useEffect(() => {
     fetchBlogs();
+    fetchSavedVendors();
   }, []);
 
   const fetchBlogs = async () => {

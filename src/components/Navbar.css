@@ -45,45 +45,50 @@ a{
   transition: all 0.3s ease;
 }
 .navbar-container{
-  max-width:1450px;
-  margin:auto;
-  height:84px;
-  padding:0 24px;
+  max-width: 1450px;
+  margin: auto;
 
-  display:flex;
-  align-items:center;
+  height: 84px;
+  padding: 0 32px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
-
 /* ==========================
    LOGO
 ========================== */
-
 .logo{
-  flex:0 0 220px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-shrink: 0;
+
+  width: 180px;
 }
 
 .logo img{
-  height:50px;
-  width:auto;
-  display:block;
+  width: 100%;
+  max-width: 170px;
+  height: auto;
+  object-fit: contain;
+  display: block;
 }
-
 /* ==========================
    NAVIGATION
 ========================== */
 
 .nav-links{
-  flex:1;
-  margin-left:8px;
+  flex: 1;
 
-  display:flex;
-  justify-content:center;
-  align-items:center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-  gap:15px;
-  list-style:none;
+  gap: 28px;
+
+  list-style: none;
 }
-
 .nav-links li{
   position:relative;
   white-space:nowrap;

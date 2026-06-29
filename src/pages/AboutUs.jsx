@@ -44,7 +44,7 @@ function AboutUs() {
         <div className="about-content">
 
           <span className="about-tag">
-            ABOUT CA CONNECT
+            ABOUT BUSSULT
           </span>
 
           <h1>
@@ -54,7 +54,7 @@ function AboutUs() {
           </h1>
 
           <p>
-            CA Connect is your trusted partner for
+            Bussult is your trusted partner for
             financial and compliance needs. We connect
             businesses with experienced Chartered
             Accountants and experts who provide reliable,personalized and technology-driven solutions.
@@ -330,12 +330,12 @@ function AboutUs() {
     </div>
 
     <details className="leaders-faq-item">
-      <summary>What is CA Connect?</summary>
-      <p>CA Connect helps businesses connect with trusted CAs.</p>
+      <summary>What is Bussult?</summary>
+      <p>Bussult helps businesses connect with trusted CAs.</p>
     </details>
 
     <details className="leaders-faq-item">
-      <summary>How does CA Connect work?</summary>
+      <summary>How does Bussult work?</summary>
       <p>Submit your requirement and connect with verified experts.</p>
     </details>
 

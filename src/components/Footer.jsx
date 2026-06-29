@@ -107,7 +107,7 @@ function Footer() {
 <div className="footer-bottom">
 
   <p>
-    © 2026 CA Connect. All Rights Reserved.
+    © 2026 Bussult. All Rights Reserved.
   </p>
 
   <div className="footer-bottom-right">

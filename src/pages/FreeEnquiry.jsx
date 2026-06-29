@@ -29,6 +29,104 @@ import {
 } from "react-icons/fa";
 
 function FreeEnquiry() {
+  const [enquiry, setEnquiry] = useState(null);
+  
+  const { id } = useParams();
+
+useEffect(() => {
+  if(id){
+    fetchEnquiry();
+  }
+}, [id]);
+
+const fetchEnquiry = async () => {
+  try {
+
+    const token =
+      localStorage.getItem("token");
+
+    const res =
+      await axios.get(
+        `https://ca-backend-d9tc.onrender.com/api/enquiries/${id}`,
+        {
+          headers: {
+            Authorization:
+              `Bearer ${token}`
+          }
+        }
+      );
+
+    const enquiry =
+      res.data.enquiry;
+
+    setEnquiry(enquiry);
+
+    setFormData({
+      serviceName:
+        enquiry.serviceName || [],
+      fullName:
+        enquiry.fullName || "",
+      email:
+        enquiry.email || "",
+      mobile:
+        enquiry.mobile || "",
+      city:
+        enquiry.city || "",
+      state:
+        enquiry.state || "",
+      preferredContact:
+        enquiry.preferredContact || "Call",
+      preferredTime:
+        enquiry.preferredTime || "",
+      businessType:
+        enquiry.businessType || "",
+      annualTurnover:
+        enquiry.annualTurnover || "",
+      businessStructure:
+        enquiry.businessStructure || "",
+      panNumber:
+        enquiry.panNumber || "",
+      gstRequired:
+        enquiry.gstRequired || "",
+      hearAboutUs:
+        enquiry.hearAboutUs || "",
+      budget:
+        enquiry.budget || "",
+      timeline:
+        enquiry.timeline || "",
+      requirements:
+        enquiry.requirements || "",
+      files: [],
+    });
+    if (
+  enquiry.vendorId &&
+  typeof enquiry.vendorId === "object"
+) {
+
+  setVendor(
+    enquiry.vendorId
+  );
+
+} else if (
+  enquiry.vendorId
+) {
+
+  const vendorRes =
+    await axios.get(
+      `https://ca-backend-d9tc.onrender.com/api/vendor/${enquiry.vendorId}`
+    );
+
+  setVendor(
+    vendorRes.data.vendor
+  );
+}
+
+  } catch (err) {
+
+    console.log(err);
+
+  }
+};
 
   const { vendorId } = useParams();
 
@@ -39,7 +137,10 @@ function FreeEnquiry() {
 
   const [step, setStep] =
     useState(1);
-const handleSubmit = async () => {
+
+
+
+    const handleSubmit = async () => {
   try {
 
     const user = JSON.parse(
@@ -48,16 +149,18 @@ const handleSubmit = async () => {
 
     const data = new FormData();
 
+    // Required IDs
     data.append(
-      "vendorId",
-      vendorId
-    );
+  "vendorId",
+  vendor?._id || vendorId
+);
 
     data.append(
       "userId",
       user?._id || ""
     );
 
+    // Normal Fields
     Object.keys(formData).forEach(
       (key) => {
 
@@ -74,6 +177,7 @@ const handleSubmit = async () => {
       }
     );
 
+    // Services
     formData.serviceName.forEach(
       (service) => {
         data.append(
@@ -83,6 +187,7 @@ const handleSubmit = async () => {
       }
     );
 
+    // Documents
     formData.files.forEach(
       (file) => {
         data.append(
@@ -92,6 +197,7 @@ const handleSubmit = async () => {
       }
     );
 
+    // Submit Enquiry
     await axios.post(
       "https://ca-backend-d9tc.onrender.com/api/enquiries",
       data,
@@ -105,6 +211,10 @@ const handleSubmit = async () => {
 
     alert(
       "Enquiry Submitted Successfully"
+    );
+
+    navigate(
+      "/user-enquiry"
     );
 
   } catch (err) {
@@ -194,20 +304,19 @@ const [formData, setFormData] = useState({
   formData.businessStructure &&
   formData.requirements?.trim() &&
   agreeTerms;
-
 useEffect(() => {
 
-  console.log(
-    "Vendor ID =",
-    vendorId
-  );
+  if (id) {
 
-  if (vendorId) {
+    fetchEnquiry();
+
+  } else if (vendorId) {
+
     fetchVendor();
+
   }
 
-}, [vendorId]);
-
+}, [vendorId, id]);
 useEffect(() => {
 
   let currentStep = 1;
@@ -1185,9 +1294,9 @@ useEffect(() => {
   >
     Submit Enquiry →
   </button>
+  
 
 </div>
-
 
 </div>
 <div className="right-sidebar">
