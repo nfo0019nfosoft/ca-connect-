@@ -1,3 +1,4 @@
+import API_URL from "../config";
 import "./AdminSidebar.css";
 import logo from "../assets/logo.png";
 

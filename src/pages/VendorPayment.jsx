@@ -1,3 +1,4 @@
+import API_URL from "../config";
 import React, {
   useEffect,
   useState
@@ -191,7 +192,7 @@ useEffect(() => {
             "token"
           );
 const res = await axios.get(
-  "https://ca-backend-d9tc.onrender.com/api/vendor/profile",
+  `${API_URL}/api/vendor/profile`,
   {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -332,7 +333,7 @@ if (data.bankDetails) {
       localStorage.getItem("token");
 
     await axios.put(
-  "https://ca-backend-d9tc.onrender.com/api/vendor/services",
+  `${API_URL}/api/vendor/services`,
   {
     services: finalServices,
   },
@@ -386,7 +387,7 @@ const [accountError, setAccountError] =
       localStorage.getItem("token");
 
     const res = await axios.put(
-      "https://ca-backend-d9tc.onrender.com/api/vendor/update-bank-details",
+      `${API_URL}/api/vendor/update-bank-details`,
       {
         bankDetails: bankData,
       },
@@ -486,7 +487,7 @@ const [accountError, setAccountError] =
  <img
   src={
     vendor.photo
-      ? `https://ca-backend-d9tc.onrender.com/uploads/${vendor.photo}`
+      ? `${API_URL}/uploads/${vendor.photo}`
       : "/avatar.png"
   }
   alt="Profile"

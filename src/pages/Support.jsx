@@ -1,3 +1,4 @@
+import API_URL from "../config";
 import "./Support.css";
 import support from "../assets/support.png";
 import { Link } from "react-router-dom";

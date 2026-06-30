@@ -1,3 +1,4 @@
+import API_URL from "../config";
 import React, {
   useEffect,
   useState
@@ -89,7 +90,7 @@ function UserAppointments() {
 
         const res =
           await axios.get(
-            "https://ca-backend-d9tc.onrender.com/api/users/profile",
+            `${API_URL}/api/users/profile`,
             {
               headers: {
                 Authorization:
@@ -137,7 +138,7 @@ function UserAppointments() {
 
         const res =
           await axios.get(
-            `https://ca-backend-d9tc.onrender.com/api/consultations/user/${storedUser._id}`,
+            `${API_URL}/api/consultations/user/${storedUser._id}`,
             {
               headers: {
                 Authorization:
@@ -259,7 +260,7 @@ appointments
               <img
                 src={
                   user?.profileImage
-                    ? `https://ca-backend-d9tc.onrender.com${user.profileImage}`
+                    ? `${API_URL}${user.profileImage}`
                     : "/avatar.png"
                 }
                 alt="user"
@@ -523,7 +524,7 @@ appointments
   <img
     src={
       item.vendorId?.photo
-        ? `https://ca-backend-d9tc.onrender.com/uploads/${item.vendorId.photo}`
+        ? `${API_URL}/uploads/${item.vendorId.photo}`
         : "/avatar.png"
     }
     alt=""

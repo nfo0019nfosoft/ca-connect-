@@ -1,3 +1,4 @@
+import API_URL from "../config";
 import { useState, useEffect } from "react";
 
 import axios from "axios";
@@ -124,7 +125,7 @@ useEffect(() => {
 
       const res =
         await axios.get(
-          `https://ca-backend-d9tc.onrender.com/api/vendor/${id}`
+          `${API_URL}/api/vendor/${id}`
         );
 
       setVendor(
@@ -207,115 +208,207 @@ useEffect(() => {
     }
 
   };
-
-
-
 const openRazorpay = async () => {
 
   try {
 
-    // Validation
     if (!formData.purpose) {
-      alert("Please select a service");
-      return;
-    }
 
-    if (!consultationFee || consultationFee < 1) {
-      alert("Invalid consultation amount");
-      return;
-    }
-
-    console.log("Consultation Fee:", consultationFee);
-
-  const { data } = await axios.post(
-  "https://ca-backend-d9tc.onrender.com/api/payment/create-order",
-  {
-    amount: consultationFee
-  }
-);
-  
-    const options = {
-
-      key: "rzp_test_T71LVMkGCB6Mxh",
-
-      amount: data.amount,
-
-      currency: data.currency,
-
-      order_id: data.id,
-
-      name: "CA Connect",
-
-      description: "Consultation Booking",
-
-     handler: async function (response) {
-
-  try {
-
-    const token =
-      localStorage.getItem("token");
-
-    const storedUser =
-      JSON.parse(
-        localStorage.getItem("user")
+      alert(
+        "Please select a service"
       );
 
-   const bookingRes =
-  await axios.post(
-    "https://ca-backend-d9tc.onrender.com/api/consultations/book",
-    {
-      userId: storedUser._id,
-      vendorId: vendor._id,
-      serviceName: formData.purpose,
-      appointmentDate: selectedDate,
-      startTime: selectedTime,
-      mode: "video",
-      amount: consultationFee,
-      paymentMethod,
-      paymentId: response.razorpay_payment_id,
-      razorpayOrderId: response.razorpay_order_id,
-      paymentStatus: "paid",
-      notes: formData.notes
-    },
-    {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
+      return;
+
     }
-  );
 
-console.log(
-  "Consultation Saved:",
-  bookingRes.data
-);
+    if (
+      !consultationFee ||
+      consultationFee < 1
+    ) {
 
-alert("Booking Successful");
+      alert(
+        "Invalid consultation amount"
+      );
 
-navigate("/user-appointments");
-  } catch (error) {
+      return;
+
+    }
 
     console.log(
-      "Booking Error:",
-      error.response?.data ||
-      error.message
+      "Consultation Fee:",
+      consultationFee
     );
 
-  }
-},
+    const { data } =
+      await axios.post(
+        `${API_URL}/api/payment/create-order`,
+        {
+          amount:
+            consultationFee
+        }
+      );
+
+    const options = {
+
+      key:
+        "rzp_test_T71LVMkGCB6Mxh",
+
+      amount:
+        data.order.amount,
+
+      currency:
+        data.order.currency,
+
+      order_id:
+        data.order.id,
+
+      name:
+        "CA Connect",
+
+      description:
+        "Consultation Booking",
+
+      handler:
+        async function (
+          response
+        ) {
+
+          try {
+
+            const token =
+              localStorage.getItem(
+                "token"
+              );
+
+            const storedUser =
+              JSON.parse(
+                localStorage.getItem(
+                  "user"
+                )
+              );
+
+            // VERIFY PAYMENT + CREATE NOTIFICATION
+
+            await axios.post(
+              `${API_URL}/api/payment/verify-payment`,
+              {
+
+                razorpay_order_id:
+                  response.razorpay_order_id,
+
+                razorpay_payment_id:
+                  response.razorpay_payment_id,
+
+                razorpay_signature:
+                  response.razorpay_signature,
+
+                userId:
+                  storedUser._id,
+
+                amount:
+                  consultationFee
+
+              }
+            );
+
+            // SAVE CONSULTATION
+
+            const bookingRes =
+              await axios.post(
+                `${API_URL}/api/consultations/book`,
+                {
+
+                  userId:
+                    storedUser._id,
+
+                  vendorId:
+                    vendor._id,
+
+                  serviceName:
+                    formData.purpose,
+
+                  appointmentDate:
+                    selectedDate,
+
+                  startTime:
+                    selectedTime,
+
+                  mode:
+                    "video",
+
+                  amount:
+                    consultationFee,
+
+                  paymentMethod,
+
+                  paymentId:
+                    response.razorpay_payment_id,
+
+                  razorpayOrderId:
+                    response.razorpay_order_id,
+
+                  paymentStatus:
+                    "paid",
+
+                  notes:
+                    formData.notes
+
+                },
+                {
+                  headers: {
+                    Authorization:
+                      `Bearer ${token}`
+                  }
+                }
+              );
+
+            console.log(
+              "Consultation Saved:",
+              bookingRes.data
+            );
+
+            alert(
+              "Booking Successful"
+            );
+
+            navigate(
+              "/user-appointments"
+            );
+
+          }
+          catch (
+            error
+          ) {
+
+            console.log(
+              "Booking Error:",
+              error.response?.data ||
+              error.message
+            );
+
+          }
+
+        },
 
       prefill: {
 
-        name: formData.fullName,
+        name:
+          formData.fullName,
 
-        email: formData.email,
+        email:
+          formData.email,
 
-        contact: formData.mobile
+        contact:
+          formData.mobile
 
       },
 
       theme: {
-        color: "#2563eb"
+        color:
+          "#2563eb"
       }
+
     };
 
     const razorpay =
@@ -325,7 +418,8 @@ navigate("/user-appointments");
 
     razorpay.open();
 
-  } catch (err) {
+  }
+  catch (err) {
 
     console.log(
       "Razorpay Error:",
@@ -333,8 +427,8 @@ navigate("/user-appointments");
     );
 
   }
-};
 
+};
   if (!vendor) {
 
     return (
@@ -944,7 +1038,7 @@ const consultationFee =
       <img
         src={
           vendor?.photo
-            ? `https://ca-backend-d9tc.onrender.com/uploads/${vendor.photo}`
+            ? `${API_URL}/uploads/${vendor.photo}`
             : "/avatar.png"
         }
         alt={vendor?.fullName}

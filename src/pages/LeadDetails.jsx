@@ -1,3 +1,4 @@
+import API_URL from "../config";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import "./VendorLeads.css";
@@ -57,7 +58,7 @@ const fetchLead = async () => {
   try {
 
     const res = await axios.get(
-      `https://ca-backend-d9tc.onrender.com/api/enquiries/${id}`
+      `${API_URL}/api/enquiries/${id}`
     );
 
     setLead(res.data.enquiry);
@@ -85,7 +86,7 @@ const saveNotes = async () => {
   try {
 
     await axios.put(
-      `https://ca-backend-d9tc.onrender.com/api/enquiries/${id}/notes`,
+      `${API_URL}/api/enquiries/${id}/notes`,
       {
         notes
       }
@@ -118,7 +119,7 @@ const fetchVendor = async () => {
       localStorage.getItem("vendorId");
 
     const res = await axios.get(
-      `https://ca-backend-d9tc.onrender.com/api/vendor/${vendorId}`
+      `${API_URL}/api/vendor/${vendorId}`
     );
 
     setVendor(res.data.vendor);
@@ -217,7 +218,7 @@ if (!lead) {
     <img
   src={
     vendor?.photo
-      ? `https://ca-backend-d9tc.onrender.com/uploads/${vendor.photo}`
+      ? `${API_URL}/uploads/${vendor.photo}`
       : "/avatar.png"
   }
   alt=""
@@ -562,7 +563,7 @@ if (!lead) {
                 </div>
 
                 <a
-                  href={`https://ca-backend-d9tc.onrender.com/uploads/${doc.fileUrl}`}
+                  href={`${API_URL}/uploads/${doc.fileUrl}`}
                   target="_blank"
                   rel="noreferrer"
                   className="attachment-view-btn"

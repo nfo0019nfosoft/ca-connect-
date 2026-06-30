@@ -1,3 +1,4 @@
+import API_URL from "../config";
 import React, {
   useEffect,
   useState
@@ -166,7 +167,7 @@ function UserAccountVerification() {
         localStorage.getItem("token");
 
       const res = await axios.get(
-        "https://ca-backend-d9tc.onrender.com/api/users/profile",
+        `${API_URL}/api/users/profile`,
         {
           headers: {
             Authorization:
@@ -247,7 +248,7 @@ function UserAccountVerification() {
       );
 
       await axios.post(
-        "https://ca-backend-d9tc.onrender.com/api/users/photo",
+        `${API_URL}/api/users/photo`,
         formData,
         {
           headers: {
@@ -272,7 +273,7 @@ function UserAccountVerification() {
   const saveBusinessDetails = async () => {
 
     await axios.put(
-      "https://ca-backend-d9tc.onrender.com/api/users/profile",
+      `${API_URL}/api/users/profile`,
       {
         ...user,
 
@@ -348,7 +349,7 @@ function UserAccountVerification() {
               <img
                 src={
                   user.profileImage
-                    ? `https://ca-backend-d9tc.onrender.com${user.profileImage}`
+                    ? `${API_URL}${user.profileImage}`
                     : "/avatar.png"
                 }
                 alt="Profile"

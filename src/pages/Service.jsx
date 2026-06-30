@@ -1,3 +1,4 @@
+import API_URL from "../config";
 import "./Service.css";
 import { Link } from "react-router-dom";
 import { useState } from "react";

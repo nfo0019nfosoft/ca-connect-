@@ -1,3 +1,4 @@
+import API_URL from "../config";
 import "./Login.css";
 import logo from "../assets/logo.png";
 import otpImg from "../assets/otp.png";
@@ -30,8 +31,8 @@ const handleOtp = async () => {
 
     const loginUrl =
       userType === "ca"
-        ? "https://ca-backend-d9tc.onrender.com/api/vendor/login"
-        : "https://ca-backend-d9tc.onrender.com/api/auth/login";
+        ? `${API_URL}/api/vendor/login`
+        : `${API_URL}/api/auth/login`;
 
     const response = await fetch(
       loginUrl,

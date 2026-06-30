@@ -1,3 +1,4 @@
+import API_URL from "../config";
 import { Link } from "react-router-dom";
 import "./ai-assistant.css";
 import chatbot from "../assets/chatbot.png";

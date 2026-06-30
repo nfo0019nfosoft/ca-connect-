@@ -1,3 +1,4 @@
+import API_URL from "../config";
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import axios from "axios";
@@ -46,7 +47,7 @@ const fetchBlog = async () => {
   try {
 
     const res = await axios.get(
-      `https://ca-backend-d9tc.onrender.com/api/blogs/${slug}`
+      `${API_URL}/api/blogs/${slug}`
     );
 
     setBlog(res.data.blog);
@@ -70,7 +71,7 @@ const fetchBlog = async () => {
 
       const res = await axios.get(
 
-        "https://ca-backend-d9tc.onrender.com/api/blogs"
+        `${API_URL}/api/blogs`
 
       );
 

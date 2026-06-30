@@ -1,3 +1,4 @@
+import API_URL from "../config";
 import React, {
   useEffect,
   useState
@@ -98,7 +99,7 @@ useEffect(() => {
   try {
 
     const res = await axios.get(
-      "https://ca-backend-d9tc.onrender.com/api/vendor/profile",
+      `${API_URL}/api/vendor/profile`,
       {
         headers: {
           Authorization: `Bearer ${token}`
@@ -169,7 +170,7 @@ const handlePhotoChange = async (e) => {
     );
 
     await axios.post(
-      "https://ca-backend-d9tc.onrender.com/api/vendor/photo",
+      `${API_URL}/api/vendor/photo`,
       formData,
       {
         headers: {
@@ -211,7 +212,7 @@ const saveProfile = async () => {
       localStorage.getItem("token");
 
     await axios.put(
-      "https://ca-backend-d9tc.onrender.com/api/vendor/profile",
+      `${API_URL}/api/vendor/profile`,
       vendor,
       {
         headers: {
@@ -278,7 +279,7 @@ const saveProfile = async () => {
 <img
   src={
     vendor.photo
-      ? `https://ca-backend-d9tc.onrender.com/uploads/${vendor.photo}`
+      ? `${API_URL}/uploads/${vendor.photo}`
       : "/avatar.png"
   }
   alt="Profile"
@@ -380,7 +381,7 @@ const saveProfile = async () => {
     <img
       src={
         vendor.photo
-          ? `https://ca-backend-d9tc.onrender.com/uploads/${vendor.photo}`
+          ? `${API_URL}/uploads/${vendor.photo}`
           : "/avatar.png"
       }
       alt=""

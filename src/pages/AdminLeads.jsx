@@ -1,3 +1,4 @@
+import API_URL from "../config";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import AdminSidebar from "../components/AdminSidebar";
@@ -97,7 +98,7 @@ function AdminLeads() {
   try {
 
     await axios.delete(
-      `https://ca-backend-d9tc.onrender.com/api/admin/leads/${id}`
+      `${API_URL}/api/admin/leads/${id}`
     );
 
     setLeads(
@@ -122,7 +123,7 @@ function AdminLeads() {
         try {
 
             const res = await axios.get(
-                "https://ca-backend-d9tc.onrender.com/api/admin/lead-stats",
+                `${API_URL}/api/admin/lead-stats`,
                 {
                     params: {
                         startDate,
@@ -178,7 +179,7 @@ function AdminLeads() {
         try {
 
             const res = await axios.get(
-                "https://ca-backend-d9tc.onrender.com/api/admin/leads"
+                `${API_URL}/api/admin/leads`
             );
 
             if (res.data.success) {

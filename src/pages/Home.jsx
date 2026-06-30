@@ -1,3 +1,4 @@
+import API_URL from "../config";
 import "./Home.css";
 import heroImg from "../assets/hero.png";
 import {
@@ -86,7 +87,7 @@ const handleSearch = async (selectedService = service) => {
   try{
 
     const res = await axios.get(
-      "https://ca-backend-d9tc.onrender.com/api/vendor/search",
+      `${API_URL}/api/vendor/search`,
       {
         params:{
           service:selectedService,
@@ -132,7 +133,7 @@ const handleSaveVendor = async (vendorId) => {
   try {
 
     const res = await axios.post(
-      "http://localhost:5000/api/saved/save",
+      `${API_URL}/api/saved/save`,
       { vendorId },
       {
         headers: {
@@ -169,7 +170,7 @@ const fetchSavedVendors = async () => {
     if (!token) return;
 
     const res = await axios.get(
-      "http://localhost:5000/api/saved/save",
+      `${API_URL}/api/saved/save`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -209,7 +210,7 @@ const fetchSavedVendors = async () => {
     try {
 
       const res = await axios.get(
-        "http://localhost:5000/api/blogs"
+        `${API_URL}/api/blogs`
       );
 
       setBlogs(res.data);
@@ -232,7 +233,7 @@ const fetchSavedVendors = async () => {
     try {
 
       const res = await axios.get(
-        "https://ca-backend-d9tc.onrender.com/api/vendor/all-services"
+        `${API_URL}/api/vendor/all-services`
       );
 
       setAllServices(res.data);
@@ -252,7 +253,7 @@ const fetchSavedVendors = async () => {
   try {
 
     const res = await axios.get(
-      "https://ca-backend-d9tc.onrender.com/api/vendor"
+      `${API_URL}/api/vendor`
     );
 
     setVendors(
@@ -518,7 +519,7 @@ const fetchSavedVendors = async () => {
             <img
               src={
                 vendor.photo
-                  ? `https://ca-backend-d9tc.onrender.com/uploads/${vendor.photo}`
+                  ? `${API_URL}/uploads/${vendor.photo}`
                   : "/avatar.png"
               }
               alt={vendor.fullName}
@@ -724,7 +725,7 @@ const fetchSavedVendors = async () => {
                     <img
                       src={
                         ca.photo
-                          ? `https://ca-backend-d9tc.onrender.com/uploads/${ca.photo}`
+                          ? `${API_URL}/uploads/${ca.photo}`
                           : "/avatar.png"
                       }
                       alt={ca.fullName}

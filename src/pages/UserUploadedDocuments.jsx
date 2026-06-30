@@ -1,3 +1,4 @@
+import API_URL from "../config";
 import React, {
     useEffect,
     useState
@@ -165,7 +166,7 @@ function UserUploadDocuments() {
                 localStorage.getItem("token");
 
             const res = await axios.get(
-                "https://ca-backend-d9tc.onrender.com/api/users/profile",
+                `${API_URL}/api/users/profile`,
                 {
                     headers: {
                         Authorization:
@@ -246,7 +247,7 @@ function UserUploadDocuments() {
             );
 
             await axios.post(
-                "https://ca-backend-d9tc.onrender.com/api/users/photo",
+                `${API_URL}/api/users/photo`,
                 formData,
                 {
                     headers: {
@@ -273,7 +274,7 @@ function UserUploadDocuments() {
   try {
 
     await axios.put(
-      "https://ca-backend-d9tc.onrender.com/api/users/profile",
+      `${API_URL}/api/users/profile`,
       {
         ...user,
         documentsCompleted: true,
@@ -325,7 +326,7 @@ const handleDocumentUpload = async (
       localStorage.getItem("token");
 
     await axios.post(
-      "https://ca-backend-d9tc.onrender.com/api/users/upload-document",
+      `${API_URL}/api/users/upload-document`,
       formData,
       {
         headers: {
@@ -445,7 +446,7 @@ const documents = [
                             <img
                                 src={
                                     user.profileImage
-                                        ? `https://ca-backend-d9tc.onrender.com${user.profileImage}`
+                                        ? `${API_URL}${user.profileImage}`
                                         : "/avatar.png"
                                 }
                                 alt="Profile"

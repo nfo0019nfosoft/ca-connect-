@@ -1,3 +1,4 @@
+import API_URL from "../config";
 import { Navigate } from "react-router-dom";
 
 function AdminProtectedRoute({

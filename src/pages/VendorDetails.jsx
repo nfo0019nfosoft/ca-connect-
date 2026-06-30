@@ -1,3 +1,4 @@
+import API_URL from "../config";
 import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 
@@ -55,7 +56,7 @@ useEffect(() => {
     try {
       const res =
         await axios.get(
-          `https://ca-backend-d9tc.onrender.com/api/vendor/${id}`
+          `${API_URL}/api/vendor/${id}`
         );
 
       setVendor(
@@ -75,7 +76,7 @@ useEffect(() => {
     if (!token) return;
 
     await axios.post(
-      "http://localhost:5000/api/recent/view",
+      `${API_URL}/api/recent/view`,
       {
         vendorId: id,
       },
@@ -165,7 +166,7 @@ useEffect(() => {
     <img
       src={
         vendor.photo
-          ? `https://ca-backend-d9tc.onrender.com/uploads/${vendor.photo}`
+          ? `${API_URL}/uploads/${vendor.photo}`
           : "/avatar.png"
       }
       alt={vendor.fullName}

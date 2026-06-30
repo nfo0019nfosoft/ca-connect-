@@ -1,3 +1,4 @@
+import API_URL from "../config";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import "./AdminVendors.css";
@@ -325,7 +326,7 @@ function AdminVendors() {
         try {
 
             const res = await axios.get(
-                "https://ca-backend-d9tc.onrender.com/api/admin/vendor-stats",
+                `${API_URL}/api/admin/vendor-stats`,
                 {
                     params: {
                         dateRange
@@ -359,7 +360,7 @@ function AdminVendors() {
         try {
 
             const res = await axios.get(
-                "https://ca-backend-d9tc.onrender.com/api/vendor",
+                `${API_URL}/api/vendor`,
                 {
                     params: {
                         search,
@@ -486,7 +487,7 @@ function AdminVendors() {
 
     await axios.delete(
 
-      `https://ca-backend-d9tc.onrender.com/api/admin/vendors/${id}`
+      `${API_URL}/api/admin/vendors/${id}`
 
     );
 

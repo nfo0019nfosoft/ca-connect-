@@ -1,3 +1,4 @@
+import API_URL from "../config";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
@@ -47,7 +48,7 @@ const fetchEnquiry = async () => {
 
     const res =
       await axios.get(
-        `https://ca-backend-d9tc.onrender.com/api/enquiries/${id}`,
+        `${API_URL}/api/enquiries/${id}`,
         {
           headers: {
             Authorization:
@@ -113,7 +114,7 @@ const fetchEnquiry = async () => {
 
   const vendorRes =
     await axios.get(
-      `https://ca-backend-d9tc.onrender.com/api/vendor/${enquiry.vendorId}`
+      `${API_URL}/api/vendor/${enquiry.vendorId}`
     );
 
   setVendor(
@@ -199,7 +200,7 @@ const fetchEnquiry = async () => {
 
     // Submit Enquiry
     await axios.post(
-      "https://ca-backend-d9tc.onrender.com/api/enquiries",
+      `${API_URL}/api/enquiries`,
       data,
       {
         headers: {
@@ -368,7 +369,7 @@ useEffect(() => {
  const fetchVendor = async () => {
   try {
     const res = await axios.get(
-      `https://ca-backend-d9tc.onrender.com/api/vendor/${vendorId}`
+      `${API_URL}/api/vendor/${vendorId}`
     );
 
     console.log("FULL RESPONSE =", res.data);
@@ -1310,7 +1311,7 @@ useEffect(() => {
     <img
       src={
         vendor.photo
-          ? `https://ca-backend-d9tc.onrender.com/uploads/${vendor.photo}`
+          ? `${API_URL}/uploads/${vendor.photo}`
           : "/avatar.png"
       }
       alt={vendor.fullName}

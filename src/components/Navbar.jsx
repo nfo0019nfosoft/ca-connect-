@@ -1,3 +1,4 @@
+import API_URL from "../config";
 import "./Navbar.css";
 import { useState } from "react";
 import logo from "../assets/logo.png";

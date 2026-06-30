@@ -1,3 +1,4 @@
+import API_URL from "../config";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
@@ -36,7 +37,7 @@ function Login() {
   try {
 
     const res = await fetch(
-      "https://ca-backend-d9tc.onrender.com/api/admin/login",
+      `${API_URL}/api/admin/login`,
       {
         method: "POST",
         headers: {

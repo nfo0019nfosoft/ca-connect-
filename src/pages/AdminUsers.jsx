@@ -1,3 +1,4 @@
+import API_URL from "../config";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import "./AdminUsers.css";
@@ -125,7 +126,7 @@ useEffect(() => {
     try {
 
       const res = await axios.get(
-        "https://ca-backend-d9tc.onrender.com/api/admin/user-stats"
+        `${API_URL}/api/admin/user-stats`
       );
 
       if (res.data.success) {
@@ -153,7 +154,7 @@ const fetchUsers = async () => {
   try {
 
     const res = await axios.get(
-      "https://ca-backend-d9tc.onrender.com/api/admin/users",
+      `${API_URL}/api/admin/users`,
       {
         params: {
           search,
@@ -224,7 +225,7 @@ const fetchUsers = async () => {
   try {
 
     await axios.delete(
-      `https://ca-backend-d9tc.onrender.com/api/admin/users/${id}`
+      `${API_URL}/api/admin/users/${id}`
     );
 
     fetchUsers();
@@ -245,7 +246,7 @@ const toggleStatus = async (id) => {
   try {
 
     await axios.put(
-      `https://ca-backend-d9tc.onrender.com/api/admin/users/block/${id}`
+      `${API_URL}/api/admin/users/block/${id}`
     );
 
     fetchUsers();

@@ -1,3 +1,4 @@
+import API_URL from "../config";
 import { Link } from "react-router-dom";
 import {
   FaChevronRight,
@@ -27,7 +28,7 @@ function Blogs() {
     try {
 
       const res = await axios.get(
-        "https://ca-backend-d9tc.onrender.com/api/blogs"
+        `${API_URL}/api/blogs`
       );
 
       setBlogs(res.data);

@@ -1,3 +1,4 @@
+import API_URL from "../config";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import "./VendorLeads.css";
@@ -57,7 +58,7 @@ const navigate = useNavigate();
       localStorage.getItem("vendorId");
 
     const res = await axios.get(
-      `https://ca-backend-d9tc.onrender.com/api/enquiries/vendor/${vendorId}`
+      `${API_URL}/api/enquiries/vendor/${vendorId}`
     );
 
     setLeads(
@@ -83,7 +84,7 @@ const navigate = useNavigate();
         localStorage.getItem("vendorId");
 
       const res = await axios.get(
-        `https://ca-backend-d9tc.onrender.com/api/vendor/${vendorId}`
+        `${API_URL}/api/vendor/${vendorId}`
       );
 
       setVendor(res.data.vendor);
@@ -176,7 +177,7 @@ const navigate = useNavigate();
     <img
   src={
     vendor?.photo
-      ? `https://ca-backend-d9tc.onrender.com/uploads/${vendor.photo}`
+      ? `${API_URL}/uploads/${vendor.photo}`
       : "/avatar.png"
   }
   alt=""

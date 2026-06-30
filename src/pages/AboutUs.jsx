@@ -1,3 +1,4 @@
+import API_URL from "../config";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import about from "../assets/about.png";

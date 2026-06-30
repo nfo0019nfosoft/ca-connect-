@@ -1,3 +1,4 @@
+import API_URL from "../config";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import AdminSidebar from "../components/AdminSidebar";
@@ -34,7 +35,7 @@ function AdminBlogDetails() {
     try {
 
       const res = await axios.get(
-        "http://localhost:5000/api/admin/blogs"
+        `${API_URL}/api/admin/blogs`
       );
 
       setBlogs(res.data.blogs);
@@ -75,7 +76,7 @@ function AdminBlogDetails() {
     try {
 
       const res = await axios.get(
-        "https://ca-backend-d9tc.onrender.com/api/admin/blog-stats"
+        `${API_URL}/api/admin/blog-stats`
       );
 
       setDashboard(res.data);

@@ -1,3 +1,4 @@
+import API_URL from "../config";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
@@ -63,7 +64,7 @@ const fetchSavedCAs = async () => {
     }
 
     const response = await axios.get(
-      "http://localhost:5000/api/saved/save",
+      `${API_URL}/api/saved/save`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -98,32 +99,48 @@ const fetchSavedCAs = async () => {
 
 
 const fetchRecentViewed = async () => {
+
   try {
-    const token = localStorage.getItem("token");
 
-    console.log("TOKEN =>", token);
+    const token =
+      localStorage.getItem("token");
 
-    const res = await axios.get(
-      "http://localhost:5000/api/recent",
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
+    const res =
+      await axios.get(
+        `${API_URL}/api/recent`,
+        {
+          headers: {
+            Authorization:
+              `Bearer ${token}`
+          }
+        }
+      );
 
-    console.log("RECENT API =>", res.data);
-
-    setRecentViewed(res.data || []);
-
-  } catch (err) {
     console.log(
-      "RECENT ERROR =>",
-      err.response?.data || err.message
+      "RECENT API =>",
+      res.data
     );
+
+    const recentData =
+      Array.isArray(res.data)
+        ? res.data
+        : res.data.recentViewed ||
+          res.data.data ||
+          [];
+
+    setRecentViewed(
+      recentData
+    );
+
+  }
+  catch(err){
+
+    console.log(err);
 
     setRecentViewed([]);
+
   }
+
 };
 
 
@@ -132,7 +149,7 @@ const fetchCompare = async () => {
   const token = localStorage.getItem("token");
 
   const res = await axios.get(
-    "http://localhost:5000/api/compare",
+    `${API_URL}/api/compare`,
     {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -150,7 +167,7 @@ const fetchCompare = async () => {
             const token = localStorage.getItem("token");
 
             const res = await axios.get(
-                "http://localhost:5000/api/users/profile",
+                `${API_URL}/api/users/profile`,
                 {
                     headers: {
                         Authorization: `Bearer ${token}`,
@@ -174,7 +191,7 @@ const fetchCompare = async () => {
             const token = localStorage.getItem("token");
 
             await axios.delete(
-                `http://localhost:5000/api/saved/save/${id}`,
+                `${API_URL}/api/saved/save/${id}`,
                 {
                     headers: {
                         Authorization: `Bearer ${token}`,
@@ -204,7 +221,7 @@ const fetchCompare = async () => {
     const token = localStorage.getItem("token");
 
     await axios.delete(
-      `http://localhost:5000/api/compare/${vendorId}`,
+      `${API_URL}/api/compare/${vendorId}`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -299,7 +316,7 @@ const fetchCompare = async () => {
                 <img
                   src={
                     item.vendor.photo
-                      ? `http://localhost:5000/uploads/${item.vendor.photo}`
+                      ? `${API_URL}/uploads/${item.vendor.photo}`
                       : "/avatar.png"
                   }
                   alt=""
@@ -336,7 +353,7 @@ const fetchCompare = async () => {
                   <img
                     src={
                       item.vendor.photo
-                        ? `http://localhost:5000/uploads/${item.vendor.photo}`
+                        ? `${API_URL}/uploads/${item.vendor.photo}`
                         : "/avatar.png"
                     }
                     alt=""
@@ -486,7 +503,7 @@ const fetchCompare = async () => {
   <img
   src={
     user?.profileImage
-      ? `http://localhost:5000${user.profileImage}`
+      ? `${API_URL}${user.profileImage}`
       : "/avatar.png"
   }
   alt={user?.name || "User"}
@@ -569,7 +586,7 @@ const fetchCompare = async () => {
               <img
                 src={
                   ca.photo
-                    ? `http://localhost:5000/uploads/${ca.photo}`
+                    ? `${API_URL}/uploads/${ca.photo}`
                     : "/avatar.png"
                 }
                 alt={ca.fullName}
@@ -681,7 +698,7 @@ const fetchCompare = async () => {
           <img
             src={
               ca.vendor.photo
-                ? `http://localhost:5000/uploads/${ca.vendor.photo}`
+                ? `${API_URL}/uploads/${ca.vendor.photo}`
                 : "/avatar.png"
             }
             alt={ca.vendor.fullName}
@@ -809,7 +826,7 @@ const fetchCompare = async () => {
         <img
           src={
             item.vendor.photo
-              ? `http://localhost:5000/uploads/${item.vendor.photo}`
+              ? `${API_URL}/uploads/${item.vendor.photo}`
               : "/avatar.png"
           }
           alt={item.vendor.fullName}

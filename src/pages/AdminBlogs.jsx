@@ -1,3 +1,4 @@
+import API_URL from "../config";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -51,7 +52,7 @@ function AdminBlogs() {
     try {
 
       const res = await axios.get(
-        "https://ca-backend-d9tc.onrender.com/api/blogs"
+        `${API_URL}/api/blogs`
       );
 
       setBlogs(res.data);
@@ -115,7 +116,7 @@ function AdminBlogs() {
       if (editId) {
 
         await axios.put(
-          `https://ca-backend-d9tc.onrender.com/api/blogs/${editId}`,
+          `${API_URL}/api/blogs/${editId}`,
           data
         );
 
@@ -124,7 +125,7 @@ function AdminBlogs() {
       } else {
 
         await axios.post(
-          "https://ca-backend-d9tc.onrender.com/api/blogs",
+          `${API_URL}/api/blogs`,
           data
         );
 
@@ -177,7 +178,7 @@ function AdminBlogs() {
     try {
 
       await axios.delete(
-        `https://ca-backend-d9tc.onrender.com/api/blogs/${id}`
+        `${API_URL}/api/blogs/${id}`
       );
 
       alert("Blog Deleted Successfully");

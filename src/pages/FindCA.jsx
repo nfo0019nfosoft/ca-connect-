@@ -1,3 +1,4 @@
+import API_URL from "../config";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import "./FindCA.css";
@@ -46,7 +47,7 @@ function FindCA() {
     try {
 
       const res = await axios.get(
-        "https://ca-backend-d9tc.onrender.com/api/vendor"
+        `${API_URL}/api/vendor`
       );
 
       const vendorData = Array.isArray(res.data)
@@ -110,7 +111,7 @@ const addCompare = async (vendorId) => {
     const token = localStorage.getItem("token");
 
     const res = await axios.post(
-      "http://localhost:5000/api/compare/add",
+      `${API_URL}/api/compare/add`,
       {
         vendorId,
       },
@@ -501,7 +502,7 @@ const addCompare = async (vendorId) => {
                   <img
                     src={
                       vendor.photo
-                        ? `https://ca-backend-d9tc.onrender.com/uploads/${vendor.photo}`
+                        ? `${API_URL}/uploads/${vendor.photo}`
                         : "/avatar.png"
                     }
                     alt={vendor.fullName}

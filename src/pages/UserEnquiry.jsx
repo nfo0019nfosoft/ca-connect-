@@ -1,3 +1,4 @@
+import API_URL from "../config";
 import React, { useEffect, useState } from "react";
 import UserSidebar from "../components/UserSidebar";
 import axios from "axios";
@@ -57,7 +58,7 @@ function UserEnquiry() {
     const token = localStorage.getItem("token");
 
     const res = await axios.get(
-      "https://ca-backend-d9tc.onrender.com/api/users/profile",
+      `${API_URL}/api/users/profile`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -87,7 +88,7 @@ function UserEnquiry() {
     const token = localStorage.getItem("token");
 
     const res = await axios.get(
-      `https://ca-backend-d9tc.onrender.com/api/enquiries/user/${storedUser._id}`,
+      `${API_URL}/api/enquiries/user/${storedUser._id}`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -197,7 +198,7 @@ function UserEnquiry() {
   <img
     src={
       user?.profileImage
-        ? `https://ca-backend-d9tc.onrender.com${user.profileImage}`
+        ? `${API_URL}${user.profileImage}`
         : "/avatar.png"
     }
     alt=""
@@ -391,7 +392,7 @@ function UserEnquiry() {
     <img
       src={
         item.vendorId?.photo
-          ? `https://ca-backend-d9tc.onrender.com/uploads/${item.vendorId.photo}`
+          ? `${API_URL}/uploads/${item.vendorId.photo}`
           : "/avatar.png"
       }
       alt=""
