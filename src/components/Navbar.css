@@ -106,7 +106,20 @@ a{
   position:relative;
   transition:.3s ease;
 }
+.active-link{
+  color:#2563eb !important;
+}
 
+.active-link::after{
+  content:"";
+  position:absolute;
+  left:0;
+  bottom:-10px;
+  width:100%;
+  height:2px;
+  background:#2563eb;
+  border-radius:20px;
+}
 .nav-links a::after{
   content:"";
   position:absolute;
@@ -212,7 +225,7 @@ text-align: left;
   display:flex;
   align-items:center;
   justify-content:center;
-  gap:8px;
+  gap:10px;
 
   height:42px;
   padding:0 18px;
@@ -231,8 +244,13 @@ text-align: left;
 
 .consult-btn svg{
   color:#021b5c;
+  
 }
-
+.login-btn svg{
+  color:white;
+  margin-right:5px;
+  
+}
 .consult-btn:hover{
   background:#f8faff;
 }

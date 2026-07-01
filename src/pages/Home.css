@@ -1032,6 +1032,9 @@
 .how-section{
   padding:40px 5%;
   background:#f8fbff;
+   max-width:1300px;
+  margin:auto;
+  padding:0 20px;
 }
 
 .how-heading{
@@ -1087,7 +1090,7 @@
   border-radius:24px;
   padding:28px 20px;
   text-align:center;
-  background:#fff;
+   background:#f8fbff;
   min-height:290px;
 
   transition:.3s;

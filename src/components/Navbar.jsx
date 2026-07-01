@@ -2,7 +2,12 @@ import API_URL from "../config";
 import "./Navbar.css";
 import { useState } from "react";
 import logo from "../assets/logo.png";
-import { Link , useNavigate} from "react-router-dom";
+import {
+  NavLink,
+  Link,
+  useNavigate,
+  useLocation
+} from "react-router-dom";
 
 import {
   FaBars,
@@ -22,6 +27,7 @@ function Navbar() {
 const [menuOpen, setMenuOpen] = useState(false);
 const [serviceOpen, setServiceOpen] = useState(false);
 const [profileOpen, setProfileOpen] = useState(false);
+const location = useLocation();
 
 
 
@@ -59,12 +65,15 @@ const closeMenu = () => {
               Home
             </Link>
           </li>
-
-          <li>
-            <Link to="/find-ca" onClick={closeMenu}>
-              Find CA
-            </Link>
-          </li>
+<li>
+  <Link
+    to="/find-ca"
+    onClick={closeMenu}
+    className="active-link"
+  >
+    Find CA
+  </Link>
+</li>
 
           <li className={serviceOpen ? "dropdown active" : "dropdown"}>
 
@@ -160,7 +169,7 @@ const closeMenu = () => {
 
             <Link
               to="/find-ca"
-              className="consult-btn"
+              className="login-btn"
               onClick={closeMenu}
             >
               <FaCalendarAlt />
@@ -223,7 +232,7 @@ const closeMenu = () => {
 ) : (
   <Link
     to="/login"
-    className="login-btn"
+    className="consult-btn"
   >
     Login / Register
   </Link>
@@ -233,7 +242,7 @@ const closeMenu = () => {
 
         <div className="nav-actions">
 
-          <Link to="/find-ca" className="consult-btn">
+          <Link to="/find-ca" className="login-btn">
             <FaCalendarAlt />
             Book Consultation
           </Link>
@@ -295,7 +304,7 @@ const closeMenu = () => {
 ) : (
   <Link
     to="/login"
-    className="login-btn"
+    className="consult-btn"
   >
     Login / Register
   </Link>
