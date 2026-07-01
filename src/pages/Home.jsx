@@ -284,297 +284,287 @@ const fetchSavedVendors = async () => {
     <>
       {/* HERO SECTION */}
 
-      <section className="hero">
-
-        <div
-          className="hero-left"
-          data-aos="fade-right"
-          data-aos-duration="1000"
-        >
-
-          <span
-            className="hero-badge"
-            data-aos="fade-down"
-            data-aos-delay="100"
-          >
-            India's Most Trusted CA Marketplace
-          </span>
-
-          <h1
-            data-aos="fade-up"
-            data-aos-delay="200"
-          >
-            Find Trusted
-            <br />
-            Chartered Accountants
-            <br />
-            <span>Near You</span>
-          </h1>
-
-          <p
-            data-aos="fade-up"
-            data-aos-delay="350"
-          >
-            Connect with verified CAs and CA firms for all your
-            business and tax needs. Fast, reliable & secure.
-          </p>
-
-          <div
-            className="hero-feaures"
-            data-aos="fade-up"
-            data-aos-delay="500"
-          >
-
-            <div className="feaure">
-              <FaShieldAlt className="feaure-icon" />
-              <span>Verified Professionals</span>
-            </div>
-
-            <div className="feaure">
-              <FaWallet className="feaure-icon" />
-              <span>Transparent Pricing</span>
-            </div>
-
-            <div className="feaure">
-              <FaLock className="feaure-icon" />
-              <span>Secure & Reliable</span>
-            </div>
-
-          </div>
-
-        </div>
-
-        <div
-          className="hero-right"
-          data-aos="zoom-in"
-          data-aos-delay="400"
-          data-aos-duration="1200"
-        >
-          <img src={heroImg} alt="CA Dashboard" />
-        </div>
-
-      </section>
-
-   
-      {/* SEARCH CARD */}
-
-      <section className="ca-search-box">
-
-        <div className="ca-search-heading">
-
-          <div className="ca-heading-row">
-            <HiOutlineUserGroup className="ca-heading-icon" />
-            <h3>Find CA / Firm</h3>
-          </div>
-
-          <div className="ca-heading-line"></div>
-
-        </div>
-
-        <div className="ca-search-label-row">
-
-          <span>What do you need help with?</span>
-
-          <span>Where?</span>
-
-          <span>Select Business Type (Optional)</span>
-
-          <span></span>
-
-        </div>
-
-        <div className="ca-search-fields">
-
-          {/* Service */}
-
-          <select
-            value={service}
-            onChange={(e) => setService(e.target.value)}
-          >
-            <option value="">
-              Select Service
-            </option>
-
-            {
-              allServices.map((item, index) => (
-                <option
-                  key={index}
-                  value={item}
-                >
-                  {item}
-                </option>
-              ))
-            }
-
-          </select>
-
-          {/* Location */}
-
-          <div className="ca-location-box">
-
-            <input
-              type="text"
-              placeholder="Enter City or Area"
-              value={city}
-              onChange={(e) => setCity(e.target.value)}
-            />
-
-            <HiOutlineLocationMarker className="ca-location-icon" />
-
-          </div>
-
-          {/* Business Type */}
-
-          <select
-            value={businessType}
-            onChange={(e) => setBusinessType(e.target.value)}
-          >
-
-            <option value="">
-              All Business Types
-            </option>
-
-            <option value="Individual">
-              Individual
-            </option>
-
-            <option value="Partnership">
-              Partnership
-            </option>
-
-            <option value="Company">
-              Company
-            </option>
-
-            <option value="LLP">
-              LLP
-            </option>
-
-          </select>
-
-          {/* Search Button */}
-
-          <button
-            type="button"
-            className="ca-search-btn"
-            onClick={() => handleSearch()}
-          >
-
-            <FaSearch />
-
-            Search Now
-
-          </button>
-
-        </div>
-
-        {/* Popular Searches */}
-
-        <div className="ca-popular-tags">
-
-          <span>
-            Popular Searches :
-          </span>
-
-          {
-
-            allServices.slice(0, 8).map((item, index) => (
-
-              <button
-                type="button"
-                key={index}
-                onClick={() => {
-
-                  setService(item);
-
-                  handleSearch(item);
-
-                }}
-              >
-
-                {item}
-
-              </button>
-
-            ))
-
-          }
-
-        </div>
-{searchDone && (
-
-  <div className="ca-search-results">
-
-    {searchResults.length > 0 ? (
-
-      <div className="ca-search-result-list">
-
-        {searchResults.map((vendor) => (
-
-          <div
-            className="ca-search-result-card"
-            key={vendor._id}
-          >
-
-            <img
-              src={
-                vendor.photo
-                  ? `${API_URL}/uploads/${vendor.photo}`
-                  : "/avatar.png"
-              }
-              alt={vendor.fullName}
-            />
-
-            <div className="ca-search-result-info">
-
-              <h4>{vendor.firmName || vendor.fullName}</h4>
-
-              <p>
-                📍 {vendor.city}, {vendor.state}
-              </p>
-
-              <p>
-                {vendor.services?.length > 0
-                  ? vendor.services
-                      .map((s) => s.serviceName)
-                      .join(", ")
-                  : "No Services"}
-              </p>
-
-            </div>
-
-            <button
-              className="ca-view-profile-btn"
-              onClick={() => navigate(`/vendor/${vendor._id}`)}
-            >
-              View Profile
-            </button>
-
-          </div>
-
-        ))}
-
+     <section className="home-hero-section">
+
+  <div
+    className="home-hero-left"
+    data-aos="fade-right"
+    data-aos-duration="1000"
+  >
+
+    <span
+      className="home-hero-badge"
+      data-aos="fade-down"
+      data-aos-delay="100"
+    >
+      India's Most Trusted CA Marketplace
+    </span>
+
+    <h1
+      className="home-hero-title"
+      data-aos="fade-up"
+      data-aos-delay="200"
+    >
+      Find Trusted
+      
+      Chartered<br/> Accountants
+    
+      <span>   Near You</span>
+    </h1>
+
+    <p
+      className="home-hero-description"
+      data-aos="fade-up"
+      data-aos-delay="350"
+    >
+      Connect with verified CAs and CA firms for all your
+      business and tax needs. Fast, reliable & secure.
+    </p>
+
+    <div
+      className="home-hero-features"
+      data-aos="fade-up"
+      data-aos-delay="500"
+    >
+
+      <div className="home-hero-feature">
+        <FaShieldAlt className="home-hero-feature-icon" />
+        <span>Verified Professionals</span>
       </div>
 
-    ) : (
-
-      <div className="ca-no-results">
-
-        <h3>No CA / Firm Found</h3>
-
-        <p>
-          No Chartered Accountant available for your search.
-        </p>
-
+      <div className="home-hero-feature">
+        <FaWallet className="home-hero-feature-icon" />
+        <span>Transparent Pricing</span>
       </div>
 
-    )}
+      <div className="home-hero-feature">
+        <FaLock className="home-hero-feature-icon" />
+        <span>Secure & Reliable</span>
+      </div>
+
+    </div>
 
   </div>
 
-)}
+  <div
+    className="home-hero-right"
+    data-aos="zoom-in"
+    data-aos-delay="400"
+    data-aos-duration="1200"
+  >
+    <img
+      src={heroImg}
+      alt="CA Dashboard"
+      className="home-hero-image"
+    />
+  </div>
 
-      </section>
+</section>
+
+
+
+<section className="home-search-section">
+
+  <div className="home-search-header">
+
+    <div className="home-search-title-row">
+      <HiOutlineUserGroup className="home-search-title-icon" />
+      <h3>Find CA / Firm</h3>
+    </div>
+
+    <div className="home-search-title-line"></div>
+
+  </div>
+
+
+  <div className="home-search-labels">
+
+    <span>What do you need help with?</span>
+
+    <span>Where?</span>
+
+    <span>Select Business Type (Optional)</span>
+
+    <span></span>
+
+  </div>
+
+
+  <div className="home-search-fields">
+
+    <select
+      className="home-search-select"
+      value={service}
+      onChange={(e) => setService(e.target.value)}
+    >
+      <option value="">
+        Select Service
+      </option>
+
+      {allServices.map((item, index) => (
+        <option key={index} value={item}>
+          {item}
+        </option>
+      ))}
+    </select>
+
+
+    <div className="home-location-box">
+
+      <input
+        type="text"
+        className="home-location-input"
+        placeholder="Enter City or Area"
+        value={city}
+        onChange={(e) => setCity(e.target.value)}
+      />
+
+      <HiOutlineLocationMarker className="home-location-icon" />
+
+    </div>
+
+
+    <select
+      className="home-search-select"
+      value={businessType}
+      onChange={(e) => setBusinessType(e.target.value)}
+    >
+      <option value="">
+        All Business Types
+      </option>
+
+      <option value="Individual">
+        Individual
+      </option>
+
+      <option value="Partnership">
+        Partnership
+      </option>
+
+      <option value="Company">
+        Company
+      </option>
+
+      <option value="LLP">
+        LLP
+      </option>
+    </select>
+
+
+    <button
+      type="button"
+      className="home-search-button"
+      onClick={() => handleSearch()}
+    >
+      <FaSearch />
+      Search Now
+    </button>
+
+  </div>
+
+
+  <div className="home-popular-searches">
+
+    <span>Popular Searches :</span>
+
+    {allServices.slice(0, 8).map((item, index) => (
+
+      <button
+        key={index}
+        type="button"
+        className="home-popular-search-button"
+        onClick={() => {
+          setService(item);
+          handleSearch(item);
+        }}
+      >
+        {item}
+      </button>
+
+    ))}
+
+  </div>
+
+
+  {searchDone && (
+
+    <div className="home-search-results">
+
+      {searchResults.length > 0 ? (
+
+        <div className="home-result-list">
+
+          {searchResults.map((vendor) => (
+
+            <div
+              key={vendor._id}
+              className="home-result-card"
+            >
+
+              <img
+                className="home-result-image"
+                src={
+                  vendor.photo
+                    ? `${API_URL}/uploads/${vendor.photo}`
+                    : "/avatar.png"
+                }
+                alt={vendor.fullName}
+              />
+
+              <div className="home-result-content">
+
+                <h4>
+                  {vendor.firmName || vendor.fullName}
+                </h4>
+
+                <p>
+                  📍 {vendor.city}, {vendor.state}
+                </p>
+
+                <p>
+                  {vendor.services?.length > 0
+                    ? vendor.services
+                        .map((s) => s.serviceName)
+                        .join(", ")
+                    : "No Services"}
+                </p>
+
+              </div>
+
+              <button
+                className="home-view-profile-btn"
+                onClick={() =>
+                  navigate(`/vendor/${vendor._id}`)
+                }
+              >
+                View Profile
+              </button>
+
+            </div>
+
+          ))}
+
+        </div>
+
+      ) : (
+
+        <div className="home-no-results">
+
+          <h3>No CA / Firm Found</h3>
+
+          <p>
+            No Chartered Accountant available for your search.
+          </p>
+
+        </div>
+
+      )}
+
+    </div>
+
+  )}
+
+</section>
 
 
       {/* Popular Services Section */}

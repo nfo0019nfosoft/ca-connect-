@@ -289,28 +289,30 @@ const openRazorpay = async () => {
               );
 
             // VERIFY PAYMENT + CREATE NOTIFICATION
+await axios.post(
+  `${API_URL}/api/payment/verify-payment`,
+  {
 
-            await axios.post(
-              `${API_URL}/api/payment/verify-payment`,
-              {
+    razorpay_order_id:
+      response.razorpay_order_id,
 
-                razorpay_order_id:
-                  response.razorpay_order_id,
+    razorpay_payment_id:
+      response.razorpay_payment_id,
 
-                razorpay_payment_id:
-                  response.razorpay_payment_id,
+    razorpay_signature:
+      response.razorpay_signature,
 
-                razorpay_signature:
-                  response.razorpay_signature,
+    userId:
+      storedUser._id,
 
-                userId:
-                  storedUser._id,
+    vendorId:
+      vendor._id,
 
-                amount:
-                  consultationFee
+    amount:
+      consultationFee
 
-              }
-            );
+  }
+);
 
             // SAVE CONSULTATION
 

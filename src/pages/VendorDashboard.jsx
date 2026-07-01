@@ -93,6 +93,10 @@ useState(false);
         await axios.get(
           `${API_URL}/api/vendor/dashboard/${vendorId}`
         );
+        console.log(
+  "Notifications:",
+  res.data.notifications
+);
 setDashboard(
   res.data || {}
 );
@@ -228,36 +232,50 @@ const conversionRate =
 
 
 
+const [revenueFilter,setRevenueFilter] =
+  useState("all");
 
+const revenueData =
+  (dashboard?.monthlyRevenueData || [])
+  .map(item => ({
+    day:
+      item.day ||
+      item._id?.day ||
+      item._id?.month ||
+      item._id?.year ||
+      "N/A",
 
+    revenue:
+      item.revenue ||
+      item.amount ||
+      item.totalRevenue ||
+      0,
 
-  const [revenueFilter,setRevenueFilter] =
-    useState("thisMonth");
+    date:
+      item.date ||
+      item.createdAt ||
+      null
+  }));
 
-  const revenueData =
-    dashboard?.monthlyRevenueData || [];
-    console.log(
-  "Revenue Data:",
-  dashboard?.monthlyRevenueData
-);
 
   const filteredRevenue =
-    revenueFilter === "thisMonth"
-      ? revenueData.filter(
-          item =>
-            new Date(item.date).getMonth() ===
-            new Date().getMonth()
-        )
-      : revenueFilter === "lastMonth"
-      ? revenueData.filter(
-          item =>
-            new Date(item.date).getMonth() ===
-            new Date().getMonth() - 1
-        )
-      : revenueData;
-
-
-
+  revenueFilter === "thisMonth"
+    ? revenueData.filter(
+        item =>
+          item.date
+            ? new Date(item.date).getMonth() ===
+              new Date().getMonth()
+            : true
+      )
+    : revenueFilter === "lastMonth"
+    ? revenueData.filter(
+        item =>
+          item.date
+            ? new Date(item.date).getMonth() ===
+              new Date().getMonth() - 1
+            : true
+      )
+    : revenueData;
 
 
 
@@ -1210,127 +1228,138 @@ const quickActions = [
   {/* Monthly Revenue */}
  <div className="vendor-dashboard-widget vendor-dashboard-revenue-widget">
 
-        <div className="vendor-dashboard-revenue-top">
+  <div className="vendor-dashboard-revenue-top">
 
-          <div>
+    <div>
 
-            <h3>
-              Monthly Revenue Overview
-            </h3>
+      <h3>
+        Monthly Revenue Overview
+      </h3>
 
-            <h1>
-              ₹
-              {
-                (
-                  dashboard?.stats?.monthlyRevenue || 0
-                ).toLocaleString()
-              }
-            </h1>
+      <h1>
+        ₹
+        {
+          (
+            dashboard?.stats?.monthlyRevenue || 0
+          ).toLocaleString()
+        }
+      </h1>
 
-            <p>
-              Total Revenue
-            </p>
+      <p>
+        Total Revenue
+      </p>
 
-          </div>
+    </div>
 
-          <select
-            value={revenueFilter}
-            onChange={(e)=>
-              setRevenueFilter(
-                e.target.value
-              )
-            }
-          >
+    <select
+      value={revenueFilter}
+      onChange={(e)=>
+        setRevenueFilter(
+          e.target.value
+        )
+      }
+    >
 
-            <option value="thisMonth">
-              This Month
-            </option>
+      <option value="thisMonth">
+        This Month
+      </option>
 
-            <option value="lastMonth">
-              Last Month
-            </option>
+      <option value="lastMonth">
+        Last Month
+      </option>
 
-            <option value="all">
-              All Time
-            </option>
+      <option value="all">
+        All Time
+      </option>
 
-          </select>
+    </select>
 
-        </div>
+  </div>
 
-        {/* Graph ikada */}
-        <ResponsiveContainer
-  width="100%"
-  height={250}
->
-
-  <AreaChart
-    data={filteredRevenue}
+  <ResponsiveContainer
+    width="100%"
+    height={250}
   >
 
-    <defs>
+    <AreaChart
+      data={filteredRevenue}
+      margin={{
+        top:20,
+        right:20,
+        left:0,
+        bottom:0
+      }}
+    >
 
-      <linearGradient
-        id="colorRevenue"
-        x1="0"
-        y1="0"
-        x2="0"
-        y2="1"
-      >
+      <defs>
 
-        <stop
-          offset="5%"
-          stopColor="#2563eb"
-          stopOpacity={0.3}
-        />
+        <linearGradient
+          id="colorRevenue"
+          x1="0"
+          y1="0"
+          x2="0"
+          y2="1"
+        >
 
-        <stop
-          offset="95%"
-          stopColor="#2563eb"
-          stopOpacity={0}
-        />
+          <stop
+            offset="5%"
+            stopColor="#2563eb"
+            stopOpacity={0.3}
+          />
 
-      </linearGradient>
+          <stop
+            offset="95%"
+            stopColor="#2563eb"
+            stopOpacity={0}
+          />
 
-    </defs>
+        </linearGradient>
 
-    <CartesianGrid
-      strokeDasharray="3 3"
-      vertical={false}
-    />
+      </defs>
 
-    <XAxis
-      dataKey="day"
-    />
+      <CartesianGrid
+        strokeDasharray="3 3"
+        vertical={false}
+      />
 
-    <YAxis
-      tickFormatter={
-        value =>
-        `₹${value/1000}k`
-      }
-    />
+      <XAxis
+        dataKey="day"
+      />
 
-    <Tooltip
-      formatter={
-        value =>
-        `₹${value.toLocaleString()}`
-      }
-    />
+      <YAxis
+        tickFormatter={
+          value =>
+            `₹${(
+              value / 1000
+            ).toFixed(1)}k`
+        }
+      />
 
-    <Area
-      type="monotone"
-      dataKey="revenue"
-      stroke="#2563eb"
-      strokeWidth={3}
-      fillOpacity={1}
-      fill="url(#colorRevenue)"
-    />
+      <Tooltip
+        formatter={
+          value => [
+            `₹${Number(
+              value
+            ).toLocaleString()}`,
+            "Revenue"
+          ]
+        }
+      />
 
-  </AreaChart>
+      <Area
+        type="monotone"
+        dataKey="revenue"
+        stroke="#2563eb"
+        strokeWidth={3}
+        fillOpacity={1}
+        fill="url(#colorRevenue)"
+      />
 
-</ResponsiveContainer>
+    </AreaChart>
 
-      </div>
+  </ResponsiveContainer>
+
+</div>
 
   {/* Quick Actions */}
 
