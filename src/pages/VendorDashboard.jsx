@@ -27,6 +27,12 @@ import {
   FaCalendarCheck,
   FaRupeeSign,
   FaCrown,
+  FaPlusCircle,
+  FaTag,
+  FaClock,
+  FaHeadset,
+  FaGift,
+ 
  
 } from "react-icons/fa";
 
@@ -230,6 +236,10 @@ const conversionRate =
 
   const revenueData =
     dashboard?.monthlyRevenueData || [];
+    console.log(
+  "Revenue Data:",
+  dashboard?.monthlyRevenueData
+);
 
   const filteredRevenue =
     revenueFilter === "thisMonth"
@@ -245,6 +255,67 @@ const conversionRate =
             new Date().getMonth() - 1
         )
       : revenueData;
+
+
+
+
+
+
+const quickActions = [
+  {
+    title: "Add New Service",
+    icon: <FaPlusCircle />,
+    className: "quick-blue",
+    path: "/vendor-services"
+  },
+
+  {
+    title: "Update Profile",
+    icon: <FaUsers />,
+    className: "quick-orange",
+    path: "/vendor-profile"
+  },
+
+  {
+    title: "Availability",
+    icon: <FaClock />,
+    className: "quick-green",
+    path: "/vendor-availability"
+  },
+
+  {
+    title: "Raise Ticket",
+    icon: <FaHeadset />,
+    className: "quick-purple",
+    path: "/support"
+  },
+
+  {
+    title: "Refer & Earn",
+    icon: <FaGift />,
+    className: "quick-pink",
+    path: "/refer-earn"
+  },
+
+  {
+    title: "Upgrade Plan",
+    icon: <FaCrown />,
+    className: "quick-yellow",
+    path: "/vendor-subscription"
+  }
+];
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1263,45 +1334,56 @@ const conversionRate =
 
   {/* Quick Actions */}
 
-  <div className="vendor-dashboard-widget">
+ <div className="vendor-dashboard-widget">
 
-    <div className="vendor-dashboard-widget-header">
+  <div className="vendor-dashboard-widget-header">
 
-      <h3>
-        Quick Actions
-      </h3>
-
-    </div>
-
-    <div className="vendor-dashboard-actions-grid">
-
-      <button>
-        Add Service
-      </button>
-
-      <button>
-        Pricing
-      </button>
-
-      <button>
-        Availability
-      </button>
-
-      <button>
-        Raise Ticket
-      </button>
-
-      <button>
-        Refer & Earn
-      </button>
-
-      <button>
-        Upgrade Plan
-      </button>
-
-    </div>
+    <h3>
+      Quick Actions
+    </h3>
 
   </div>
+
+  <div className="vendor-dashboard-actions-grid">
+
+    {
+      quickActions.map(
+        (
+          item,
+          index
+        ) => (
+
+          <div
+            key={index}
+            className={`vendor-dashboard-action-card ${item.className}`}
+            onClick={() =>
+              navigate(
+                item.path
+              )
+            }
+          >
+
+            <div className="vendor-dashboard-action-icon">
+
+              {item.icon}
+
+            </div>
+
+            <p>
+
+              {item.title}
+
+            </p>
+
+          </div>
+
+        )
+      )
+    }
+
+  </div>
+
+</div>
 
 </div>
 
