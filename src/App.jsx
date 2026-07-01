@@ -20,6 +20,7 @@ import AboutUs from "./pages/AboutUs";
 import FindCA from "./pages/FindCA";
 import Blogs from "./pages/Blogs";
 import VendorDetails from "./pages/VendorDetails"
+import VendorAppointments from "./pages/VendorAppointments"
 
 import VendorDashboard from "./pages/VendorDashboard";
 import VendorProfile from "./pages/VendorProfile";
@@ -78,7 +79,8 @@ function Layout() {
    "/login",
    "/user-saved-ca",
    "/user-enquiry",
-   "/user-appointments"
+   "/user-appointments",
+    "/vendor-appointments"
 ];
 
 const hideNavbarFooter =
@@ -191,6 +193,7 @@ const hideNavbarFooter =
         <Route path="/vendor-preview" element={<VendorPreview />} />
         <Route path="/vendor-payment" element={<VendorPayment />} />
         <Route path="/vendor-leads" element={<VendorLeads />} />
+         <Route path="/vendor-appointments" element={<VendorAppointments />} />
 
         {/* User Pages */}
         <Route path="/user-dashboard" element={<UserDashboard />} />

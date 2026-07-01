@@ -64,11 +64,12 @@ a{
   justify-content: flex-start;
   flex-shrink: 0;
 
-  width: 180px;
+  width: 200px;
 }
 
 .logo img{
   width: 100%;
+  margin-left: 20px;
   max-width: 170px;
   height: auto;
   object-fit: contain;
@@ -100,7 +101,7 @@ a{
 
 .nav-links a{
   color:#111827;
-  font-size:12px;
+  font-size:18px;
   font-weight:600;
   position:relative;
   transition:.3s ease;
@@ -207,55 +208,43 @@ text-align: left;
 }
 
 /* Book Consultation */
-
 .consult-btn{
   display:flex;
   align-items:center;
-  gap:5px;
-margin-left:8px;
-  height:46px;
-  padding:0 20px;
+  justify-content:center;
+  gap:8px;
 
-  border:1px solid #2563eb;
-  border-radius:12px;
+  height:42px;
+  padding:0 18px;
 
-  background:#fff;
-  color:#2563eb;
+  border:2px solid #021b5c;
+  border-radius:14px;
 
-  font-size:14px;
-  font-weight:600;
+  background:#ffffff;
+  color:#021b5c;
 
-  white-space:nowrap;
+  font-size:12px;
+  font-weight:700;
+
   transition:.3s ease;
 }
 
+.consult-btn svg{
+  color:#021b5c;
+}
+
 .consult-btn:hover{
-  background:#2563eb;
-  color:#fff;
+  background:#f8faff;
+}
+.consult-btn{
+  background:#ffffff !important;
+  color:#021b5c !important;
+  border:2px solid #021b5c !important;
 }
 
-/* Location */
-
-.location-btn{
-  display:flex;
-  align-items:center;
-  gap:6px;
-
-  height:46px;
-  padding:0 16px;
-
-  border:1px solid #e5e7eb;
-  border-radius:12px;
-
-  background:#fff;
-  color:#374151;
-
-  font-size:14px;
-  font-weight:500;
-
-  white-space:nowrap;
+.consult-btn svg{
+  color:#021b5c !important;
 }
-
 /* Login */
 
 .login-btn{
@@ -315,11 +304,11 @@ margin-left:8px;
   }
 
   .nav-links{
-    gap:16px;
+    gap:20px;
   }
 
   .nav-links a{
-    font-size:14px;
+    font-size:15px;
   }
 
   .consult-btn,
@@ -349,6 +338,7 @@ margin-left:8px;
   color:#4f46e5;
   font-size:14px;
 }
+
 /* ==========================
    TABLET
 ========================== */

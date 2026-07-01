@@ -167,14 +167,6 @@ const closeMenu = () => {
               Book Consultation
             </Link>
 
-            <Link
-              to="/location"
-              className="location-badge"
-              onClick={closeMenu}
-            >
-              <FaMapMarkerAlt />
-              Location
-            </Link>
 {user ? (
 <div className="profil-wrapper">
 
@@ -246,10 +238,7 @@ const closeMenu = () => {
             Book Consultation
           </Link>
 
-          <Link to="/location" className="location-badge">
-            <FaMapMarkerAlt />
-            Location
-          </Link>
+        
 {user ? (
  <div className="profil-wrapper">
 

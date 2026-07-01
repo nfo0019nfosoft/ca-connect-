@@ -325,7 +325,7 @@
 
 .popula-services-section {
   max-width: 1400px;
-  margin: 40px auto;
+  margin: 30px auto;
     overflow:hidden;
   padding: 50px;
 }
@@ -339,6 +339,7 @@
 
 .popula-services-header h2 {
   font-size: 30px;
+  text-transform: uppercase;
   font-weight: 700;
   color: #111827;
 }
@@ -508,7 +509,8 @@
 }
 
 .top-ca-header h2{
-  font-size:42px;
+  font-size:30px;
+  text-transform: uppercase;
   font-weight:700;
   color:#111827;
   margin:0;
@@ -1016,185 +1018,193 @@
     color:#2563eb;
 }
 
-/*==========================
-HOW SECTION
-==========================*/
+
+
+
+
+
+
+
+
+
+
 
 .how-section{
-    padding:30px 5%;
-    background:#f8fbff;
-    max-width:1300px;
-  margin:auto;
+  padding:40px 5%;
+  background:#f8fbff;
 }
 
 .how-heading{
-    text-align:center;
-    margin-bottom:40px;
+  text-align:center;
+  margin-bottom:30px;
 }
 
 .how-tag{
-    display:inline-block;
-    padding:8px 18px;
-    border-radius:50px;
-    background:#eaf2ff;
-    color:#2563eb;
-    font-size:14px;
-    font-weight:600;
-    margin-bottom:15px;
+  display:inline-block;
+  padding:8px 18px;
+  border-radius:50px;
+  background:#eaf2ff;
+  color:#2563eb;
+  font-size:13px;
+  font-weight:700;
+  text-transform:uppercase;
+  margin-bottom:15px;
 }
 
 .how-heading h2{
-    font-size:42px;
-    color:#0f172a;
-    margin-bottom:12px;
+  font-size:35px;
+  font-weight:700;
+  color:#0f172a;
+  margin-bottom:10px;
 }
 
 .how-heading p{
-    max-width:650px;
-    margin:auto;
-    color:#64748b;
-    font-size:17px;
-    line-height:1.7;
+  color:#64748b;
+  font-size:18px;
 }
 
-.how-grid{
-    display:grid;
-    grid-template-columns:1fr 60px 1fr 60px 1fr 60px 1fr;
-    align-items:center;
+.how-wrapper{
+  background:#ffffff;
+  border-radius:35px;
+  padding:35px;
+
+  display:grid;
+  grid-template-columns:
+  1fr 40px
+  1fr 40px
+  1fr 40px
+  1fr;
+
+  align-items:center;
+  gap:15px;
+
+  box-shadow:
+    0 20px 60px rgba(37,99,235,.08);
 }
 
 .how-card{
-    background:#fff;
-    border-radius:22px;
-    padding:35px 25px;
-    text-align:center;
-    position:relative;
-    border:1px solid #edf2f7;
-    transition:.35s;
+  border:1px solid #edf2f7;
+  border-radius:24px;
+  padding:28px 20px;
+  text-align:center;
+  background:#fff;
+  min-height:290px;
+
+  transition:.3s;
 }
 
 .how-card:hover{
-    transform:translateY(-8px);
-    box-shadow:0 20px 50px rgba(37,99,235,.12);
+  transform:translateY(-8px);
+  box-shadow:
+    0 15px 40px rgba(37,99,235,.12);
+}
+
+.how-icon{
+  width:80px;
+  height:80px;
+  margin:auto;
+  margin-bottom:22px;
+
+  border-radius:50%;
+  background:#eff6ff;
+  color:#2563eb;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  font-size:32px;
+}
+
+.how-title{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:10px;
+
+  margin-bottom:15px;
 }
 
 .how-number{
-    position:absolute;
-    top:18px;
-    right:18px;
-    width:36px;
-    height:36px;
-    border-radius:50%;
-    background:#2563eb;
-    color:#fff;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:14px;
-    font-weight:700;
+  width:24px;
+  height:24px;
+
+  border-radius:50%;
+  background:#2563eb;
+  color:#fff;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  font-size:10px;
+  font-weight:700;
 }
 
-.how-icon{
-    width:85px;
-    height:85px;
-    margin:auto;
-    margin-bottom:20px;
-    border-radius:50%;
-    background:#eff6ff;
-    color:#2563eb;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:34px;
-}
-
-.how-card h4{
-    font-size:22px;
-    margin-bottom:12px;
-    color:#0f172a;
+.how-title h4{
+  font-size:20px;
+  font-weight:700;
+  color:#0f172a;
+  margin:0;
 }
 
 .how-card p{
-    color:#64748b;
-    line-height:1.8;
-    font-size:15px;
+  color:#64748b;
+  font-size:15px;
+  line-height:1.8;
+ 
 }
 
-.how-line{
-    height:4px;
-    background:linear-gradient(90deg,#2563eb,#60a5fa);
-    border-radius:30px;
-    position:relative;
-}
+.how-arrow{
+  display:flex;
+  align-items:center;
+  justify-content:center;
 
-.how-line::after{
-    content:"";
-    position:absolute;
-    right:-2px;
-    top:50%;
-    transform:translateY(-50%);
-    width:14px;
-    height:14px;
-    border-radius:50%;
-    background:#2563eb;
+  font-size:28px;
+  color:#2563eb;
 }
-
-/*==========================
-TABLET
-==========================*/
 
 @media(max-width:1100px){
 
-.how-grid{
-    grid-template-columns:repeat(2,1fr);
-    gap:25px;
-}
+  .how-wrapper{
+    grid-template-columns:1fr 1fr;
+  }
 
-.how-line{
+  .how-arrow{
     display:none;
+  }
 }
-
-}
-
-/*==========================
-MOBILE
-==========================*/
 
 @media(max-width:768px){
 
-.how-section{
+  .how-section{
     padding:60px 20px;
-}
+  }
 
-.how-heading h2{
-    font-size:30px;
-}
+  .how-heading h2{
+    font-size:34px;
+  }
 
-.how-heading p{
-    font-size:15px;
-}
-
-.how-grid{
+  .how-wrapper{
     grid-template-columns:1fr;
-    gap:20px;
-}
+    padding:20px;
+  }
 
-.how-card{
-    padding:28px 20px;
-}
+  .how-card{
+    min-height:auto;
+    padding:25px 18px;
+  }
 
-.how-icon{
+  .how-icon{
     width:70px;
     height:70px;
     font-size:28px;
-}
+  }
 
-.how-card h4{
+  .how-title h4{
     font-size:20px;
+  }
 }
-
-}
-
 
 
 
@@ -1654,12 +1664,13 @@ MOBILE
 ========================= */
 
 .assistant-content{
-  max-width:520px;
+  max-width:620px;
 }
 
 .assistant-content h2{
-  font-size:30px;
-  line-height:1.18;
+  font-size:22px;
+  line-height:1.3;
+  text-transform: uppercase;
   font-weight:700;
   color:#0f172a;
   text-align:left;
@@ -2246,7 +2257,8 @@ MOBILE
 }
 
 .home-blog-header h2{
-  font-size:34px;
+  font-size:30px;
+  text-transform:uppercase;
   font-weight:700;
   color:#111827;
 }
@@ -2457,8 +2469,9 @@ MOBILE
 .faq-left h2{
   margin:0 0 25px;
 
-  font-size:34px;
+  font-size:30px;
   font-weight:700;
+  text-transform:uppercase;
 
   color:#111827;
 }

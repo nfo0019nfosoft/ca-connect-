@@ -812,28 +812,34 @@ const fetchSavedVendors = async () => {
 
 
       {/* HOW IT WORKS */}
-
-  <section className="how-section">
+<section className="how-section">
 
   <div className="how-heading">
-    <span className="how-tag">Simple Process</span>
-    <h2>How It Works</h2>
+    <span className="how-tag">
+      SIMPLE PROCESS
+    </span>
+
+    <h2>
+      HOW IT WORKS
+    </h2>
+
     <p>
       Connect with verified Chartered Accountants in just four simple steps.
     </p>
   </div>
 
-  <div className="how-grid">
+  <div className="how-wrapper">
 
     <div className="how-card">
-
-      <div className="how-number">01</div>
 
       <div className="how-icon">
         <FaSearch />
       </div>
 
-      <h4>Search</h4>
+      <div className="how-title">
+        <span className="how-number">01</span>
+        <h4>SEARCH</h4>
+      </div>
 
       <p>
         Search for the service you need and choose your preferred location.
@@ -841,17 +847,20 @@ const fetchSavedVendors = async () => {
 
     </div>
 
-    <div className="how-line"></div>
+    <div className="how-arrow">
+      <i className="fas fa-arrow-right"></i>
+    </div>
 
     <div className="how-card">
-
-      <div className="how-number">02</div>
 
       <div className="how-icon">
         <FaClipboardList />
       </div>
 
-      <h4>Compare</h4>
+      <div className="how-title">
+        <span className="how-number">02</span>
+        <h4>COMPARE</h4>
+      </div>
 
       <p>
         Compare CA profiles, pricing, experience and customer reviews.
@@ -859,17 +868,20 @@ const fetchSavedVendors = async () => {
 
     </div>
 
-    <div className="how-line"></div>
+    <div className="how-arrow">
+      <i className="fas fa-arrow-right"></i>
+    </div>
 
     <div className="how-card">
-
-      <div className="how-number">03</div>
 
       <div className="how-icon">
         <FaPaperPlane />
       </div>
 
-      <h4>Connect</h4>
+      <div className="how-title">
+        <span className="how-number">03</span>
+        <h4>CONNECT</h4>
+      </div>
 
       <p>
         Send enquiry or instantly book an online consultation.
@@ -877,17 +889,20 @@ const fetchSavedVendors = async () => {
 
     </div>
 
-    <div className="how-line"></div>
+    <div className="how-arrow">
+      <i className="fas fa-arrow-right"></i>
+    </div>
 
     <div className="how-card">
-
-      <div className="how-number">04</div>
 
       <div className="how-icon">
         <FaCheckCircle />
       </div>
 
-      <h4>Get It Done</h4>
+      <div className="how-title">
+        <span className="how-number">04</span>
+        <h4>GET IT DONE</h4>
+      </div>
 
       <p>
         Complete your compliance work quickly and securely.
@@ -898,7 +913,6 @@ const fetchSavedVendors = async () => {
   </div>
 
 </section>
-
 
 
 
@@ -1042,7 +1056,7 @@ const fetchSavedVendors = async () => {
           >
             <h2>
               Your AI Assistant for
-              <br />
+              
               All Tax & Compliance Questions
             </h2>
 
