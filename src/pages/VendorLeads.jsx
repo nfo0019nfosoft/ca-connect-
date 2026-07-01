@@ -104,6 +104,44 @@ const navigate = useNavigate();
       .includes(search.toLowerCase())
   );
 
+
+
+
+
+
+
+const handleLogout = ()=>{
+
+  const confirmLogout =
+    window.confirm(
+      "Are you sure you want to logout?"
+    );
+
+  if(!confirmLogout) return;
+
+  localStorage.removeItem(
+    "vendorToken"
+  );
+
+  localStorage.removeItem(
+    "vendorId"
+  );
+
+  navigate(
+    "/login"
+  );
+
+};
+
+
+
+
+
+
+
+
+
+
   if (loading) {
 
     return (
@@ -113,6 +151,7 @@ const navigate = useNavigate();
     );
 
   }
+
 
   return (
 
@@ -174,13 +213,17 @@ const navigate = useNavigate();
 
     <div className="vendor-header-profile">
 
-    <img
+   <img
   src={
     vendor?.photo
       ? `${API_URL}/uploads/${vendor.photo}`
       : "/avatar.png"
   }
-  alt=""
+  alt="Profile"
+  onClick={handleLogout}
+  style={{
+    cursor:"pointer"
+  }}
 />
 
       <div>

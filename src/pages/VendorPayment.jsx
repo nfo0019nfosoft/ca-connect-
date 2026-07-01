@@ -47,13 +47,7 @@ import Sidebar from "../components/Sidebar";
 import "./VendorServices.css";
 
 function VendorPayment() {
- const handleLogout = () => {
 
-  localStorage.removeItem("token");
-  localStorage.removeItem("user");
-
-  window.location.href = "/login";
-};
 useEffect(() => {
 
   const token =
@@ -439,6 +433,50 @@ const [accountError, setAccountError] =
   setAccountError("");
 
   await saveBankDetails();
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+const handleLogout = ()=>{
+
+  const confirmLogout =
+    window.confirm(
+      "Are you sure you want to logout?"
+    );
+
+  if(!confirmLogout) return;
+
+  localStorage.removeItem(
+    "vendorToken"
+  );
+
+  localStorage.removeItem(
+    "vendorId"
+  );
+
+  navigate(
+    "/login"
+  );
+
 };
 
   return (

@@ -14,6 +14,7 @@ import {
   FaHeadset,
   FaSignOutAlt,
   FaCrown,
+  FaClock
 } from "react-icons/fa";
 
 import "./Sidebar.css";
@@ -149,7 +150,49 @@ function Sidebar() {
               Appointments
             </Link>
 
+
+
           </li>
+
+
+
+
+
+
+
+
+
+
+
+          <li>
+
+            <Link
+              to="/vendor-availability"
+              className={
+                location.pathname ===
+                "/vendor-availability"
+                  ? "active"
+                  : ""
+              }
+            >
+              <FaClock />
+              Availability
+            </Link>
+
+
+
+          </li>
+
+
+
+
+
+
+
+
+
+
+
 
           <li>
 

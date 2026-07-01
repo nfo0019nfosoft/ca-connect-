@@ -6,6 +6,9 @@
   display:flex;
  margin-left: 230px;
     background:#f8fafc;
+     max-width:1300px;
+  margin:auto;
+  padding:0 20px;
 }
 
 .userappointments-header{

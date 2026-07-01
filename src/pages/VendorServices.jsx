@@ -44,13 +44,7 @@ import Sidebar from "../components/Sidebar";
 import "./VendorServices.css";
 
 function VendorServices() {
- const handleLogout = () => {
-
-  localStorage.removeItem("token");
-  localStorage.removeItem("user");
-
-  window.location.href = "/login";
-};
+ 
 useEffect(() => {
 
   const token =
@@ -379,6 +373,51 @@ const services = [
       "Any other professional services.",
   },
 ];
+
+
+
+
+
+
+
+
+const handleLogout = ()=>{
+
+  const confirmLogout =
+    window.confirm(
+      "Are you sure you want to logout?"
+    );
+
+  if(!confirmLogout) return;
+
+  localStorage.removeItem(
+    "vendorToken"
+  );
+
+  localStorage.removeItem(
+    "vendorId"
+  );
+
+  navigate(
+    "/login"
+  );
+
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   return (
     <div className="profile-layout">

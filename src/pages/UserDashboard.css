@@ -6,6 +6,9 @@
   display:flex;
   min-height:100vh;
   background:#f7f9fc;
+   max-width:1300px;
+  margin:auto;
+  padding:0 20px;
 }
 
 .userdashboard-page-content{

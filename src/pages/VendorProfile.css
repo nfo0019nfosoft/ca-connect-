@@ -8,6 +8,9 @@
   display:flex;
   min-height:100vh;
   background:#f5f7fb;
+   max-width:1300px;
+  margin:auto;
+  padding:0 20px;
 }
 
 .profile-content{

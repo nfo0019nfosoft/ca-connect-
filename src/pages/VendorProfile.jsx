@@ -30,13 +30,6 @@ function VendorProfile() {
 
 
 
-  const handleLogout = () => {
-
-  localStorage.removeItem("token");
-  localStorage.removeItem("user");
-
-  window.location.href = "/login";
-};
 
 
   const [vendor, setVendor] = useState({
@@ -232,6 +225,48 @@ const saveProfile = async () => {
     alert("Update Failed");
   }
 };
+
+
+
+
+
+
+
+
+
+
+
+const handleLogout = ()=>{
+
+  const confirmLogout =
+    window.confirm(
+      "Are you sure you want to logout?"
+    );
+
+  if(!confirmLogout) return;
+
+  localStorage.removeItem(
+    "vendorToken"
+  );
+
+  localStorage.removeItem(
+    "vendorId"
+  );
+
+  navigate(
+    "/login"
+  );
+
+};
+
+
+
+
+
+
+
+
+
 
   return (
     <div className="profile-layout">

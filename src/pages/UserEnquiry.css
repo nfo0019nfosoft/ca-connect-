@@ -15,6 +15,9 @@
     border-bottom:1px solid #edf1f7;
 
     box-sizing:border-box;
+     max-width:1300px;
+  margin:auto;
+  padding:0 20px;
 }
 
 .userenquiry-left h1{
@@ -438,6 +441,9 @@
     justify-content:space-between;
     align-items:center;
     gap:10px;
+     max-width:1300px;
+  margin:auto;
+  padding:0 20px;
 }
 
 .userenquiry-tabs{
@@ -719,6 +725,9 @@
     align-items:flex-start;
     background:#f8fafc;
     min-height:100vh;
+     max-width:1300px;
+  margin:auto;
+  padding:0 20px;
 }
 
 /* =========================

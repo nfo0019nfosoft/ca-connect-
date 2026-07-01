@@ -4,6 +4,9 @@
     align-items:center;
     margin-bottom:35px;
     margin-left: 240px;
+     max-width:1300px;
+  margin:auto;
+  padding:0 20px;
 }
 
 .dashboard-header h1{
@@ -141,6 +144,9 @@
     align-items:flex-start;
     margin-top:25px;
     margin-left: 230px;
+     max-width:1300px;
+  margin:auto;
+  padding:0 20px;
 }
 
 .usersavedca-left{

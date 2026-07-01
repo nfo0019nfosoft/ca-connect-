@@ -42,13 +42,7 @@ import {
 
 function VendorKyc() {
     const navigate = useNavigate();
- const handleLogout = () => {
-
-  localStorage.removeItem("token");
-  localStorage.removeItem("user");
-
-  window.location.href = "/login";
-};
+ 
 useEffect(() => {
 
   const token =
@@ -331,6 +325,45 @@ const documents = [
     icon: <FaCertificate />,
   },
 ];
+
+
+
+
+
+
+
+const handleLogout = ()=>{
+
+  const confirmLogout =
+    window.confirm(
+      "Are you sure you want to logout?"
+    );
+
+  if(!confirmLogout) return;
+
+  localStorage.removeItem(
+    "vendorToken"
+  );
+
+  localStorage.removeItem(
+    "vendorId"
+  );
+
+  navigate(
+    "/login"
+  );
+
+};
+
+
+
+
+
+
+
+
+
+
 
   return (
     <div className="profile-layout">

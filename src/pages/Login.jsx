@@ -78,9 +78,28 @@ const handleOtp = async () => {
         )
       );
 
-      if (userType === "ca") {
+if (userType === "ca") {
 
-  console.log(data);
+  console.log(
+    "VENDOR DATA =>",
+    data.vendor
+  );
+
+  console.log(
+    "USER DATA =>",
+    data.user
+  );
+
+  console.log(
+    "VENDOR ID =>",
+    data.vendor?._id ||
+    data.user?._id
+  );
+
+  localStorage.setItem(
+    "vendorToken",
+    data.token || ""
+  );
 
   localStorage.setItem(
     "vendorId",
@@ -98,9 +117,10 @@ const handleOtp = async () => {
   );
 
   window.location.href =
-    "/vendor-dashboard";
+    "/vendor-profile";
 
-} else {
+}
+else {
 
         window.location.href =
           "/";

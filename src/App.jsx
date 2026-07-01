@@ -21,11 +21,12 @@ import FindCA from "./pages/FindCA";
 import Blogs from "./pages/Blogs";
 import VendorDetails from "./pages/VendorDetails"
 import VendorAppointments from "./pages/VendorAppointments"
-
+import VendorAvailability from "./pages/VendorAvailability"
 import VendorDashboard from "./pages/VendorDashboard";
 import VendorProfile from "./pages/VendorProfile";
 import VendorKyc from "./pages/VendorKyc";
 import VendorServices from "./pages/VendorServices";
+import VendorSettings from "./pages/VendorSettings";
 import VendorPreview from "./pages/VendorPreview";
 import UserDashboard from "./pages/UserDashboard";
 import UserProfile from "./pages/UserProfile";
@@ -80,7 +81,9 @@ function Layout() {
    "/user-saved-ca",
    "/user-enquiry",
    "/user-appointments",
-    "/vendor-appointments"
+    "/vendor-appointments",
+     "/vendor-availability",
+     "/vendor-settings",
 ];
 
 const hideNavbarFooter =
@@ -194,6 +197,8 @@ const hideNavbarFooter =
         <Route path="/vendor-payment" element={<VendorPayment />} />
         <Route path="/vendor-leads" element={<VendorLeads />} />
          <Route path="/vendor-appointments" element={<VendorAppointments />} />
+         <Route path="/vendor-availability" element={<VendorAvailability />} />
+          <Route path="/vendor-settings" element={<VendorSettings />} />
 
         {/* User Pages */}
         <Route path="/user-dashboard" element={<UserDashboard />} />

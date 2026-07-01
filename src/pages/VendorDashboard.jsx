@@ -331,6 +331,29 @@ const quickActions = [
 
 
 
+const handleLogout = ()=>{
+
+  const confirmLogout =
+    window.confirm(
+      "Are you sure you want to logout?"
+    );
+
+  if(!confirmLogout) return;
+
+  localStorage.removeItem(
+    "vendorToken"
+  );
+
+  localStorage.removeItem(
+    "vendorId"
+  );
+
+  navigate(
+    "/login"
+  );
+
+};
+
 
 
 
@@ -421,16 +444,19 @@ const quickActions = [
 
             <div className="vendor-dashboard-profile">
 
-              <img
-                src={
-                  vendor?.photo
-                  ?
-                  `${API_URL}/uploads/${vendor.photo}`
-                  :
-                  "/avatar.png"
-                }
-                alt=""
-              />
+            
+            <img
+              src={
+                vendor?.photo
+                  ? `${API_URL}/uploads/${vendor.photo}`
+                  : "/avatar.png"
+              }
+              alt="Profile"
+              onClick={handleLogout}
+              style={{
+                cursor:"pointer"
+              }}
+            />
 
               <div>
 
