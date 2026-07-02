@@ -1294,66 +1294,66 @@ const fetchSavedVendors = async () => {
 {
 showAllFaqs && (
 <>
+  <details className="faq-item">
+    <summary className="faq-question">
+      <span>Can I choose a CA based on specialization?</span>
+    </summary>
 
-<details className="faq-item">
-  <summary className="faq-question">
-    <span>Can I compare multiple CAs before booking?</span>
-  </summary>
+    <div className="faq-answer">
+      Yes. You can filter professionals based on GST, Taxation,
+      Audit, Company Registration, ROC Compliance and other
+      specialized services.
+    </div>
+  </details>
 
-  <div className="faq-answer">
-    Yes. You can compare experience, ratings,
-    pricing and services before selecting a CA.
-  </div>
-</details>
+  <details className="faq-item">
+    <summary className="faq-question">
+      <span>How quickly will I receive a response?</span>
+    </summary>
 
-<details className="faq-item">
-  <summary className="faq-question">
-    <span>Can I cancel or reschedule appointments?</span>
-  </summary>
+    <div className="faq-answer">
+      Most professionals respond within a few hours depending
+      on their availability and service requirements.
+    </div>
+  </details>
 
-  <div className="faq-answer">
-    Yes. Appointments can be cancelled or
-    rescheduled directly from your dashboard.
-  </div>
-</details>
+  <details className="faq-item">
+    <summary className="faq-question">
+      <span>Can I book appointments with multiple CAs?</span>
+    </summary>
 
-<details className="faq-item">
-  <summary className="faq-question">
-    <span>Which payment methods are supported?</span>
-  </summary>
+    <div className="faq-answer">
+      Yes. You can compare professionals and schedule
+      consultations with multiple experts before making
+      a final decision.
+    </div>
+  </details>
 
-  <div className="faq-answer">
-    We support UPI, Debit Cards, Credit Cards,
-    Net Banking and Wallet payments.
-  </div>
-</details>
+  <details className="faq-item">
+    <summary className="faq-question">
+      <span>Do you provide services for startups and businesses?</span>
+    </summary>
 
-<details className="faq-item">
-  <summary className="faq-question">
-    <span>Will I receive invoices after payment?</span>
-  </summary>
+    <div className="faq-answer">
+      Absolutely. We support startups, MSMEs and enterprises
+      with registration, taxation, compliance and advisory
+      services.
+    </div>
+  </details>
 
-  <div className="faq-answer">
-    Yes. Every successful payment generates
-    an invoice which is available in your dashboard.
-  </div>
-</details>
+  <details className="faq-item">
+    <summary className="faq-question">
+      <span>Can I track the status of my enquiry?</span>
+    </summary>
 
-<details className="faq-item">
-  <summary className="faq-question">
-    <span>Can businesses get dedicated CA support?</span>
-  </summary>
-
-  <div className="faq-answer">
-    Yes. Businesses can choose long-term CA
-    support plans and dedicated professionals.
-  </div>
-</details>
-
+    <div className="faq-answer">
+      Yes. Your dashboard allows you to monitor enquiry
+      progress, appointments and responses from professionals.
+    </div>
+  </details>
 </>
 )
 }
-
 
 <button
   className="faq-link"
@@ -1402,16 +1402,22 @@ showAllFaqs
                 Compliance and Professional Services.
               </p>
 
-              <div className="support-buttons">
-                <Link to="/support" className="contact-btn">
-                  Contact Support
-                </Link>
+        <div className="support-buttons">
 
-                <Link to="/ai-assistant" className="chat-btn">
-                  Live Chat
-                </Link>
+  <Link to="/support" className="contact-btn">
+    Contact Support
+  </Link>
 
-              </div>
+  <a
+    href="https://wa.me/919177267680?text=Hello%20Bussult%20Team,%20I%20need%20assistance%20with%20your%20services."
+    target="_blank"
+    rel="noopener noreferrer"
+    className="chat-btn"
+  >
+    Live Chat
+  </a>
+
+</div>
 
             </div>
 
