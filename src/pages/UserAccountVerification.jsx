@@ -448,7 +448,7 @@ function UserAccountVerification() {
                   </span>
 
                   <span className="current-page">
-                    Business Details
+                    Account Verification
                   </span>
                 </div>
 

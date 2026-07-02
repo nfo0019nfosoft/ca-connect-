@@ -6,9 +6,9 @@
 
 .profile-content {
   flex: 1;
-  padding: 20px 25px;
+  padding: 10px 25px;
+  margin-left: 190px;
 }
-
 /* Header */
 
 .top-header {

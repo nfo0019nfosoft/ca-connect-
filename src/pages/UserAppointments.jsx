@@ -266,13 +266,15 @@ appointments
                 alt="user"
               />
 
-              <h4>
-                {
-                  user?.name ||
-                  user?.fullName ||
-                  "Guest User"
-                }
-              </h4>
+  <div>
+    <h4>
+      {user.name || "User Name"}
+    </h4>
+
+    <p>
+      {user.role || "Business User"}
+    </p>
+  </div>
 
             </div>
 
@@ -480,10 +482,7 @@ appointments
           key={item._id}
         >
 
-        <div
-  className="ua-appointment-row"
-  key={item._id}
->
+
 
   {/* APPOINTMENT DETAILS */}
 
@@ -685,7 +684,7 @@ appointments
 
   <div className="ua-row-actions">
 
-    <button
+    {/* <button
       className="ua-row-action-btn"
       title="View Details"
       onClick={() =>
@@ -695,9 +694,9 @@ appointments
       }
     >
       <FaEye />
-    </button>
+    </button> */}
 
-    <button
+    {/* <button
       className="ua-row-action-btn"
       title="Open Vendor"
       onClick={() =>
@@ -707,7 +706,7 @@ appointments
       }
     >
       <FaChevronRight />
-    </button>
+    </button> */}
 
     <button
       className="ua-row-action-btn"
@@ -720,7 +719,7 @@ appointments
 
 </div>
 
-        </div>
+        
 
       ))
 

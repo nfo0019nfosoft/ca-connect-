@@ -152,6 +152,7 @@ function UserEnquiry() {
 
     <>
    <UserSidebar />
+    <div className="userenquiry-layout">
       <div className="userenquiry-header">
 
         <div className="userenquiry-left">
@@ -205,8 +206,13 @@ function UserEnquiry() {
   />
 
   <div>
-    <h4>{user?.name || user?.fullName || "Guest User"}</h4>
-   
+    <h4>
+      {user?.name || "User Name"}
+    </h4>
+
+    <p>
+      {user?.role || "Business User"}
+    </p>
   </div>
 
 </div>
@@ -675,7 +681,7 @@ function UserEnquiry() {
 
 
 
-
+</div>
 
 
 

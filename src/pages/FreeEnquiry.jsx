@@ -1280,7 +1280,7 @@ useEffect(() => {
 <div className="enquiry-footer">
 
   <button
-    className="cancel-btn"
+    className="canel-btn"
     onClick={() => navigate(-1)}
   >
     Cancel

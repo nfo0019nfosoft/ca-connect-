@@ -231,10 +231,10 @@ function Sidebar() {
           <li>
 
             <Link
-              to="/vendor-support"
+              to="/vendor-help"
               className={
                 location.pathname ===
-                "/support"
+                "/vendor-help"
                   ? "active"
                   : ""
               }

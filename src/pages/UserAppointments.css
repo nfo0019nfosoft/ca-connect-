@@ -4,8 +4,8 @@
 
 .userappointments-layout{
   display:flex;
- margin-left: 230px;
-    background:#f8fafc;
+
+  
      max-width:1300px;
   margin:auto;
   padding:0 20px;
@@ -115,7 +115,7 @@
 }
 
 .userappointments-notification::after{
-  content:"6";
+
   position:absolute;
   top:5px;
   right:5px;
@@ -450,18 +450,19 @@ APPOINTMENTS CONTENT
 .ua-left-filters{
   display:flex;
   align-items:center;
-  gap:12px;
+  gap:5px;
   background:#fff;
   padding:14px;
   border-radius:16px;
   border:1px solid #edf2f7;
   margin-bottom:16px;
+  margin-top:10px;
 }
 
 .ua-filter-select,
 .ua-filter-date{
   height:46px;
-  min-width:160px;
+  min-width:100px;
   border:1px solid #e2e8f0;
   border-radius:12px;
   padding:0 14px;
@@ -904,10 +905,10 @@ APPOINTMENTS CONTENT
 ======================================== */
 
 .userappointments-right{
-  width:340px;
+  width:240px;
   display:flex;
   flex-direction:column;
-  gap:24px;
+  gap:12px;
 }
 
 
@@ -919,6 +920,7 @@ APPOINTMENTS CONTENT
   background:#fff;
   border-radius:24px;
   padding:24px;
+  margin-top:10px;
   border:1px solid #edf2f7;
   box-shadow:0 8px 25px rgba(0,0,0,.04);
 }
@@ -1296,4 +1298,262 @@ APPOINTMENTS CONTENT
 
 .ua-appointment-row:first-of-type{
   border-radius:0 0 18px 18px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* =====================================
+   IMPORTANT ALIGNMENT FIX
+===================================== */
+
+.userappointments-layout{
+  display:flex;
+  width:100%;
+  min-height:100vh;
+  background:#f8fafc;
+}
+
+.userappointments-main{
+  flex:1;
+  padding:30px;
+  width:100%;
+  margin-left: 190px;
+  overflow:hidden;
+}
+
+.userappointments-content{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 240px;
+  gap:20px;
+  align-items:start;
+}
+
+.userappointments-left{
+  width:100%;
+  min-width:0;
+}
+
+.userappointments-right{
+  width:260px;
+  min-width:260px;
+}
+
+.ua-table-header,
+.ua-appointment-row{
+  width:100%;
+
+  display:grid;
+
+  grid-template-columns:
+    2.3fr
+    1.5fr
+    1.2fr
+    1fr
+    0.9fr
+    0.8fr;
+
+  align-items:center;
+}
+
+.ua-appointment-row{
+  background:#fff;
+  border:1px solid #edf2f7;
+  border-radius:18px;
+  padding:20px;
+  margin-bottom:16px;
+}
+
+.userappointments-header-right{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  flex-wrap:wrap;
+}
+
+.userappointments-search{
+  flex:1;
+  min-width:260px;
+  max-width:420px;
+}
+
+/* =========================
+   TABLET
+========================= */
+
+@media(max-width:1200px){
+
+  .userappointments-content{
+    grid-template-columns:1fr;
+  }
+
+  .userappointments-right{
+    width:100%;
+    min-width:100%;
+  }
+
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:991px){
+
+  .ua-table-header{
+    display:none;
+  }
+
+  .ua-appointment-row{
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    gap:18px;
+  }
+
+  .ua-service-info,
+  .ua-ca-info,
+  .ua-date-info,
+  .ua-mode-info,
+  .ua-status-info,
+  .ua-row-actions{
+    width:100%;
+  }
+
+  .ua-row-actions{
+    justify-content:flex-end;
+  }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+/* SERVICE SECTION */
+
+.ua-service-info{
+  display:flex;
+  align-items:center;
+  gap:5px;
+}
+
+.ua-service-icon{
+  width:22px;
+  height:22px;
+  min-width:22px;
+  border-radius:12px;
+  background:#eef4ff;
+  color:#2563eb;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:10px;
+}
+
+.ua-service-content{
+  display:flex;
+  flex-direction:column;
+  gap:2px;
+}
+
+.ua-service-content h3{
+  font-size:10px;
+  font-weight:700;
+  line-height:1.35;
+  color:#0f172a;
+  margin:0;
+}
+
+.ua-service-category{
+  font-size:11px;
+  color:#64748b;
+  margin:0;
+}
+
+.ua-service-id{
+  font-size:10px;
+  color:#94a3b8;
+  line-height:1.4;
+}
+
+/* CA DETAILS */
+
+.ua-ca-info img{
+  width:22px;
+  height:22px;
+}
+
+.ua-ca-content h4{
+  font-size:10px;
+  margin-bottom:2px;
+}
+
+.ua-ca-content p{
+  font-size:10px;
+}
+
+.ua-ca-rating{
+  font-size:8px;
+}
+
+/* DATE */
+
+.ua-date-row,
+.ua-time-row{
+  font-size:10px;
+}
+
+.ua-date-info p{
+  font-size:10px;
+}
+
+.ua-date-info small{
+  font-size:10px;
+}
+
+/* MODE */
+
+.ua-mode-badge{
+  padding:8px 12px;
+  font-size:8px;
+  border-radius:12px;
+}
+
+/* STATUS */
+
+.ua-status-badge{
+  padding:8px 14px;
+  font-size:8px;
+}
+
+/* ACTION */
+
+.ua-row-action-btn{
+  width:36px;
+  height:36px;
+  font-size:13px;
+}
+
+/* CARD HEIGHT */
+
+.ua-appointment-row{
+  padding:16px 18px;
+  min-height:90px;
 }

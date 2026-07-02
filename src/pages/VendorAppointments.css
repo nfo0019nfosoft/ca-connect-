@@ -13,7 +13,7 @@ VENDOR APPOINTMENTS
 
 .vendorappointments-main{
   flex:1;
-  margin-left:220px;
+  margin-left:190px!important;
   padding:25px;
   overflow-x:hidden;
 }

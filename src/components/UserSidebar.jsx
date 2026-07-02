@@ -183,10 +183,10 @@ function Sidebar() {
           <li>
 
             <Link
-              to="/user-support"
+              to="/user-help"
               className={
                 location.pathname ===
-                  "/support"
+                  "/user-help"
                   ? "active"
                   : ""
               }

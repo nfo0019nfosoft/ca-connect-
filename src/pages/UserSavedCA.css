@@ -3,10 +3,32 @@
     justify-content:space-between;
     align-items:center;
     margin-bottom:35px;
-    margin-left: 240px;
-     max-width:1300px;
-  margin:auto;
-  padding:0 20px;
+
+    width:100%;
+    padding:0 30px 0 260px;
+    box-sizing:border-box;
+}
+
+
+
+
+.usersavedca-container{
+    display:flex;
+    gap:25px;
+    align-items:flex-start;
+
+    width:100%;
+    padding:0 30px 0 260px;
+    box-sizing:border-box;
+}
+.dashboard-header,
+.usersavedca-container{
+    width:100%;
+    max-width:1400px;
+    margin:0 auto;
+    padding:0 30px;
+    /* margin-left: 210px; */
+    box-sizing:border-box;
 }
 
 .dashboard-header h1{
@@ -138,16 +160,6 @@
    MAIN LAYOUT
 ================================== */
 
-.usersavedca-container{
-    display:flex;
-    gap:10px;
-    align-items:flex-start;
-    margin-top:25px;
-    margin-left: 230px;
-     max-width:1300px;
-  margin:auto;
-  padding:0 20px;
-}
 
 .usersavedca-left{
     flex:0.98;
@@ -197,7 +209,7 @@
 }
 
 .usersavedca-sort label{
-    font-size:14px;
+    font-size:10px;
     font-weight:600;
 }
 
@@ -1518,4 +1530,216 @@ transform:translateX(0);
 
 .usersavedca-help-btn:hover{
     background:#1d4ed8;
+}
+
+
+
+
+
+
+
+
+
+
+
+.usersavedca-left{
+    flex:1;
+    min-width:0;
+}
+
+.usersavedca-right{
+    width:300px;
+    flex-shrink:0;
+}
+@media(max-width:992px){
+
+    .dashboard-header,
+    .usersavedca-container{
+        padding:20px;
+    }
+
+    .usersavedca-container{
+        flex-direction:column;
+    }
+
+    .usersavedca-right{
+        width:100%;
+    }
+
+}
+.usersavedca-page{
+    display:flex;
+}
+
+.usersavedca-content{
+    flex:1;
+    margin-left:230px; 
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.usersaved-tabs{
+    display:flex;
+    align-items:center;
+    gap:30px;
+    border-bottom:1px solid #edf2f7;
+    margin:25px 0 30px;
+    padding-bottom:15px;
+    overflow-x:auto;
+}
+
+.usersaved-tab{
+    background:none;
+    border:none;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-size:15px;
+    font-weight:600;
+    color:#667085;
+    cursor:pointer;
+    padding-bottom:14px;
+    position:relative;
+    white-space:nowrap;
+}
+
+.usersaved-tab svg{
+    font-size:15px;
+    color:#667085;
+}
+
+.usersaved-tab span{
+    min-width:22px;
+    height:22px;
+    padding:0 7px;
+    border-radius:20px;
+    background:#eef2ff;
+    color:#2563eb;
+    font-size:12px;
+    font-weight:700;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.usersaved-tab.active{
+    color:#2563eb;
+}
+
+.usersaved-tab.active svg{
+    color:#2563eb;
+}
+
+.usersaved-tab.active::after{
+    content:"";
+    position:absolute;
+    left:0;
+    bottom:-16px;
+    width:100%;
+    height:3px;
+    border-radius:20px;
+    background:#2563eb;
+}
+
+/* ===========================
+   USERSAVED TABS MOBILE
+=========================== */
+
+@media(max-width:768px){
+
+    .usersaved-tabs{
+        gap:18px;
+        overflow-x:auto;
+        padding-bottom:10px;
+        scrollbar-width:none;
+    }
+
+    .usersaved-tabs::-webkit-scrollbar{
+        display:none;
+    }
+
+    .usersaved-tab{
+        min-width:max-content;
+        font-size:13px;
+        padding-bottom:12px;
+    }
+
+    .usersaved-tab svg{
+        font-size:13px;
+    }
+
+    .usersaved-tab span{
+        min-width:20px;
+        height:20px;
+        font-size:11px;
+    }
+
+    .usersaved-tab.active::after{
+        bottom:-11px;
+    }
+
+}
+
+@media(max-width:480px){
+
+    .usersaved-tabs{
+        gap:14px;
+    }
+
+    .usersaved-tab{
+        font-size:12px;
+        gap:6px;
+    }
+
+    .usersaved-tab svg{
+        font-size:12px;
+    }
+
+    .usersaved-tab span{
+        min-width:18px;
+        height:18px;
+        font-size:10px;
+        padding:0 5px;
+    }
+
+}
+.usersaved-tabs{
+    display:flex;
+    align-items:center;
+    gap:30px;
+    overflow-x:auto;
+
+    /* Scroll bar hide */
+    scrollbar-width:none; /* Firefox */
+    -ms-overflow-style:none; /* IE and Edge */
+}
+
+.usersaved-tabs::-webkit-scrollbar{
+    display:none; /* Chrome, Safari */
 }

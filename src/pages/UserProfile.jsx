@@ -203,17 +203,15 @@ const handleImageUpload = async (e) => {
 /* =====================
    SAVE PROFILE
 ===================== */
-
 const saveProfile = async () => {
-
   try {
-
     setLoading(true);
 
-    const token =
-      localStorage.getItem("token");
+    const token = localStorage.getItem("token");
 
-    await axios.put(
+    console.log("Sending Data:", user);
+
+    const res = await axios.put(
       `${API_URL}/api/users/profile`,
       {
         ...user,
@@ -221,31 +219,21 @@ const saveProfile = async () => {
       },
       {
         headers: {
-          Authorization:
-            `Bearer ${token}`,
+          Authorization: `Bearer ${token}`,
         },
       }
     );
 
-    setUser((prev) => ({
-      ...prev,
-      personalCompleted: true,
-    }));
+    console.log("Response:", res.data);
+
+    setUser(res.data.user);
 
   } catch (error) {
-
-    console.log(error);
-
+    console.log("SAVE ERROR:", error.response?.data || error);
   } finally {
-
     setLoading(false);
-
   }
-
 };
-
-
-
 
 
 
@@ -690,13 +678,13 @@ const saveProfile = async () => {
 
   <div className="action-btn-area">
 
-    <Link
-      to="/user-business-details"
-      className="continue-save-btn"
-      onClick={saveProfile}
-    >
-      Save & Continue
-    </Link>
+  <Link
+  to="/user-business-details"
+  className="continue-save-btn"
+  onClick={saveProfile}
+>
+  Save & Continue
+</Link>
 
   </div>
 

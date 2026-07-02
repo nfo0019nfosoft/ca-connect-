@@ -16,7 +16,8 @@ FaBell,
 FaRegCommentDots,
 FaCog,
 FaShieldAlt,
-FaLock
+FaLock,
+FaSearch,
 } from "react-icons/fa";
 
 import {
@@ -25,6 +26,10 @@ useNavigate
 const VendorSettings = ()=>{
     const navigate =
 useNavigate();
+
+
+const [activeTab,setActiveTab] =
+useState("general");
 
 const [vendor,
 setVendor] =
@@ -102,64 +107,79 @@ Authorization:
 }
 );
 
-setVendor(
-res.data.vendor
-);
+
+const vendor =
+res.data.vendor;
+
+setVendor(vendor);
 
 setFormData({
+  businessName:
+    vendor.businessName ||
+    vendor.firmName ||
+    vendor.fullName ||
+    "",
 
-businessName:
-res.data.vendor.businessName ||
-res.data.vendor.firmName ||
-"",
+  businessEmail:
+    vendor.businessEmail ||
+    vendor.officeEmail ||
+    vendor.email ||
+    "",
 
-businessEmail:
-res.data.vendor.businessEmail ||
-res.data.vendor.officeEmail ||
-"",
+  phone:
+    vendor.officeMobile ||
+    vendor.mobile ||
+    vendor.contactNumber ||
+    "",
 
-phone:
-res.data.vendor.phone ||
-res.data.vendor.mobile ||
-"",
+  businessAddress:
+    vendor.businessAddress ||
+    vendor.addressLine1 ||
+    "",
 
-businessAddress:
-res.data.vendor.businessAddress ||
-res.data.vendor.addressLine1 ||
-"",
+  city:
+    vendor.city || "",
 
-city:
-res.data.vendor.city || "",
+  state:
+    vendor.state || "",
 
-state:
-res.data.vendor.state || "",
+  pinCode:
+    vendor.pincode || "",
 
-pinCode:
-res.data.vendor.pinCode ||
-res.data.vendor.pincode ||
-"",
+  timeZone:
+    vendor.timeZone ||
+    "Asia/Kolkata",
 
-timeZone:
-res.data.vendor.timeZone ||
-"Asia/Kolkata",
+  dateFormat:
+    vendor.dateFormat ||
+    "DD/MM/YYYY",
 
-dateFormat:
-res.data.vendor.dateFormat ||
-"DD/MM/YYYY",
+  timeFormat:
+    vendor.timeFormat ||
+    "12 Hour",
 
-timeFormat:
-res.data.vendor.timeFormat ||
-"12 Hour",
+  emailNotifications:
+    vendor.emailNotifications || {
+      newLead:true,
+      appointmentBooked:true,
+      appointmentReminder:true,
+      paymentReceived:true,
+      systemUpdates:true
+    },
 
-emailNotifications:
-res.data.vendor.emailNotifications,
+  smsNotifications:
+    vendor.smsNotifications || {
+      newLead:true,
+      appointmentBooked:true,
+      appointmentReminder:true,
+      paymentReceived:false
+    },
 
-smsNotifications:
-res.data.vendor.smsNotifications,
-
-security:
-res.data.vendor.security
-
+  security:
+    vendor.security || {
+      twoFactorEnabled:false,
+      loginAlerts:true
+    }
 });
 
 }catch(err){
@@ -240,40 +260,6 @@ alert(
 
 
 
-const changePassword = async () => {
-
-  try {
-
-    const token =
-      localStorage.getItem(
-        "vendorToken"
-      );
-
-    await axios.put(
-      `${API_URL}/api/vendor/change-password`,
-      passwordData,
-      {
-        headers:{
-          Authorization:
-            `Bearer ${token}`
-        }
-      }
-    );
-
-    alert(
-      "Password Updated Successfully"
-    );
-
-  } catch(err) {
-
-    console.log(err);
-
-  }
-
-};
-
-
-
 
 
 
@@ -312,6 +298,76 @@ navigate(
 );
 
 };
+
+
+
+
+const changePassword = async()=>{
+
+  try{
+
+    const token =
+      localStorage.getItem(
+        "vendorToken"
+      );
+
+    const res =
+    await axios.put(
+      `${API_URL}/api/vendor/settings/change-password`,
+      passwordData,
+      {
+        headers:{
+          Authorization:
+          `Bearer ${token}`
+        }
+      }
+    );
+
+    alert(
+      res.data.message
+    );
+
+    setPasswordData({
+      currentPassword:"",
+      newPassword:"",
+      confirmPassword:""
+    });
+
+  }catch(err){
+
+    alert(
+      err.response?.data?.message ||
+      "Something went wrong"
+    );
+
+  }
+
+};
+
+
+
+
+
+
+
+
+if(loading){
+  return (
+    <div>
+      Loading...
+    </div>
+  );
+}
+
+
+
+
+
+
+
+
+
+
 return(
 
 <div className="vendorsettings-layout">
@@ -334,6 +390,19 @@ Home / Settings
 </div>
 
 <div className="vendorsettings-header-right">
+
+
+
+  <div className="vendorsettings-search-box">
+
+  <input
+    type="text"
+    placeholder="Search settings..."
+  />
+
+  <FaSearch className="vendorsettings-search-icon"/>
+
+</div>
 
 <button className="settings-icon">
 <FaRegCommentDots/>
@@ -386,7 +455,61 @@ vendor?.firmName
 </div>
 
 
+<div className="vendorsettings-tabs-wrapper">
 
+  <button
+    className={`vendorsetings-tab-btn ${
+      activeTab === "general"
+        ? "vendorsettings-tab-active"
+        : ""
+    }`}
+    onClick={()=>
+      setActiveTab("general")
+    }
+  >
+    General Settings
+  </button>
+
+  <button
+    className={`vendorsetings-tab-btn ${
+      activeTab === "notification"
+        ? "vendorsettings-tab-active"
+        : ""
+    }`}
+    onClick={()=>
+      setActiveTab("notification")
+    }
+  >
+    Notification Settings
+  </button>
+
+  <button
+    className={`vendorsetings-tab-btn ${
+      activeTab === "security"
+        ? "vendorsettings-tab-active"
+        : ""
+    }`}
+    onClick={()=>
+      setActiveTab("security")
+    }
+  >
+    Security Settings
+  </button>
+
+  <button
+    className={`vendorsetings-tab-btn ${
+      activeTab === "password"
+        ? "vendorsettings-tab-active"
+        : ""
+    }`}
+    onClick={()=>
+      setActiveTab("password")
+    }
+  >
+    Change Password
+  </button>
+
+</div>
 
 
 
@@ -609,335 +732,220 @@ Save Changes
 
 
 
-
-
-
 <div className="vendorsettings-section-card">
 
-<div className="vendorsettings-side-info">
+  <div className="vendorsettings-side-info">
 
-<div className="vendorsettings-side-icon">
-<FaBell/>
-</div>
+    <div className="vendorsettings-side-icon">
+      <FaBell/>
+    </div>
 
-<div>
+    <div>
+      <h3>Notification Settings</h3>
 
-<h3>
-Notification Settings
-</h3>
+      <p>
+        Choose how you want to receive
+        notifications and stay updated.
+      </p>
+    </div>
 
-<p>
-Choose how you want to receive
-notifications and stay updated.
-</p>
+  </div>
 
-</div>
+  <div className="vendorsettings-section-content">
 
-</div>
+    <div className="notification-wrapper">
 
-<div className="vendorsettings-section-content">
+      {/* EMAIL */}
 
-<div className="notification-column">
+      <div className="notification-column">
 
-<h4>
-Email Notifications
-</h4>
+        <h4>Email Notifications</h4>
 
-<p>
-Receive email notifications for important updates.
-</p>
+        <p>
+          Receive email notifications for important updates.
+        </p>
 
-<label>
-<input
-type="checkbox"
-checked={
-formData.emailNotifications
-?.newLead
-}
-/>
-New lead received
-</label>
+        <label>
+          <input
+            type="checkbox"
+            checked={formData.emailNotifications?.newLead}
+            onChange={(e)=>
+              setFormData({
+                ...formData,
+                emailNotifications:{
+                  ...formData.emailNotifications,
+                  newLead:e.target.checked
+                }
+              })
+            }
+          />
+          New Lead Received
+        </label>
 
-<label>
-<input
-type="checkbox"
-checked={
-formData.emailNotifications
-?.appointmentBooked
-}
-/>
-Appointment booked
-</label>
+        <label>
+          <input
+            type="checkbox"
+            checked={formData.emailNotifications?.appointmentBooked}
+            onChange={(e)=>
+              setFormData({
+                ...formData,
+                emailNotifications:{
+                  ...formData.emailNotifications,
+                  appointmentBooked:e.target.checked
+                }
+              })
+            }
+          />
+          Appointment Booked
+        </label>
 
-<label>
-<input
-type="checkbox"
-checked={
-formData.emailNotifications
-?.appointmentReminder
-}
-/>
-Appointment reminder
-</label>
+        <label>
+          <input
+            type="checkbox"
+            checked={formData.emailNotifications?.appointmentReminder}
+            onChange={(e)=>
+              setFormData({
+                ...formData,
+                emailNotifications:{
+                  ...formData.emailNotifications,
+                  appointmentReminder:e.target.checked
+                }
+              })
+            }
+          />
+          Appointment Reminder
+        </label>
 
-<label>
-<input
-type="checkbox"
-checked={
-formData.emailNotifications
-?.paymentReceived
-}
-/>
-Payment received
-</label>
+        <label>
+          <input
+            type="checkbox"
+            checked={formData.emailNotifications?.paymentReceived}
+            onChange={(e)=>
+              setFormData({
+                ...formData,
+                emailNotifications:{
+                  ...formData.emailNotifications,
+                  paymentReceived:e.target.checked
+                }
+              })
+            }
+          />
+          Payment Received
+        </label>
 
-<label>
-<input
-type="checkbox"
-checked={
-formData.emailNotifications
-?.systemUpdates
-}
-/>
-System updates & announcements
-</label>
+        <label>
+          <input
+            type="checkbox"
+            checked={formData.emailNotifications?.systemUpdates}
+            onChange={(e)=>
+              setFormData({
+                ...formData,
+                emailNotifications:{
+                  ...formData.emailNotifications,
+                  systemUpdates:e.target.checked
+                }
+              })
+            }
+          />
+          System Updates
+        </label>
 
-</div>
+      </div>
 
-<div className="notification-column">
+      {/* SMS */}
 
-<h4>
-SMS Notifications
-</h4>
+      <div className="notification-column">
 
-<p>
-Receive SMS notifications for important updates.
-</p>
+        <h4>SMS Notifications</h4>
 
-<label>
-<input
-type="checkbox"
-checked={
-formData.smsNotifications
-?.newLead
-}
-/>
-New lead received
-</label>
+        <p>
+          Receive SMS notifications for important updates.
+        </p>
 
-<label>
-<input
-type="checkbox"
-checked={
-formData.smsNotifications
-?.appointmentBooked
-}
-/>
-Appointment booked
-</label>
+        <label>
+          <input
+            type="checkbox"
+            checked={formData.smsNotifications?.newLead}
+            onChange={(e)=>
+              setFormData({
+                ...formData,
+                smsNotifications:{
+                  ...formData.smsNotifications,
+                  newLead:e.target.checked
+                }
+              })
+            }
+          />
+          New Lead Received
+        </label>
 
-<label>
-<input
-type="checkbox"
-checked={
-formData.smsNotifications
-?.appointmentReminder
-}
-/>
-Appointment reminder
-</label>
+        <label>
+          <input
+            type="checkbox"
+            checked={formData.smsNotifications?.appointmentBooked}
+            onChange={(e)=>
+              setFormData({
+                ...formData,
+                smsNotifications:{
+                  ...formData.smsNotifications,
+                  appointmentBooked:e.target.checked
+                }
+              })
+            }
+          />
+          Appointment Booked
+        </label>
 
-<label>
-<input
-type="checkbox"
-checked={
-formData.smsNotifications
-?.paymentReceived
-}
-/>
-Payment received
-</label>
+        <label>
+          <input
+            type="checkbox"
+            checked={formData.smsNotifications?.appointmentReminder}
+            onChange={(e)=>
+              setFormData({
+                ...formData,
+                smsNotifications:{
+                  ...formData.smsNotifications,
+                  appointmentReminder:e.target.checked
+                }
+              })
+            }
+          />
+          Appointment Reminder
+        </label>
 
-</div>
+        <label>
+          <input
+            type="checkbox"
+            checked={formData.smsNotifications?.paymentReceived}
+            onChange={(e)=>
+              setFormData({
+                ...formData,
+                smsNotifications:{
+                  ...formData.smsNotifications,
+                  paymentReceived:e.target.checked
+                }
+              })
+            }
+          />
+          Payment Received
+        </label>
 
-<button
-className="notification-save-btn"
-onClick={saveSettings}
->
-Save Changes
-</button>
+      </div>
 
-</div>
+    </div>
 
-</div>
+    <button
+      className="notification-save-btn"
+      onClick={saveSettings}
+    >
+      Save Changes
+    </button>
 
-
-
-
-
-
-
-
-
-
-<div className="vendorsettings-section-card">
-
-<div className="vendorsettings-side-info">
-
-<div className="vendorsettings-side-icon">
-<FaBell/>
-</div>
-
-<div>
-
-<h3>
-Notification Settings
-</h3>
-
-<p>
-Choose how you want to receive
-notifications and stay updated.
-</p>
-
-</div>
-
-</div>
-
-<div className="vendorsettings-section-content">
-
-<div className="notification-column">
-
-<h4>
-Email Notifications
-</h4>
-
-<p>
-Receive email notifications for important updates.
-</p>
-
-<label>
-<input
-type="checkbox"
-checked={
-formData.emailNotifications
-?.newLead
-}
-/>
-New lead received
-</label>
-
-<label>
-<input
-type="checkbox"
-checked={
-formData.emailNotifications
-?.appointmentBooked
-}
-/>
-Appointment booked
-</label>
-
-<label>
-<input
-type="checkbox"
-checked={
-formData.emailNotifications
-?.appointmentReminder
-}
-/>
-Appointment reminder
-</label>
-
-<label>
-<input
-type="checkbox"
-checked={
-formData.emailNotifications
-?.paymentReceived
-}
-/>
-Payment received
-</label>
-
-<label>
-<input
-type="checkbox"
-checked={
-formData.emailNotifications
-?.systemUpdates
-}
-/>
-System updates & announcements
-</label>
+  </div>
 
 </div>
 
-<div className="notification-column">
 
-<h4>
-SMS Notifications
-</h4>
-
-<p>
-Receive SMS notifications for important updates.
-</p>
-
-<label>
-<input
-type="checkbox"
-checked={
-formData.smsNotifications
-?.newLead
-}
-/>
-New lead received
-</label>
-
-<label>
-<input
-type="checkbox"
-checked={
-formData.smsNotifications
-?.appointmentBooked
-}
-/>
-Appointment booked
-</label>
-
-<label>
-<input
-type="checkbox"
-checked={
-formData.smsNotifications
-?.appointmentReminder
-}
-/>
-Appointment reminder
-</label>
-
-<label>
-<input
-type="checkbox"
-checked={
-formData.smsNotifications
-?.paymentReceived
-}
-/>
-Payment received
-</label>
-
-</div>
-
-<button
-className="notification-save-btn"
-onClick={saveSettings}
->
-Save Changes
-</button>
-
-</div>
-
-</div>
 
 
 
@@ -945,92 +953,91 @@ Save Changes
 
 <div className="vendorsettings-section-card">
 
-<div className="vendorsettings-side-info">
+  <div className="vendorsettings-side-info">
 
-<div className="vendorsettings-side-icon">
-<FaShieldAlt/>
-</div>
+    <div className="vendorsettings-side-icon">
+      <FaShieldAlt/>
+    </div>
 
-<div>
+    <div>
+      <h3>Security Settings</h3>
 
-<h3>
-Security Settings
-</h3>
+      <p>
+        Manage your account security and access preferences.
+      </p>
+    </div>
 
-<p>
-Manage your account security and access preferences.
-</p>
+  </div>
 
-</div>
+  <div className="vendorsettings-section-content">
 
-</div>
-
-<div className="vendorsettings-section-content">
-
+    {/* 2FA */}
 <div className="security-row">
 
-<div>
+  <div className="security-left">
+    <h4>Two-Factor Authentication</h4>
+    <p>Require OTP verification during login.</p>
+  </div>
 
-<h4>
-Two-Factor Authentication (2FA)
-</h4>
-
-<p>
-Add an extra layer of security to your account.
-</p>
-
-</div>
-
-<div className="security-actions">
-
-<span className="security-badge">
-Enabled
-</span>
-
-<button
-className="security-btn"
->
-Manage 2FA
-</button>
-
-</div>
+  <label className="switch">
+    <input
+      type="checkbox"
+      checked={formData.security?.twoFactorEnabled}
+      onChange={(e)=>
+        setFormData({
+          ...formData,
+          security:{
+            ...formData.security,
+            twoFactorEnabled:e.target.checked
+          }
+        })
+      }
+    />
+    <span className="slider"></span>
+  </label>
 
 </div>
 
 <div className="security-row">
 
-<div>
+  <div className="security-left">
+    <h4>Login Alerts</h4>
+    <p>
+      Get notified about new logins to your account.
+    </p>
+  </div>
 
-<h4>
-Login Alerts
-</h4>
-
-<p>
-Get notified about new logins to your account.
-</p>
-
-</div>
-
-<label className="switch">
-
-<input
-type="checkbox"
-checked={
-formData.security
-?.loginAlerts
-}
-/>
-
-<span className="slider"></span>
-
-</label>
+  <label className="switch">
+    <input
+      type="checkbox"
+      checked={formData.security?.loginAlerts}
+      onChange={(e)=>
+        setFormData({
+          ...formData,
+          security:{
+            ...formData.security,
+            loginAlerts:e.target.checked
+          }
+        })
+      }
+    />
+    <span className="slider"></span>
+  </label>
 
 </div>
 
-</div>
+<button
+  className="notification-save-btn"
+  onClick={saveSettings}
+>
+  Save Changes
+</button>
+
+    
+
+  </div>
 
 </div>
-
 
 
 

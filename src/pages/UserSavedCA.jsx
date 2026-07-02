@@ -37,6 +37,7 @@ function UserSavedCA() {
     const [loading, setLoading] = useState(true);
     const [search, setSearch] = useState("");
     const [sortBy, setSortBy] = useState("recent");
+    const [activeTab, setActiveTab] = useState("favorites");
    
     const [showComparePopup, setShowComparePopup] = useState(false);
 const [showCompareTable, setShowCompareTable] = useState(false);
@@ -212,7 +213,7 @@ const fetchCompare = async () => {
 
 
 
-
+ 
 
 
 
@@ -462,9 +463,14 @@ const fetchCompare = async () => {
 
   </div>
 )}
+<div className="usersavedca-page">
 
+    <UserSidebar />
 
-            <UserSidebar />
+    <div className="usersavedca-content">
+
+         
+            
             <div className="dashboard-header">
 
                 <div>
@@ -509,7 +515,16 @@ const fetchCompare = async () => {
   alt={user?.name || "User"}
 />
 
-<h4>{user?.name || user?.fullName || "Guest User"}</h4>
+
+  <div>
+    <h4>
+      {user.name || "User Name"}
+    </h4>
+
+    <p>
+      {user.role || "Business User"}
+    </p>
+  </div>
  
 
 
@@ -528,9 +543,63 @@ const fetchCompare = async () => {
 
                 {/* LEFT SIDE */}
 
-               {/* LEFT SIDE */}
+
 
 <div className="usersavedca-left">
+
+
+
+
+
+
+              <div className="usersaved-tabs">
+
+  <button
+    className={`usersaved-tab ${
+      activeTab === "favorites"
+        ? "active"
+        : ""
+    }`}
+    onClick={() =>
+      setActiveTab("favorites")
+    }
+  >
+    <FaHeart />
+    Favorite Professionals
+    <span>{savedCAs.length}</span>
+  </button>
+
+  <button
+    className={`usersaved-tab ${
+      activeTab === "recent"
+        ? "active"
+        : ""
+    }`}
+    onClick={() =>
+      setActiveTab("recent")
+    }
+  >
+    <FaEye />
+    Recently Viewed CAs
+    <span>{recentViewed.length}</span>
+  </button>
+
+  <button
+    className={`usersaved-tab ${
+      activeTab === "compare"
+        ? "active"
+        : ""
+    }`}
+    onClick={() =>
+      setActiveTab("compare")
+    }
+  >
+    <FaExchangeAlt />
+    Compare CAs
+    <span>{compareCAs.length}</span>
+  </button>
+
+</div>
 
   {/* ===========================
       Favorite Professionals
@@ -901,7 +970,7 @@ const fetchCompare = async () => {
 
 
 
-
+</div></div>
             
 
             
