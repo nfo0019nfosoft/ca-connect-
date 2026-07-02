@@ -20,7 +20,8 @@ import {
   FaLock,
   FaShieldAlt,
   FaFileInvoice,
-  FaDownload
+  FaDownload,
+  
 } from "react-icons/fa";
 
 function UserSettings(){
@@ -229,387 +230,65 @@ user?.role ||
 
 <div className="usersettings-main">
 
-{/* LEFT MENU */}
+<div className="usersettings-tabs">
 
-<div className="usersettings-sidebar">
+  <button
+    className={`usersettings-tab ${activeMenu === "payment" ? "active" : ""}`}
+    onClick={() => setActiveMenu("payment")}
+  >
+    <FaCreditCard />
+    Payment History
+  </button>
 
-<h4>
-Settings Menu
-</h4>
+  <button
+    className={`usersettings-tab ${activeMenu === "cards" ? "active" : ""}`}
+    onClick={() => setActiveMenu("cards")}
+  >
+    <FaWallet />
+    Saved Payment Methods
+  </button>
 
-<div
-className={`usersettings-menu-item ${
-activeMenu === "payment"
-? "active"
-: ""
-}`}
-onClick={()=>
-setActiveMenu(
-"payment"
-)
-}
+  <button
+    className={`usersettings-tab ${activeMenu === "email" ? "active" : ""}`}
+    onClick={() => setActiveMenu("email")}
+  >
+    <FaEnvelope />
+    Email Notifications
+  </button>
+
+
+<button
+  className={`usersettings-tab ${
+    activeMenu === "notifications"
+      ? "active"
+      : ""
+  }`}
+  onClick={() =>
+    setActiveMenu(
+      "notifications"
+    )
+  }
 >
-
-<FaCreditCard/>
-
-<div>
-
-<h5>
-Payment History
-</h5>
-
-<p>
-View transactions and invoices
-</p>
-
-</div>
-
-</div>
-
-
-
-<div
-className={`usersettings-menu-item ${
-activeMenu === "cards"
-? "active"
-: ""
-}`}
-onClick={()=>
-setActiveMenu(
-"cards"
-)
-}
->
-
-<FaWallet/>
-
-<div>
-
-<h5>
-Saved Cards
-</h5>
-
-<p>
-Manage cards and UPI
-</p>
-
-</div>
-
-</div>
-
-
-
-<div
-className={`usersettings-menu-item ${
-activeMenu === "notifications"
-? "active"
-: ""
-}`}
-onClick={()=>
-setActiveMenu(
-"notifications"
-)
-}
->
-
-<FaBell/>
-
-<div>
-
-<h5>
-Notification Settings
-</h5>
-
-<p>
-Manage alerts
-</p>
-
-</div>
-
-</div>
-
-
-
-<div
-className={`usersettings-menu-item ${
-activeMenu === "email"
-? "active"
-: ""
-}`}
-onClick={()=>
-setActiveMenu(
-"email"
-)
-}
->
-
-<FaEnvelope/>
-
-<div>
-
-<h5>
-Email Preferences
-</h5>
-
-<p>
-Manage communication
-</p>
-
-</div>
-
-</div>
-
-
-
-<div
-className={`usersettings-menu-item ${
-activeMenu === "password"
-? "active"
-: ""
-}`}
-onClick={()=>
-setActiveMenu(
-"password"
-)
-}
->
-
-<FaLock/>
-
-<div>
-
-<h5>
-Password Change
-</h5>
-
-<p>
-Update password
-</p>
-
-</div>
-
-</div>
-
-
-
-<div
-className={`usersettings-menu-item ${
-activeMenu === "privacy"
-? "active"
-: ""
-}`}
-onClick={()=>
-setActiveMenu(
-"privacy"
-)
-}
->
-
-<FaShieldAlt/>
-
-<div>
-
-<h5>
-Privacy Settings
-</h5>
-
-<p>
-Manage privacy controls
-</p>
-
-</div>
-
-</div>
-
-</div>
-
-
-
-{/* RIGHT SIDE */}
-
-<div className="usersettings-card">
-
-<div className="usersettings-card-top">
-
-<div>
-
-<h2>
-Payment History
-</h2>
-
-<p>
-View and track transactions,
-payments and invoices.
-</p>
-
-</div>
-
-<button className="usersettings-filter-btn">
-Filter
+  <FaBell />
+  In-App Notifications
 </button>
 
-</div>
 
+  <button
+    className={`usersettings-tab ${activeMenu === "password" ? "active" : ""}`}
+    onClick={() => setActiveMenu("password")}
+  >
+    <FaLock />
+    Password Change
+  </button>
 
-
-<div className="usersettings-table-wrapper">
-
-<table className="usersettings-table">
-
-<thead>
-
-<tr>
-
-<th>
-Transaction ID
-</th>
-
-<th>
-Date
-</th>
-
-<th>
-Description
-</th>
-
-<th>
-Type
-</th>
-
-<th>
-Amount
-</th>
-
-<th>
-Payment Method
-</th>
-
-<th>
-Status
-</th>
-
-<th>
-Invoice
-</th>
-
-</tr>
-
-</thead>
-
-<tbody>
-
-{
-payments.length > 0
-?
-
-payments.map((item)=>(
-
-<tr key={item._id}>
-
-<td>
-{
-item.transactionId
-}
-</td>
-
-<td>
-
-{
-new Date(
-item.createdAt
-).toLocaleDateString()
-}
-
-</td>
-
-<td>
-
-{
-item.description ||
-item.serviceName ||
-"Consultation Payment"
-}
-
-</td>
-
-<td>
-Payment
-</td>
-
-<td>
-
-₹{
-item.amount
-}
-
-</td>
-
-<td>
-
-{
-item.paymentMethod
-}
-
-</td>
-
-<td>
-
-<span
-className={`usersettings-status ${
-item.status
-}`}
->
-
-{
-item.status
-}
-
-</span>
-
-</td>
-
-<td>
-
-<a
-href={
-item.invoiceUrl
-}
-target="_blank"
-rel="noreferrer"
->
-
-<FaFileInvoice/>
-
-</a>
-
-</td>
-
-</tr>
-
-))
-
-:
-
-<tr>
-
-<td
-colSpan="8"
-className="usersettings-empty"
->
-
-No payments found
-
-</td>
-
-</tr>
-
-}
-
-</tbody>
-
-</table>
-
-</div>
+  <button
+    className={`usersettings-tab ${activeMenu === "privacy" ? "active" : ""}`}
+    onClick={() => setActiveMenu("privacy")}
+  >
+    <FaShieldAlt />
+    Privacy Settings
+  </button>
 
 </div>
 

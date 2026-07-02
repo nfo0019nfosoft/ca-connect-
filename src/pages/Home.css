@@ -1,3 +1,11 @@
+body{
+    background:#fff;
+}
+
+
+
+
+
 /* ================= HERO ================= */
 
 .home-hero-section{
@@ -44,7 +52,7 @@
     margin-top:14px;
     font-size:46px;
     line-height:1.15;
-    color:#111827;
+    color:#00125c;
 }
 
 .home-hero-title span{
@@ -57,7 +65,7 @@
 
     font-size:15px;
     line-height:1.8;
-    color:#475569;
+    color:black;
 }
 
 .home-hero-features{
@@ -309,7 +317,101 @@
 
 
 
+body{
+    background:#fff;
+}
 
+/* ================= HERO ================= */
+
+.home-hero-section{
+    width:92%;
+    max-width:1250px;
+    margin:0 auto;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    gap:15px;
+    padding:10px 0 5px;
+}
+
+.home-hero-left{
+    flex:1;
+}
+
+.home-hero-right{
+    flex:1;
+    display:flex;
+    justify-content:center;
+}
+
+.home-hero-image{
+    width:100%;
+    max-width:320px;
+}
+
+.home-hero-badge{
+    display:inline-block;
+    padding:6px 15px;
+    border-radius:30px;
+    background:#eef4ff;
+    color:#2563eb;
+    font-size:11px;
+    font-weight:600;
+}
+
+.home-hero-title{
+    margin-top:10px;
+    font-size:38px;
+    line-height:1.1;
+    color:#00125c;
+}
+
+.home-hero-title span{
+    color:#2563eb;
+}
+
+.home-hero-description{
+    margin-top:10px;
+    max-width:500px;
+    font-size:14px;
+    line-height:1.6;
+    color:black;
+}
+
+.home-hero-features{
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+    margin-top:25px;
+}
+
+.home-hero-feature{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    font-size:13px;
+    font-weight:600;
+}
+
+.home-hero-feature-icon{
+    color:#2563eb;
+    font-size:16px;
+}
+
+/* ================= SEARCH ================= */
+
+.home-search-section{
+    width:92%;
+    max-width:1250px;
+    margin:5px auto 0;
+    background:#fff;
+    border-radius:18px;
+    padding:16px;
+    margin-top:-10px;
+    box-shadow:0 8px 25px rgba(0,0,0,.08);
+}
 
 
 
@@ -326,8 +428,9 @@
 .popula-services-section {
   max-width: 1400px;
   margin: 30px auto;
+  background: #fbfdff;
     overflow:hidden;
-  padding: 50px;
+  padding: 50px ;
 }
 
 .popula-services-header {
@@ -1024,14 +1127,22 @@
 
 
 
+.popula-services-section{
+  background:#fbfdff;
+  margin-bottom:0;
+}
 
+.top-ca-section{
+  margin-top:0;
+  padding-top:50px;
+}
 
 
 
 
 .how-section{
-  padding:40px 5%;
-  background:#f8fbff;
+  padding:80px 5%;
+background: #fbfdff;
    max-width:1300px;
   margin:auto;
   padding:0 20px;
@@ -1045,6 +1156,7 @@
 .how-tag{
   display:inline-block;
   padding:8px 18px;
+  margin-top:20px;
   border-radius:50px;
   background:#eaf2ff;
   color:#2563eb;
@@ -1222,6 +1334,7 @@
 
 .expert-section{
     width:100%;
+    background:white;
     padding:0 40px;
       overflow:hidden;
     box-sizing:border-box;
@@ -2461,7 +2574,7 @@
 ========================== */
 
 .faq-left{
-  background:#f8fbff;
+  background: #fbfdff;
 
   border:1px solid #edf2ff;
   border-radius:24px;
@@ -2565,7 +2678,7 @@
 ========================== */
 
 .support-card{
-  background:#f8fbff;
+background: #fbfdff;
 
   border:1px solid #edf2ff;
   border-radius:24px;
@@ -3040,3 +3153,41 @@ height: 500px;
     }
 
 }
+
+
+
+
+
+.faq-link{
+  margin-top:20px;
+  border:none;
+  background:none;
+  color:#2563eb;
+  font-size:15px;
+  font-weight:600;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+.faq-link:hover{
+  color:#1d4ed8;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

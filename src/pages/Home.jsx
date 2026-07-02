@@ -63,7 +63,7 @@ const [searchResults, setSearchResults] = useState([]);
   const [businessType, setBusinessType] = useState("");
   const [service, setService] = useState("");
 
-
+const [showAllFaqs, setShowAllFaqs] = useState(false);
 
   const [allServices, setAllServices] = useState([]);
 
@@ -305,11 +305,8 @@ const fetchSavedVendors = async () => {
       data-aos="fade-up"
       data-aos-delay="200"
     >
-      Find Trusted
-      
-      Chartered<br/> Accountants
-    
-      <span>   Near You</span>
+      Find Trusted Experts for Every
+      <span>  Business  Need</span>
     </h1>
 
     <p
@@ -317,8 +314,9 @@ const fetchSavedVendors = async () => {
       data-aos="fade-up"
       data-aos-delay="350"
     >
-      Connect with verified CAs and CA firms for all your
-      business and tax needs. Fast, reliable & secure.
+     Connect with trusted Chartered Accountants, Legal Experts, Business Consultants,
+      and Insurance & Loan Advisors to gain expert guidance, make confident decisions,
+       and accelerate your business growth.
     </p>
 
     <div
@@ -1290,10 +1288,91 @@ const fetchSavedVendors = async () => {
               </div>
             </details>
 
-            <a href="/" className="faq-link">
-              View All FAQs
-              <i className="fas fa-arrow-right"></i>
-            </a>
+
+
+
+{
+showAllFaqs && (
+<>
+
+<details className="faq-item">
+  <summary className="faq-question">
+    <span>Can I compare multiple CAs before booking?</span>
+  </summary>
+
+  <div className="faq-answer">
+    Yes. You can compare experience, ratings,
+    pricing and services before selecting a CA.
+  </div>
+</details>
+
+<details className="faq-item">
+  <summary className="faq-question">
+    <span>Can I cancel or reschedule appointments?</span>
+  </summary>
+
+  <div className="faq-answer">
+    Yes. Appointments can be cancelled or
+    rescheduled directly from your dashboard.
+  </div>
+</details>
+
+<details className="faq-item">
+  <summary className="faq-question">
+    <span>Which payment methods are supported?</span>
+  </summary>
+
+  <div className="faq-answer">
+    We support UPI, Debit Cards, Credit Cards,
+    Net Banking and Wallet payments.
+  </div>
+</details>
+
+<details className="faq-item">
+  <summary className="faq-question">
+    <span>Will I receive invoices after payment?</span>
+  </summary>
+
+  <div className="faq-answer">
+    Yes. Every successful payment generates
+    an invoice which is available in your dashboard.
+  </div>
+</details>
+
+<details className="faq-item">
+  <summary className="faq-question">
+    <span>Can businesses get dedicated CA support?</span>
+  </summary>
+
+  <div className="faq-answer">
+    Yes. Businesses can choose long-term CA
+    support plans and dedicated professionals.
+  </div>
+</details>
+
+</>
+)
+}
+
+
+<button
+  className="faq-link"
+  onClick={() =>
+    setShowAllFaqs(
+      !showAllFaqs
+    )
+  }
+>
+
+{
+showAllFaqs
+? "Show Less FAQs"
+: "View All FAQs"
+}
+
+<i className="fas fa-arrow-right"></i>
+
+</button>
 
           </div>
 
@@ -1349,7 +1428,7 @@ const fetchSavedVendors = async () => {
 
         </div>
 
-      </section>
+   
 
 
 
@@ -1361,6 +1440,7 @@ const fetchSavedVendors = async () => {
 
 
 
+</section>
 
 
 

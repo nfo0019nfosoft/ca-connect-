@@ -2,16 +2,24 @@
    PAGE LAYOUT
 ========================== */
 
+/* ==========================
+   PAGE LAYOUT
+========================== */
+
 .usersettings-layout{
   display:flex;
   min-height:100vh;
   background:#f5f7fb;
+  width:100%;
 }
 
 .usersettings-content{
   flex:1;
+  margin-left:210px; /* sidebar width */
   padding:30px;
+  width:calc(100% - 260px);
   overflow-x:hidden;
+  transition:all .3s ease;
 }
 
 /* ==========================
@@ -22,7 +30,7 @@
   display:flex;
   justify-content:space-between;
   align-items:center;
-  gap:20px;
+  gap:10px;
   margin-bottom:30px;
 }
 
@@ -132,223 +140,6 @@
   color:#64748b;
 }
 
-/* ==========================
-   MAIN SECTION
-========================== */
-
-.usersettings-main{
-  display:grid;
-  grid-template-columns:280px 1fr;
-  gap:25px;
-}
-
-/* ==========================
-   LEFT MENU
-========================== */
-
-.usersettings-sidebar{
-  background:white;
-  border-radius:20px;
-  padding:25px;
-  height:fit-content;
-  box-shadow:0 2px 15px rgba(0,0,0,.05);
-}
-
-.usersettings-sidebar h4{
-  font-size:18px;
-  margin-bottom:20px;
-  color:#1e293b;
-}
-
-.usersettings-menu-item{
-  display:flex;
-  align-items:flex-start;
-  gap:15px;
-  padding:16px;
-  border-radius:14px;
-  margin-bottom:12px;
-  cursor:pointer;
-  transition:.3s;
-}
-
-.usersettings-menu-item:hover{
-  background:#f8fafc;
-}
-
-.usersettings-menu-item.active{
-  background:#eff6ff;
-  border:1px solid #bfdbfe;
-}
-
-.usersettings-menu-item svg{
-  color:#2563eb;
-  font-size:18px;
-  margin-top:2px;
-}
-
-.usersettings-menu-item h5{
-  font-size:15px;
-  color:#1e293b;
-  margin-bottom:4px;
-}
-
-.usersettings-menu-item p{
-  font-size:12px;
-  color:#64748b;
-  line-height:1.5;
-}
-
-/* ==========================
-   RIGHT CARD
-========================== */
-
-.usersettings-card{
-  background:white;
-  border-radius:20px;
-  padding:25px;
-  box-shadow:0 2px 15px rgba(0,0,0,.05);
-}
-
-.usersettings-card-top{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:25px;
-}
-
-.usersettings-card-top h2{
-  font-size:24px;
-  color:#1e293b;
-  margin-bottom:5px;
-}
-
-.usersettings-card-top p{
-  color:#64748b;
-  font-size:14px;
-}
-
-.usersettings-filter-btn{
-  padding:12px 20px;
-  border:none;
-  background:#2563eb;
-  color:white;
-  border-radius:10px;
-  cursor:pointer;
-  font-size:14px;
-}
-
-/* ==========================
-   TABLE
-========================== */
-
-.usersettings-table-wrapper{
-  overflow-x:auto;
-}
-
-.usersettings-table{
-  width:100%;
-  border-collapse:collapse;
-  min-width:1100px;
-}
-
-.usersettings-table thead{
-  background:#f8fafc;
-}
-
-.usersettings-table th{
-  padding:16px;
-  text-align:left;
-  font-size:13px;
-  color:#64748b;
-  border-bottom:1px solid #e5e7eb;
-}
-
-.usersettings-table td{
-  padding:18px 16px;
-  border-bottom:1px solid #f1f5f9;
-  font-size:14px;
-  color:#334155;
-}
-
-.usersettings-table tr:hover{
-  background:#fafafa;
-}
-
-.usersettings-empty{
-  text-align:center;
-  padding:50px !important;
-  color:#94a3b8;
-}
-
-/* ==========================
-   STATUS
-========================== */
-
-.usersettings-status{
-  padding:7px 14px;
-  border-radius:30px;
-  font-size:12px;
-  font-weight:600;
-  text-transform:capitalize;
-}
-
-.usersettings-status.success{
-  background:#dcfce7;
-  color:#15803d;
-}
-
-.usersettings-status.pending{
-  background:#fef3c7;
-  color:#b45309;
-}
-
-.usersettings-status.failed{
-  background:#fee2e2;
-  color:#dc2626;
-}
-
-.usersettings-status.refunded{
-  background:#ede9fe;
-  color:#7c3aed;
-}
-
-/* ==========================
-   INVOICE ICON
-========================== */
-
-.usersettings-table td a{
-  width:36px;
-  height:36px;
-  border-radius:10px;
-  background:#eff6ff;
-  color:#2563eb;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-decoration:none;
-}
-
-.usersettings-table td a:hover{
-  background:#2563eb;
-  color:white;
-}
-
-/* ==========================
-   TABLE SCROLLBAR
-========================== */
-
-.usersettings-table-wrapper::-webkit-scrollbar{
-  height:8px;
-}
-
-.usersettings-table-wrapper::-webkit-scrollbar-thumb{
-  background:#cbd5e1;
-  border-radius:20px;
-}
-
-.usersettings-table-wrapper::-webkit-scrollbar-track{
-  background:#f1f5f9;
-}
 
 /* ==========================
    MOBILE CSS
@@ -477,6 +268,103 @@
   .usersettings-table td{
     padding:14px;
     font-size:12px;
+  }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+/* ==========================
+   SETTINGS TABS
+========================== */
+
+.usersettings-tabs{
+  width:100%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:5px;
+  margin-bottom:20px;
+}
+
+.usersettings-tab{
+  flex:1;
+  border:none;
+  outline:none;
+  background:#fff;
+  border:1px solid #e5e7eb;
+  border-radius:10px;
+  padding:10px 8px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:6px;
+  cursor:pointer;
+  transition:.3s;
+  font-size:10px;
+  font-weight:600;
+  color:#64748b;
+  min-width:0;
+}
+
+.usersettings-tab svg{
+  font-size:10px;
+  margin-left:-20px;
+}
+
+.usersettings-tab:hover{
+  background:#f8fafc;
+}
+
+.usersettings-tab.active{
+  background:#2563eb;
+  color:#fff;
+  border-color:#2563eb;
+}
+
+.usersettings-tab.active svg{
+  color:#fff;
+}
+@media(max-width:768px){
+
+  .usersettings-tabs{
+    overflow-x:auto;
+    justify-content:flex-start;
+    padding-bottom:5px;
+  }
+
+  .usersettings-tab{
+    flex:none;
+    min-width:120px;
+    font-size:11px;
+    padding:10px 12px;
+  }
+
+  .usersettings-tab svg{
+    font-size:12px;
+  }
+
+}
+
+@media(max-width:480px){
+
+  .usersettings-tab{
+    min-width:105px;
+    font-size:10px;
+    padding:8px 10px;
+    gap:5px;
+  }
+
+  .usersettings-tab svg{
+    font-size:11px;
   }
 
 }
