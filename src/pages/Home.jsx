@@ -60,6 +60,9 @@ function Home() {
     const [searchDone, setSearchDone] = useState(false);
 const [searchResults, setSearchResults] = useState([]);
   const [city, setCity] = useState("");
+// //  const [cities,setCities] = useState([]);
+// const cities = await Vendor.distinct("city");
+
   const [businessType, setBusinessType] = useState("");
   const [service, setService] = useState("");
 
@@ -70,17 +73,50 @@ const [showAllFaqs, setShowAllFaqs] = useState(false);
   const [vendors, setVendors] = useState([]);
 
 
-  useEffect(() => {
-    fetchTopVendors();
-  }, []);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  const topCities = [
+  "Hyderabad",
+  "Bangalore",
+  "Chennai",
+  "Mumbai",
+  "Delhi",
+  "Pune",
+  "Kolkata",
+  "Ahmedabad",
+  "Vijayawada",
+  "Visakhapatnam"
+];
 
   useEffect(() => {
-
-    fetchServices();
+      fetchTopVendors();
+      // fetchCities();
+      
+      fetchServices();
 
   }, []);
 
 
+
+//  const fetchCities = async () => {
+//   const res = await axios.get(
+//     `${API_URL}/api/vendor/cities`
+//   );
+
+//   setCities(res.data);
+// };
 
 const handleSearch = async (selectedService = service) => {
 
@@ -406,20 +442,49 @@ const fetchSavedVendors = async () => {
       ))}
     </select>
 
+<div className="home-city-box">
 
-    <div className="home-location-box">
+  <HiOutlineLocationMarker className="home-city-icon"/>
+{/* <select
+  className="home-search-select"
+  value={city}
+  onChange={(e)=>setCity(e.target.value)}
+>
+  <option value="">Select City</option>
 
-      <input
-        type="text"
-        className="home-location-input"
-        placeholder="Enter City or Area"
+  {cities.map((city,index)=>(
+    <option
+      key={index}
+      value={city}
+    >
+      {city}
+    </option>
+  ))}
+</select> */}
+
+
+
+
+<select
+    className="home-city-select"
+    value={city}
+    onChange={(e)=>setCity(e.target.value)}
+  >
+    <option value="">
+      Choose City
+    </option>
+
+    {topCities.map((city,index)=>(
+      <option
+        key={index}
         value={city}
-        onChange={(e) => setCity(e.target.value)}
-      />
+      >
+        {city}
+      </option>
+    ))}
+  </select>
 
-      <HiOutlineLocationMarker className="home-location-icon" />
-
-    </div>
+</div>
 
 
     <select

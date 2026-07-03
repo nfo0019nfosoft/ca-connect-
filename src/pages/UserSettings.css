@@ -368,3 +368,708 @@
   }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ==========================
+   PAYMENT HISTORY
+========================== */
+
+.usersettings-payment-card{
+  width:100%;
+  background:#fff;
+  border-radius:18px;
+  padding:25px;
+  margin-top:20px;
+  box-shadow:0 4px 20px rgba(0,0,0,.05);
+}
+
+.usersettings-payment-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:25px;
+  gap:20px;
+}
+
+.usersettings-payment-header h2{
+  font-size:24px;
+  font-weight:700;
+  color:#1e293b;
+  margin-bottom:5px;
+}
+
+.usersettings-payment-header p{
+  font-size:14px;
+  color:#64748b;
+}
+
+.usersettings-payment-table-wrapper{
+  width:100%;
+  overflow-x:auto;
+}
+
+.usersettings-payment-table{
+  width:100%;
+  border-collapse:collapse;
+  min-width:900px;
+}
+
+.usersettings-payment-table thead{
+  background:#f8fafc;
+}
+
+.usersettings-payment-table th{
+  padding:18px 15px;
+  text-align:left;
+  font-size:13px;
+  font-weight:700;
+  color:#64748b;
+  border-bottom:1px solid #e2e8f0;
+  white-space:nowrap;
+}
+
+.usersettings-payment-table td{
+  padding:18px 15px;
+  font-size:14px;
+  color:#334155;
+  border-bottom:1px solid #f1f5f9;
+  white-space:nowrap;
+}
+
+.usersettings-payment-table tr:hover{
+  background:#f8fbff;
+}
+
+.usersettings-payment-status{
+  padding:7px 14px;
+  border-radius:30px;
+  font-size:12px;
+  font-weight:600;
+  display:inline-block;
+}
+
+/* SUCCESS */
+
+.usersettings-payment-status.success{
+  background:#dcfce7;
+  color:#15803d;
+}
+
+/* PENDING */
+
+.usersettings-payment-status.pending{
+  background:#fef3c7;
+  color:#b45309;
+}
+
+/* FAILED */
+
+.usersettings-payment-status.failed{
+  background:#fee2e2;
+  color:#dc2626;
+}
+
+/* REFUNDED */
+
+.usersettings-payment-status.refunded{
+  background:#ede9fe;
+  color:#7c3aed;
+}
+
+.usersettings-no-data{
+  text-align:center;
+  padding:40px !important;
+  color:#94a3b8;
+  font-size:14px;
+}
+
+/* ==========================
+   MOBILE
+========================== */
+
+@media(max-width:768px){
+
+  .usersettings-payment-card{
+    padding:18px;
+  }
+
+  .usersettings-payment-header{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+
+  .usersettings-payment-header h2{
+    font-size:20px;
+  }
+
+  .usersettings-payment-header p{
+    font-size:13px;
+  }
+
+  .usersettings-payment-table{
+    min-width:750px;
+  }
+
+  .usersettings-payment-table th,
+  .usersettings-payment-table td{
+    padding:14px 12px;
+    font-size:12px;
+  }
+
+  .usersettings-payment-status{
+    padding:5px 10px;
+    font-size:11px;
+  }
+
+}
+
+@media(max-width:480px){
+
+  .usersettings-payment-card{
+    padding:15px;
+  }
+
+  .usersettings-payment-header h2{
+    font-size:18px;
+  }
+
+  .usersettings-payment-table{
+    min-width:700px;
+  }
+
+  .usersettings-payment-table th,
+  .usersettings-payment-table td{
+    font-size:11px;
+    padding:12px 10px;
+  }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* ==========================
+   SETTINGS CARDS
+========================== */
+
+.usersettings-settings-grid{
+  width:100%;
+}
+
+.usersettings-settings-card{
+  background:#fff;
+  border-radius:18px;
+  padding:24px;
+  margin-top:20px;
+  box-shadow:0 2px 15px rgba(0,0,0,.05);
+}
+
+.usersettings-settings-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:20px;
+  gap:20px;
+}
+
+.usersettings-settings-top h2,
+.usersettings-settings-card h2{
+  font-size:22px;
+  font-weight:700;
+  color:#1e293b;
+  margin-bottom:5px;
+}
+
+.usersettings-settings-top p,
+.usersettings-settings-card p{
+  font-size:14px;
+  color:#64748b;
+}
+
+.usersettings-add-btn{
+  border:none;
+  background:#2563eb;
+  color:#fff;
+  padding:10px 18px;
+  border-radius:10px;
+  cursor:pointer;
+  font-size:13px;
+  font-weight:600;
+  transition:.3s;
+}
+
+.usersettings-add-btn:hover{
+  background:#1d4ed8;
+}
+
+/* ==========================
+   PAYMENT METHODS
+========================== */
+
+.usersettings-method-item{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:18px 0;
+  border-bottom:1px solid #f1f5f9;
+}
+
+.usersettings-method-item:last-child{
+  border-bottom:none;
+}
+
+.usersettings-method-left{
+  display:flex;
+  align-items:center;
+  gap:15px;
+}
+
+.usersettings-method-icon{
+  width:50px;
+  height:50px;
+  border-radius:14px;
+  background:#f8fafc;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:24px;
+}
+
+.usersettings-method-left h4{
+  font-size:15px;
+  color:#1e293b;
+  margin-bottom:4px;
+}
+
+.usersettings-method-left p{
+  font-size:13px;
+  color:#64748b;
+}
+
+.usersettings-method-right{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.usersettings-method-right button{
+  border:none;
+  background:#fee2e2;
+  color:#dc2626;
+  padding:8px 14px;
+  border-radius:8px;
+  cursor:pointer;
+  font-size:12px;
+  font-weight:600;
+}
+
+.default-badge{
+  background:#dcfce7;
+  color:#16a34a;
+  padding:6px 12px;
+  border-radius:20px;
+  font-size:11px;
+  font-weight:600;
+}
+
+.usersettings-empty{
+  text-align:center;
+  padding:40px 0;
+  color:#94a3b8;
+  font-size:14px;
+}
+
+/* ==========================
+   TOGGLE SETTINGS
+========================== */
+
+.usersettings-toggle-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:18px 0;
+  border-bottom:1px solid #f1f5f9;
+}
+
+.usersettings-toggle-row:last-child{
+  border-bottom:none;
+}
+
+.usersettings-toggle-row h4{
+  font-size:15px;
+  color:#1e293b;
+  margin-bottom:5px;
+  text-transform:capitalize;
+}
+
+.usersettings-toggle-row p{
+  font-size:12px;
+  color:#64748b;
+}
+
+/* ==========================
+   SWITCH
+========================== */
+
+.switch{
+  position:relative;
+  display:inline-block;
+  width:52px;
+  height:28px;
+}
+
+.switch input{
+  opacity:0;
+  width:0;
+  height:0;
+}
+
+.slider{
+  position:absolute;
+  cursor:pointer;
+  inset:0;
+  background:#cbd5e1;
+  transition:.3s;
+  border-radius:30px;
+}
+
+.slider:before{
+  position:absolute;
+  content:"";
+  width:22px;
+  height:22px;
+  left:3px;
+  bottom:3px;
+  background:white;
+  transition:.3s;
+  border-radius:50%;
+}
+
+.switch input:checked + .slider{
+  background:#2563eb;
+}
+
+.switch input:checked + .slider:before{
+  transform:translateX(24px);
+}
+
+/* ==========================
+   TABLET
+========================== */
+
+@media(max-width:991px){
+
+  .usersettings-settings-card{
+    padding:20px;
+  }
+
+  .usersettings-settings-top{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+
+}
+
+/* ==========================
+   MOBILE
+========================== */
+
+@media(max-width:768px){
+
+  .usersettings-settings-card{
+    padding:18px;
+  }
+
+  .usersettings-settings-top h2,
+  .usersettings-settings-card h2{
+    font-size:20px;
+  }
+
+  .usersettings-method-item{
+    flex-direction:column;
+    align-items:flex-start;
+    gap:15px;
+  }
+
+  .usersettings-method-right{
+    width:100%;
+    justify-content:space-between;
+  }
+
+  .usersettings-toggle-row{
+    gap:20px;
+  }
+
+  .usersettings-toggle-row h4{
+    font-size:14px;
+  }
+
+}
+
+/* ==========================
+   SMALL MOBILE
+========================== */
+
+@media(max-width:480px){
+
+  .usersettings-settings-card{
+    padding:15px;
+  }
+
+  .usersettings-settings-top h2,
+  .usersettings-settings-card h2{
+    font-size:18px;
+  }
+
+  .usersettings-method-left{
+    gap:12px;
+  }
+
+  .usersettings-method-icon{
+    width:42px;
+    height:42px;
+    font-size:20px;
+  }
+
+  .usersettings-method-left h4{
+    font-size:14px;
+  }
+
+  .usersettings-method-left p{
+    font-size:12px;
+  }
+
+  .usersettings-method-right button{
+    padding:7px 12px;
+    font-size:11px;
+  }
+
+  .default-badge{
+    font-size:10px;
+    padding:5px 10px;
+  }
+
+  .switch{
+    width:48px;
+    height:26px;
+  }
+
+  .slider:before{
+    width:20px;
+    height:20px;
+  }
+
+  .switch input:checked + .slider:before{
+    transform:translateX(22px);
+  }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.usersettings-security-grid{
+  width:100%;
+}
+
+.usersettings-password-card{
+  background:#fff;
+  border-radius:18px;
+  padding:25px;
+  box-shadow:0 4px 20px rgba(0,0,0,.05);
+  margin-top:20px;
+}
+
+.usersettings-password-body{
+  display:grid;
+  grid-template-columns:2fr 1fr;
+  gap:25px;
+  margin-top:25px;
+}
+
+.usersettings-input-group{
+  margin-bottom:18px;
+}
+
+.usersettings-input-group label{
+  display:block;
+  margin-bottom:8px;
+  font-size:14px;
+  font-weight:600;
+  color:#334155;
+}
+
+.usersettings-input-group input{
+  width:100%;
+  height:50px;
+  border:1px solid #e2e8f0;
+  border-radius:12px;
+  padding:0 15px;
+  font-size:14px;
+  outline:none;
+}
+
+.usersettings-input-group input:focus{
+  border-color:#2563eb;
+}
+
+.usersettings-password-rules{
+  background:#f8fafc;
+  padding:20px;
+  border-radius:14px;
+  height:fit-content;
+}
+
+.usersettings-password-rules h4{
+  margin-bottom:15px;
+  color:#1e293b;
+}
+
+.usersettings-password-rules ul{
+  list-style:none;
+  padding:0;
+}
+
+.usersettings-password-rules li{
+  margin-bottom:12px;
+  color:#475569;
+  font-size:14px;
+}
+
+.usersettings-primary-btn{
+  background:#2563eb;
+  color:#fff;
+  border:none;
+  height:50px;
+  padding:0 25px;
+  border-radius:12px;
+  font-weight:600;
+  cursor:pointer;
+}
+
+.usersettings-privacy-item{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:22px 0;
+  border-bottom:1px solid #f1f5f9;
+}
+
+.usersettings-privacy-left h4{
+  font-size:15px;
+  color:#1e293b;
+  margin-bottom:5px;
+}
+
+.usersettings-privacy-left p{
+  font-size:13px;
+  color:#64748b;
+}
+
+.usersettings-select{
+  width:180px;
+  height:42px;
+  border:1px solid #e2e8f0;
+  border-radius:10px;
+  padding:0 12px;
+}
+
+.usersettings-outline-btn{
+  border:1px solid #2563eb;
+  background:#fff;
+  color:#2563eb;
+  padding:10px 18px;
+  border-radius:10px;
+  font-weight:600;
+  cursor:pointer;
+}
+
+.usersettings-danger-btn{
+  border:none;
+  background:#fee2e2;
+  color:#dc2626;
+  padding:10px 18px;
+  border-radius:10px;
+  font-weight:600;
+  cursor:pointer;
+}
+
+@media(max-width:768px){
+
+  .usersettings-password-body{
+    grid-template-columns:1fr;
+  }
+
+  .usersettings-privacy-item{
+    flex-direction:column;
+    align-items:flex-start;
+    gap:15px;
+  }
+
+  .usersettings-select{
+    width:100%;
+  }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
