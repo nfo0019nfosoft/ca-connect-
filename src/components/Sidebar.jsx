@@ -263,7 +263,7 @@ function Sidebar() {
           </p>
 
           <Link
-            to="/subscription"
+            to="/pricing-plan"
             className="upgrade-btn"
           >
             Upgrade Now

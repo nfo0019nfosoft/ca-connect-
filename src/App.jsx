@@ -26,7 +26,9 @@ import VendorProfile from "./pages/VendorProfile";
 import VendorKyc from "./pages/VendorKyc";
 import VendorServices from "./pages/VendorServices";
 import VendorSettings from "./pages/VendorSettings";
+import VendorSubscription from "./pages/VendorSubscription";
 import VendorPreview from "./pages/VendorPreview";
+import PricingPlans from "./pages/PricingPlans";
 import UserDashboard from "./pages/UserDashboard";
 import UserProfile from "./pages/UserProfile";
 import UserBusinessDetails from "./pages/UserBusinessDetails";
@@ -88,6 +90,8 @@ function Layout() {
     "/vendor-help",
     "/user-help",
      "/user-settings",
+      "/vendor-subscription",
+      "/pricing-plans"
   ];
 
   const hideNavbarFooter =
@@ -204,6 +208,8 @@ function Layout() {
         <Route path="/vendor-availability" element={<VendorAvailability />} />
         <Route path="/vendor-settings" element={<VendorSettings />} />
         <Route path="/vendor-help" element={<VendorHelp />} />
+         <Route path="/vendor-subscription" element={<VendorSubscription />} />
+          <Route path="/pricing-plans" element={<PricingPlans />} />
 
         {/* User Pages */}
         <Route path="/user-dashboard" element={<UserDashboard />} />
